@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>图片在固定高宽的空间居中显示</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style>
+.wrapper{background-color:#e4e4e4;}
+.header{background-color:#f0f0f0;height:60px;}
+.main{width:1002px;margin:0 auto;height:3000px;background:#ece1ad;position:relative;}
+
+.photo ul{width:681px; padding-top:20px;margin:0 auto;}
+.photo li{float:left;width:201px;padding-bottom:20px;margin-right:26px;}
+.photo li .picbox{width:195px;height:245px;border:3px solid #c0ac63;overflow:hidden;}
+.photo li .picbox a{ display:block;width:195px;height:245px;}
+.photo li .picbox a img{display:block;width:195px;height:245px;}
+.photo li .picinfo p{height:33px;width:201px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;line-height:33px; border-bottom:1px solid #d5c78c;color:#81530b;}
+.photo li .picinfo p strong{ margin-right:6px;}
+
+</style>
+
+<script src="../js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+        <div class="header"></div>
+        <div class="main photo">
+            <ul class="gallery" id="list">
+                <li>
+                    <div class="picbox">
+                        <a href="javascript:void(0);"><img src="http://img.dfs.sdg-china.com/m/DnXJ92nwJCf2dsUaB1_1.JPG"></a>
+                    </div>
+                    <div class="picinfo"><p><strong>自我介绍</strong>2003年跟着同学开始接触热血传奇，12个岁月让我永远不能割舍！</p></div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <a href="javascript:void(0);"><img src="http://img.dfs.sdg-china.com/m/blWeU4vqMWr0pw4mY3_1.JPG"></a>
+                    </div>
+                    <div class="picinfo"><p><strong>自我介绍</strong>收的号希望兄弟们开开心心。</p></div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <a href="javascript:void(0);"><img src="http://img.dfs.sdg-china.com/m/eHCK92UXDrL4EJ9Vs0.JPG"></a>
+                    </div>
+                    <div class="picinfo"><p><strong>自我介绍</strong>十三年的传奇，一路走来终在169打破了我内心的安静</p></div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <a href="javascript:void(0);"><img src="http://img.dfs.sdg-china.com/m/dr1eU4dBaBR2QkJqt2.JPG"></a>
+                    </div>
+                    <div class="picinfo"><p><strong>自我介绍</strong>，，，，</p></div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <a href="javascript:void(0);"><img src="http://img.dfs.sdg-china.com/m/XkjdU4U5N931MG97D2.JPG" ></a>
+                    </div>
+                    <div class="picinfo"><p><strong>自我介绍</strong>玩了10年&nbsp;地图不会跑&nbsp;对就是我&nbsp;酱油在此</p></div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <a href="javascript:void(0);"><img src="http://img.dfs.sdg-china.com/m/veYK92PQxjx1vaqqY3.JPG"></a>
+                    </div>
+                    <div class="picinfo"><p><strong>自我介绍</strong>累</p></div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <a href="javascript:void(0);"><img src="http://img.dfs.sdg-china.com/m/K4PK92Qw9Ys1H8mAF2.JPG"></a>
+                    </div>
+                    <div class="picinfo"><p><strong>自我介绍</strong>分享身边的精彩。</p></div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <a href="javascript:void(0);"><img src="http://img.dfs.sdg-china.com/m/FwMK92q9Cx23MeSuJ3.JPG"></a>
+                    </div>
+                    <div class="picinfo"><p><strong>自我介绍</strong>跨服战&nbsp;激情留念</p></div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <a href="javascript:void(0);"><img src="http://img.dfs.sdg-china.com/m/r35eU4EnpuO05PGSk1.JPG"></a>
+                    </div>
+                    <div class="picinfo"><p><strong>自我介绍</strong>十多年过去了，传奇还是有美好回忆的。</p></div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <a href="javascript:void(0);"><img src="http://img.dfs.sdg-china.com/m/9PxeU4ZmSlU1OQlAq0.JPG"></a>
+                    </div>
+                    <div class="picinfo"><p><strong>自我介绍</strong>热血中的佼佼者！</p></div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <a href="javascript:void(0);"><img src="http://img.dfs.sdg-china.com/m/gMxJ925wSVp2dDXP33.JPG"></a>
+                    </div>
+                    <div class="picinfo"><p><strong>自我介绍</strong>用辅助找小伙</p></div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <a href="javascript:void(0);"><img src="http://img.dfs.sdg-china.com/m/EytK92R7lmv1rn1Tg4.JPG"></a>
+                    </div>
+                    <div class="picinfo"><p><strong>自我介绍</strong>338</p></div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <a href="javascript:void(0);"><img src="http://img.dfs.sdg-china.com/m/uU2L92xNzd53UVjQ33.JPG"></a>
+                    </div>
+                    <div class="picinfo"><p><strong>自我介绍</strong>自己照片</p></div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <a href="javascript:void(0);"><img src="http://img.dfs.sdg-china.com/m/cfydU4kLF7f36BLjX0.JPG"></a>
+                    </div>
+                    <div class="picinfo"><p><strong>自我介绍</strong>五千个日夜，同一个传奇！</p></div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <a href="javascript:void(0);"><img src="http://img.dfs.sdg-china.com/m/h8NJ925sOiQ2kBdtG3.JPG"></a>
+                    </div>
+                    <div class="picinfo"><p><strong>自我介绍</strong>有一种情叫传奇，有你有我</p></div>
+                </li>
+            </ul>
+        </div>
+	</div>
+<script>  
+    //图片放大居中
+    $(".photo li img").each(function(){
+        var img=new Image(),w_h=0,that=$(this);
+        img.onload=function(){
+            w_h=this.width/this.height;
+            if(w_h>=195/245){that.height(245).width("auto");}
+            else{that.width(213).height("auto");}
+            that.attr("src",this.src).css({
+                "marginLeft":0-(that.width()-195)/2,
+                "marginTop":0-(that.height()-245)/2
+                });
+            //console.log(this.width,this.height);
+            };
+        img.src=this.src.replace("_1.JPG",".JPG");
+        });
+
+</script>
+</body>
+</html>

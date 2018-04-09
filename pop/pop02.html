@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>自适应的弹出层</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style>
+.wrapper{padding:100px;}
+.wrapper a{display:inline-block;padding:5px 15px;border:1px solid #ccc;}
+
+#mask{display:none;position:absolute;top:0;left:0;width:100%;height:100%;background:#000;z-index:100;filter:alpha(opacity=50);opacity:0.5;}
+.popbox{display:none;width:614px;position:absolute;left:50%;top:50%;margin:-188px 0 0 -305px;z-index:101;}
+.popbox .close{position:absolute;top:0px;right:-60px;width:60px;height:60px;background:#000;color:#fff;font-size:36px;font-family:SimSun;text-align: center;line-height:60px;}
+.popbox .popcontbox{overflow:hidden;position:relative;width:586px;background:url(http://static.sdg-china.com/mir3/pic/mir3_act/mir3_winter/popbg.png) 0 0 no-repeat;padding:12px 14px 0;}
+.popbox .popcontbottom{background:url(http://static.sdg-china.com/mir3/pic/mir3_act/mir3_winter/popbg.png) 0 bottom no-repeat; height:50px;}
+.popbox .popcontbox h2{height:64px;line-height:64px;color:#ffe991;font-weight:normal;font-size:36px; padding:10px 0 6px; text-align:center;}
+.popbox .popcontbox .textBox{padding:10px 30px 0;line-height:2;word-break:break-all;color:#cc995c;}
+.popbox .popcontbox .textBox strong{color:#f00;}
+.popbox .popcontbox .textBox table{ border-collapse:collapse;border:1px solid #cc995c;}
+.popbox .popcontbox .textBox table th{ border:1px solid #cc995c;}
+.popbox .popcontbox .textBox table td{ border:1px solid #cc995c;padding:0 1em;}
+.popbox .popcontbox .textBox table td span{color:#fa0;}
+
+</style>
+<script src="../js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+		<!--页面内容-->
+		淡入淡出：<a href="javascript:showPOP(0);">弹出少的</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:showPOP(1);">弹出多的</a>
+		<br /><br />
+		上下切入：<a href="javascript:showPOP02(0);">弹出少的</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:showPOP02(1);">弹出多的</a>
+
+	<ul id="popcont" style="display:none;">
+        <li>
+        	<h2>暖冬礼遇</h2>
+            <p>活动时间：12月12日-12月15日每晚21:30-22:00<br />参与区组：免费版全区组（卧虎1、藏龙1除外）<br />活动详情：庆典使者为60级及以上的玩家准备了大量暖冬好礼。</p>
+        </li>
+        <li>
+        	<h2>微信活动</h2>
+            <p>双12来到，买买买，不停歇！晒出您双12期间在《传奇3》里的任意消费截图，就有机会获得精美周边奖品！<br /><br />
+活动时间：12月12日——12月15日<br />活动范围：全体玩家<br />活动奖品：巨幅鼠标垫、铂金扑克牌<br /><br />活动内容：活动期间，所有玩家都可以通过微信平台关注《传奇3》官方微信号：mir3sdg， 晒出您双12期间在《传奇3》里的任意消费截图。<br />活动结束后，官方会从中抽取5名幸运玩家各送上铂金扑克牌一副，5名幸运玩家送出巨幅鼠标垫一份！<br /><br />活动说明：<br />1、用户可多次发送语音参与活动，但仅有一次获奖机会；<br />2、语音内容与《传奇3》内容无关的，将视为无效；<br />3、禁止发布带有侮辱、诽谤、黄色等违反游戏内运营政策，或有消极厌世等思想倾向的语音内容，否则将取消参与资格；<br />4、活动结束后官方将通过私信联系中奖者，获奖的玩家需在5个工作日内提供真实姓名、联系电话、收取奖品地址、所在服务器、账号名、角色名称，否则将被视为自动放弃。<br />5、盛大游戏保留本活动最终解释权。<br />6、<br />7、<br />8、<br />9、<br />10、</p>
+        </li>
+    </ul>
+
+	</div>
+	<!--遮罩-->
+    <div id="mask"></div>
+    <!--遮罩-->
+	<!--弹出层-->
+    <div class="popbox" id="popBox">
+        <div class="popcontbox">
+            <h2></h2>
+            <div class="textBox"></div>
+        </div>
+        <div class="popcontbottom"></div>
+        <a href="javascript:void(0);" class="close" title="关闭">×</a>
+    </div>
+    <!--弹出层-->
+  	<script>
+  		var TextAry=document.getElementById("popcont").children;
+    	function showPOP(n){
+			var mar_top=(document.body.scrollTop||document.documentElement.scrollTop),obj=$("#popBox");
+			$("#mask").show().height($(document).height());
+			obj[0].children[0].children[0].innerHTML=TextAry[n].children[0].innerHTML;
+			obj[0].children[0].children[1].innerHTML=TextAry[n].children[1].innerHTML;
+			obj.stop(true,true).fadeIn(800).css("marginTop",mar_top-obj.height()/2+"px");
+			obj.children('a.close')[0].onclick=$("#mask")[0].onclick=function(){
+				$("#mask").hide();
+				obj.fadeOut(600,function(){$(this).removeAttr("style");});
+			}
+		}
+
+		function showPOP02(n){
+			var mar_top=(document.body.scrollTop||document.documentElement.scrollTop),obj=$("#popBox");
+			$("#mask").show().height($(document).height());
+			obj[0].children[0].children[0].innerHTML=TextAry[n].children[0].innerHTML;
+			obj[0].children[0].children[1].innerHTML=TextAry[n].children[1].innerHTML;
+			obj.stop(true,true).css("marginTop",mar_top-obj.height()/2+"px").slideDown(800);
+			obj.children('a.close')[0].onclick=$("#mask")[0].onclick=function(){
+				$("#mask").hide();
+				obj.slideUp(600,function(){$(this).removeAttr("style");});
+			}
+		}
+  	</script>
+</body>
+</html>

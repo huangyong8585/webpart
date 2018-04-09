@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>手机轮播</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    
+    .scroll_box{overflow:hidden;width:100%;min-height:100px;position:relative;z-index:0;}
+    .scroll_wrap{overflow:hidden;}
+    .scroll_wrap li{display:block;width:100%;float:left;position:relative;z-index:0;}
+    .scroll_wrap li a{display:block;}
+    .scroll_wrap li a img{display:block;width:100%;}
+    .scroll_position{position:absolute;z-index:11;right:0;bottom:5%;width:100%;height:1em;line-height:1;text-align:center;}
+    .scroll_position li{display:inline-block;margin:0 0.2em;width:2em;height:0.3em;background:#fff;overflow:hidden;}
+    .scroll_position li.on{background-color:#554d4a;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+    </style>
+    <script src="../js/zepto.min.js"></script>
+</head>
+<body>
+    <article class="wrapper">
+        <div class="banner">
+            <div class="scroll_box" id="scroll_img">
+                <ul class="scroll_wrap">
+                    <li><a href="http://act.dsm.sdo.com/project/two20170919/index.html"><img src="http://fu5.sdo.com/10036/201709/15058727646934.jpg" /></a></li>
+                    <li><a href="http://dsm.sdo.com/web3/active.html"><img src="http://fu5.sdo.com/10036/201705/14956001311074.jpg" /></a></li>
+                    <li><a href="http://dsmm.sdo.com/web3/news.html?id=276122"><img src="http://fu5.sdo.com/10036/201703/14901723149524.jpg" /></a></li>
+                    <li><a href="http://dsmm.sdo.com/web3/news.html?id=272345"><img src="http://fu5.sdo.com/10036/201611/14804873532806.jpg" /></a></li>
+                    <li><a href="http://dsmm.sdo.com/web3/news.html?id=254673"><img src="http://img.dfs.sdg-china.com/m/71odU4T3X6t1BWf1C1.JPG" /></a></li>
+                </ul>
+                <ul class="scroll_position" id="scroll_position"><li class="on"></li><li></li><li></li><li></li><li></li></ul>
+            </div>
+        </div>
+        <div id="qrcode"></div>
+    </article>
+    <script src="../js/hhSwipe.js"></script>
+    <script src="../js/Qrcode.js"></script>
+    <script>
+    window.onload=function(){
+        var bullets = document.getElementById('scroll_position').getElementsByTagName('li'),
+            slider = Swipe(document.getElementById('scroll_img'), {
+                auto: 3000,
+                stopPropagation: true,
+                continuous: true,
+                callback: function (pos) {
+                  var i = bullets.length;
+                  while (i--) {
+                    bullets[i].className = ' ';
+                  }
+                  bullets[pos].className = 'on';
+                }
+              });
+
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+                //设置宽高
+                width : 96,
+                height : 96
+            });
+        qrcode.makeCode(window.location.href);
+    }
+    </script>
+</body>
+</html>

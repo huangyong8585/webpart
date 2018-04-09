@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单验证demo</title>
+    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
+    <style>
+    .wrapper{background-color:#e4e4e4;}
+    .header{background-color:#f0f0f0;height:60px;}
+    .main{width:1200px;margin:0 auto;height:3000px;background:#fff;position:relative;}
+    
+    .verifybox{display:block;width:310px;background-color:#dfdfdf;padding:20px 30px;margin:0 auto;}
+    .verifybox h2{font-size:18px;margin-bottom:30px;}
+    .verifybox .inputWrap{padding-bottom:10px;}
+    .verifybox .inputWrap label{display:block;font-size:14px;height:30px;line-height:30px;color:#000;}
+    .verifybox .inputWrap input{width:290px;line-height:20px;font-size:14px;padding:10px;border:0 none;background:#fff;}
+    .verifybox .buttonWrap{padding-top:10px;}
+    .verifybox .buttonWrap .Btn{display:block;width:80px;height:40px;text-align:center;line-height:40px;color:#fff;background-color:#d2b991;}
+    </style>
+    <script src="../js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header"></div>
+        <div class="main">
+            <div class="verifybox" id="loginbox">
+                <h2>登录</h2>
+                <div class="inputWrap"><label>账号</label><input type="text" id="username" placeholder="手机" /></div>
+                <div class="inputWrap"><label>密码</label><input type="password" id="password" placeholder="密码" /></div>
+                <div class="buttonWrap"><a href="javascript:checkLoginInfo();" class="Btn">登录</a></div>
+            </div>
+            &nbsp;<br>&nbsp;
+            <div class="verifybox" id="addressbox">
+                <h2>快递地址</h2>
+                <div class="inputWrap"><label>真实姓名：</label><input type="text" id="name" placeholder="真实姓名" maxlength="10" /></div>
+                <div class="inputWrap"><label>联系电话：</label><input type="tel" id="phone" placeholder="联系电话" maxlength="11" /></div>
+                <div class="inputWrap"><label>通讯地址：</label><input type="text" id="addr" placeholder="通讯地址" /></div>
+                <div class="inputWrap"><label>电子邮箱：</label><input type="text" id="email" placeholder="电子邮箱" /></div>
+                <div class="inputWrap"><label>邮政编码：</label><input type="tel" id="ex" placeholder="邮政编码" maxlength="6" /></div>
+                <div class="buttonWrap"><a href="javascript:checkAddress();" class="Btn">提交</a></div>
+            </div>
+        </div>
+    </div>
+    <script>
+    //验证并登录
+    function checkLoginInfo(){
+        var phonereg = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        var emailreg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
+        var username=$("#username")[0],username_val=username.value.replace(/\s/g,""),
+            password=$("#password")[0],password_val=password.value.replace(/\s/g,"");
+        if(username_val.length==0){showErrMsg("账号不能为空！");username.focus();}
+        else if(!phonereg.test(username_val)&&!emailreg.test(username_val)){showErrMsg("账号必须为手机号，请检查账号输入！");username.focus();}
+        else if(password_val.length==0){showErrMsg("密码不能为空！");password.focus();}
+        else{
+            //调接口
+        }
+    }
+
+
+    function checkAddress(){
+        var phonereg = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        var emailreg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
+        var phone=document.getElementById("phone"),phone_val=phone.value.replace(/\s/g,""),
+            name=document.getElementById("name"),name_val=name.value.replace(/\s/g,""),
+            addr=document.getElementById("addr"),addr_val=addr.value.replace(/\s/g,""),
+            email=document.getElementById("email"),email_val=email.value.replace(/\s/g,""),
+            ex=document.getElementById("ex"),ex_val=ex.value.replace(/\s/g,"");
+        if(name_val.length==0){alert("请填写姓名");}
+        else if(phone_val.length==0){alert("请填写手机号");}
+        else if(isNaN(phone_val)){alert("请正确填写手机号");}
+        else if(phone_val.length!==11){alert("请正确填写手机号");}
+        else if(!phonereg.test(phone_val)){alert("请正确填写手机号");}
+        else if(email_val.length==0){alert("请填写电子邮箱");}
+        else if(!emailreg.test(email_val)){alert("请正确填写电子邮箱");}
+        else if(addr_val.length<5){alert("请正确填写地址");}
+        else if(ex_val.length!=6){alert("请填写邮政编码");}
+        else if(isNaN(ex_val)){alert("请正确填写邮政编码");}
+        else{
+            //调接口
+            }
+        }
+    </script>
+</body>
+</html>

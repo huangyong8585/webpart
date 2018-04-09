@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta id="view" name="viewport" content="width=900, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>图片处理</title>
+  <link rel="stylesheet" type="text/css" href="../../css/mreset.css" />
+  <style>
+  html, body { width: 100%; height: 100% }
+body, input, select { font-size: 12px; background: #fff; margin: 0; font-family: '微软雅黑', arial; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+body, div, ul, li, p, span, h1, h2, h3, h4, h5, h6, img, form, table, tr, td, dl, dt, dd, input, select { margin: 0; padding: 0; }
+body { background:#d5cfc3; background-size:100% 100%; width:100%;}
+#uploadbox, #to_show_2 {width: 100%; z-index: 100; }
+#uploadbox { position: relative; margin-bottom: 18px; }
+.iphone4 #uploadbox, .iphone4 #to_show, .iphone4 #to_show_2 { -webkit-transform: scale(.9) !important; }
+#to_show_2 { bottom: 7.076664%; }
+#uploadbox img, #to_show img, #to_show_2 img { position: relative; width: 100%; z-index: 2 }
+#upload { position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0; z-index: 3 }
+#container { position: absolute; top: 0; width: 70%; left: 15%; z-index: 1; }
+#container canvas{ margin-top:5%; margin-left:1%;}
+
+#uploadbox { margin-top:15%;}
+#submit{ text-align:center;font-size:48px;border:1px solid #000;width:25%;line-height:78px;margin:0 auto;border-radius:10px;}
+
+#qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+  </style>
+  <script src="../../js/zepto.min.js"></script>
+  <script>
+    if (/Android/i.test(navigator.userAgent)) {
+      if (/MicroMessenger/i.test(navigator.userAgent)) {
+        $('#view').attr('content', 'width=900, user-scalable=no');
+      } else {
+        $('#view').attr('content', 'width=device-width, user-scalable=no');
+      }
+    };
+  </script>
+  </head>
+<body class="photo">
+<div class="page p3">
+  <form id="myform">
+    <div id="uploadbox"><!-- 上传按钮 --> 
+        <img src="data:image/png;base64,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" id="first_upload"/>
+        <div id="container" class="editor"></div>
+        <input type="file" id="upload" name="file" required>
+        <input type="hidden" name="pic">
+    </div>
+    <div id="submit">提交</div>
+  </form>
+</div>
+<div id="qrcode"></div>
+<script src="js/quark.js"></script> 
+<script src="js/encoderexifbinary.js"></script> 
+<script src="js/image-editor.js"></script>
+<script src="js/js.js"></script>
+<script src="../../js/Qrcode.js"></script>
+<script>
+window.onload=function(){
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+            //设置宽高
+            width : 96,
+            height : 96
+        });
+    qrcode.makeCode(window.location.href);
+}
+</script>
+</body>
+</html>

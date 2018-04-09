@@ -1,0 +1,575 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>浓情端午 传奇独家定制祝福卡</title>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<style>
+@charset "utf-8";
+blockquote,body,caption,dd,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,iframe,img,label,legend,li,object,ol,p,pre,span,strong,table,tbody,td,tfoot,th,thead,tr,ul,article,section,aside,figure{border:0 none;margin:0;outline:0 none;padding:0;-webkit-text-size-adjust:none;}
+body,html{font-family:'Microsoft YaHei',Helvetica,Tahoma,StSun,SimSun,sans-serif;/*font-family:"Helvetica Neue",Helvetica,STHeiTi,sans-serif;*/-webkit-text-size-adjust:none;height:100%;background:-webkit-linear-gradient(top,#902721,#6b0501);}
+ol,ul,li{list-style:none}
+table{border-collapse:collapse;border-spacing:0}
+:focus{outline:0}
+button::-moz-focus-inner{padding:0;border:0}
+a:link,a:visited{text-decoration:none;color:#333;}
+a:hover{text-decoration:none;}
+a{-webkit-tap-highlight-color:rgba(255,0,0,0);}
+img{border:0;}
+.clearfix:after{display:block;clear:both;height:0;visibility:hidden;content:"."}
+.clearfix{display:block;*display:inline-block;zoom:1;}
+* html .clearfix{height:1%}
+.gold{color:#f08f00;}
+.hide{display:none}
+.tac{text-align:center}
+.w100{width:100%;}
+.imgw100{width:100%;display:block;}
+
+article{height:100%;overflow:hidden;}
+article section{height:100%;width:100%;overflow:hidden;position:relative;z-index:0;opacity:0;}
+.page0,.page1,.page2{position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;z-index:0; -webkit-transition:all .4s ease-out;transition:all .4s ease-out;}
+.logo{text-align:right;padding:.5em .5em 0 0;}
+.logo img{width:44.375%;}
+.page0{background:url(image/wrap.jpg) 0 0/100% 100% no-repeat #901506;}
+.page0 .slogan{width:100%;margin:30% 0 25%;text-align:center;opacity:0;-webkit-transform-origin:center center;transform-origin:center center;-webkit-transform:scale(0.001,0.001);transform:scale(0.001,0.001);
+-webkit-transition:-webkit-transform .3s ease-in-out 0s,opacity .8s linear .3s,background .5s ease-in .8s;transition:transform .3s ease-in-out 0s,opacity .8s linear .3s,background .5s ease-in .8s;}
+.page0 .slogan img{-webkit-transform-origin:center center;transform-origin:center center;-webkit-transform:scale(0.001,0.001);transform:scale(0.001,0.001);-webkit-transition:-webkit-transform .3s ease .5s;transition:transform .3s ease .5s;}
+.page0 .content{width:100%;text-align:center;}
+.page0 .content img{width:57.34375%;}
+.page1{background:url(image/wrap01.jpg) 0 0/100% 100% no-repeat,-webkit-linear-gradient(top,#902721,#6b0501);}
+.page1 .select{width:93.75%; margin:0 auto;}
+.page1 .select h2{ text-align:center;}
+.page1 .select h2 img{width:93.83333%;}
+.page1 .select .selectBox{background:#610a08;border:.5em solid #610a08;position:relative;margin:3% 0;}
+.page1 .select .selectBox .checkBox{position:absolute;top:0;left:0;width:100%;height:100%;}
+.page1 .select .selectBox .checkBox ul{padding:5% 2% 0;}
+.page1 .select .selectBox .checkBox ul li{width:25%;float:left; text-align:center;}
+.page1 .select .selectBox .checkBox ul li img{width:98%;}
+.page1 .select .selectBox .checkBox ul li span{width:50%;display:inline-block;height:1.875em;background:url(image/selectbg.png) 50% 50%/100% 100% no-repeat;}
+.page1 .select .selectBox .checkBox ul li span.active{background:url(image/selectedbg.png) 50% 50%/100% 100% no-repeat;}
+.page1 .select .fromBox{background:#360100;border:.2em solid #d5a13f;padding:5%;border-radius:1em;}
+.page1 .select .fromBox .item{ margin-bottom:1em;}
+.page1 .select .fromBox .item label{ display:inline-block;width:20%;text-align:right;font-size:1.6em;padding-right:5%;color:#eab940;vertical-align:top;}
+.page1 .select .fromBox .item input{border:0 none; background-color:#fff;height:1.6m;padding:.5em 3%;vertical-align:top;width:65%;font-size:1em;}
+.page1 .select .fromBox .item textarea{border:0 none; background-color:#fff;height:1.6m;padding:.5em 3%;vertical-align:top;width:65%;resize:none;height:4em;font-size:1em;}
+.page1 .select .fromBox .submit{ padding-left:25%;}
+.page1 .select .fromBox .submit a{display:block;width:40%;height:2.4em;line-height:2.4em;font-size:1.2em;text-align:center;color:#5e0909;background:-webkit-linear-gradient(top,#fffdda,#dea42e);}
+.page2{background:url(image/wrap01.jpg) 0 0/100% 100% no-repeat,-webkit-linear-gradient(top,#902721,#6b0501);}
+.page2 .logo{position:relative;z-index:3;}
+.page2 .slogan{width:100%;text-align:center;position:absolute;left:0;top:0;z-index:2;}
+.page2 .smlCode{background:#610a08;width:90%;margin:0 auto;border:.5em solid #610a08;position:relative;z-index:1;top:35%;}
+.page2 .smlCode .codeOpera{position:absolute;left:0;top:0;width:100%;height:100%;}
+.page2 .smlCode .codeOpera p.buts{width:100%;position:absolute;left:0;bottom:5%;}
+.page2 .smlCode .codeOpera p.buts a{ display:inline-block;width:40%;height:2.4em;line-height:2.4em;font-size:1.2em;text-align:center;color:#5e0909;background:-webkit-linear-gradient(top,#fffdda,#dea42e);margin:0 5%;}
+.page2 .smlCode .codeOpera p.zoom{ text-align:center;color:#fdee97;font-size:1.5em;font-weight:bold;text-shadow:1px 2px 0 #560000;position:relative;top:63%;z-index:5;}
+.page2 .smlCode .codeOpera p.zoom img{width:10%; vertical-align:middle;margin-right:2%;}
+article section.show0 .page0{opacity:1;z-index:5;}
+article section.show1 .page1{opacity:1;z-index:5;}
+article section.show2 .page2{opacity:1;z-index:5;}
+
+#code{width:40%;background:url(image/codebg.png) 0 0/100% 100% no-repeat;padding:3.5%;font-size:.66em;position:absolute;left:40%;top:3%;-webkit-transform:skew(-15deg,14deg) scale(0.75,0.75);transform:skew(-15deg,14deg) scale(0.75,0.75); box-shadow:0 0 5px #560000;}
+#code img{width:100%;}
+#code p.yourtext{word-break:break-all;height:9em;}
+#code .yourfriend{padding:.3em 0;margin:5% 0;text-align:center; background:url(image/bg0.png) 0 0/100% 100% no-repeat;}
+#code p.date{ text-align:center;}
+ 
+
+/*弹出层*/
+.popbox{display:none;position:fixed;width:100%;height:100%;overflow:hidden;left:0;top:0;z-index:10;opacity:0;-webkit-transition:opacity .8s ease-in-out;transition:opacity .8s ease-in-out;}
+.popbox .pop{position:absolute;width:100%;height:100%;left:0;top:0;background:rgba(0,0,0,0.6);z-index:11;}
+.popbox .pop .closepop{width:6em;height:6em;border-radius:6em;position:absolute;right:-1.2em;bottom:-1.2em; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfAgMAAABiwP6qAAAACVBMVEUAAAAVCgIkGRJnPJyuAAAAAXRSTlMAQObYZgAAAFpJREFUGNNFkEEOACEIAyHhsEeexNP26WLTjGooChRqTGhVtHChhBvIC7KjFEVtvuv8DqcLXNo6qjB97jZr2em2UyMwCy/kUAUPzPSiO/P4Nsz8VKALpWjnNw4evAWS9iAWqwAAAABJRU5ErkJggg==) 45% 45% no-repeat rgba(255,255,255,0.5);background-size:2em 2em;}
+.popbox #CodeBox{z-index:12;}
+.popbox #CodeBox .code{width:80%;background:url(image/codebg.png) 0 0/100% 100% no-repeat;padding:5%;font-size:1em;box-sizing:border-box;position:absolute;left:10%;top:50%;}
+.popbox #CodeBox .code img{width:100%; margin-bottom:5%;}
+.popbox #CodeBox .code p.yourtext{ line-height:1.8;word-break:break-all;height:9em;}
+.popbox #CodeBox .code .yourfriend{padding:.3em 0;margin:5% 0;text-align:center; background:url(image/bg0.png) 0 0/100% 100% no-repeat;}
+.popbox #CodeBox .code p.date{text-align:center;}
+
+/*alert弹出层*/
+.alertpopbox{display:none;position:fixed;width:100%;height:100%;left:0;top:0;background-color:rgba(0,0,0,0.6);z-index:20;}
+.alertpopbox .pop{display:none;position:absolute;width:68%;left:16%;top:50%;background-color:#fff;border-radius:.5em;}
+.alertpopbox .pop p{font-size:1em;line-height:1.5;padding:10% 5%;word-break:break-all;border-bottom:1px solid #d4d4d4;}
+.alertpopbox .pop a{display:inline-block;text-align:center;width:50%;font-size:1em;box-sizing:border-box;height:3em;line-height:3em;}
+.alertpopbox .pop a:last-child{border-left:1px solid #d4d4d4;}
+
+/*分享*/
+.sharetip{position:fixed;width:100%;height:100%;overflow:hidden;left:0;top:150%;background-color:rgba(0,0,0,0.6);z-index:150;-webkit-transform:translateY(350%);-moz-transform:translateY(350%);transform:translateY(350%);
+-webkit-transition:all .5s ease-in-out;-moz-transition:all .5s ease-in-out;transition:all .5s ease-in-out; text-align:right;}
+.sharetip img{width:20%;margin-right:3%;}
+.sharetip .tips{width:90%;display:block;text-align:center;margin:.25em auto 0;padding:.25em .5em;line-height:1.8;border:1px solid rgba(255,255,255,0.85);color:rgba(255,255,255,0.85);font-size:1.2em;}
+.sharetip .closeSharetip{width:6em;height:6em;border-radius:6em;position:absolute;right:-1.2em;bottom:-1.2em; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfAgMAAABiwP6qAAAACVBMVEUAAAAVCgIkGRJnPJyuAAAAAXRSTlMAQObYZgAAAFpJREFUGNNFkEEOACEIAyHhsEeexNP26WLTjGooChRqTGhVtHChhBvIC7KjFEVtvuv8DqcLXNo6qjB97jZr2em2UyMwCy/kUAUPzPSiO/P4Nsz8VKALpWjnNw4evAWS9iAWqwAAAABJRU5ErkJggg==) 45% 45% no-repeat rgba(255,255,255,0.5);background-size:2em 2em;}
+
+/*动画*/
+article.animate section{-webkit-transform:translate(0,0);transform:translate(0,0);opacity:1;}
+article.animate section .page0 .logo{-webkit-transform:translateX(0);transform:translateX(0);}
+article.animate section .page0 .slogan{-webkit-transform:scale(1,1);transform:scale(1,1);opacity:1; background-size:96% auto;}
+article.animate section .page0 .slogan img{-webkit-transform:scale(1,1);transform:scale(1,1);}
+
+@-webkit-keyframes guide {
+    0% {-webkit-transform:translateX(10px);opacity:.5;}
+    100% {-webkit-transform:translateX(0px);opacity:1;}
+}
+@keyframes guide {
+    0% {-webkit-transform:translateX(10px);opacity:.5;}
+    100% {-webkit-transform:translateX(0px);opacity:1;}
+}
+@-webkit-keyframes droproll {
+    0% {right:20%;bottom:16%;-webkit-transform:scale(0.75,0.75) rotate(0deg);}
+	20% {right:15%;bottom:0;-webkit-transform:scale(1,1) rotate(0deg);}
+    100% {right:0;bottom:0;-webkit-transform:scale(1,1) rotate(360deg);}
+}
+@keyframes droproll {
+    0% {right:20%;bottom:16%;transform:scale(0.75,0.75) rotate(0deg);}
+	20% {right:15%;bottom:0;transform:scale(1,1) rotate(0deg);}
+    100% {right:0;bottom:0;transform:scale(1,1) rotate(360deg);}
+}
+@-webkit-keyframes rotate {from {-webkit-transform: rotate(0deg);} to {-webkit-transform: rotate(360deg);}}
+@keyframes rotate {from {transform: rotate(0deg);} to {transform: rotate(360deg);}}
+
+@-webkit-keyframes tada {
+    0% {-webkit-transform: scale(1);}
+    10%, 20% {-webkit-transform: scale(0.9) rotate(-3deg);}
+    30%, 50%, 70%, 90% {-webkit-transform: scale(1.01) rotate(3deg);}
+    40%, 60%, 80% {-webkit-transform: scale(1.01) rotate(-3deg);}
+    100% {-webkit-transform: scale(1) rotate(0);}
+}
+@keyframes tada {
+    0% {transform: scale(1);}   
+    10%, 20% {transform: scale(0.9) rotate(-3deg);}
+    30%, 50%, 70%, 90% {transform: scale(1.01) rotate(3deg);}
+    40%, 60%, 80% {transform: scale(1.01) rotate(-3deg);}
+    100% {transform: scale(1) rotate(0);}
+}
+
+
+@media screen and (max-width:320px) and (max-height:480px) {
+	
+}
+@media screen and (max-width:320px) and (max-height:420px) {
+	.logo img{width:30%;}
+	.page0{ background-size:100% auto;}
+	.page0 .slogan{margin:20% 0;}
+	.page1 .select .selectBox{margin:1% 0;}
+	.page1 .select .fromBox{ padding:3.5%;}
+	.page2 .slogan{top:-14.5%;}
+	.page2 .smlCode{top:29%;}
+}
+
+@media screen and (min-width : 720px) and (min-height : 960px) {
+	.logo img{width:30%;}
+	.page0{ background-size:100% auto;}
+	.page0 .slogan{margin:20% 0;}
+	.page1 .select .selectBox{margin:1% 0;}
+	.page1 .select .fromBox{ padding:3.5%;}
+	.page2 .slogan{top:-14.5%;}
+	.page2 .smlCode{top:29%;}
+}
+
+@media screen and (max-width : 340px){
+	body{font-size:12px;}
+}
+@media screen and (min-width : 341px) and (max-width : 360px){
+	body{font-size:13px;}
+}
+@media screen and (min-width : 361px) and (max-width : 400px){
+	body{font-size:14px;}
+}
+@media screen and (min-width : 401px) and (max-width : 440px){
+	body{font-size:15px;}
+}
+@media screen and (min-width : 441px) and (max-width : 480px){
+	body{font-size:16px;}
+}
+@media screen and (min-width : 481px) and (max-width : 520px){
+	body{font-size:17px;}
+}
+@media screen and (min-width : 521px) and (max-width : 560px){
+	body{font-size:21px;}
+}
+@media screen and (min-width : 561px) and (max-width : 620px){
+	body{font-size:22px;}
+}
+@media screen and (min-width : 621px) and (max-width : 660px){
+	body{font-size:24px;}
+}
+@media screen and (min-width : 661px) and (max-width : 720px){
+	body{font-size:26px;}
+}
+@media screen and (min-width : 721px) and (max-width : 800px){
+	body{font-size:29px;}
+}
+@media screen and (min-width : 801px) {
+	body{font-size:31px;}
+}
+</style>
+</head>
+<body>   
+	<article>
+    	<header style="display:none;">
+        	<img src="image/share.jpg" />
+        </header>
+        <section class="show0">
+        	<div class="page0">
+            	<div class="logo"><img src="image/logo.png" /></div>
+                <div class="slogan"><img src="image/slogan.png" class="imgw100" /></div>
+                <div class="content">
+                	<a href="javascript:showpage(1);"><img src="image/but.jpg" /></a>
+                </div>
+            </div>
+            <div class="page1">
+            	<div class="logo"><img src="image/logo.png" /></div>
+                <div class="select">
+                	<h2><img src="image/title.png" /></h2>
+                    <div class="selectBox">
+                    	<img src="image/bg00.png" class="imgw100" />
+                        <div class="checkBox">
+                        	<ul>
+                            	<li><img src="image/boat01.png" /><br /><span index="1" class="active"></span></li>
+                                <li><img src="image/boat02.png" /><br /><span index="2"></span></li>
+                                <li><img src="image/boat03.png" /><br /><span index="3"></span></li>
+                                <li><img src="image/boat04.png" /><br /><span index="4"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="fromBox">
+                    	<div class="item"><label>姓名</label><input id="name" type="text" maxlength="8" /></div>
+                        <div class="item"><label>祝福</label><textarea id="hopetext" maxlength="90" placeholder="祝福语，最多90字"></textarea></div>
+                        <div class="submit"><a href="javascript:checkText();">提交</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="page2">
+            	<div class="logo"><img src="image/logo.png" /></div>
+                <div class="slogan"><img src="image/slogan2.png" class="imgw100" /></div>
+                <div class="smlCode">
+                	<img src="image/bg01.png" class="imgw100" /> 
+                    <div class="codeOpera">
+                    	<div id="code">
+                        	<img src="image/boat1.png" />
+                            <p class="yourtext"></p>
+                            <div class="yourfriend">您的朋友：XXXX</div>
+                            <p class="date">2016.3.6</p>
+                        </div>
+                        <p class="zoom" onclick="showPOP(1,'CodeBox')"><img src="image/zoom.png" />点击放大</p>
+                    	<p class="buts"><a href="index.html">再做一张</a><a href="javascript:showShareImg('友谊的小船已经变成满载祝福的端午龙舟啦，快把您的龙舟贺卡分享给您的好友吧！<br /><br /><img src=image/xinqu.jpg style=width:65%; />');">分享给好友</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+        <!--弹出层-->
+        <!--合成层-->
+        <div class="popbox">
+            <div class="pop" id="CodeBox">
+            	<div class="closepop"></div>
+            	<div class="code">
+                	<img src="image/boat1.png" />
+                    <p class="yourtext"></p>
+                    <div class="yourfriend">您的朋友：</div>
+                    <p class="date"></p>
+                </div>
+            </div>
+        </div>
+        <!--弹出层-->
+        <!--alert弹出层-->
+        <div class="alertpopbox">
+        	<div class="pop" id="alertpop">
+                <p></p>
+                <a href="javascript:;" class="closepop">确定</a><a href="javascript:;" class="closepop">取消</a>
+            </div>
+		</div>
+        <!--alert弹出层-->
+        <!--分享指引-->
+        <div class="sharetip" id="sharetip">
+        	<div class="closeSharetip"></div>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABlCAMAAAD+r9R1AAAAOVBMVEUAAAD19fXs7Ozi4uLv7+/v7+/l5eXp6enq6urw8PD19fXv7+/u7u76+vr6+vr////39/j7+/v///9S6T+3AAAAEHRSTlMA/g4FM18dSY7plrzUInhmWux2jAAAAzpJREFUaN7NlYF2qyAMQCegqAhV//9jX1LAFCpWop7zbqLQbd5kpOv+2Dj99wh6Xe3fA9h1XRtxv1c0K2DuF5v1jbvb69aAvntwkaW709stqw8QN/I+r2zWAKrH+8QjKhdI8MLyusv7WgA0Rr26x6vA5mPbiDu8AnzIp3mQNwxuWHYYbxhcdGG/RHvV25I0RV0dXIlVXBxcEXNFbJYDHN/rlkM016uXH1ie18KjM6Zf4SL8i0bw/hdFw7ytFP6VYQ9uzoxUy7tfjMHN89uFt3jHwMQ9LpwBat9hkONFdWgBujpv16AoCMlPt63QIOs+0ubPRjcRuWkda8RjdOVW2hPtee9rrkKd9aq5jkac/cuYKxnkycFVM54fXIPZxA2uMWnB8HlmgC09Q57EQkWp9O8BqreCoklf51uqJ34PLjMVIq9ojsUGvTvM/k47zBR35JU2xaGA+ovq2ZtsSt1nURlskU/ROl8UD091PBW1/2vHTw1PPCVWT4nbI3F7QeyeEpsBBAPEzWIxREAf7bi/KlZDBihJr/li9+X1/eJ1SWymoUADqdheO20MEJDkBfjidtpjiHRs8TiVGPAS7JMwbya8Jsgc/kkYYkJ/sIfFcL1yNAZyjwmj54rVGDEYXzj2SYwZmb5lekUqzdvni3UfGPtdu1HM0bk+ZYRMaljm6EiZ2OlXEMzR9a73iVfux+R5O/dBj5nrW2bD4Hv1r3AjSK95DbdvHASofQW0BtDOm51uU3qsgEm/heR4bbsP9u88rCMWuTDvHlAcsYLHdXuM4ExOAy1cuPj4rsM5CJ3TxiAYJyGVLkJywfIqpTFK4Mkw3mkqIa8Rjr/je3NSvaz1diQ6siuG1+axpxfVXmtBlfh2/XVa2VmkgwhLp7p3pdxf17DoMixeIZT1Su9me0slQveC6S2WiKdUc7xCdOKLDuNbX9Fw8KRRLFDTLomIrxJBL063W0JmJXADebpduXmkl8n4KiXKT2k3B3nQTu68wMmD2DqjAgDJ/Saxy3PtyngIRLRDUgna/LYGZ5HkW9sk5W8tPX+M2JbfXv9zdKSA3A/IbefXhFPvDwhM3FKERPxXCl4+0Uklcf8Ee95/7nB2fneLSRgAAAAASUVORK5CYII=" />
+            <span class="tips">有这样这么着调的好事，<br />赶紧的去奔走相告啊！</span>
+        </div>
+        <!--分享指引-->
+    <script src="../../js/base64.js"></script>
+	<script>
+	//document.domain="sdo.com";
+	//JSONP
+	function loadData(_url,data,fn){
+		//var url = "http://act.wz.sdo.com/project/app_20130515/wz_newslist.ashx?category_code=5608,5609,5610&callback=HandleNewsListData";
+		var url = "",t=document.createElement("script");
+		if(fn){url = _url+"?"+data+"&callback="+fn;}
+		else{url = _url+"?"+data;}
+		//n=document.getElementsByTagName("script")[0];
+		//document.getElementsByTagName("head")[0].appendChild(t);
+		t.src=url,t.type="text/javascript",t.async=!0//,n.parentNode.insertBefore(t,n)
+		document.getElementsByTagName("head")[0].appendChild(t);
+		t.onload=function(){document.getElementsByTagName("head")[0].removeChild(t);}
+		}
+	//loadData("http://funvery.applinzi.com/init.php","url="+window.location.href.split("#")[0],'wxConfigStatrt');
+	
+	//ajax
+	function ajax(method,url,para,callback){
+			var xmlhttp=new XMLHttpRequest(),_url,_para;
+			xmlhttp.onreadystatechange=function(){
+				if(xmlhttp.readyState==4&&xmlhttp.status==200){
+					callback(JSON.parse(xmlhttp.responseText.replace(",}","}")));
+					}
+				};
+			if(method=="GET"){
+				_url=url+"?"+para;
+				_para=null;
+				}
+			else if(method=="POST"){
+				_url=url;
+				_para=para;
+				}
+			xmlhttp.open(method,_url,true);
+			xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+			xmlhttp.send(_para);
+			}
+	//ajax("GET","Handler/getCheckInfo.ashx","url="+window.location.href,wxConfigStatrt);
+	
+	//获取参数的hdindex
+	function getURLPara(str){
+        var ary=[],obj={},wls=window.location.search,temp='',i=0;
+        if(wls!==""){
+            if(wls.indexOf("&")!=-1){ary=wls.substring(1).split("&");}
+            else{ary[0]=wls.substring(1)}
+			i=ary.length;
+            for(;i--;){console.log(i);
+                temp=ary[i].split("=");
+                obj[temp[0]]=temp[1];
+                }
+            }
+        if(str){return obj[str];}
+		else{return obj;}
+    }
+			
+	function isFromShare(str){
+		var b=new Base64();
+		console.log(b.decode(decodeURIComponent(str)).replace(/~/g,"="));
+		var fromShareObj=JSON.parse(b.decode(decodeURIComponent(str.replace(/~/g,"="))));
+		var code1=document.getElementById("code"),code2=document.getElementById("CodeBox").children[1];
+		var boatpic=new Image();
+		code1.children[1].innerHTML=code2.children[1].innerHTML=fromShareObj.txt;
+		code1.children[2].innerHTML=code2.children[2].innerHTML='您的朋友：'+fromShareObj.guy;
+		code1.children[3].innerHTML=code2.children[3].innerHTML=fromShareObj.date;
+		document.querySelector('.codeOpera .buts').innerHTML='<a href="index.html" style="display:block;margin:0 auto;">我也要做</a>'
+		showpage(2);
+		boatpic.onload=function(){
+			showPOP(true,'CodeBox');
+			}
+		code1.children[0].src=code2.children[0].src=boatpic.src="image/boat"+fromShareObj.img+".png";
+		}
+	
+	(function (doc, win) {
+          //var docEl = doc.documentElement,
+		  var docEl = doc.getElementsByTagName("body")[0],
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+              var clientWidth = (docEl.clientWidth||win.innerWidth);console.log(clientWidth,win.innerWidth);
+              if (!clientWidth) return;
+			  docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+              //doc.getElementsByTagName('body')[0].style.fontSize = 12 * (clientWidth / 320) + 'px';
+            },
+			wxCode = function(){
+				var blesCode = getURLPara('bless');
+				//alert(wxcode+","+wxstate+","+(typeof wxcode)+","+(typeof wxstate));
+            	if (!!blesCode && blesCode !== "undefined" && blesCode !== "" &&(typeof blesCode)!=="undefined" && blesCode.length > 0){//1.请求后端 获取用户信息
+					isFromShare(blesCode);
+				}
+				else {// 2.跳转到微信授权界面
+					
+					}
+				};
+          if (!doc.addEventListener) return;
+          win.addEventListener(resizeEvt, recalc, false);
+          doc.addEventListener('DOMContentLoaded', recalc, false);
+		  doc.addEventListener('DOMContentLoaded', wxCode, false);
+        })(document, window);
+		
+	var phoneWidth = parseInt(document.body.clientWidth||document.documentElement.clientWidth||window.screen.width);
+  	var phoneHeight = parseInt(document.body.clientHeight||document.documentElement.clientHeight||window.screen.height);
+	var dragonboat={
+			"img":1,
+			"date":"",
+			"guy":"",
+			"txt":""
+		},bless="";
+	console.log(phoneWidth,phoneHeight);
+	
+	function resetForm(){
+		document.getElementById("name").value=document.getElementById("hopetext").value="";
+		var n=dragonboat.img;
+		dragonboat.date="";
+		dragonboat.guy="";
+		dragonboat.txt="";
+		bless="";
+		showpage(1);
+		}
+	
+	//当前时间
+	function currentTime(){
+		var date = new Date(),time={},currentTimeStr;
+		time.year = date.getFullYear();
+		time.month = date.getMonth() + 1;
+		time.date = date.getDate();
+		currentTimeStr = time.year+"."+time.month+"."+time.date;
+		return currentTimeStr;		
+		}
+	
+	function checkText(){
+		var name=document.getElementById("name"),name_val=name.value.replace(/\s/g,""),
+			hopetext=document.getElementById("hopetext"),hopetext_val=hopetext.value.replace(/\s/g,"").replace(/[\r\n]/g,"");
+		var code1=document.getElementById("code"),code2=document.getElementById("CodeBox").children[1];
+			if(name_val.length==0){alertpop("请填写姓名");}
+			else if(hopetext_val.length==0){alertpop("请填写祝福语");}
+			else if(hopetext_val.length<5){alertpop("祝福语太少了点吧");}
+			else{
+				code1.children[0].src=code2.children[0].src="image/boat"+dragonboat.img+".png";
+				code1.children[1].innerHTML=code2.children[1].innerHTML=dragonboat.txt=hopetext_val;
+				code1.children[2].innerHTML=code2.children[2].innerHTML='您的朋友：'+name_val;
+				code1.children[3].innerHTML=code2.children[3].innerHTML=dragonboat.date=currentTime();
+				dragonboat.guy=name_val;
+				name.value=hopetext.value="";
+				var b=new Base64();
+				bless=encodeURIComponent(b.encode(JSON.stringify(dragonboat).replace(/\s/g,"")).replace(/=/g,"~"));
+				console.log(bless);			
+				showpage(2);
+				//loadData("http://chuanqi.sdo.com/project/message/setmessage.asp","rolename="+encodeURIComponent(name_val)+"&content="+encodeURIComponent(hopetext_val));
+				ajax("GET","../inc/GetCheckInfo.php","url="+encodeURIComponent(window.location.href),wxConfigStatrt);
+				}
+		}
+	
+	function showpage(n){
+		document.querySelector('article section').className="show"+n;
+		}
+	
+	//打开弹出层	
+	function showPOP(t,name){
+		var box=document.getElementById(name).parentNode;
+		if(t){
+			box.style.display="block";
+			box.children[0].children[1].style.marginTop=(0-box.children[0].children[1].offsetHeight/2)+"px";
+			setTimeout(function(){box.style.opacity=1;},100);
+			}
+		else{
+			box.style.display="none";
+			box.style.opacity=0;
+			}
+		if(box.getElementsByClassName("closepop").length>0){
+			box.getElementsByClassName("closepop")[0].onclick=function(){
+				box.style.display="none";
+				box.style.opacity=0;
+				}
+			}
+		}
+	//showPOP(true,'CodeBox');
+
+	function alertpop(t){
+		var popobj=document.getElementById("alertpop");
+		popobj.parentNode.style.display="block";
+		popobj.style.display="block";
+		popobj.children[0].innerHTML=t;
+		popobj.style.marginTop=(0-popobj.offsetHeight/2)+"px";
+		popobj.children[1].onclick=popobj.children[2].onclick=function(){
+			popobj.parentNode.style.display="none";
+			popobj.style.display="none";
+			popobj.children[0].innerHTML='';
+			}
+		}
+
+	
+	//打开分享指引
+	function showShareImg(t){
+		var box=document.getElementById("sharetip");
+		if(t){
+			box.children[2].innerHTML=t;
+			box.style.top=0;
+			box.style.webkitTransform='translateY(0)';
+			box.style.transform='translateY(0)';
+			box.children[0].onclick=function(){
+				box.style.top="150%";
+				box.style.webkitTransform='translateY(350%)';
+				box.style.transform='translateY(350%)';
+				}
+			}
+		else{
+			box.children[2].innerHTML="";
+			box.style.top="150%";
+			box.style.webkitTransform='translateY(350%)';
+			box.style.transform='translateY(350%)';
+			}
+		}
+		
+	
+	window.addEventListener("load",function(){
+		var wls=window.location.search;
+		document.querySelector("body article").className="animate";
+		document.querySelector(".checkBox ul").onclick=function(e){
+			var that;
+			this.getElementsByClassName('active')[0].className="";
+			if(e.target.nodeName.toLowerCase()=="li"){
+				that=e.target.getElementsByTagName('span')[0];
+				}
+			else if(e.target.nodeName.toLowerCase()=="img"){
+				that=e.target.parentNode.getElementsByTagName('span')[0];
+				}
+			else if(e.target.nodeName.toLowerCase()=="span"){
+				that=e.target;
+				}
+			dragonboat.img=that.getAttribute("index");
+			that.className="active";
+			}
+		},false);
+
+    /***微信分享***/
+    function wxConfigStatrt(data){console.log(data);
+        if(data.Tsuccess==0){return false;}
+        BindWXReady();
+        wx.config({
+            debug: false,
+            appId: 'wxe5b7f4b9d084f4e3',
+            timestamp: data.timestamp,
+            nonceStr: data.nonceStr,    
+            signature: data.sign,
+            jsApiList: [
+                'checkJsApi',
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage'
+                ]
+        });
+    }
+
+    var shareTitle='日本殿堂级声优献声 《神域召唤》一大波声控福利降临';
+    var shareDesc='《神域召唤》集结日本殿堂级全明星声优，带来纯正的日系游戏体验！';
+    function BindWXReady(){
+        wx.ready(function(){
+            wx.onMenuShareTimeline({
+                title:dragonboat.guy+"祝你端午节快乐", // 分享标题
+                link:'http://weixin.mir.sdo.com/SDGMir/dwbless/index.html?bless='+bless, // 分享链接
+                imgUrl:'http://weixin.mir.sdo.com/SDGMir/dwbless/image/share.jpg', // 分享图标
+                success: function(){},
+                cancel: function(){}
+            });
+        
+            wx.onMenuShareAppMessage({
+                title:dragonboat.guy+"祝你端午节快乐", // 分享标题
+                desc: dragonboat.txt, // 分享描述
+                link:'http://weixin.mir.sdo.com/SDGMir/dwbless/index.html?bless='+bless, // 分享链接
+                imgUrl:'http://weixin.mir.sdo.com/SDGMir/dwbless/image/share.jpg', // 分享图标
+                type: 'link', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function (){},
+                cancel: function(){}
+            });
+        });
+    }
+    $.get("http://wx.act.sdo.com/mg/auth/GetSharePara","url="+encodeURIComponent(window.location.href),function(data){
+        if(data.Code==0){
+            Data=eval('('+data.Attach+')');
+            wxConfigStatrt(Data);
+        }
+    },'jsonp');
+    /***微信分享***/
+
+   </script>
+</body>
+</html>

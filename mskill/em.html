@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>em单位</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    body{font-size:12px;}
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+    </style>
+</head>
+<body>	
+	<article class="wrapper">
+		<p style="width:1em;height:1em;background:#f39;"></p>
+		<p style="color:#f00;">1个rem的单位等于html的字体大小(font-size)<br>（屏幕宽度/320*12）<br>上面的红色正方形宽高为1em*1em</p>
+		<br /><br /><br />
+		<div style="width:17.5em;height:8.3333333333em;background:#36f;">宽2.1em，高1em</div>
+		<p style="color:#00f;">例子：设计稿整体宽640px<br>此元素在设计稿宽210px高100px所以<br>这个div的em宽度为：210除以html的（font-size）值&nbsp;&nbsp;(17.5em)<br>这个div的rem高度为：100除以html的（font-size）值&nbsp;&nbsp;(8.3333em)</p>
+		<div id="qrcode"></div>
+	</article>
+    <script src="../js/Qrcode.js"></script>
+	<script>
+		// 字体大小自适应
+	    (function (doc, win) {
+		  //var docEl = doc.documentElement,
+		  var docEl = doc.getElementsByTagName("body")[0],
+		    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+		    recalc = function () {210/12
+		      var clientWidth = (docEl.clientWidth||win.innerWidth);
+		      if (!clientWidth) return;
+		      docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+		      //doc.getElementsByTagName('body')[0].style.fontSize = 12 * (clientWidth / 320) + 'px';
+		    };
+
+		  if (!doc.addEventListener) return;
+		  win.addEventListener(resizeEvt, recalc, false);
+		  doc.addEventListener('DOMContentLoaded', recalc, false);
+		})(document, window);
+	    // 字体大小自适应
+
+		window.onload=function(){
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }
+	</script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>下拉框</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style type="text/css">
+.fx-select{ color:#666; border:1px solid #D6D6D6; position:relative;
+background:url('data:image/gif;base64,R0lGODlhBwAEAJEAAAAAAP///2BgYP///yH5BAEAAAMALAAAAAAHAAQAAAIIlC+DOWoN2SgAOw==') 95% center no-repeat;
+-moz-user-select: none;-webkit-user-select: none; display:*inline;float: left;
+ margin-right:10px;}
+.fx-select-list{ margin:0; padding:0; text-indent:10px; position:absolute; border:1px solid #D6D6D6; left:-1px; background:#fff;}
+.fx-select-list dd{ overflow:hidden; margin:0; font-size:12px; height:22px; line-height:22px; color:#666; cursor:default;}
+.fx-select-list-hover{ background:#efefef;}
+.fx-select-val{ overflow:hidden; font-size:12px; text-indent:10px;-moz-user-select: none;-webkit-user-select: none; cursor:default;}
+.fx-select-hover {border:1px solid #bbb;}
+.fx-select-hover .fx-select-list{border:1px solid #bbb;}
+</style>
+<script src="../js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+<select class="fx-select">
+	<option value="a">–请选择–</option>
+	<option value="a">f00sun.com</option>
+	<option value="b">baidu.com</option>
+	<option value="c">sina.com</option>
+	<option value="d">google.com</option>
+</select>
+
+<select class="fx-select" id="fx-select">
+	<option value="a">葡萄</option>
+	<option value="b" selected="selected">狐狸</option>
+	<option value="c">老虎</option>
+	<option value="d">大象</option>
+</select>
+<script type="text/javascript">
+jQuery.fn.extend({
+    //下拉框
+    fxSelect: function (opt) {
+        return this.each(function () {
+            var t = $(this),
+                option = t.find("option"),
+                isselect = true,
+                width,
+                height;
+            t.hide().after($('<div class="fx-select"><div class="fx-select-val"></div><dl class="fx-select-list"></dd></dl></div>'));
+            width = opt.width ? opt.width : 150;
+            height = opt.height ? opt.height : 26;
+
+            //模拟下拉框
+            var l = t.next(),
+                show = l.find('.fx-select-val'),
+                list = l.find('.fx-select-list'),
+                listHtml = "";
+
+            //初始化赋值
+            option.each(function (i) {
+                listHtml += '<dd data-val="' + $(this).val() + '" data-index="' + i + '">' + $(this).text() + '</dd>';
+                if ($(this).attr('selected') == 'selected') {
+                    show.html($(this).text())
+                }
+            });
+
+            //显示值的div
+            show.css({
+                'height': height,
+                'line-height': height + 'px'
+            });
+
+            //外框处理
+            l.css({
+                    'width': opt.width,
+                    'height': opt.height
+                })
+                .click(function (e) {
+                    list.css('display') == 'none' ? list.show() : list.hide();
+                })
+                .mouseover(function () {
+                    $(this).addClass('fx-select-hover').css({
+                        'z-index': 3
+                    });
+                    isselect = true;
+                })
+                .mouseout(function () {
+                    $(this).removeClass('fx-select-hover').css({
+                        'z-index': 1
+                    });
+                    isselect = false;
+                });
+            //列表处理
+            list.html(listHtml).hide()
+                .css({
+                    'top': height + 'px',
+                    'width': width
+                })
+                .find('dd')
+                .mouseover(function () {
+                    $(this).addClass('fx-select-list-hover');
+                })
+                .mouseout(function () {
+                    $(this).removeClass('fx-select-list-hover');
+                })
+                .click(function () {
+                    isselect = true;
+                    show.text($(this).text());
+                    var index = $(this).data('index');
+                    option.eq(index).attr('selected', 'selected').siblings().removeAttr('selected');
+                });
+            $(document).click(function () {
+                isselect == false && list.hide();
+            })
+        })
+    }
+});
+
+$('.fx-select').fxSelect({
+    width: '100',
+    height: '25'
+});
+</script>
+</body>
+</html>

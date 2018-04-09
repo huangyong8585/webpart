@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>抢夺闹钟不赖床 天才宝贝</title>
+<style>
+@charset "utf-8";
+blockquote,body,caption,dd,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,iframe,img,label,legend,li,object,ol,p,pre,span,strong,table,tbody,td,tfoot,th,thead,tr,ul,article,section,aside,figure{border:0 none;margin:0;outline:0 none;padding:0;}
+body,html{font-family:'Microsoft YaHei',Helvetica,Tahoma,StSun,SimSun,sans-serif;font-size:29px;background-color:#b3d1fe;-webkit-text-size-adjust:none;height:100%;}
+ol,ul,li{list-style:none}
+table{border-collapse:collapse;border-spacing:0}
+:focus{outline:0}
+button::-moz-focus-inner{padding:0;border:0}
+a:link,a:visited{text-decoration: none;color:#9b5e16;}
+a:hover{text-decoration:none;}
+a{-webkit-tap-highlight-color:rgba(255,0,0,0);}
+img{border:0;}
+.clear{clear:both;display:block;margin:0;padding:0}
+.clear-after:after{content:"";display:block;height:0;clear:both;visibility:hidden}
+* .clear-after{zoom:1}
+.hide{display:none}
+.clearfix:after{display:block;clear:both;height:0;visibility:hidden;content:"."}
+.clearfix{display:block;*display:inline-block;zoom:1;}
+* html .clearfix{height:1%}
+.tac{text-align:center}
+.w100{width:100%;}
+.imgw100{width:100%;display:block;}
+
+.hbox {display:-webkit-box;display:-moz-box;display:-ms-flexbox;-webkit-box-orient:horizontal;-moz-box-orient:horizontal;box-orient:horizontal;-ms-flex-direction:row;display:box;width:100%;}
+.vbox {display:-webkit-box;display:-moz-box;display:-ms-flexbox;-webkit-box-orient:vertical;-moz-box-orient:vertical;box-orient:vertical;-ms-flex-direction:column;display:box;height:100%;}
+.flex1 {-webkit-box-flex:1;-moz-box-flex:1;-ms-flex:1;box-flex:1;}
+.flex2 {-webkit-box-flex:2;-moz-box-flex:2;-ms-flex:2;box-flex:2;}
+.flex3 {-webkit-box-flex:3;-moz-box-flex:3;-ms-flex:3;box-flex:3;}
+.flex4 {-webkit-box-flex:4;-moz-box-flex:4;-ms-flex:4;box-flex:4;}
+.flex5 {-webkit-box-flex:5;-moz-box-flex:5;-ms-flex:5;box-flex:5;}
+
+.wrapper{position:relative;height:100%;}
+.wrapper section{position:absolute;left:0;top:0;width:100%;height:100%;display:none;opacity:0;overflow:hidden;}
+
+.content1{height:100%;-webkit-transition:all .4s ease-in-out;transition:all .4s  ease-in-out; text-align:center;
+background:url(image/window.png) 60% 35%/57.5% auto no-repeat,url(image/cloud.png) center 30%/90.15625% auto no-repeat,url(image/stars.png) 5% 20%/29.0625% auto no-repeat,url(image/stars.png) 90% 40%/29.0625% auto no-repeat;
+}
+.content1 .logo{position:absolute;left:20%;top:1.5%;width:59.84375%;z-index:1;}
+.content1 .slogan{width:78.09375%; margin-top:12%;}
+.content1 .clock{position:absolute;left:10%;top:40%;width:30.96875%;z-index:5;}
+.content1 .sleep{width:70.3125%; margin:0 auto;position:relative;z-index:0;}
+.content1 .sleep img{width:100%;-webkit-transition:opacity 2s ease-in-out;transition:opacity 2s ease-in-out;}
+.content1 .sleep img:last-child{position:absolute;left:0;top:0;z-index:1;}
+.content1 .sleep img:first-child{opacity:1;}
+.content1 .sleep img:last-child{opacity:0;}
+.content1 .sleep.change img:first-child{opacity:0;}
+.content1 .sleep.change img:last-child{opacity:1;}
+.content1 .tip{width:81.25%;}
+.content1 a.but{ display:inline-block;width:55.3125%;}
+.content1 a.but img{ width:100%;}
+
+
+.content2{height:100%;text-align:center;}
+.content2 .cont-img{width:84.625%; margin:5% 0;}
+.content2 a.but{display:inline-block;width:55.3125%;}
+.content2 a.but img{width:100%;}
+.content2 .lookrlues a{display:block;padding-top:2%;color:#333;font-weight:bold; letter-spacing:1px;}
+.content2 .rlues{ display:none;position:absolute;left:0;top:0;width:100%;height:100%; background:url(image/rlues.png) 0 0/100% 100% no-repeat;}
+
+.content3{height:100%;}
+.content3 header{height:10%;width:100%;background:#b3d1fe;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:end;-webkit-box-align:center;
+display:box;box-orient:horizontal;box-pack:end;box-align:center;position:relative;}
+.content3 header em{font-style:normal; padding:0 0.5em;}
+.content3 header #inter{margin-right:1em;background:rgba(255,255,255,0.6);padding:0.5em;border-radius:0.25em;font-size:1em; line-height:1;}
+.content3 header #count{position:absolute;left:0.5em;top:0.6em;color:#ff0;font-size:2em;line-height:1;}
+.content3 .scene{height:90%; position:relative;overflow:hidden;background:url(image/scene01.jpg) 0 0/100% 100% no-repeat;}
+.content3 .scene .borderbox{display:block;height:30%;width:100%; position:absolute;left:0;top:30%;z-index:1;border-top:1em solid #069a10;border-bottom:1em solid #fd6c02;}
+.content3 .scene .flex1{position:relative;height:100%;overflow:hidden;z-index:2;}
+.content3 .scene .flex1 strong{display:block;width:80%;position:absolute; left:10%;bottom:-0.3em;}
+.content3 .scene .flex1 strong img{width:100%;}
+.content3 .scene .flex1 i{position:absolute;left:50%;top:0; margin-left:-2.5em;width:5em;height:3.5em;background:url(image/clock.png) 0 0/100% auto no-repeat;
+-webkit-transition-property:top;
+-webkit-transition-duration:2s;
+-webkit-transition-timing-function:linear;
+-webkit-transition-delay:0s;
+transition-property:top;
+transition-duration:2s;
+transition-timing-function:linear;
+transition-delay:0s;
+}
+.content3 .scene .flex1.move i{top:100%;}
+.content3 .scene .flex1.reset i{top:0;-webkit-transition-duration:0s;transition-duration:0s;}
+
+/*弹出层*/
+.popbox{position:fixed;width:100%;height:100%;left:0;top:0;background-color:rgba(0,0,0,0.6);z-index:10;-webkit-transform:translateY(-150%);-moz-transform:translateY(-150%);transform:translateY(-150%);
+-webkit-transition:all .5s ease-in-out;-moz-transition:all .5s ease-in-out;transition:all .5s ease-in-out;}
+.pop{display:none;position:absolute;width:90%;left:5%;top:50%;background-color:#b3d1fe;border-radius:0.5em; padding-bottom:2%;}
+/*.pop .closepop{position:absolute;right:0;top:0;padding:4%; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfAgMAAABiwP6qAAAACVBMVEUAAAAVCgIkGRJnPJyuAAAAAXRSTlMAQObYZgAAAFpJREFUGNNFkEEOACEIAyHhsEeexNP26WLTjGooChRqTGhVtHChhBvIC7KjFEVtvuv8DqcLXNo6qjB97jZr2em2UyMwCy/kUAUPzPSiO/P4Nsz8VKALpWjnNw4evAWS9iAWqwAAAABJRU5ErkJggg==) center center no-repeat; background-size:70% 70%;}
+.pop .closepop img{height:1.4em;display:block;opacity:0;}*/
+.pop h3{font-size:2em; text-align:center;color:#f80;padding:4% 0;line-height:1;font-weight:normal;}
+.pop p a{font-size:1em;line-height:2em;height:2.2em;text-align:center;background:-webkit-gradient(linear,0 0,0 70%,from(#78d3f4),to(#00a0e9));border:0.2em solid #00a0e9;border-radius:0.4em;box-sizing:border-box;color:#fff;}
+.pop p.bbut{padding:4% 3% 2%;text-align:center;}
+.pop p.bbut a{display:inline-block;width:90%;height:2.3em;}
+.pop p.sbut{padding:2% 3% 4%;}
+.pop p.sbut a{display:inline-block;width:40%;margin:0 5%;}
+.pop .tel_box,.pop .city_center{padding:1% 8%;}
+.pop .tel_box span,.pop .city_center span{display:block;font-size:1em;color:#666;margin-bottom:2%;}
+.pop .tel_box input{width:94%;height:2em;line-height:2em;font-size:1em;font-weight:bold;letter-spacing:1px;border-radius:0.4em;border:1px solid #c0c0c0;padding:0 3%;}
+.pop .city_center select{display:inline-block;width:45%;height:2em;border-radius:0.4em;border:1px solid #c0c0c0;box-sizing:border-box;}
+.pop .city_center select#select_city{margin-right:10%;}
+/*动画*/
+.wrapper .animated{opacity:1;animation: opacityto1 0.8s linear;-moz-animation:opacityto1 0.8s linear;-webkit-animation:opacityto1 0.8s linear;}
+.animated.content1{}
+.animated.content1 .clock{-webkit-animation:tada 1.5s infinite linear;animation:tada 1.5s infinite linear;}
+
+
+aside.loading{ position:absolute;left:0;top:0;height:100%;width:100%;display:-webkit-box;display:box; -webkit-box-pack:center;box-pack:center;-webkit-box-align:center;box-align:center;display:none;}
+aside.loading .load{width:50%;height:40px;line-height:40px;display:inline-block;color:#f00;font-size:28px;font-family:Arial;text-align:center;}
+
+/*分享*/
+.sharetip{position:fixed;width:100%;height:100%;left:0;top:150%;background-color:rgba(0,0,0,0.6);z-index:150;-webkit-transform:translateY(350%);-moz-transform:translateY(350%);transform:translateY(350%);
+-webkit-transition:all .5s ease-in-out;-moz-transition:all .5s ease-in-out;transition:all .5s ease-in-out; text-align:right;}
+.sharetip img{width:43.59375%; margin-right:3%;}
+
+
+/*自定义动画*/
+@-webkit-keyframes opacityto1{0%{opacity:0;} 50%{opacity:0.2;} 100%{opacity:1;}}
+@-moz-keyframes opacityto1 {0%{opacity:0;} 50%{opacity:0.2;} 100%{opacity:1;}}
+@keyframes opacityto1 {0%{opacity:0;} 50%{opacity:0.2;} 100%{opacity:1;}}
+
+@-webkit-keyframes tada {
+    0% {-webkit-transform: scale(1);}
+    10%, 20% {-webkit-transform: scale(0.9) rotate(-3deg);}
+    30%, 50%, 70%, 90% {-webkit-transform: scale(1.01) rotate(3deg);}
+    40%, 60%, 80% {-webkit-transform: scale(1.01) rotate(-3deg);}
+    100% {-webkit-transform: scale(1) rotate(0);}
+}
+@-moz-keyframes tada {
+    0% {-moz-transform: scale(1);}  
+    10%, 20% {-moz-transform: scale(0.9) rotate(-3deg);}
+    30%, 50%, 70%, 90% {-moz-transform: scale(1.01) rotate(3deg);}
+    40%, 60%, 80% {-moz-transform: scale(1.01) rotate(-3deg);}
+    100% {-moz-transform: scale(1) rotate(0);}
+}
+@keyframes tada {
+    0% {transform: scale(1);}   
+    10%, 20% {transform: scale(0.9) rotate(-3deg);}
+    30%, 50%, 70%, 90% {transform: scale(1.01) rotate(3deg);}
+    40%, 60%, 80% {transform: scale(1.01) rotate(-3deg);}
+    100% {transform: scale(1) rotate(0);}
+}
+
+@media screen and (max-width:320px) and (max-height:480px) {
+	.content1 .logo{left:25%;top:1.5%;width:50%;}
+	.content1 .slogan{width:73%;margin-top:8%;}
+	.content1 .sleep {width:70%;}
+	.content1 .tip {width:78.25%;}
+	.content2 .cont-img {width:80%;margin:3% 0;}
+	.content3 header #count{top:0.5em;}
+}
+@media screen and (max-width:320px) and (max-height:420px) {
+	.content1 .logo{left:30%;top:1.2%;width:40%;}
+	.content1 .slogan{width:60%;margin-top:8%;}
+	.content1 .sleep {width:60%;}
+	.content1 .tip {width:73.25%;}
+	.content2 .cont-img {width:70%;margin:2.5% 0;}
+	.content3 header #count{top:0.4em;}
+}
+
+@media screen and (max-width : 340px){
+	body{font-size:12px;}
+}
+@media screen and (min-width : 341px) and (max-width : 360px){
+	body{font-size:13px;}
+}
+@media screen and (min-width : 361px) and (max-width : 400px){
+	body{font-size:14px;}
+}
+@media screen and (min-width : 401px) and (max-width : 440px){
+	body{font-size:16px;}
+}
+@media screen and (min-width : 441px) and (max-width : 480px){
+	body{font-size:16px;}
+}
+@media screen and (min-width : 481px) and (max-width : 520px){
+	body{font-size:17px;}
+}
+@media screen and (min-width : 521px) and (max-width : 560px){
+	body{font-size:21px;}
+}
+@media screen and (min-width : 561px) and (max-width : 620px){
+	body{font-size:22px;}
+}
+@media screen and (min-width : 621px) and (max-width : 660px){
+	body{font-size:24px;}
+}
+@media screen and (min-width : 661px) and (max-width : 720px){
+	body{font-size:26px;}
+}
+@media screen and (min-width : 721px) and (max-width : 800px){
+	body{font-size:29px;}
+}
+@media screen and (min-width : 801px) {
+	body{font-size:31px;}
+}
+</style>
+<script src="zepto.min.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+	<header style="display:none;">
+    	<img src="image/share.jpg">
+    </header>
+	<article class="wrapper">
+        <section id="wrap1" class="content1">
+            <img src="image/logo.png" class="logo"/>
+            <img src="image/slogan.png" class="slogan" />
+            <img src="image/clock.png" class="clock" />
+            <div class="sleep">
+            	<img src="image/sleep1.png" />
+                <img src="image/sleep2.png" />
+            </div>
+            <img src="image/tips.png" class="tip" />
+            <a href="javascript:showPage(2);" class="but"><img src="image/but1.png" /></a>
+        </section>
+        <section id="wrap2" class="content2">
+        	<img src="image/cont2-img1.png" class="cont-img" />
+            <a href="javascript:showPage(3);" class="but"><img src="image/but2.png" /></a>
+            <p class="lookrlues tac"><a href="javascript:;">查看活动规则</a></p>
+            <div class="rlues"></div>
+        </section>
+        <section id="wrap3" class="content3">
+        	<header><span id="count">30</span><span id="inter">积分:<em id="jfNum">0</em></span></header>
+            <div class="scene hbox" id="scene">
+            	<div class="borderbox"></div>
+            	<div class="flex1">
+                	<strong><img src="image/rab1.png" /></strong><i></i>
+                </div>
+                <div class="flex1">
+                	<strong><img src="image/rab2.png" /></strong><i></i>
+                </div>
+                <div class="flex1">
+                	<strong><img src="image/rab3.png" /></strong><i></i>
+                </div>
+            </div>
+        </section>
+        <!--弹出层-->
+        <div class="popbox">
+            <div class="pop" id="isOver">
+                <h3>GAME OVER</h3>
+                <div class="tel_box">
+                    <span>请输入您的手机号</span>
+                    <input id="txt_tel" type="tel" maxlength="11">
+                </div>
+                <div class="city_center">
+            		<span>请选择离您最近的中心进行兑换</span>
+                    <select id="select_city"></select><select id="select_center"></select>
+                </div>
+                <p class="bbut"><a href="javascript:;">提 交</a></p>
+                <p class="sbut"><a href="javascript:showShareImg();">去分享</a><a href="javascript:playGame.again();">再来一次</a></p>
+            </div>
+        </div>
+        <!--弹出层-->
+        <!--分享指引-->
+        <div class="sharetip" id="sharetip"><img src="image/sharetip.png" /></div>
+        <!--分享指引-->
+	</article>
+    <script>
+		try{
+		//睡姿切换
+		var timeP=setInterval(function(){
+				var fire=$("#wrap1 .sleep")[0];
+				if(fire.className=="sleep"){fire.className="sleep change";}
+				else{fire.className="sleep";}
+				},8000);
+				
+		//查看规则	
+		$("#wrap2 .lookrlues").click(function(){
+			$(this).next().show().on("click",function(){$(this).hide();});
+			})
+		
+		var ALL_CITY={"list":{"1":"\u4e0a\u6d77","2":"\u5e7f\u5dde","4":"\u5927\u8fde","6":"\u6c88\u9633","7":"\u4e1c\u839e","8":"\u5317\u4eac","10":"\u6e29\u5dde","11":"\u6df1\u5733","12":"\u90d1\u5dde","14":"\u65e0\u9521","15":"\u82cf\u5dde","19":"\u592a\u539f","20":"\u91cd\u5e86","21":"\u5357\u4eac","22":"\u53a6\u95e8","23":"\u6210\u90fd","26":"\u6b66\u6c49","29":"\u798f\u5dde","30":"\u5e38\u5dde","31":"\u5f90\u5dde","33":"\u5408\u80a5","36":"\u6cc9\u5dde","37":"\u4f5b\u5c71","39":"\u5357\u5b81","41":"\u5e38\u719f","43":"\u4e49\u4e4c","45":"\u5609\u5174","47":"\u91d1\u534e","48":"\u6d4e\u5b81","52":"\u7ecd\u5174","53":"\u5357\u901a","54":"\u7ef5\u9633","55":"\u6606\u660e","56":"\u4e34\u6c82","57":"\u70df\u53f0","58":"\u73e0\u6d77","59":"\u5f20\u5bb6\u6e2f","63":"\u5170\u5dde","69":"\u6ed5\u5dde","71":"\u5fb7\u9633","73":"\u6e56\u5dde","74":"\u79e6\u7687\u5c9b"},"city1":{"4":"\u4e0a\u6d77\u8679\u6865#\u4e0a\u6d77\u5e02\u957f\u5b81\u533a\u5174\u4e49\u8def8\u53f7\u4e07\u90fd\u5546\u57ce3\u697cB-301\u5355\u5143","5":"\u4e0a\u6d77\u9ec4\u6d66#\u4e0a\u6d77\u5f90\u5bb6\u6c47\u8def618\u53f7\u65e5\u6708\u5149\u4e2d\u5fc3\u5e7f\u573a3\u697cC\u533a\uff0c3F-k-12","18":"\u4e0a\u6d77\u5927\u5b81#\u4e0a\u6d77\u5171\u548c\u65b0\u8def2008\u53f7\u5927\u5b81\u56fd\u9645\u5546\u4e1a\u5e7f\u573a12\u5e62416-419\u5ba4","42":"\u4e0a\u6d77\u8054\u6d0b#\u6d66\u4e1c\u82b3\u7538\u8def300\u53f7\u8054\u6d0b\u5e7f\u573aA\u533a3\u5c42306-2","1007":"\u4e0a\u6d77\u95f5\u884c#\u4e0a\u6d77\u95f5\u884c\u533a\u90fd\u5e02\u8def5001\u53f7\u4ef2\u76db\u4e16\u754c\u5546\u57ce3\u697c13A\u5355\u5143"},"city2":{"36":"\u5e7f\u5dde\u6ee8\u6c5f#\u5e7f\u5dde\u5e02\u6d77\u73e0\u533a\u6ee8\u6c5f\u4e1c\u8def41\u53f7\u73e0\u6c5f\u6cf3\u573a\u201c\u6ee8\u6c5f\u4e1c\u5cb8\u201d\u5546\u573a\u4e1c\u533a3\u697c","121":"\u5e7f\u5dde\u5bcc\u90a6#\u5e7f\u5dde\u5e02\u4e2d\u5c71\u4e03\u8def51\u53f7\u5bcc\u90a6\u4e2d\u5fc3\u4e09\u697c312-313\u53f7"},"city4":{"1029":"\u5927\u8fde\u5f00\u53d1\u533a\u4e07\u548c\u6c47#\u4e2d\u56fd\u8fbd\u5b81\u7701\u5927\u8fde\u5f00\u53d1\u533a\u91d1\u9a6c\u8def208\u53f7\u4e07\u548c\u6c47\u8d2d\u7269\u5e7f\u573a3\u697c","1033":"\u5927\u8fde\u74e6\u623f\u5e97#\u5927\u8fde\u74e6\u623f\u5e97\u5e02\u5f97\u5229\u5927\u53a6\u5199\u5b57\u95f4\u4e09\u5c42"},"city6":{"1041":"\u6c88\u9633\u957f\u767d#\u6c88\u9633\u5e02\u548c\u5e73\u533a\u957f\u767d\u897f\u8def26-5\u53f76-7\u95e8\uff08\u957f\u767d\u4e07\u79d1\u57ce\u4e1c\u95e8\u531750\u7c73\uff09"},"city7":{"19":"\u4e1c\u839e\u5357\u57ce#\u4e1c\u839e\u5e02\u5357\u57ce\u533a\u9e3f\u798f\u8def200\u53f7\u7b2c\u4e00\u56fd\u9645\u8d2d\u7269\u4e2d\u5fc3F\u5ea72\u5c42","92":"\u4e1c\u839e\u957f\u5b89#\u4e1c\u839e\u957f\u5b89\u9547\u957f\u9752\u8def\u6021\u5b89\u767e\u8d27\u56db\u697c"},"city8":{"109":"\u5317\u4eac\u65b9\u5e84#\u5317\u4eac\u5e02\u4e30\u53f0\u533a\u84b2\u65b9\u8def9\u53f7\u7269\u7f8e\u5927\u5356\u573a5\u5c42\uff08\u5730\u94c1\u4e94\u53f7\u7ebf\u84b2\u9ec4\u6986\u7ad9\uff09","1002":"\u5317\u4eac\u901a\u5dde#\u5317\u4eac\u5e02\u901a\u5dde\u533a\u5929\u65f6\u540d\u82d1\u534e\u8054\u5546\u53a63\u5c42","1018":"\u5317\u4eac\u4e94\u5f69\u57ce#\u5317\u4eac\u5e02\u6d77\u6dc0\u533a\u6e05\u6cb3\u4e2d\u885768\u53f7\u4e94\u5f69\u57ce\u8d2d\u7269\u4e2d\u5fc3\u4e8c\u671fL371C"},"city10":{"106":"\u4e50\u6e05\u4e16\u8d38#\u4e50\u6e05\u5e02\u7389\u7bab\u8def\u4e16\u8d38\u56fd\u9645\u516c\u5bd3\u4e8c\u697c","1005":"\u9f99\u6e2f\u8d22\u5bcc#\u82cd\u5357\u53bf\u9f99\u6e2f\u9547\u9f99\u6e2f\u8d22\u5bcc\u5e7f\u573a\u9f99\u57ce\u534e\u5e9c\u4e09\u5e623\u5c42"},"city11":{"23":"\u6df1\u5733\u5357\u5c71#\u6df1\u5733\u5e02\u5357\u5c71\u5546\u4e1a\u6587\u5316\u4e2d\u5fc3\u533a\u6d77\u5fb7\u4e09\u9053\u7f8e\u5885\u84dd\u5c71\u5bb6\u56ed\u88d9\u697c1-2\u5c42"},"city12":{"25":"\u90d1\u5dde\u51ef\u5fb7#\u90d1\u5dde\u5e02\u4e2d\u5dde\u5927\u90531188\u53f7\uff08\u90d1\u6c74\u8def\u5317\uff09\u51ef\u5fb7\u5e7f\u573a\uff08\u539f\u5609\u8302\uff094F"},"city14":{"28":"\u65e0\u9521\u6052\u9686#\u65e0\u9521\u5e02\u4eba\u6c11\u4e2d\u8def139\u53f7\u6052\u9686\u5e7f\u573a3\u697c331-1\u94fa\u4f4d"},"city15":{"29":"\u82cf\u5dde\u7eff\u5b9d#\u82cf\u5dde\u5e02\u9ad8\u65b0\u533a\u957f\u6c5f\u8def436\u53f7\u7eff\u5b9d\u5e7f\u573a3\u697c","99":"\u82cf\u5dde\u4e45\u5149#\u82cf\u5dde\u5de5\u4e1a\u56ed\u533a\u65fa\u58a9\u8def268\u53f7\u4e45\u5149\u767e\u8d273D-2\uff08\u7eff\u533a\uff09"},"city19":{"33":"\u592a\u539f\u8fce\u6cfd#\u592a\u539f\u5e02\u8fce\u6cfd\u533a\u5357\u5185\u73af179\u53f7\u5988\u5988\u5b9d\u8d1d3\u5c42"},"city20":{"34":"\u91cd\u5e86\u5730\u738b#\u91cd\u5e86\u5e02\u6e1d\u4e2d\u533a\u6c11\u65cf\u8def166\u53f7\u5730\u738b\u8d2d\u7269\u4e2d\u5fc3\u738b\u5e9c\u4e95\u767e\u8d276\u697cK\u533a","49":"\u91cd\u5e86\u9f99\u6e56#\u91cd\u5e86\u5e02\u6e1d\u5317\u533a\u9f99\u6e56\u7d2b\u57ce\u5929\u8857\u8d2d\u7269\u4e2d\u5fc32-8\u680b301-307"},"city21":{"38":"\u5357\u4eac\u6c34\u6e38\u57ce#\u5357\u4eac\u5e02\u767d\u4e0b\u533a\u5065\u5eb7\u8def1\u53f7\u6c34\u6e38\u57ce\u4e09\u697c331","94":"\u5357\u4eac\u516b\u4f70\u4f34#\u5357\u4eac\u5e02\u6e56\u5357\u8def1\u53f7\u516b\u4f70\u4f34\u8d2d\u7269\u4e2d\u5fc34\u697c","1042":"\u5357\u4eac\u9f99\u6c5f#\u5357\u4eac\u5e02\u9f13\u697c\u533a\u8349\u573a\u95e8\u5927\u885799\u53f7\u9f99\u6c5f\u65b0\u57ce\u5e02\u5e7f\u573a\u4e09\u697c"},"city22":{"35":"\u53a6\u95e8\u78d0\u57fa#\u798f\u5efa\u7701\u53a6\u95e8\u5e02\u601d\u660e\u533a\u5609\u79be\u8def199\u53f7\u78d0\u57fa\u4e2d\u5fc3G43+G44\u5546\u94fa\u5929\u624d\u5b9d\u8d1d"},"city23":{"37":"\u6210\u90fd\u9526\u6c5f#\u6210\u90fd\u5e02\u9526\u6c5f\u533a\u4e1c\u5927\u8def238\u53f7\u5e02\u5987\u5973\u513f\u7ae5\u4e2d\u5fc3\u4e09\u697c"},"city26":{"53":"\u6b66\u6c49\u4f1a\u5c55#\u6b66\u6c49\u5e02\u89e3\u653e\u5927\u9053696\u53f7\u6b66\u6c49\u4f1a\u5c55\u4e2d\u5fc3\u4e3b\u697c\u4e1c\u4e8c\u5c42"},"city29":{"1009":"\u798f\u5dde\u91d1\u878d\u8857#\u798f\u5dde\u5e02\u53f0\u6c5f\u533a\u9ccc\u5cf0\u8def31\u53f7\u91d1\u878d\u8857\u4e07\u8fbe\u5e7f\u573a\u5ba4\u5916\u6b65\u884c\u8857\u4e8c\u697c146\uff0d148\u53f7"},"city30":{"66":"\u5e38\u5dde\u83b1\u8499#\u5e38\u5dde\u5e02\u83b1\u8499\u90fd\u4f1a\u4e8c\u671f7-309-1"},"city31":{"52":"\u5f90\u5dde\u9f13\u697c#\u5f90\u5dde\u5e02\u9f13\u697c\u533a\u6c11\u4e3b\u5317\u8def61\u53f74\u697c"},"city33":{"88":"\u5408\u80a5\u6b22\u4e50\u9882#\u5408\u80a5\u5e02\u5e90\u9633\u533a\u957f\u4e30\u8def66\u53f7\uff08\u4e0e\u5317\u4e00\u73af\u4ea4\u53c9\u53e3\uff09\u6b22\u4e50\u9882\u8d2d\u7269\u4e2d\u5fc3","1028":"\u5408\u80a5\u5929\u9e45\u6e56#\u5408\u80a5\u653f\u52a1\u533a\u7941\u6f5c\u8def\u53e3\u65b0\u5730\u8d2d\u7269\u4e2d\u5fc3\u767e\u76db\u4e8c\u697c\u5973\u88c5\u533a"},"city36":{"89":"\u6cc9\u5dde\u5343\u4ebf#\u6cc9\u5dde\u5e02\u4e30\u6cfd\u533a\u7530\u5b89\u5357\u8def\u5343\u4ebf\u534e\u56ed2\u697c"},"city37":{"93":"\u4f5b\u5c71\u7985\u57ce#\u4f5b\u5c71\u5e02\u7985\u57ce\u533a\u5b63\u534e\u4e94\u8def36\u53f7\u65b0\u4e00\u57ce\uff08\u6c83\u5c14\u739b\u8d2d\u7269\u5e7f\u573a\uff09B\u5ea71\u697c"},"city39":{"97":"\u5357\u5b81\u822a\u6d0b#\u5357\u5b81\u5e02\u6c11\u65cf\u5927\u9053131\u53f7\u822a\u6d0b\u57ce\u5317\u5e7f\u573aA3\u680b"},"city41":{"102":"\u5e38\u719f\u7f8e\u57ce#\u5e38\u719f\u5e02\u6d77\u865e\u5317\u8def39\u53f7\u7f8e\u57ce\u8d2d\u72693\u697c"},"city43":{"103":"\u4e49\u4e4c\u7a20\u57ce#\u6d59\u6c5f\u7701\u4e49\u4e4c\u5e02\u8d1d\u6751\u8def335~348"},"city45":{"104":"\u5609\u5174\u65ed\u8f89#\u5609\u5174\u5e02\u5357\u6e56\u533a\u65ed\u8f89\u5e7f\u573a3\u697cM3F-24\uff08\u5929\u624d\u5b9d\u8d1d\u5546\u94fa\uff09"},"city47":{"107":"\u91d1\u534e\u798f\u534e#\u91d1\u534e\u5e02\u516b\u4e00\u5317\u885788\u53f7\u798f\u534e\u94f6\u6cf04\u697c"},"city48":{"108":"\u6d4e\u5b81\u8fd0\u6cb3\u57ce#\u6d4e\u5b81\u5e02\u592a\u767d\u4e2d\u8def17\u53f7\u8fd0\u6cb3\u57ce\u5546\u4e1a\u6469\u5c14\u4e8c\u5c42"},"city52":{"114":"\u7ecd\u5174\u8d8a\u57ce#\u7ecd\u5174\u5e02\u89e3\u653e\u5317\u8def2\u53f7\u739b\u683c\u4e3d\u7279\u5546\u4e1a\u4e2d\u5fc3\u4e1c\u533a3\u5e622\u697c"},"city53":{"115":"\u5357\u901a\u73af\u897f\u5e7f\u573a#\u5357\u901a\u5e02\u5d07\u5ddd\u533a\u73af\u897f\u8def18\u53f7\uff08\u6587\u5316\u5bab\u7535\u5f71\u9662\u659c\u5bf9\u9762\uff09\u98de\u9a6c\u5927\u53a64\u697c"},"city54":{"116":"\u7ef5\u9633\u5357\u6cb3#\u7ef5\u9633\u5e02\u6daa\u57ce\u533a\u5357\u6cb3\u8def\u964430\u53f7\u57ce\u5357\u540d\u84573\u697c"},"city55":{"120":"\u6606\u660e\u5317\u8fb0\u8d22\u5bcc#\u6606\u660e\u5e02\u5317\u8fb0\u8d22\u5bcc\u4e2d\u5fc3D2\u680bA\u5ea7401"},"city56":{"119":"\u4e34\u6c82\u5170\u5c71#\u4e34\u6c82\u5e02\u5170\u5c71\u533a\u89e3\u653e\u8def128\u53f7\u4e45\u9686\u5965\u65af\u5361\u5546\u4e1a\u5e7f\u573aC\u99862\u697c"},"city57":{"118":"\u70df\u53f0\u829d\u7f58#\u70df\u53f0\u5e02\u829d\u7f58\u533a\u5357\u5927\u8857180\u53f7\u632f\u534e\u56fd\u9645\u5e7f\u573a3\u697c"},"city58":{"1003":"\u73e0\u6d77\u5409\u5927#\u73e0\u6d77\u5e02\u5409\u5927\u6d77\u6ee8\u5357\u8def50\u53f7\u91d1\u78a7\u65f6\u4ee3\u5e7f\u573a \u5546\u573a2F 202\u53f7"},"city59":{"1004":"\u5f20\u5bb6\u6e2f\u51e4\u51f0#\u6c5f\u82cf\u7701\u5f20\u5bb6\u6e2f\u5e02\u8d2d\u7269\u516c\u56ed\u592a\u9633\u5e7f\u573a4\u697c"},"city63":{"1011":"\u5170\u5dde\u65f6\u5c1a\u767e\u76db#\u7518\u8083\u7701\u5170\u5dde\u5e02\u57ce\u5173\u533a\u5e86\u9633\u8def111\u53f7\u65f6\u5c1a\u767e\u76db\u4e94\u697c"},"city69":{"1025":"\u6ed5\u5dde\u4e66\u57ce#\u5c71\u4e1c\u7701\u6ed5\u5dde\u5e02\u8346\u6cb3\u4e2d\u8def\u4e66\u57ce\u4e09\u697c"},"city71":{"1034":"\u5fb7\u9633\u6587\u5e99#\u5fb7\u9633\u5e02\u65cc\u9633\u533a\u6587\u5e99\u8857\u5357\u4fa7\u534e\u76db\u5546\u53a6A\u5e62\u4e09\u697c\u4e8c\u53f7"},"city73":{"1038":"\u6e56\u5dde\u4e1c\u5434#\u6e56\u5dde\u5e02\u5434\u5174\u533a\u52b3\u52a8\u8def518\u53f7\u4e1c\u5434\u94f6\u6cf0\u57ce3-72A"},"city74":{"1043":"\u79e6\u7687\u5c9b\u6d77\u6e2f#\u6cb3\u5317\u7701\u79e6\u7687\u5c9b\u5b9c\u5b89\u5927\u53a6\u4e09\u5c42"}};
+		
+		var w_h=(document.body.offsetHeight||document.documentElement.offsetHeight);
+		var em_1=parseFloat(getComputedStyle($("#scene .borderbox")[0],0)['borderTopWidth']);
+		var right_top=w_h*0.1+w_h*0.3+em_1;
+		var right_bottom=right_top+w_h*0.9*0.3-em_1*3.5;
+		
+		var playGame={
+				"count":30,
+				"score":0,
+				"w_h":w_h,
+				"em1":em_1,
+				"jifen":$("#jfNum"),
+				"scene_but":$("#scene .flex1 strong"),
+				"scene_child":$("#scene .flex1"),
+				"right_top":right_top,
+				"right_bottom":right_bottom,
+				"random_num":function(){return Math.floor(Math.random()*3);},
+				"speed":3000,
+				"timepoint":null,
+				"play":function(){
+					if(this.count==0){showPOP('EXCELLENT');return false;}
+					var that=this;
+					/*this.scene_child.eq(this.random_num()).append('<i></i>').children("i").animate({"top":'100%'},this.speed,'linear',function(){
+							showPOP('FUCK YOU');
+							$(this).remove();
+							that.count--;
+							that.speed=parseInt(that.speed-that.speed*0.05);
+							});*/
+					//count.text(this.count);
+					console.log(this.speed);
+					var ha=this.scene_child.eq(this.random_num()).children("i").attr("i",this.count);
+					setTimeout(function(){
+						//haha.style.cssText='top:100%;-webkit-transition:top '+(that.speed/1000+"s")+' linear 0s;transition:top '+(that.speed/1000+"s")+' linear 0s;'
+						//haha.style.webkitTransition='top '+(that.speed/1000+"s")+' linear 0s';
+						//haha.style.transition='top '+(that.speed/1000+"s")+' linear 0s';
+						//ha[0].style.transitionDuration=(that.speed/1000+"s");
+						//ha[0].style.webkitTransitionDuration=(that.speed/1000+"s");
+						ha.parent().removeClass("reset").addClass("move");
+						},50);
+					console.log(this.speed,ha.attr("i"),that.count);
+					this.timepoint=setTimeout(function(){if(ha[0].getAttribute("i")==that.count){showPOP('GAME OVER 2');}},that.speed);
+					},
+				"bindevent":function(){
+					var that=this,count=$("#count");
+					this.scene_but.removeAttr("notouch").on("touchstart",function(){
+						if(this.getAttribute("notouch")=="true"){return false;}
+						if(that.timepoint){clearTimeout(that.timepoint);console.log("clear ok");}
+						var t=($(this.parentNode).children('i').length>0?$(this.parentNode).children('i').offset().top:0);
+						console.log(t,$(this.parentNode).children('i').css("top").charAt(0),"TP");
+						if($(this.parentNode).children('i').css("top").charAt(0)==="-"||t<that.right_top||t>that.right_bottom){
+							this.setAttribute("notouch","true");
+							showPOP('GAME OVER');
+							console.log("Game Over");
+							}
+						else{
+							//$(this).prev('i').css({'top':'-4em','transitionDuration':'0s','webkitTransitionDuration':'0s'});
+							$(this).parent().removeClass("move").addClass("reset");
+							count.text(--that.count);
+							//that.speed=parseInt(that.speed-that.speed*0.066);
+							(that.speed>2000)?(that.score+=1):((that.speed>1000)?(that.score+=5):(that.score+=10));
+							that.jifen.text(that.score);
+							that.play();
+							}
+						});
+					},
+				"again":function(){showPOP(false);
+					this.speed=3000;
+					this.count=30;
+					this.score=0;
+					this.scene_but.removeAttr("notouch");
+					this.scene_child.addClass("reset").removeClass("move");
+					this.play();
+				}
+			};
+		console.log(playGame.w_h,playGame.right_top,playGame.right_bottom);
+		//console.log(right_bottom-right_top,w_h*0.1,w_h*0.9*0.3,parseFloat(getComputedStyle($("#scene .borderbox")[0],0)['borderTopWidth']));
+		//console.log(getComputedStyle(document.getElementById("wrap3").children[0],0)['height'],getComputedStyle($("#scene .borderbox")[0],0)['top'],getComputedStyle($("#scene .borderbox")[0],0)['borderTopWidth']);
+		//console.log(getStyle(document.getElementById("wrap3"),'height'),getStyle($("#scene .borderbox")[0],'top'),getStyle($("#scene .borderbox")[0],'borderTopWidth'));
+		/*
+		function playGame(){
+			var random_num=Math.floor(Math.random()*3);
+			var scene_but=$("#scene .flex1 strong");
+			var scene_child=$("#scene .flex1").eq(random_num);
+			scene_but.on("touchstart",function(){console.log($(this).offset().top);
+				if($(this.parentNode).children('i').length==0){console.log("Game Over");}
+				else{$(this).next().css('transform','scale(0.9)').remove();}
+				})
+			scene_child.append("<i></i>").children("i").animate({"top":'100%'},3000,'linear',function(){});
+			}
+		*/
+		
+		
+		//打开分享指引
+		function showShareImg(){
+			var box=document.getElementById("sharetip");
+			box.style.top=0;
+			box.style.webkitTransform='translateY(0)';
+			box.style.transform='translateY(0)';
+			box.onclick=function(){
+				box.style.top="150%";
+				box.style.webkitTransform='translateY(350%)';
+				box.style.transform='translateY(350%)';
+				}
+			}
+			
+		//打开弹出层	
+		function showPOP(t){
+			var box=document.getElementById("isOver");
+			if(t){
+				box.children[0].innerHTML=t;
+				box.style.display="block";
+				box.style.marginTop=(0-box.offsetHeight/2)+"px";
+				box.parentNode.style.webkitTransform='translateY(0)';
+				box.parentNode.style.transform='translateY(0)';
+				}
+			else{
+				box.parentNode.style.webkitTransform='translateY(-150%)';
+				box.parentNode.style.transform='translateY(-150%)';
+				setTimeout(function(){box.style.display="none";},300);
+				}
+			}
+		
+		function showPage(num){
+			var wrap=$("#wrap"+num);
+			wrap.siblings("section").hide().removeClass("animated");
+			wrap.show();
+			setTimeout(function(){wrap.addClass("animated");},10);
+			if(num!=1){
+				clearInterval(timeP);
+				}
+			if(num==3){
+				playGame.bindevent();
+				playGame.play();addcitylist();
+				}
+			}
+		showPage(3);
+		
+		//添加城市选项
+		function addcitylist(){
+			var htm="";
+			$.each(ALL_CITY.list,function(key,value){
+				htm+="<option value='" + key + "'>" + value + "</option>";
+            });
+			$("#select_city").html(htm).change(function(){addCityDetailList(this.value);});
+			addCityDetailList(1);
+			}
+			
+		//添加城市报名点选项
+		function addCityDetailList(n){
+			var tmp_i = 0,html="";
+            $.each(ALL_CITY["city"+n], function (key, value) {
+                var dataArray = value.split('#');
+                var da = dataArray[0];
+                var db = dataArray[1];
+				html+="<option value='" + key + "'  data-addr='" + db + "'>" + da + "</option>"
+                tmp_i++;
+            });
+            if (tmp_i == 0) {
+                $("#select_center").append("<option value='-1'>无</option>");
+            }
+			else{
+				$("#select_center").html(html);
+				}
+
+			}
+		}catch(e){alert(e.name+"|"+e.message+"|"+e.lineNumber);}
+</script>
+</body>
+</html>

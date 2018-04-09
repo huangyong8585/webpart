@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>轮播开门关门</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style>
+.banner { height: 340px;position: relative; width: 580px;padding:0 80px; margin:20px auto 0; background-color:#f0f0f0;}
+.banner .imgBox,.banner .imgBox img { width: 580px; height: 340px; overflow: hidden; }
+.banner .imgBox { position: relative; }
+.banner .imgBox ul { width: 580px; height: 340px; position: absolute; left: 0; top: 0; z-index: 3; }
+.banner .imgBox ul li {position:absolute;left:0;top:0; width: 580px; height: 340px; overflow: hidden;display:none;}
+a.prev,a.next { width: 50px; height: 50px; background-image: url(http://mat1.gtimg.com/sh/zt/girl/lr.png); background-repeat: no-repeat; display: block; position: absolute; top: 135px; z-index: 10; opacity: 0.6; filter: alpha(opacity=60); }
+a.prev { left: 15px; }
+a.next { right: 15px; background-position: right 0; }
+.banner a.prev { left: 0px; }
+.banner a.next { right: 0px; }
+.temp-anim-div{height:100%;width:50%;position:absolute;top:0;background-repeat:no-repeat;}
+</style>
+<script type="text/javascript" src="../js/jquery-1.7.2.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+	<div class="banner" id="banner">
+        <div class="imgBox">
+            <ul>
+                <li><a href="javascript:;"><img src="http://img1.gtimg.com/hn/pics/hv1/143/125/1509/98154743.jpg"></a></li>
+                <li><a href="javascript:;"><img src="http://img1.gtimg.com/xian/pics/hv1/206/152/1517/98681891.jpg"></a></li>
+                <li><a href="javascript:;"><img src="http://img1.gtimg.com/xian/pics/hv1/58/29/1519/98780428.jpg"></a></li>
+                <li><a href="javascript:;"><img src="http://img1.gtimg.com/xian/pics/hv1/6/52/1519/98786241.jpg"></a></li>
+                <li><a href="javascript:;"><img src="http://img1.gtimg.com/xian/pics/hv1/79/29/1519/98780449.jpg"></a></li>
+                <li><a href="javascript:;"><img src="http://img1.gtimg.com/xian/pics/hv1/114/29/1519/98780484.jpg"></a></li>
+				<li><a href="javascript:;"><img src="http://img1.gtimg.com/xian/pics/hv1/106/29/1519/98780476.jpg"></a></li>
+				<li><a href="javascript:;"><img src="http://mat1.gtimg.com/henan/weixin/weigirl/580/ynvshen1hao.jpg"></a></li>
+				<li><a href="javascript:;"><img src="http://mat1.gtimg.com/henan/weixin/weigirl/580/ynvshen3hao.jpg"></a></li>
+				<li><a href="javascript:;"><img src="http://mat1.gtimg.com/henan/weixin/weigirl/580/ynvshen4hao.jpg"></a></li>
+				<li><a href="javascript:;"><img src="http://mat1.gtimg.com/henan/weixin/weigirl/580/ynvshen5hao.jpg"></a></li>
+				<li><a href="javascript:;"><img src="http://mat1.gtimg.com/henan/weixin/weigirl/580/ynvshen6hao.jpg"></a></li>
+				<li><a href="javascript:;"><img src="http://mat1.gtimg.com/henan/weixin/weigirl/580/ynvshen8hao.jpg"></a></li>
+			</ul>
+        </div>
+        <a href="javascript:void(0);" class="prev"></a>
+        <a href="javascript:void(0);" class="next"></a>
+	</div>
+	<script>
+	function switchbanner2(elementID,elementClass,play_time){
+		var n=0;
+		var _div=$("#"+elementID+" ul");
+		var div_imglength=$("#"+elementID+" li").length;
+		if(div_imglength<=1||div_imglength>20){return false;}
+		var temp_time;
+		//addnumber(div_imglength);
+		var isanimated=true;
+		play_img(n,true);
+		_div.parent().parent().hover(//将事件定在最外层的div上(这个很重要)
+				   function(){_div.stop(true,true);clearTimeout(temp_time)},
+				   function(){temp_time=setTimeout(function(){play_img(n,true)},play_time);}
+				   )
+		$("#banner a.prev").click(function(){if(isanimated){clearTimeout(temp_time);n-=2;if(n<0){n=div_imglength-1;}play_img(n,false);isanimated=false;}})
+		$("#banner a.next").click(function(){if(isanimated){clearTimeout(temp_time);play_img(n,true);isanimated=false;}})
+		
+		function play_img(_n,r){
+			if(temp_time){clearTimeout(temp_time);}
+			if(_n==div_imglength){_n=0;}
+			//update_location(_n);//修改当前link的位置
+			var obj=_div.find("li").eq(_n),prev_obj=_div.children("li:visible");
+			if(r){
+				obj.css("z-index",5).show().siblings().css("z-index",3);
+				obj.children().hide();
+				obj.append('<div class="temp-anim-div" style="left:-50%;background-image:url('+obj.find("img").attr("src")+');background-position:0 0;"></div><div class="temp-anim-div" style="right:-50%;background-image:url('+obj.find("img").attr("src")+');background-position:100% 0;"></div>');
+				obj.children("div").eq(0).animate({"left":0},400);
+				obj.children("div").eq(1).animate({"right":0},400,function(){obj.children("div").remove();obj.children().show();prev_obj.hide();isanimated=true;});
+			}
+			else{
+				obj.css("zIndex",4).show();prev_obj.css("zIndex",5);
+				prev_obj.children().hide();
+				prev_obj.append('<div class="temp-anim-div" style="left:0;background-image:url('+prev_obj.find("img").attr("src")+');background-position:0 0;"></div><div class="temp-anim-div" style="right:0;background-image:url('+prev_obj.find("img").attr("src")+');background-position:100% 0;"></div>');
+				prev_obj.children("div").eq(0).animate({"left":"-50%"},400);
+				prev_obj.children("div").eq(1).animate({"right":"-50%"},400,function(){prev_obj.children("div").remove();prev_obj.css("z-index",3).hide().children().show();obj.css("z-index",5).children().show();isanimated=true;});
+			}
+			_n++;
+			n=_n;
+			//_div.animate({"left":-(div_width*_n)+"px"},500,function(){_n++;n=_n;});
+			temp_time=setTimeout(function(){play_img(_n,true)},play_time);
+			}
+		
+	}
+	window.onload=function(){switchbanner2("banner","active",5000);}
+    </script>
+</body>
+</html>

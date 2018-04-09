@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>margin负值去除多余margin-right值</title>
+<style>
+*{margin:0;padding:0;}
+li{list-style:none;}
+html,body,div{height:100%;}
+body,ul,li{ padding:0; margin:0;}
+    ul,li{ list-style:none;}
+    #test{
+        width:320px;
+        height:210px;
+        background:#CCC;
+		margin:0 auto;
+		overflow:hidden;/*ie6下会被ul撑开*/
+    }
+    #test ul{
+        margin-right:-10px;/*margin-right的负值，可以让ul的宽度拉伸*/
+        zoom:1;
+		overflow:hidden;
+    }
+    #test ul li{
+        width:100px;
+        height:100px;
+        background:#F60;
+        margin-right:10px;
+        margin-bottom:10px;
+        float:left;
+    }
+	#test,.left{ float:left;}
+	.left{width:500px;height:210px; background-color:#09F;}
+	.main{ clear:left;height:300px; background-color:#0F9;}
+</style>
+</head>
+
+<body>
+	<div id="test">
+        <ul>
+            <li>子元素1</li>
+            <li>子元素2</li>
+            <li>子元素3</li>
+            <li>子元素4</li>
+            <li>子元素5</li>
+            <li>子元素6</li>
+        </ul>
+    </div>
+    <div class="left"></div>
+    <div class="main"></div>
+</body>
+</html>

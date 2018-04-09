@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="baidu-site-verification" content="IonoCQs8Sp" />
+<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<title>Document</title>
+<style>
+@charset "UTF-8";
+article,aside,blockquote,body,caption,dd,div,dl,dt,em,fieldset,figure,form,h1,h2,h3,h4,h5,h6,html,iframe,img,label,legend,li,object,ol,p,pre,section,span,strong,table,tbody,td,tfoot,th,thead,tr,ul{border:0;margin:0;outline:0;padding:0}
+body,html{font-family:'Microsoft YaHei',Helvetica,Tahoma,StSun,SimSun,sans-serif;font-size:29px;background-color:#fafafa;-webkit-text-size-adjust:none;height:100%;overflow:hidden;}
+.clear-after:after,.clearfix:after{clear:both;height:0;visibility:hidden}
+li,ol,ul{list-style:none}
+table{border-collapse:collapse;border-spacing:0}
+:focus{outline:0}
+button::-moz-focus-inner{padding:0;border:0}
+a:link,a:visited{color:#9b5e16}
+a{-webkit-tap-highlight-color:rgba(255,0,0,0);text-decoration:none}
+img{border:0}
+.fl{float:left;}
+.fr{float:right;}
+.clearfix:after{display:block;content:"."}
+.clearfix{display:block;zoom:1}
+* html .clearfix{height:1%}
+.tac{text-align:center}
+.img100{display:block;width:100%;}
+body{width:640px;height: 1008px;margin:0 auto;position:relative;}
+		
+/*规则弹出层*/
+.popbox{display:none;position:absolute;width:100%;height:100%;overflow:hidden;left:0;top:0;z-index:100;opacity:0;-webkit-transition:opacity .8s ease-in-out;transition:opacity .8s ease-in-out;}
+.popbox .pop{position:absolute;width:100%;height:100%;left:0;top:0;background:rgba(0,0,0,0.9);z-index:101;}
+.popbox .pop .popbut a{display:block;width:43%;height:3em;line-height:3em;text-align:center;color:#e6b9b3;margin:0 auto;background:url(http://static.sdg-china.com/jijiamobile/pic/ah/act/ah20171031/popbtnbg.png) 0 0/100% 100% no-repeat;}
+
+.yuyueContent{width:92.34375%;height:21.3em;position:absolute;left:3.828125%;top:50%;margin-top:-10.65em;text-align:left;background:url(http://static.sdg-china.com/jijiamobile/pic/ah/act/ah20171031/yuyuepopbg.png) 50% 50%/100% auto no-repeat;}
+.yuyueContent h2{text-align:center;font-size:1em;height:8.75em;}
+.yuyueContent p{padding-left:3em;margin-bottom:0.75em;}
+.yuyueContent p.megcodebox{ margin-bottom:1.2em; }
+.yuyueContent p label{font-size:1em;height:2.5em;line-height:2.5em;color:#88899a; display: inline-block;vertical-align: middle; text-align:center;padding-left:0.25em;padding-right:0.75em;}
+.yuyueContent p input{width:13em;height:2.5em;line-height:2.5em;font-size:1em;vertical-align: middle;background:none;padding:0 1em;color:#888899;box-sizing:border-box;border:1px solid #52525c;}
+.yuyueContent p.megcodebox input{width:7.25em;}
+#getmsgcode{display:inline-block;width:5.916666666666667em;height:2.583333333333333em;line-height:2.583333333333333em;vertical-align: middle;text-align:center;color:#000;background:url(http://static.sdg-china.com/jijiamobile/pic/ah/act/ah20171031/msgcodebtn.png) 0 0/100% auto no-repeat;}
+#getmsgcode span{font-size: 0.875em;}
+.yuyueContent .btnbox{width:9em;height:3em;position:absolute;left:7.875em;top:15.33333em;}
+.yuyueContent .btnbox a{display:block;height:100%;font-size:1em;}
+.yuyueContent a.closepop{position:absolute;right:0.75em;top:2.75em;width:2.25em;height:2.25em;background:url(http://static.sdg-china.com/jijiamobile/pic/ah/act/ah20171031/closepop.png) 0 0/100% 100% no-repeat;}
+</style>
+<script src="http://static.sdg-china.com/jijiamobile/js/zepto.min.js"></script>
+</head>
+<body>
+<!--预约弹出层-->
+<div class="popbox">
+    <div class="pop" id="yuyueBox">
+        <div class="yuyueContent" id="yuyueContent">
+            <h2>&nbsp;</h2>
+            <p class="mobilebox"><label>手机号</label><input type="tel" name="mobile" id="mobile" maxlength="11" /></p>
+            <p class="megcodebox"><label>验证码</label><input type="tel" name="megcode" id="msgcode" maxlength="6" ><a href="javascript:;" id="getmsgcode"><span>发送验证码</span></a></p>
+            <div class="popbut"><a href="javascript:;" id="drawyuyue">立即预约</a></div>
+            <a href="javascript:;" class="closepop"></a>
+        </div>
+    </div>
+</div>
+<!--预约弹出层-->
+<script type="text/javascript">
+(function (doc, win) {
+  //var docEl = doc.documentElement,
+  var docEl = doc.getElementsByTagName("body")[0],
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+      var clientWidth = (docEl.clientWidth||win.innerWidth);console.log(clientWidth,win.innerWidth);
+      if (!clientWidth) return;
+      docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+      //doc.getElementsByTagName('body')[0].style.fontSize = 12 * (clientWidth / 320) + 'px';
+    };
+
+  if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+  doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+
+
+//发送短信验证码倒计时
+function countdown(obj){
+    if(countdown.n==0){obj.innerHTML="重新获取";obj.className="";countdown.n=60;return false;}
+    if(!countdown.n){countdown.n=60;}
+    obj.innerHTML='重新获取('+countdown.n+')';
+    countdown.n--;
+    setTimeout(function(){countdown(obj);},1000);
+    }
+
+//活动短信验证码和提交预定
+function bindEvent01(){
+    var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/,
+        phone=document.getElementById("mobile"),
+        vcode=document.getElementById("msgcode"),
+        phone_val="",
+        vcode_val="";
+    var o=navigator.userAgent,phoneSystem='';
+    if(o.indexOf("iPhone")!=-1||o.indexOf("iPad")!=-1||o.indexOf("iPod")!=-1){phoneSystem = "iOS";}
+    else if(o.indexOf("Android")!=-1){phoneSystem = 'Android';}
+
+    document.getElementById("getmsgcode").onclick=function(){
+        var that=this;
+        if(this.className=="off"){return false;}
+        phone_val=phone.value.replace(/\s/g,"");
+        if(phone_val.length==0){alert("请填写手机号");}
+        else if(isNaN(phone_val)){alert("请正确填写手机号");}
+        else if(phone_val.length!==11){alert("请正确填写手机号");}
+        else if(!myreg.test(phone_val)){alert("请正确填写手机号");}
+        else{
+            $.get('http://wx.act.sdo.com/Ah/Act_Award20171106/GetCode',"mobile="+phone_val,function(data){
+                if(data.Code==0){that.className="off";countdown(that.children[0]);alert("验证码发送成功，请注意查收短信");}
+                else{alert(data.Message);}
+                },'jsonp');
+            }
+        };
+    document.getElementById("drawyuyue").onclick=function(){
+        phone_val=phone.value.replace(/\s/g,""),
+        vcode_val=vcode.value.replace(/\s/g,"");
+        if(phone_val.length==0){alert("请填写手机号");}
+        else if(isNaN(phone_val)){alert("请正确填写手机号");}
+        else if(phone_val.length!==11){alert("请正确填写手机号");}
+        else if(!myreg.test(phone_val)){alert("请正确填写手机号");}
+        else if(vcode_val.length==0){alert("请填写验证码");}
+        else if(isNaN(vcode_val)){alert("请正确填写验证码");}
+        else if(vcode_val.length!==6){alert("请正确填写验证码");}
+        else{
+            MOBILE=phone_val;
+            phone.value="";
+            vcode.value="";
+            $.get('http://wx.act.sdo.com/Ah/Act_Award20171106/Reserve',"mobile="+phone_val+"&code="+vcode_val+"&time="+(new Date().getTime()),function(data){
+                if(data.Code==0){showSomePOP(0,'yuyueBox');alert("预约成功，感谢您的参与");}
+                else{alert(data.Message);}
+                },'jsonp')
+            }
+        };
+}
+bindEvent01();
+
+
+//打开弹出层 
+function showSomePOP(t,name){
+    var box=document.getElementById(name).parentNode,
+        contbox=box.children[0].children[0];
+    if(t){
+        box.style.display="block";
+        contbox.style.marginTop=(0-contbox.offsetHeight/2)+"px";
+        setTimeout(function(){box.style.opacity=1;},100);
+        }
+    else{box.style.display="none";box.style.opacity=0;}
+    if(box.getElementsByClassName("closepop").length>0){
+        box.getElementsByClassName("closepop")[0].onclick=function(){
+            box.style.display="none";box.style.opacity=0;
+            }
+        }
+    }
+showSomePOP(1,'yuyueBox');
+
+</script>
+</body>
+</html>

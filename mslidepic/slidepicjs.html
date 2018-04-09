@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>手机轮播</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    
+    #switchImage{width:84.84375%;margin:0 auto;}
+    #switchImage .bigImage{border:.2em solid #a07d50;}
+    #switchImage .bigImage .bigBox{width:100%;overflow:hidden;}
+    #switchImage .bigImage .bigBox ul.clearfix{width:600%;-webkit-transform:translateX(0);transform:translateX(0);-webkit-transition:-webkit-transform ease-in .5s;transition:-webkit-transform ease-in .5s;}
+    #switchImage .bigImage .bigBox ul.clearfix li{ display:block; float:left;width:16.666666%;}
+    #switchImage .bigImage .bigBox ul.clearfix li img{width:100%; display:block;}
+    #switchImage .smllImage{ padding-top:.5em;}
+    #switchImage .smllImage span{ display:block;float:left;width:15%;margin-right:1.99992%;position:relative;}
+    #switchImage .smllImage span img{width:100%;display:block;}
+    #switchImage .smllImage span:last-child{ margin-right:0;}
+    #switchImage .smllImage span:after{display:block;content:" ";width:100%;height:100%;position:absolute;left:0;top:0;background:rgba(0,0,0,.45);}
+    #switchImage .smllImage span.active:after{ display:none;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+    </style>
+    <script src="../js/zepto.min.js"></script>
+</head>
+<body>
+    <article class="wrapper">
+        <div id="switchImage">
+            <div class="bigImage">
+                <div class="bigBox">
+                    <ul class="clearfix">
+                        <li><img src="http://static.sdg-china.com//mymir/pic/mymir_act/newarea/image01.jpg" /></li>
+                        <li><img src="http://static.sdg-china.com//mymir/pic/mymir_act/newarea/image02.jpg" /></li>
+                        <li><img src="http://static.sdg-china.com//mymir/pic/mymir_act/newarea/image03.jpg" /></li>
+                        <li><img src="http://static.sdg-china.com//mymir/pic/mymir_act/newarea/image04.jpg" /></li>
+                        <li><img src="http://static.sdg-china.com//mymir/pic/mymir_act/newarea/image05.jpg" /></li>
+                        <li><img src="http://static.sdg-china.com//mymir/pic/mymir_act/newarea/image06.jpg" /></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="smllImage clearfix">
+                <span index="0" class="active"><img src="http://static.sdg-china.com//mymir/pic/mymir_act/newarea/img01.jpg" /></span>
+                <span index="1"><img src="http://static.sdg-china.com//mymir/pic/mymir_act/newarea/img02.jpg" /></span>
+                <span index="2"><img src="http://static.sdg-china.com//mymir/pic/mymir_act/newarea/img03.jpg" /></span>
+                <span index="3"><img src="http://static.sdg-china.com//mymir/pic/mymir_act/newarea/img04.jpg" /></span>
+                <span index="4"><img src="http://static.sdg-china.com//mymir/pic/mymir_act/newarea/img05.jpg" /></span>
+                <span index="5"><img src="http://static.sdg-china.com//mymir/pic/mymir_act/newarea/img06.jpg" /></span>
+            </div>
+        </div>
+        <div id="qrcode"></div>
+    </article>
+    <script src="../js/Qrcode.js"></script>
+    <script>
+    window.onload=function(){
+        document.querySelector("#switchImage .smllImage").addEventListener("click",function(e){
+            if(e.target.nodeName!="span"&&e.target.nodeName!="SPAN"){return false;}
+            var targrt=e.target,n=targrt.getAttribute("index");
+            movehandle(n);
+        },false);
+
+        var nownum=0,box=document.querySelector("#switchImage ul"),m_num=100/box.children.length;
+        function movehandle(n){
+            spanActive(n);
+            if(n>nownum){
+                box.style.webkitTransform="translateX("+(0-n*m_num)+"%)";
+                box.style.transform="translateX("+(0-n*m_num)+"%)";
+            }
+            else if(n<nownum){
+                box.style.webkitTransform="translateX("+(0-n*m_num)+"%)";
+                box.style.transform="translateX("+(0-n*m_num)+"%)";
+            }
+            nownum=n;
+        }
+
+        var span=document.querySelectorAll("#switchImage .smllImage span");
+        function spanActive(n){
+            var spanlen=span.length;
+            while(spanlen--){span[spanlen].classList.remove('active');}
+            span[n].classList.add('active');
+        }
+    
+        window.MOUSE_DOWN = 'ontouchstart' in document ? 'touchstart' : 'mousedown';
+        window.MOUSE_UP = 'ontouchend' in document ? 'touchend' : 'mouseup';
+        window.MOUSE_MOVE = 'ontouchmove' in document ? 'touchmove' : 'mousemove';
+
+        function touchmove(wrapper){
+            var y=_Y=Y=0,n=0;
+            var handle={
+                    "move":function(e){
+                        e.stopPropagation();
+                        e.preventDefault();
+                        },
+                    "end":function(e){
+                            _Y = (e.pageX||e.changedTouches[0].pageX);
+                            Y = _Y - y;
+                            //手势向上拖动 页面向上滚动
+                            if (Y < -30) {
+                                console.log("next");
+                                if(n<5){n++;movehandle(n);}
+                            }
+                            //手势向下拖到 页面向下滚动
+                            else if (Y > 30){
+                                console.log("prev");
+                                if(n>0){n--;movehandle(n);}
+                            }
+                            wrapper.removeEventListener(window.MOUSE_MOVE,handle.move,false);
+                            wrapper.removeEventListener(window.MOUSE_UP,handle.end,false);
+                        },
+                    "start":function(e){
+                            y = (e.pageX||e.changedTouches[0].pageX);
+                            wrapper.addEventListener(window.MOUSE_MOVE,handle.move,false);
+                            wrapper.addEventListener(window.MOUSE_UP,handle.end,false);
+                            e.stopPropagation();
+                            //e.preventDefault();
+                        }
+                };
+            wrapper.addEventListener(window.MOUSE_DOWN,handle.start,false);
+        }
+        touchmove(document.querySelector("#switchImage .bigBox"));
+
+
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+                //设置宽高
+                width : 96,
+                height : 96
+            });
+        qrcode.makeCode(window.location.href);
+    }
+    </script>
+</body>
+</html>

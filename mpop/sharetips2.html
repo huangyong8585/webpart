@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>微信分享提醒二</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    body{}
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    .btnbox{padding-top:30px;}
+    .btnbox a{display:block;width:200px;height:40px;margin:0 auto 20px;text-align:center;line-height:40px;border:1px solid #999;font-size:14px;border-radius:8px;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+
+	/*分享*/
+	.sharetip{position:fixed;width:100%;height:100%;overflow:hidden;left:0;top:150%;background-color:rgba(0,0,0,0.6);z-index:250;-webkit-transform:translateY(350%);-moz-transform:translateY(350%);transform:translateY(350%);
+	-webkit-transition:all .5s ease-in-out;-moz-transition:all .5s ease-in-out;transition:all .5s ease-in-out; text-align:right;}
+	.sharetip img{width:55%;margin-right:3%;}
+	.sharetip .tips{width:90%;display:block;text-align:center;margin:.25em auto 0;padding:.6em .5em .2em;line-height:1.8;border:1px solid rgba(255,255,255,0.85);color:rgba(255,255,255,0.85);font-size:1.2em;border-radius:50%;}
+	.sharetip .closeSharetip{width:4em;height:4em;border-radius:4em;position:absolute;left:50%;bottom:4em;margin-left:-2em;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfAgMAAABiwP6qAAAACVBMVEUAAAAVCgIkGRJnPJyuAAAAAXRSTlMAQObYZgAAAFpJREFUGNNFkEEOACEIAyHhsEeexNP26WLTjGooChRqTGhVtHChhBvIC7KjFEVtvuv8DqcLXNo6qjB97jZr2em2UyMwCy/kUAUPzPSiO/P4Nsz8VKALpWjnNw4evAWS9iAWqwAAAABJRU5ErkJggg==) 50% 50% no-repeat rgba(255,255,255,0.5);background-size:2em 2em;}
+    </style>
+</head>
+<body>	
+	<article class="wrapper">
+		<div class="btnbox">
+			<a id="btn1" href="javascript:;">微信分享指引</a>
+		</div>
+        <!--分享指引-->
+		<div class="sharetip" id="sharetip">
+		  <div class="closeSharetip"></div>
+		    <img src="data:image/png;base64,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" />
+		    <span class="tips">(-_-)</span>
+		</div>
+		<!--分享指引-->
+		<div id="qrcode"></div>
+	</article>
+    <script src="../js/Qrcode.js"></script>
+	<script>
+		(function (doc, win) {
+                var docEl = doc.getElementsByTagName("body")[0].children[0],
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = (docEl.clientWidth||win.innerWidth);
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+                };
+        
+                if (!doc.addEventListener) return;
+                win.addEventListener(resizeEvt, recalc, false);
+                doc.addEventListener('DOMContentLoaded', recalc, false);
+            })(document, window);
+
+	    //打开分享指引
+		function showShareImg(t){
+			var box=document.getElementById("sharetip");
+			if(t){
+				box.children[2].innerHTML=t;
+				box.style.top=0;
+				box.style.webkitTransform='translateY(0)';
+				box.style.transform='translateY(0)';
+				box.children[0].onclick=function(){
+					box.style.top="150%";
+					box.style.webkitTransform='translateY(350%)';
+					box.style.transform='translateY(350%)';
+					}
+				}
+			else{
+				box.children[2].innerHTML="";
+				box.style.top="150%";
+				box.style.webkitTransform='translateY(350%)';
+				box.style.transform='translateY(350%)';
+				}
+			}
+
+		window.onload=function(){
+			document.getElementById('btn1').onclick=function(){ showShareImg('分享至朋友圈，让你的小伙伴们都来<br />领取双十一的礼包'); };
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }
+	</script>
+</body>
+</html>

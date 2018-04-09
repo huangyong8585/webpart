@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>移动端弹出层</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    body{}
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    .btnbox{padding-top:30px;}
+    .btnbox a{display:block;width:200px;height:40px;margin:0 auto 20px;text-align:center;line-height:40px;border:1px solid #999;font-size:14px;border-radius:8px;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+
+	/*视屏弹出层*/
+	.vpopbox{position:fixed;width:100%;height:100%;left:0;top:0;background-color:rgba(0,0,0,.6);z-index:240;-webkit-transform:translateY(-150%);transform:translateY(-150%);-webkit-transition:all .5s ease-in-out;transition:all .5s ease-in-out;}
+	.vpopbox .pop{display:none;position:absolute;width:90%;left:5%;top:50%;background-color:#333}
+	.vpopbox .pop .closepop{position:absolute;right:0;top:0;padding:3%;background:url(http://mat1.gtimg.com/sh/longhua/closebut.png) center center no-repeat;background-size:70% 70%}
+	.vpopbox .pop .closepop img{height:1.4em;display:block;opacity:0}
+	.vpopbox .pop h3{font-size:1.2em;color:#e9314b;padding:0.66em 0;line-height:1;text-indent:1em;text-align:center}
+	.vpopbox .pop p{font-size:1em;line-height:1.6;color:#610411;word-break:break-all;padding:2% 3% 4%}
+	.vpopbox .pop .imgw100{width:96%;height:50%;padding:0 2% 1.75%}
+    </style>
+</head>
+<body>	
+	<article class="wrapper">
+		<div class="btnbox">
+			<a id="btn1" href="javascript:;">视频弹出层</a>
+			<p class="tac">由上滑入的视频弹出层</p>
+		</div>
+		<!--视频弹出层-->
+		<div class="vpopbox">
+		    <div class="pop" id="videobox">
+		        <a href="javascript:;" class="closepop"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAMAAADW3miqAAAARVBMVEUAAADpMUvpMUvpMUvpMUvpMUvpMUvpMUvpMUvpMUvpMUvpMUvpMUvpMUvpMUvpMUvpMUvpMUvpMUvpMUvpMUvpMUvpMUsTSXaSAAAAFnRSTlMAzfKjWsjCrCcR57ucmnJLPQbd2qbOhV8rnAAAAO1JREFUOMuVlNEOwiAMRS+MAY45Np39/09VEUNLcMzzBjkJcGkLjl/mcdJ6GufFo42xxAimocQHVahYO1dqcBXKZaQm44U5d/rBvViKfqKQmemAGYmVDlmTdDuWbilD6mCqW5sc1+CtuLsvK70CA71wwBbKvsdSFhFIlkvZlf0Fe/0LwSLLX3ZxpQH44kSgE3Gr5dAETZyw4cVmiaMryX6kICV5nENmkMcp6bQsxSMIeGNDXao7DzMF5PIbIw/T82pNTrJW9iAvP9i6nL3hVzpZKv2iO12+/Ubot9TZ5uy3eX9g9EfPI/47xPrj8AkzMEt9JM2UhwAAAABJRU5ErkJggg==" /></a>
+		        <h3>弹出播放视频</h3>
+		        <div class="imgw100" id="videoCont">
+		          <video src="###" style="object-fit:fill;" controls="controls" webkit-playsinline="true" x-webkit-airplay="true" playsinline="true"  x5-video-player-type="h5" x5-video-orientation="h5" x5-video-player-fullscreen="true" width="100%" height="100%"></video>
+		        </div>
+		    </div>
+		</div>
+		<!--视频弹出层-->
+		<div id="qrcode"></div>
+	</article>
+    <script src="../js/Qrcode.js"></script>
+	<script>
+		(function (doc, win) {
+                var docEl = doc.getElementsByTagName("body")[0].children[0],
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = (docEl.clientWidth||win.innerWidth);
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+                };
+        
+                if (!doc.addEventListener) return;
+                win.addEventListener(resizeEvt, recalc, false);
+                doc.addEventListener('DOMContentLoaded', recalc, false);
+            })(document, window);
+
+        function getAndroidVer(){
+	    	var o=navigator.userAgent,android_ver=0,android_str='';
+	    	if((o.indexOf("Android")==-1)){return android_ver;}
+	    	android_str=o.substring(o.indexOf("Android"),o.indexOf("Android")+17);
+	    	android_str=android_str.substring(0,android_str.indexOf(";"));
+	    	android_str=android_str.replace('Android','');
+	    	android_ver=parseFloat(android_str);
+	    	return android_ver;
+	    }
+
+		//打开视频弹出层
+		function showvideopop(n){
+			var o=navigator.userAgent
+			var is_ios=(o.indexOf("iPhone")!=-1||o.indexOf("iPad")!=-1||o.indexOf("iPod")!=-1);
+			var is_android=(o.indexOf("Android")!=-1);
+			var android_ver=getAndroidVer();
+			var videoCont=document.getElementById("videoCont");
+			if(is_ios){videoCont.innerHTML=('<video src="https://img1.tiancitycdn.com/cls/event/2018/cls0213/video/video'+n+'.mp4" style="object-fit:fill;" webkit-playsinline="true" x-webkit-airplay="true" playsinline="true" x5-video-player-type="h5" x5-video-orientation="h5" x5-video-player-fullscreen="true" width="100%" height="auto"></video>');}
+			if(is_android&&android_ver>=7){videoCont.innerHTML=('<video src="https://img1.tiancitycdn.com/cls/event/2018/cls0213/video/video'+n+'.mp4" style="object-fit:fill;" controls="controls" width="100%" height="auto"></video>');}
+			var ww=document.documentElement.offsetWidth,wh=document.documentElement.offsetHeight;
+			var box=document.getElementById("videobox");
+			var win_height=document.documentElement.clientHeight||document.body.clientHeight;
+			var videoObj=videoCont.children[0];
+			//关闭视频弹出层
+			var hidevideopop=function(){
+				videoObj.pause();
+				box.parentNode.style.display="none";
+				box.parentNode.style.webkitTransform='translateY(-150%)';
+				box.parentNode.style.transform='translateY(-150%)';
+				box.parentNode.style.display="block";
+				box.style.display="none";
+			}
+			if(android_ver<7){videoObj.setAttribute("src","https://img1.tiancitycdn.com/cls/event/2018/cls0213/video/video"+n+".mp4");}
+			box.style.display="block";
+			videoObj.play();
+			videoObj.onended=function(){
+				hidevideopop();
+	        }
+
+			box.style.marginTop=(0-box.offsetHeight/2-(document.querySelector("#videobox h3").offsetHeight*0.6))+"px";
+			box.parentNode.style.webkitTransform='translateY(0)';
+			box.parentNode.style.transform='translateY(0)';
+			box.children[0].onclick=function(){
+				box.parentNode.style.webkitTransform='translateY(-150%)';
+				box.parentNode.style.transform='translateY(-150%)';
+				setTimeout(function(){
+					box.style.display="none";
+					videoObj.pause();
+				},300);
+				}
+			}
+
+		window.onload=function(){
+			document.getElementById('btn1').onclick=function(){ showvideopop(1) };
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }
+	</script>
+</body>
+</html>

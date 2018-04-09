@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/><!--删除默认的苹果工具栏和菜单栏-->
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>图片编辑上传</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    
+    .formBox{width:100%;padding:5% 5% 10%;box-sizing:border-box;}
+    .formBox .boxItem{overflow:hidden;border:1px solid #64c003;background:#fff;border-radius:4px;margin-bottom:10px;}
+    .formBox .boxItem label{width:40%;float:left;font-size:14px;box-sizing:border-box;border-right:1px solid #64c003;text-align:center;height:40px;line-height:40px;background-color:#95e419;box-shadow:3px 0 6px rgba(26,65,2,0.2) inset;color:#FFF;}
+    .formBox .boxItem .inputBox{width:60%;box-sizing:border-box;margin-left:40%;height:40px;box-shadow:0 0 6px rgba(26,65,2,0.2) inset;}
+    .formBox .boxItem input{border:0 none;background:none;display:block;width:100%;padding:10px 5%;box-sizing:border-box;font-size:16px;height:40px;line-height:20px;}
+    .formBox .boxItem input.file{opacity:0;position:relative;z-index:2;}
+    .formBox .boxItem .uploadImage{background-position:5% center; background-repeat:no-repeat; background-size:38px 38px;position:relative;}
+    .formBox .boxItem .uploadImage em.changeIt{ display:none;width:24px;height:24px;position:absolute;z-index:1;right:5%;top:8px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAMAAACf4xmcAAAAgVBMVEUAAADvv7/4YmLzmpr4YWH4ZGT4amr2fn74Y2Pxqanvy8v3cXH0i4v4Zmb3Zmb1iYnvxcXuxMT0jIzuxcX0iIj4YmLyoKD4YWH//////f35dXX4ZGT919f4amr+7+/6jo7++Pj5f3/5h4f9z8/+6en6l5f8urr94eH8xMT7paX7rq7TEk9LAAAAF3RSTlMAKMZA+/TRduBHBqRktbVtGBhkGG3+QnTPlYkAAAF6SURBVDjLjVTtcoMgECRxlKhp07Sd4QA/8Ctq3v8By2TwgGsau79Qzl32Vo6FKBJeZqkQaVbypGDPceBHEeDID+w3PvhJEJz4lVbl7+IJ3vK46hOpCOE5rLpEeyp8uARcMcXYhk/IlxNFkPc60M2dR3p6AFmpwMfXo4yHx5qW0YBFM2l8yR9d9ZL6PkpwMEuNsoeITA1WrpkrLAvoCkyoniWYVdWCiopjwRJUtFyziiwgEq/ZGltFG4Kq5baswHTYXoKSZW7VSRg0hkWQsdSt7gCT+Asp21bWgGeh0MwfDTTZ7PsOy1LPRuzVAMMmihZuAD0hA7ihhXJrm3/pP2yxIXyTb2CMPKgRGo3txbBWKZewbJFyxbB89Gq2suiivrmEXfQ+1N7YyDuXSSXBoCUe/ZZtAyCHtW3XQQI0bfhbOjrkcEBeC06vjJ6q0UhpxmrS0ZWhF1CrzmakdHQBHc7iBYLx8E226HBAvtejZn9wEVz3x+D+UP3niP4B/i9p2bkIyDsAAAAASUVORK5CYII=) 0 0/100% 100% no-repeat;}
+
+    /*弹出层*/
+    .popbox{display:none;width:100%;height:100%;position:fixed;overflow:hidden;left:0;top:0;z-index:30;background-color:rgba(0,0,0,0.4);}
+    .popbox.animateLocal{background-color:rgba(0,0,0,0.9);
+    -webkit-transform:translateY(-150%);transform:translateY(-150%);-webkit-transition:-webkit-transform .4s ease-in-out;transition:transform .4s ease-in-out;}
+    .popbox.animateZoom{background-color:rgba(0,0,0,0.75);
+    -webkit-transform:scale(0.001,0.001);transform:scale(0.001,0.001);-webkit-transform-origin:center center;transform-origin:center center;
+    -webkit-transition:-webkit-transform .2s ease-in-out;transition:transform .2s ease-in-out;}
+    .popbox .pop{position:absolute;width:100%;height:100%;left:0;top:0;z-index:31;overflow:hidden;}
+    .popbox .pop img{width:100%;}
+    .popbox .closepop{width:72px;height:72px;border-radius:72px;position:absolute;right:-15px;bottom:-15px;z-index:40;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfAgMAAABiwP6qAAAACVBMVEUAAAAVCgIkGRJnPJyuAAAAAXRSTlMAQObYZgAAAFpJREFUGNNFkEEOACEIAyHhsEeexNP26WLTjGooChRqTGhVtHChhBvIC7KjFEVtvuv8DqcLXNo6qjB97jZr2em2UyMwCy/kUAUPzPSiO/P4Nsz8VKALpWjnNw4evAWS9iAWqwAAAABJRU5ErkJggg==) 45% 45% no-repeat rgba(255,255,255,0.5);background-size:30px 30px;}
+    .popbox .pop .ActveCodeOver{display:none;padding-top:14%;box-sizing:border-box;}
+    .popbox .pop .ActveCodeOver h2{color:#ce0000;font-size:1.6em;height:2.5em;line-height:2.5em;text-align:center;}
+    .popbox .pop .ActveCodeOver p{color:#fff;padding:0 6%;line-height:1.6;}
+    .popbox .pop .ActveCodeOver p strong{color:#f00;}
+    .popbox .pop .ActveCodeOver p.ewmbox{ text-align:center;padding-top:16%;font-size:1.25em;}
+    .popbox .pop .ActveCodeOver p.ewmbox img{width:50%;margin-bottom:1em;}
+
+    .popbox #eidtPicture:after{content:" ";display:block;width:100%;height:100%;position:relative;z-index:33;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAC7gAAAu4AgMAAAAMex3qAAAACVBMVEUBAQEAAAAAtszeiHEMAAAAAnRSTlOAAE0QVXMAAAvgSURBVHja7MGBAAAAAICg/akXqQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYPbgQAAAAAAAyP+1EVRVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVhT04EAAAAAAA8n9tBFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVYQ8OBAAAAACA/F8bQVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV2IMDAQAAAAAg/9dGUFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUV9uBAAAAAAADI/7URVFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVWFPTgQAAAAAADyf20EVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVhDw4EAAAAAID8XxtBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVXYgwMBAAAAACD/10ZQVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVRX24EAAAAAAAMj/tRFUVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVYU9OBAAAAAAAPJ/bQRVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVWEPDgQAAAAAgPxfG0FVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVdiDAwEAAAAAIP/XRlBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVFfbgQAAAAAAAyP+1EVRVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVhT04EAAAAAAA8n9tBFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVYQ8OBAAAAACA/F8bQVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV2IMDAQAAAAAg/9dGUFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUVdumgCGAQCIBYB4/1gx5UooHnzSYaAgAAAAAAAAAAAAAwwTrP9gczrf+Z7kylOyG6E6I7IboTojshuhOiOyG6E6I7IboTojshuhOiOyG6E6I7IboTojshuhOiOyG6E6I7IboTojshuhOiOyG6E6I7IboTojshuhOiOyG6E6I7IboTojshuhOiOyG6E6I7IboTojshuhOiOyG6E6I7IboTojshuhOiOyG6E6I7IboTojshuhOiOyG6E6I7IboTojshuhOiOyG6E6I7IboTctmlAwEAAAAAQf7Wg1wM6c6I7ozozojujOjOiO6M6M6I7ozozojujOjOiO6M6M6I7ozozojujOjOiO6M6M6I7ozozojujOjOiO6M6M6I7ozozojujOjOiO6M6M6I7ozozojujOjOiO6M6M6I7ozozojujOjOiO6M6M6I7ozozojujOjOiO6M6M6I7ozozojujOjOiO6M6M6I7ozozojujOjOiO6M6M6I7ozozojujOjOiO6M6M6I7ozozojujOjOiO6M6M6I7ozozojujOjOiO6M6M6I7ozozojusUsHNQAAIACENvsnMaUZfB9kgBDdCdGdEN0J0Z0Q3QnRnRDdCdGdEN0J0Z0Q3QnRnRDdCdGdEN0J0Z0Q3QnRnRDdCdGdEN0J0Z0Q3QnRnRDdCdGdEN0J0Z0Q3QnRnRDdCdGdEN0J0Z0Q3QnRnRDdCdGdEN0J0Z0Q3QnRnRDdCdGdEN0J0Z0Q3QnRnRDdCdGdEN0J0Z0Q3QmZfdMdAAAAAAAAAAAAAAAAAAAAAAAAADj24EAAAAAAAMj/tRFUVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVYU9OBAAAAAAAPJ/bQRVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVWEPDgQAAAAAgPxfG0FVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVdiDAwEAAAAAIP/XRlBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVFfbgQAAAAAAAyP+1EVRVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVhT04EAAAAAAA8n9tBFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVYQ8OBAAAAACA/F8bQVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV2IMDAQAAAAAg/9dGUFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUV9uBAAAAAAADI/7URVFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVWFPTgQAAAAAADyf20EVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVhDw4EAAAAAID8XxtBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVXYgwMBAAAAACD/10ZQVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVRX24EAAAAAAAMj/tRFUVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVYU9OBAAAAAAAPJ/bQRVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVWEPDgQAAAAAgPxfG0FVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVdiDAwEAAAAAIP/XRlBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVlfbggAQAAABA0P/X7QhUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAtrGohDleWg6AAAAAElFTkSuQmCC) 50% 50% no-repeat;}
+    .popbox #eidtPicture #readArea{position:absolute;z-index:32;width:200px;height:200px;left:50%;top:50%;margin:-100px 0 0 -100px;}
+    .popbox #eidtPicture #readArea img{position:absolute;-webkit-transform-origin:center center;transform-origin:center center;}
+    .popbox #eidtPicture #touchArea{position:absolute;z-index:34;width:200px;height:200px;left:50%;top:50%;margin:-100px 0 0 -100px;}
+    .popbox #eidtPicture #operaArea{position:absolute;z-index:34;width:202px;height:70px;left:50%;top:50%;margin:111px 0 0 -101px;}
+    #operaArea .operaButs{height:30px; margin-bottom:10px;}
+    #operaArea .operaButs a{float:left;width:64px;height:30px;background:#88de09;margin-right:5px;border-radius:2px;color:#fff;font-size:24px;font-family:Helvetica,STHeiTi,sans-serif;text-align:center;line-height:30px;-webkit-user-select:none;user-select:none;}
+    #operaArea .operaButs a:nth-child(2){font-size:18px;}
+    #operaArea .operaButs a:last-child{margin-right:0;}
+    #operaArea .enterButs a{display:block;height:30px;font-size:16px;border-radius:4px;background:#88de09;color:#fff;text-align:center;line-height:30px;-webkit-user-select:none;user-select:none;}
+    #touchArea.loading{ background:url(https://img1.tiancitycdn.com/cls/event/2018/cls0213/images/load.gif) center center/50px 50px no-repeat;opacity:0.5;}
+
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+    </style>
+</head>
+<body>
+    <article class="wrapper">
+        <!--分页-->
+        <div class="formBox">
+            <form id="subImage" name="subImage">
+                <div class="boxItem"><label>照片</label><p class="inputBox uploadImage"><input class="file" id="uploadimg" type="file" /><em class="changeIt"></em></p><input type="hidden" id="imageurl" /></div>
+            </form>
+        </div>
+        <!--分页-->
+        <!--图片编辑弹出层-->
+        <div class="popbox fixed">
+            <div class="pop" id="eidtPicture">
+                <div id="readArea"><img src="###" style="-webkit-transform:scale(1);transform:scale(1);" /></div>
+                <div id="touchArea"></div>
+                <div id="operaArea">
+                    <p class="operaButs clearfix"><a href="javascript:zoomPicture('+');">+</a><a href="javascript:zoomPicture('o');">O</a><a href="javascript:zoomPicture('-');">-</a></p>
+                    <p class="enterButs"><a href="javascript:;">上&nbsp;传&nbsp;图&nbsp;片</a></p>
+                </div>
+            </div>
+            <div class="closepop" onClick="showEditPicPOP();"></div>
+        </div>
+        <!--图片编辑弹出层-->
+        <div id="qrcode"></div>
+    </article>
+    <script src="../js/zepto.min.js"></script>
+    <script src="../js/Qrcode.js"></script>
+    <script>
+    (function (doc, win) {
+        var docEl = doc.getElementsByTagName("body")[0].children[0],
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+            var clientWidth = (docEl.clientWidth||win.innerWidth);
+            if (!clientWidth) return;
+            docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+        };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+
+    //打开图片编辑弹出层 
+    function showEditPicPOP(t){
+        var box=document.getElementById("eidtPicture"),box_p=box.parentNode;
+        if(t){box_p.style.display="block";movePicture(document);zoomPicture('o');}
+        else{box_p.style.display="none";}
+        }
+    //showEditPicPOP(true);
+    
+    
+    //绑定触摸事件
+    function movePicture(doc){
+        var touchBox=doc.getElementById("touchArea"),readBox=doc.getElementById("readArea").children[0],loacl={"x":0,"y":0},
+        handleFun={
+                "touchmoveFn":function(e){
+                    readBox.style.left=Number(readBox.style.left.replace("px",""))+(e.touches[0].pageX-loacl.x)+"px";
+                    readBox.style.top=Number(readBox.style.top.replace("px",""))+(e.touches[0].pageY-loacl.y)+"px";
+                    loacl.x=e.touches[0].pageX;
+                    loacl.y=e.touches[0].pageY;
+                    e.stopPropagation();
+                    e.preventDefault();
+                    },
+                "touchendFn":function(e){
+                    //document.removeEventListener("touchstart",handleFun.touchstartFn,false);
+                    touchBox.parentNode.parentNode.removeEventListener("touchmove",handleFun.touchmoveFn,false);
+                    touchBox.parentNode.parentNode.removeEventListener("touchend",handleFun.touchendFn,false);
+                    },
+                "touchstartFn":function(e){
+                    loacl.x=e.touches[0].pageX;
+                    loacl.y=e.touches[0].pageY;
+                    touchBox.parentNode.parentNode.addEventListener("touchmove",handleFun.touchmoveFn,false);
+                    touchBox.parentNode.parentNode.addEventListener("touchend",handleFun.touchendFn,false);
+                    e.stopPropagation();
+                    e.preventDefault();
+                }
+            };
+            touchBox.addEventListener("touchstart",handleFun.touchstartFn,false);
+        }
+        
+    //放大缩小图片
+    function zoomPicture(t){
+        var thisimage=document.getElementById("readArea").children[0],nowscale=Number((thisimage.style.transform||thisimage.style.webkitTransform).replace("scale(","").replace(")",""));
+        console.log(nowscale);
+        if(t=="+"){
+            thisimage.style.webkitTransform='scale('+(nowscale+0.05)+')';
+            thisimage.style.transform='scale('+(nowscale+0.05)+')';
+            }
+        else if(t=="-"){
+            thisimage.style.webkitTransform='scale('+(nowscale-0.05)+')';
+            thisimage.style.transform='scale('+(nowscale-0.05)+')';
+            }
+        else if(t=="o"){
+            thisimage.style.webkitTransform='scale(1)';
+            thisimage.style.transform='scale(1)';
+            }
+        }
+        
+    function readthePicture(img){
+        //if(!img){return document.getElementsByTagName("canvas")[0].toDataURL('image/png');}
+        var canvas=document.createElement("canvas"),
+            ctx=canvas.getContext("2d"),
+            thisPic=document.getElementById("readArea").children[0],
+            nowscale=Number((thisPic.style.transform||thisPic.style.webkitTransform).replace("scale(","").replace(")","")),
+            bili=thisPic.width*nowscale/img.width,
+            touchArea=document.getElementById("touchArea");
+            canvas.width=canvas.height=400;
+            //ctx.clearRect(-500,-500,1200,1200);
+            ctx.drawImage(
+                thisPic,
+                (0-thisPic.style.left.replace("px","")+(thisPic.width*nowscale-thisPic.width)/2)/bili,
+                (0-thisPic.style.top.replace("px","")+(thisPic.height*nowscale-thisPic.height)/2)/bili,
+                (img.width>=img.height?img.height:img.width)/nowscale,
+                (img.width>=img.height?img.height:img.width)/nowscale,
+                0,//(thisPic.width-thisPic.width*nowscale)/2,
+                0,//(thisPic.height-thisPic.height*nowscale)/2,
+                400,
+                400
+            );
+            touchArea.className="loading";
+            imageData=canvas.toDataURL('image/jpeg');
+            //canvas.style.cssText="position: absolute;z-index:100;left:0px;top:0px;";
+            //document.body.appendChild(canvas);
+            //window.location.href=canvas.toDataURL('image/png');
+            //setTimeout(function(){window.open(canvas.toDataURL('image/jpeg'));},1000);
+            /*ajax("POST","saveImage.php","dataimg="+encodeURIComponent(canvas.toDataURL('image/jpeg')),
+                function(data){
+                    if(data!="failed"){
+                        showEditPicPOP(false);
+                        touchArea.removeAttribute("class");
+                        document.getElementById("uploadimg").parentNode.style.backgroundImage="url(http://hycash-image.bj.bcebos.com/bybike/"+data+".jpg)";
+                        document.getElementById("imageurl").value="http://hycash-image.bj.bcebos.com/bybike/"+data+".jpg";
+                        document.querySelector("em.changeIt").style.display="block";
+                    }else{
+                        alert("图片未成功上传，请稍后重试！");
+                        touchArea.removeAttribute("class");
+                        return false;
+                        }
+                    }
+                );*/
+            showEditPicPOP(false);
+            document.querySelector("em.changeIt").style.display="block";
+            document.getElementById("uploadimg").parentNode.style.backgroundImage="url("+imageData+")";
+            //$.post("saveImage.php",{"dataimg":canvas.toDataURL('image/jpeg')},function(data){showEditPicPOP(false);console.log(data);window.open(canvas.toDataURL('image/jpeg'));})
+        }
+    
+    //压缩图片
+    function compressPicture(picObj){
+        var canvas=document.createElement("canvas"),
+            ctx=canvas.getContext("2d"),
+            bili=picObj.width/picObj.height;
+            if(bili>1){canvas.width=1000;canvas.height=1000/bili;}
+            else if(bili<1){canvas.height=1000;canvas.width=1000*bili;}
+            else{canvas.height=canvas.width=1000;}
+            ctx.drawImage(picObj,0,0, picObj.width,picObj.height,0,0,canvas.width,canvas.height);
+            //window.open(canvas.toDataURL('image/jpeg'));
+            picObj.src=canvas.toDataURL('image/jpeg');
+        }
+
+    window.addEventListener("load",function(){
+        var resultFile,urlData,img,pic=document.getElementById("readArea").children[0],that=null,kgb=0,touchArea=document.getElementById("touchArea");
+        document.getElementById("uploadimg").onchange=function(ev){
+            showEditPicPOP(true);
+            touchArea.className="loading";
+            that=this;
+            resultFile=ev.target.files[0];
+            if (resultFile) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    urlData = this.result;
+                    img = new Image();
+                    //img.crossOrigin = 'Anonymous';
+                    img.onload=function (){
+                        //imgH=img.height;
+                        //imgW=img.width;
+                        if((img.width>1000||img.height>1000)&&resultFile.size>700*1024){compressPicture(img);}
+                        else{
+                        kgb=img.width/img.height;
+                        if(kgb>1){pic.style.cssText="height:200px;top:0px;width:"+200*kgb+"px;left:"+(0-(200*kgb-200)/2)+"px;";}
+                        else if(kgb<1){pic.style.cssText="width:200px;left:0px;height:"+200/kgb+"px;top:"+(0-(200/kgb-200)/2)+"px;";}
+                        else{pic.style.cssText="width:200px;left:0px;height:200px;top:0px";}
+                        pic.style.webkitTransform='scale(1)';
+                        pic.style.transform='scale(1)';
+                        pic.src=this.src;
+                        touchArea.removeAttribute("class");
+                        document.querySelector(".enterButs a").onclick=function(){readthePicture(img);};
+                        }
+                        //that.parentNode.style.backgroundImage="url("+this.src+")";
+                        //img.style.cssText="width:"+img.width+"px;height:"+img.height+"px;position:absolute;left:0;top:0;z-index:100;"
+                    }
+                    img.src =urlData;
+                    /*$.post('dataimg.php',{"dataimg":urlData},function(data){
+                        //console.log(data);
+                        urlData=data.replace("base64,",";base64,");
+                        img = new Image();
+                        img.crossOrigin = 'Anonymous';
+                        img.onload=function (){
+                            //ctx.drawImage(img,0-img.width/2,0-img.height/2);
+                            //ctx.drawImage(img,0,0);
+                            imgH=img.height;
+                            imgW=img.width;
+                            PO={x:LT.x+imgW/2,y:LT.y+imgH/2};
+                            //ctx.translate(PO.x,PO.y);//载入时将canvas坐标系原点移到图片中心点上
+                            showPage(4);
+                            onDraw();
+                        }
+                        img.src =urlData;
+                    });*/
+                };
+                reader.readAsDataURL(resultFile);
+            }
+            else{alert("未选择图片");}
+        }   
+    },false)
+
+
+    window.onload=function(){
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+                //设置宽高
+                width : 96,
+                height : 96
+            });
+        qrcode.makeCode(window.location.href);
+    }
+    </script>
+</body>
+</html>

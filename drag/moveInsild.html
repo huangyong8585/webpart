@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Div区域内可拖动</title>
+<style>
+*{padding:0;margin:0;}
+body{position:relative;height:100%; background-color:#f0f0f0;}
+#test{position:absolute;left:100px;top:100px;height:100px;width:100px;background-color:#FFF;cursor:move;box-shadow:0px 0px 10px #000;}
+#ttt{width:100px;height:30px;background-color:#000;}
+</style>
+</head>
+
+<body>
+<div id="test">
+<div id="ttt"></div>
+</div>
+<p id="dd1"></p>
+<p id="dd2"></p>
+<script>
+function moveDIV(DIV_ID){
+function getTop(e)//获取对象距离页面顶部的距离
+{
+    var offset = e.offsetTop;
+    if (e.offsetParent != null) //只要还有父元素,也就是当前元素不是根节点就继续往上累计元素的高度
+        offset += getTop(e.offsetParent);
+    return offset;
+}
+function getLeft(e)//获取对象距离页面顶部的距离
+{
+    var offset = e.offsetLeft;
+    if (e.offsetParent != null) //只要还有父元素,也就是当前元素不是根节点就继续往上累计元素的高度
+        offset += getLeft(e.offsetParent);
+    return offset;
+}
+var div=document.getElementById("ttt"),dd1=document.getElementById("dd1"),dd2=document.getElementById("dd2"),x,y,_x=0,_y=0,test="";
+if(div.innerHTML==""&&/Firefox/i.test(navigator.userAgent)){div.innerHTML="&nbsp;";}
+div.onmousedown=function(){
+	_x=x-getLeft(div);
+	_y=y-getTop(div);//获得鼠标在元素中的位置
+	//alert(getTop(div)+"||"+getLeft(div));
+	//this.style.top=y-_y+"px";
+	//this.style.left=x-_x+"px";
+	this.style.backgroundColor="#3CF";
+	test=document.getElementById(DIV_ID);
+	}
+document.onmousemove=function(event){
+	event=event||window.event
+	x=event.clientX;y=event.clientY;
+	dd1.innerHTML=x+"!!"+_x+"/"+getLeft(div);dd2.innerHTML=y+"!!"+_y+"/"+getTop(div);
+	if(test!=""){
+	test.style.top=y-_y+"px";
+	test.style.left=x-_x+"px";}//移动元素的位置
+	event.preventDefault();
+	}
+div.onmouseup=function(){test="";this.style.backgroundColor="#f0c";}
+}
+moveDIV("test")
+</script>
+</body>
+</html>

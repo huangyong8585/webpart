@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>手机拖动一页页切换</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    
+    .guide{ background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAASAQMAAADrMfUSAAAABlBMVEUAAAAzMzPI8eYgAAAAAXRSTlMAQObYZgAAAENJREFUCNcdy8EJwDAQA8Gx8cPPK8GluLSUklITHYgFiZUHx8V1+Hsx2ExWZ6ZmrBZOyzfHvteAPcO1wrnDUaE3iP4BJk0E3TIt4esAAAAASUVORK5CYII=) no-repeat;background-size:4.166667em 2.375em;height:2.375em;width:4.166667em;position:absolute;left:50%;margin-left:-2.0833335em;bottom:.5em;opacity:0;-webkit-animation:guide 1.5s infinite alternate;-moz-animation:guide 1.5s infinite alternate;-o-animation:guide 1.5s infinite alternate;animation:guide 1.5s infinite alternate;cursor:pointer;z-index:100;}
+    @-webkit-keyframes guide {
+        0% {-webkit-transform:translateY(10px);opacity:0.5;}
+        100% {-webkit-transform:translateY(0px);opacity:1;}
+    }
+    @keyframes guide {
+        0% {-webkit-transform:translateY(10px);opacity:0.5;}
+        100% {-webkit-transform:translateY(0px);opacity:1;}
+    }
+    #wrap{-webkit-transform:translateY(0);transform:translateY(0);-webkit-transition:-webkit-transform ease-in .33s;transition:-webkit-transform ease-in .33s;}
+    #wrap section{position:relative;}
+    .page0{background:#f60;}
+    .page1{background:#93f;}
+    .page2{background:#f90;}
+    .page3{background:#6f0;}
+    .page4{background:#f30;}
+    .page5{background:#aaa;}
+    .page6{background:#7aa;}
+    .wrap section span{width:200px;height:200px;position:absolute;left:50%;top:50%;margin:-100px 0 0 -100px;font-size:100px;font-weight:bold;line-height:200px;text-align:center;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;top:20px;margin-left:-55px;z-index:10;}
+    </style>
+    <script src="../js/zepto.min.js"></script>
+</head>
+<body>
+    <article class="wrapper">
+        <div class="wrap" id="wrap">
+            <section class="page0"><span>1</span><div class="guide"></div></section>
+            <section class="page1"><span>2</span><div class="guide"></div></section>
+            <section class="page2"><span>3</span><div class="guide"></div></section>
+            <section class="page3"><span>4</span><div class="guide"></div></section>
+            <section class="page4"><span>5</span><div class="guide"></div></section>
+            <section class="page5"><span>6</span><div class="guide"></div></section>
+            <section class="page6"><span>7</span></section>
+        </div>
+        <div id="qrcode"></div>
+    </article>
+    <script src="../js/Qrcode.js"></script>
+    <script>
+    (function (doc, win) {
+        var docEl = doc.getElementsByTagName("body")[0].children[0],
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+            var clientWidth = (docEl.clientWidth||win.innerWidth);
+            if (!clientWidth) return;
+            docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+        };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+
+    window.onload=function(){
+        var nownum=0,box=document.querySelector("#wrap"),boxchild=box.children,boxchildlen=boxchild.length,m_num=100/boxchildlen;
+
+        box.style.height=boxchildlen*100+"%";
+        while(boxchildlen--){boxchild[boxchildlen].style.height=m_num+"%";}     
+
+        function movehandle(n){
+            if(n>nownum){
+                box.style.webkitTransform="translateY("+(0-n*m_num)+"%)";
+                box.style.transform="translateY("+(0-n*m_num)+"%)";
+            }
+            else if(n<nownum){
+                box.style.webkitTransform="translateY("+(0-n*m_num)+"%)";
+                box.style.transform="translateY("+(0-n*m_num)+"%)";
+            }
+            nownum=n;
+        }
+    
+        window.MOUSE_DOWN = 'ontouchstart' in document ? 'touchstart' : 'mousedown';
+        window.MOUSE_UP = 'ontouchend' in document ? 'touchend' : 'mouseup';
+        window.MOUSE_MOVE = 'ontouchmove' in document ? 'touchmove' : 'mousemove';
+
+        function touchmove(wrapper){
+            var y=_Y=Y=0,n=0;
+            var handle={
+                    "move":function(e){
+                        e.stopPropagation();
+                        e.preventDefault();
+                        },
+                    "end":function(e){
+                            _Y = (e.pageY||e.changedTouches[0].pageY);
+                            Y = _Y - y;
+                            //手势向上拖动 页面向上滚动
+                            if (Y < -30) {
+                                console.log("next");
+                                if(n<boxchild.length-1){n++;movehandle(n);}
+                            }
+                            //手势向下拖到 页面向下滚动
+                            else if (Y > 30){
+                                console.log("prev");
+                                if(n>0){n--;movehandle(n);}
+                            }
+                            wrapper.removeEventListener(window.MOUSE_MOVE,handle.move,false);
+                            wrapper.removeEventListener(window.MOUSE_UP,handle.end,false);
+                        },
+                    "start":function(e){
+                            y = (e.pageY||e.changedTouches[0].pageY);
+                            wrapper.addEventListener(window.MOUSE_MOVE,handle.move,false);
+                            wrapper.addEventListener(window.MOUSE_UP,handle.end,false);
+                            e.stopPropagation();
+                            //e.preventDefault();
+                        }
+                };
+            wrapper.addEventListener(window.MOUSE_DOWN,handle.start,false);
+        }
+        touchmove(document.querySelector("article.wrapper"));
+
+
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+                //设置宽高
+                width : 96,
+                height : 96
+            });
+        qrcode.makeCode(window.location.href);
+    }
+    </script>
+</body>
+</html>

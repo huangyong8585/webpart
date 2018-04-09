@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/><!--删除默认的苹果工具栏和菜单栏-->
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>转盘抽奖</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    
+    .turntable{width:83.28125%;margin:0 auto;position:relative;top:2em;z-index:6;}
+    #turnImage{width:84.24015009380863%;position:absolute;left:7.5%;top:8.35%;}
+    #arrow{width:28.33020637898687%;position:absolute;left:50%;top:50%;margin:-24% 0 0 -14%;}
+
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+    </style>
+    <script src="../js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="../js/jQueryRotate.2.2.js"></script>
+</head>
+<body>
+    <article class="wrapper">
+        <div class="turntable">
+            <img src="../draw/image/turntablebg.png" class="imgw100" />
+            <div id="turnImage">
+                <img src="../draw/image/turntable.png" class="imgw100" id="rotaryCont" />
+            </div>
+            <div id="arrow">
+                <img src="../draw/image/jt.png" class="imgw100" id="rotaryArrow" />
+            </div>
+        </div>
+        <div id="qrcode"></div>
+    </article>
+    <script src="../js/Qrcode.js"></script>
+    <script>
+    (function (doc, win) {
+        var docEl = doc.getElementsByTagName("body")[0].children[0],
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+            var clientWidth = (docEl.clientWidth||win.innerWidth);
+            if (!clientWidth) return;
+            docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+        };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+
+    
+    //抽奖  
+    function getawarddata(num){
+        var $rotaryCont=$('#rotaryCont');
+        var $rotaryArrow = $('#rotaryArrow');
+ 
+        var rotateFunc = function(awards,angle,text){  //awards:奖项，angle:奖项对应的角度
+                $('#rotaryCont').stopRotate();
+                $('#rotaryCont').rotate({
+                        angle: 0,
+                        duration: 5000,
+                        animateTo: angle + 1440,  //angle是图片上各奖项对应的角度，1440是让指针固定旋转4圈
+                        callback: function(){
+                            if(awards==0){alert(text);}
+                            else{
+                                alert(text);
+                                //$("#coupon").text(text);
+                                //$("#couponCode").text(data.data["ItemGift"]);
+                                //showPOP(true,'WinPOP');
+                                }
+                        }
+                });
+        };      
+        switch(num){
+            case 0: 
+                    rotateFunc(0,0,'已经被抽完了');
+                    break;
+            case 1: 
+                    rotateFunc(1,338,'500元优惠券');
+                    break;
+            case 2: 
+                    rotateFunc(2,22,'200元优惠券');
+                    break;
+            case 3: 
+                    rotateFunc(3,66,'100元优惠券');
+                    break;
+            case 4: 
+                    rotateFunc(4,113,'50元优惠券');
+                    break;
+            case 5: 
+                    rotateFunc(5,160,'300元优惠券');
+                    break;
+            case 6: 
+                    rotateFunc(6,206,'50元优惠券');
+                    break;
+            case 7: 
+                    rotateFunc(7,250,'100元优惠券');
+                    break;
+            case 8: 
+                    rotateFunc(8,296,'50元优惠券');
+                    break;
+            default:
+                    rotateFunc(0,0,'已经被抽完了');
+            }
+    }
+
+
+    window.onload=function(){
+        //点击抽奖按钮
+        document.getElementById('rotaryArrow').onclick=function(){
+            this.setAttribute("clicked","true");
+            //无接口测试
+            getawarddata(Math.floor(Math.random()*8));
+            }
+
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+                //设置宽高
+                width : 96,
+                height : 96
+            });
+        qrcode.makeCode(window.location.href);
+    }
+    </script>
+</body>
+</html>

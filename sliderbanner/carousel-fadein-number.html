@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>轮播淡入淡出带数字</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style>
+/*图片切换*/
+.switchimg{position:relative;width:580px;height:340px;}
+.switchimg .localNumber{position:absolute;z-index:10;height:15px;overflow:hidden;bottom:5px;right:5px;}
+.switchimg .localNumber span{display:block; float:left; text-align:center;width:15px;height:15px;line-height:15px;font-size:10px;background:#cdcdcd;margin-left:5px;cursor:pointer;}
+.switchimg .localNumber span.active{ background:#FD017A;}
+.switchimg ul{position:relative;width:580px;height:340px;overflow:hidden;}
+.switchimg ul li{position:absolute;left:0;top:0;z-index:3;}
+.switchimg ul li img{width:580px;height:340px;}
+</style>
+<script type="text/javascript" src="../js/jquery-1.7.2.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+	<!--切换图片 b-->
+        <div class="switchimg">
+            <ul>
+                <li><a href="javascript:;"><img src="http://mat1.gtimg.com/cq/wx/wxgirls/top10/no102.jpg"></a></li>
+                <li><a href="javascript:;"><img src="http://mat1.gtimg.com/cq/wx/wxgirls/top10/no32.jpg"></a></li>
+                <li><a href="javascript:;"><img src="http://img1.gtimg.com/hn/pics/hv1/143/125/1509/98154743.jpg"></a></li>
+                <li><a href="javascript:;"><img src="http://img1.gtimg.com/xian/pics/hv1/206/152/1517/98681891.jpg"></a></li>
+                <li><a href="javascript:;"><img src="http://img1.gtimg.com/xian/pics/hv1/58/29/1519/98780428.jpg"></a></li>
+                <li><a href="javascript:;"><img src="http://img1.gtimg.com/xian/pics/hv1/6/52/1519/98786241.jpg"></a></li>
+            </ul>
+            <div class="localNumber"></div>
+        </div>
+    <!--切换图片 end-->
+
+	<script>
+	//图片轮播
+	function switchbanner(elementID,elementClass,play_time){
+			var n=0;
+			var _div=$("."+elementID+">ul");
+			var div_imglength=$("."+elementID+" li").length;
+			if(div_imglength<=1||div_imglength>9){return false;}
+			var temp_time;
+			addnumber(div_imglength);
+			play_img(n);
+			_div.parent().hover(//将事件定在最外层的div上(这个很重要)
+					   function(){_div.stop(true,false);clearTimeout(temp_time)},
+					   function(){temp_time=setTimeout(function(){play_img(n)},play_time);}
+					   )
+			$(".localNumber span").click(
+						  function(){_div.delay(500).stop(true,true);
+							  n=$(".localNumber span").index(this);
+							  play_img(n);
+							   clearTimeout(temp_time);
+							  }
+						  )
+			function play_img(_n){
+				if(temp_time){clearTimeout(temp_time);}
+				update_location(_n);//修改当前link的位置
+				_div.find("li").eq(_n).css("z-index",5).fadeIn(600).siblings().css("z-index",3).fadeOut(400);
+				_n++;
+				if(_n==div_imglength){_n=0;}
+				n=_n;
+				//_div.animate({"left":-(div_width*_n)+"px"},500,function(){_n++;n=_n;});
+				temp_time=setTimeout(function(){play_img(_n)},play_time);
+				}
+			function addnumber(count){
+				_html='';
+				for(var j=0;j<count;j++){
+					_html+='<span>'+(j+1)+'</span>'
+					}
+				$(".localNumber").html(_html);
+				}
+			function update_location(_n){
+				$(".localNumber span").eq(_n).addClass(elementClass).siblings().removeClass(elementClass);
+				}
+		}
+		window.onload=function(){switchbanner("switchimg","active",5000);}
+    </script>
+</body>
+</html>

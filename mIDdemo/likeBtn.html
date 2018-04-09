@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>点赞效果</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    body{}
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    .btnbox{padding-top:30px;}
+    .btnbox a{display:block;width:200px;height:40px;margin:0 auto 20px;text-align:center;line-height:40px;border:1px solid #999;font-size:14px;border-radius:8px;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+	
+	.likeBut{position:relative;top:50%;}
+	.likeBut a{display:block;width:46%;height:46px;position:relative;border:1px solid #67c203;border-radius:5px;margin:0 auto;line-height:46px;text-align:center;color:#488a04;}
+	.likeBut a i{display:block;width:50px;height:50px;position:absolute;left:50%;top:0;margin-left:-25px;opacity:0;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAqCAMAAAAtU0N2AAAAP1BMVEUAAAD/AUr/AUr/AUr/AUr/AUr/AUr/AUr/AUr/AUr/AUr/AUr/AUr/AUr/AUr/AUr/AUr/AUr/AUr/AUr/AUqVcv0+AAAAFHRSTlMAz4yzMO8LInwUpFM5RG/bXpfB91lYAIkAAAESSURBVEjHvdVLloQgDAXQh/IXFTH7X2vbbXVZiCKZ1B1GA0k4HPDigu2F8FFqlIY4BuR0TPQyD3nO6Ge1hVXqJA5moQ9Cfv5PB/v+4DzlBuzMtGbx/j+lo7NpX2mhE2/wS1IpZLWel/JUUhKuowsSgFN0YZaWrlgAli7NN2EAPbEMgCKWCYF4OgzE038hI2EkHg+s3M6RiCWCOV5lAK2IYcHGEsOIjWFusbGcLv44QY0sds2n6B0ATl1K4s35xst0MKnlLmWkeOxaIxdmquo0zuRcTXAoGVEpyeFKSA89lEx/MyWHO6aj0hpR4crTFyOq9KAo0xs8CSKbajWhfBXXqNFCxzV79zK1MSvr0E5P6m5GP6TdbUjvTZP0AAAAAElFTkSuQmCC) 0 0 no-repeat;}
+	
+	.animated{-webkit-animation-duration:0.8s;-moz-animation-duration:.8s;-o-animation-duration:.8s;animation-duration:.8s;
+-webkit-animation-timing-function:ease;-moz-animation-timing-function:ease;-o-animation-timing-function:ease;animation-timing-function:ease;
+-webkit-animation-fill-mode:both;-moz-animation-fill-mode: both;-o-animation-fill-mode: both;animation-fill-mode:both;}
+	@-webkit-keyframes bounceInUp{0%{opacity:0;-webkit-transform:translateY(0px);} 60%{opacity:1;-webkit-transform:translateY(-70px);} 80%{-webkit-transform:translateY(-50px);} 100%{-webkit-transform:translateY(-60px);}}
+	@-moz-keyframes bounceInUp{0%{opacity:0;-moz-transform:translateY(0px);} 60%{opacity:1;-moz-transform:translateY(-70px);} 80%{-moz-transform:translateY(-50px);} 100%{-moz-transform:translateY(-60px);}}
+	@-o-keyframes bounceInUp{0%{opacity:0;-o-transform:translateY(0px);} 60%{opacity:1;-o-transform:translateY(-70px);} 80%{-o-transform:translateY(-50px);} 100%{-o-transform:translateY(-60px);}}
+	@keyframes bounceInUp{0%{opacity:0;transform:translateY(0px);} 60%{opacity:1;transform:translateY(-70px);} 80%{transform:translateY(-50px);} 100%{transform:translateY(-60px);}}
+	.likeBut a.play i.animated{-webkit-animation-name:bounceInUp;-moz-animation-name:bounceInUp;-o-animation-name:bounceInUp;animation-name:bounceInUp;}
+    </style>
+</head>
+<body>	
+	<article class="wrapper">
+		<!--点赞按钮-->
+		<p class="likeBut"><a href="javascript:;">投票<i class="animated"></i></a></p>
+		<!--点赞按钮-->
+		<div id="qrcode"></div>
+	</article>
+    <script src="../js/Qrcode.js"></script>
+	<script>
+		(function (doc, win) {
+                var docEl = doc.getElementsByTagName("body")[0].children[0],
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = (docEl.clientWidth||win.innerWidth);
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+                };
+        
+                if (!doc.addEventListener) return;
+                win.addEventListener(resizeEvt, recalc, false);
+                doc.addEventListener('DOMContentLoaded', recalc, false);
+            })(document, window);
+
+		window.onload=function(){
+			document.querySelector(".likeBut").children[0].onclick=function(){
+				if(this.className=="play"){return false;}
+				var that=this;
+				this.className="play";
+				setTimeout(function(){that.className="";},1000);		
+			};
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }
+	</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>汉字、Unicode互变</title>
+</head>
+
+<body>
+<input type="button" id="but2" value="Unicode变汉字" />
+<textarea id="in" style="width:200px;height:80px;" placeholder="汉字框"></textarea>
+<textarea id="out" style="width:200px;height:80px;" placeholder="Unicode框"></textarea>
+<input type="button" id="but" value="汉字变Unicode" />
+<script>
+document.getElementById('but').onclick=function(){
+	document.getElementById('out').value=C2U(document.getElementById('in').value);
+	}
+document.getElementById('but2').onclick=function(){
+	document.getElementById('in').value=U2C(document.getElementById('out').value);
+	}
+function C2U(source){
+	if(!source){return;}
+	var result='';
+	for (var i=0; i<source.length; i++){
+		//alert(Number(source.value.charCodeAt(i),16));
+		//if(source.charCodeAt(i)>255) result += '\\u' + source.charCodeAt(i).toString(16);
+		//else result+=source.charAt(i);
+		result += '\\u' + source.charCodeAt(i).toString(16);
+	}
+	console.log("C2U-source:"+source,"C2U-result:"+result);
+	return result;
+}
+
+function U2C(source) { 
+ //Unicode -> ASCII
+ var code = source.split("\\u"),result = '';
+ if(code == null){return;}
+ for(var i=1; i<code.length; i++){
+	//alert(parseInt(code[i],16));
+	result += String.fromCharCode(parseInt(code[i],16));
+	}
+ return result;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/><!--删除默认的苹果工具栏和菜单栏-->
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>分页js算法</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    
+    .pager{display:none;text-align:center;margin:4% auto 0;text-align:center;}
+    .pager a{display:inline-block;margin:0 0.25em;font-size:1em;height:3em;width:3em;text-align:center;line-height:3em;color:#323232;box-sizing:border-box;border:1px solid #666;}
+    .pager span{display:inline-block;margin:0 0.25em;font-size:1em;height:3em;width:1em;text-align:center;line-height:3em;color:#aaa;box-sizing:border-box;border:1px solid rgba(0,0,0,0);}
+    .pager a.current{background-color:#777;color:#fff;}
+
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+    </style>
+</head>
+<body>
+    <article class="wrapper">
+        <!--分页-->
+        <div class="pager" id="pager"></div>
+        <!--分页-->
+        <div id="qrcode"></div>
+    </article>
+    <script src="../js/zepto.min.js"></script>
+    <script src="../js/Qrcode.js"></script>
+    <script>
+    /**
+     +----------------------------------------------------------
+     * 获取URL参数
+     +----------------------------------------------------------
+     */
+    function getURLPara(str){
+        var ary=[],obj={},wls=window.location.search,temp='',i=0;
+        if(wls!==""){
+            if(wls.indexOf("&")!=-1){ary=wls.substring(1).split("&");}
+            else{ary[0]=wls.substring(1)}
+            i=ary.length;
+            for(;i--;){
+                temp=ary[i].split("=");
+                obj[temp[0]]=decodeURIComponent(temp[1].replace(/\+/g,"%20"));
+                }
+            }
+        if(str){return obj[str];}
+        else{return obj;}
+    }
+    /**
+     +----------------------------------------------------------
+     * 查询字符串参数转对象
+     +----------------------------------------------------------
+     */
+    function searchStrToObject(str){
+        var ary=[],obj={},temp='',i=0;
+        if(str!==""){
+            if(str.indexOf("&")!=-1){ary=str.split("&");}
+            else{ary[0]=str.substring(1)}
+            i=ary.length;
+            for(;i--;){
+                temp=ary[i].split("=");
+                if(!obj[temp[0]]){obj[temp[0]]=decodeURIComponent(temp[1].replace(/\+/g,"%20"));}
+                else{obj[temp[0]]+=","+decodeURIComponent(temp[1].replace(/\+/g,"%20"));}
+                }
+            }
+        return obj;
+    }
+    /**
+     +----------------------------------------------------------
+     * 对象转查询字符串
+     +----------------------------------------------------------
+     */
+    function ObjectTosearchStr(obj){
+        var temp='';
+        if((typeof obj)=="object"){
+            for(k in obj){
+                if(k==="page"||k==="size"){continue;}
+                if((typeof obj[k])=="number"||((typeof obj[k])=="string"&&obj[k].length>0)){temp+=("&"+k+"="+obj[k]);}
+                }
+            }
+        return temp;
+    }  
+
+    /**
+     +----------------------------------------------------------
+     * 设置分页
+     * page 当前所在页码
+     * total 总共的条数
+     * size 当前一页显示条数
+     * param 其他查询条件例如
+     +----------------------------------------------------------
+     */
+    function setpaging(page,total,size,param){
+        var pagesize=size||2;
+        var num=Math.ceil(total/pagesize);
+        var _n=Number(page);
+        if(_n==0){_n=1;}
+        if(num<=1){$("#pager").html('').hide();return false;}
+        if(param){pagesize+=param}
+        var configPara={
+            "begin":1,
+            "end":num
+            }
+        if(_n>=1&&_n<num){
+            configPara.begin=(_n-2<1?1:_n-2);
+            if(_n==1){configPara.end=(_n+4>num?num:_n+4);}
+            else if(_n==2){configPara.end=(_n+3>num?num:_n+3);}
+            else if(_n==num-1){configPara.begin=(_n-3<1?1:_n-3);}
+            else{configPara.end=(_n+2>num?num:_n+2);}
+            }
+        else if(_n==num){
+            configPara.begin=(num-4<1?1:num-4)
+            }
+        console.log(configPara.begin,configPara.end);
+        var _html='',html2='';
+        for(var i=configPara.begin;i<=configPara.end;i++){
+            if(i==_n){_html+='<a href="javascript:void(0);" class="current">'+(i)+'</a>';}
+            else{_html+='<a href="?page='+i+'&size='+pagesize+'">'+(i)+'</a>';}
+            }
+        if(page==1){html2=''+_html+(num>5?'<span>...</span>':'')+'';}
+        else if(page==num){html2=''+(num>5?'<span>...</span>':'')+_html;}
+        else{html2=''+(i>5&&configPara.begin>1?'<span>...</span>':'')+_html+(configPara.end<num?'<span>...</span>':'')+'';}
+        console.log(i);
+        if(num>1){
+            $("#pager").html(html2).show();
+            }
+    }
+
+    var UrlPara=getURLPara();
+    if(!UrlPara.page&&typeof UrlPara.page==='undefined'){UrlPara.page=1;}
+    if(!UrlPara.size&&typeof UrlPara.size==='undefined'){UrlPara.size=10;}
+    var serchstr=ObjectTosearchStr(UrlPara);
+
+    setpaging(UrlPara.page,213,UrlPara.size,serchstr);
+
+
+    window.onload=function(){
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+                //设置宽高
+                width : 96,
+                height : 96
+            });
+        qrcode.makeCode(window.location.href);
+    }
+    </script>
+</body>
+</html>

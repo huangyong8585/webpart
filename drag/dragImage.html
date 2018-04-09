@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>div拖拽</title>
+<style>
+#div1{/*height:90px;width:90px;*/ background-color:#06F;position:absolute;left:0;top:0;}
+#divbox{width:800px;height:600px;position:relative; margin:0 auto;border:1px solid #e4e4e4; background-color:#fff;}
+</style>
+</head>
+
+<body>
+<div id="divbox">
+	<!--<div id="div1"></div>-->
+    <img src="http://img11.360buyimg.com/da/g15/M09/09/08/rBEhWVItKHgIAAAAAAAZaZ0tS60AAC8LgINwQ4AABmB205.jpg" id="div1" />
+</div>
+<script>
+oDiv=document.getElementById("div1");
+oDiv2=document.getElementById("divbox");
+oDiv.onmousedown=function(ev){
+	var oEvent=ev||event;
+	var disX=oEvent.clientX-oDiv.offsetLeft;
+	var disY=oEvent.clientY-oDiv.offsetTop;
+	document.onmousemove=function(event){
+		event=event||window.event;
+		var l=event.clientX-disX;
+		var t=event.clientY-disY;
+		//磁性吸附
+		/*if(l<50){l=0;}
+		if(l>document.documentElement.clientWidth-oDiv.offsetWidth-50){l=document.documentElement.clientWidth-oDiv.offsetWidth}
+		if(t<50){t=0;}
+		if(t>document.documentElement.clientHeight-oDiv.offsetHeight-50){t=document.documentElement.clientHeight-oDiv.offsetHeight}*/
+		if(l<50){l=0;}
+		if(l>oDiv2.offsetWidth-oDiv.offsetWidth-50){l=oDiv2.offsetWidth-oDiv.offsetWidth}
+		if(t<50){t=0;}
+		if(t>oDiv2.offsetHeight-oDiv.offsetHeight-50){t=oDiv2.offsetHeight-oDiv.offsetHeight}
+		
+		oDiv.style.left=l+"px";
+		oDiv.style.top=t+"px";
+		if(oEvent.preventDefault){oEvent.preventDefault();}
+		else{oEvent.returnValue=false;}
+		}
+	document.onmouseup=function(){
+		document.onmousemove=null;
+		document.onmouseup=null;
+		}
+	return false;
+	}
+</script>
+</body>
+</html>

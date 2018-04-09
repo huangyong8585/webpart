@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>设置分页</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style>
+.wrapper{background-color:#e4e4e4;}
+.header{background-color:#f0f0f0;height:60px;}
+.main{width:1002px;margin:0 auto;height:3000px;background:#ece1ad;position:relative;}
+
+.pager{display:none;margin:0 auto;padding-top:40px;height:50px;text-align:center;}
+.pager span,.pager a{display:inline-block;margin-right:4px;height:26px;padding:0 2px;text-align:center;line-height:26px;background:#dbcf96;color:#fff;}
+.pager span{cursor:default;color:#777;border:1px solid #b9aa6d;}
+.pager a{min-width:10px;padding:0 4px;color:#775839;border:1px solid #b9aa6d;}
+.pager a:hover{background-color:#b8a964;}
+.pager a.current{border:1px solid #b9aa6d;background-color:#b8a964;color:#000;}
+</style>
+
+<script src="../js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+        <div class="header"></div>
+        <div class="main photo">
+            <!--分页-->
+            <div class="pager" id="pager"></div>
+            <!--分页-->
+        </div>
+	</div>
+<script>
+/**
+ +----------------------------------------------------------
+ * 获取URL参数
+ +----------------------------------------------------------
+ */
+function getURLPara(str){
+    var ary=[],obj={},wls=window.location.search,temp='',i=0;
+    if(wls!==""){
+        if(wls.indexOf("&")!=-1){ary=wls.substring(1).split("&");}
+        else{ary[0]=wls.substring(1)}
+        i=ary.length;
+        for(;i--;){
+            temp=ary[i].split("=");
+            obj[temp[0]]=decodeURIComponent(temp[1].replace(/\+/g,"%20"));
+            }
+        }
+    if(str){return obj[str];}
+    else{return obj;}
+}
+/**
+ +----------------------------------------------------------
+ * 查询字符串参数转对象
+ +----------------------------------------------------------
+ */
+function searchStrToObject(str){
+    var ary=[],obj={},temp='',i=0;
+    if(str!==""){
+        if(str.indexOf("&")!=-1){ary=str.split("&");}
+        else{ary[0]=str.substring(1)}
+        i=ary.length;
+        for(;i--;){
+            temp=ary[i].split("=");
+            if(!obj[temp[0]]){obj[temp[0]]=decodeURIComponent(temp[1].replace(/\+/g,"%20"));}
+            else{obj[temp[0]]+=","+decodeURIComponent(temp[1].replace(/\+/g,"%20"));}
+            }
+        }
+    return obj;
+}
+/**
+ +----------------------------------------------------------
+ * 对象转查询字符串
+ +----------------------------------------------------------
+ */
+function ObjectTosearchStr(obj){
+    var temp='';
+    if((typeof obj)=="object"){
+        for(k in obj){
+            if(k==="page"||k==="size"){continue;}
+            if((typeof obj[k])=="number"||((typeof obj[k])=="string"&&obj[k].length>0)){temp+=("&"+k+"="+obj[k]);}
+            }
+        }
+    return temp;
+}  
+/**
+ +----------------------------------------------------------
+ * 设置分页
+ * page 当前所在页码
+ * total 总共的条数
+ * size 当前一页显示条数
+ * param 其他查询条件例如
+ +----------------------------------------------------------
+ */
+function setpaging(page,total,size,param){
+    var pagesize=size||10;
+    var num=Math.ceil(total/pagesize);
+    var _n=Number(page);
+    if(num<=1){$("#pager").html('').hide();return false;}
+    if(param){pagesize+=param}
+    var configPara={
+        "begin":1,
+        "end":num
+        }
+    if(_n>=4){
+        if(num-5<_n&&_n<=num){configPara.begin=(num-10<1?1:num-10);}
+        else{configPara.begin=(_n-4<1?1:_n-4);}
+        }
+    if(_n+5<=num){
+        if(_n==1){configPara.end=_n+9>num?num:_n+9;}
+        else if(_n>1&&configPara.begin==1){configPara.end=_n+10-_n>num?num:_n+10-_n;}
+        else{configPara.end=_n+5;}
+        }
+    //console.log(configPara.begin,configPara.end);
+    //console.log(num);
+    var _html='',html2='';
+    for(var i=configPara.begin;i<=configPara.end;i++){
+        if(i==page){_html+='<a href="javascript:void(0);" class="current">'+(i)+'</a>';}
+        else{_html+='<a href="?page='+i+'&size='+pagesize+'">'+(i)+'</a>';}
+        }
+    if(page==1){html2='<span>首页</span><span>上一页</span>'+_html+(num>i-1?'<span>...</span>':'')+'<a href="?page=2&size='+pagesize+'">下一页</a><a href="?page='+(num)+'&size='+pagesize+'">末页</a>';}
+    else if(page==num){html2='<a href="?page=1&size='+pagesize+'">首页</a><a href="?page='+(page-1)+'&size='+pagesize+'">上一页</a>'+(num>i-1||configPara.begin>1?'<span>...</span>':'')+_html+'<span>下一页</span><span>末页</span>';}
+    else{html2='<a href="?page=1&size='+pagesize+'">首页</a><a href="?page='+(page-1)+'&size='+pagesize+'">上一页</a>'+(i>5&&configPara.begin>1?'<span>...</span>':'')+_html+(i-1<num?'<span>...</span>':'')+'<a href="?page='+(page-0+1)+'&size='+pagesize+'">下一页</a><a href="?page='+(num)+'&size='+pagesize+'">末页</a>';}
+    if(num>1){
+        $("#pager").html(html2).show();
+        }
+    }
+var UrlPara=getURLPara();
+if(!UrlPara.page&&typeof UrlPara.page==='undefined'){UrlPara.page=1;}
+if(!UrlPara.size&&typeof UrlPara.size==='undefined'){UrlPara.size=50;}
+var serchstr=ObjectTosearchStr(UrlPara);
+
+setpaging(UrlPara.page,2123,UrlPara.size,serchstr);
+
+</script>
+</body>
+</html>

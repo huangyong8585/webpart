@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>margin负值去除多余margin-right值</title>
+<style>
+*{margin:0;padding:0;}
+html,body,div{height:100%;}
+body,ul,li{margin:0;padding:0;}
+    ul,li{list-style:none;}
+    #test{
+        margin:20px;
+        width:390px;
+        background:#F4F8FC;
+        border-radius:3px;
+        border:2px solid #D7E2EC;
+    }
+    #test li{
+        height:50px;
+        line-height:50px;
+        padding:5px;
+        border-bottom:1px dotted #D5D5D5;
+        margin-bottom:-1px;
+    }
+</style>
+</head>
+
+<body>
+        <ul id="test">
+            <li>子元素1</li>
+            <li>子元素2</li>
+            <li>子元素3</li>
+            <li>子元素4</li>
+            <li>子元素5</li>
+            <li>子元素6</li>
+        </ul>
+</body>
+</html>

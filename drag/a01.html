@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+*{padding:0;margin:0;}
+body{position:relative;height:100%; background-color:#f0f0f0;}
+div{position:absolute;left:100px;top:100px;height:100px;width:100px;background-color:#FFF;cursor:move;/*-moz-user-select:-moz-none;*/}
+</style>
+</head>
+ 
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<!--<img src="http://a.hiphotos.baidu.com/ting/pic/item/fd039245d688d43fd123dd767d1ed21b0ff43baf.jpg" />
+<p id="dd1"></p>
+<p id="dd2"></p>-->
+<script>
+var divs=document.getElementsByTagName("div"),/*dd1=document.getElementById("dd1"),dd2=document.getElementById("dd2"),*/x,y,_x=0,_y=0,test=null;
+ 
+//if(div.innerHTML==""&&/Firefox/i.test(navigator.userAgent)){div.innerHTML=" ";alert(/Firefox/i.test(navigator.userAgent))}
+for(var i=0,len=divs.length;i<len;i++){
+    divs[i].innerText=i;
+    divs[i].style.top=Math.floor(Math.random()*600)+"px"
+    divs[i].style.left=Math.floor(Math.random()*1000)+"px"
+    divs[i].style.zIndex=i;
+    divs[i].onmousedown=function(){
+        test=this;
+        _x=x-this.offsetLeft;
+        _y=y-this.offsetTop;
+        this.style.zIndex=len+10;
+        this.style.backgroundColor="#3CF";
+        }
+    }
+//function moveDIV(){
+//div.onmousedown=function(event){
+    /*event=event||window.event;
+    var target=event.target||event.srcElement;
+    if(target==div){*/
+    //test=document.getElementById("test");
+    //_x=x-div.offsetLeft;
+    //_y=y-div.offsetTop;//获得鼠标在元素中的位置
+    //this.style.top=y-_y+"px";
+    //this.style.left=x-_x+"px";
+    //div.style.backgroundColor="#3CF";
+    //}
+    //}
+document.onmousemove=function(event){
+    event=event||window.event;
+    x=event.clientX;y=event.clientY;
+    //dd1.innerHTML=x+"!!"+_x+"/"+div.offsetLeft;dd2.innerHTML=y+"!!"+_y+"/"+div.offsetTop;
+    if(test!=null){
+    test.style.top=y-_y+"px";
+    test.style.left=x-_x+"px";}//移动元素的位置
+    }
+document.onmouseup=function(event){
+    /*event=event||window.event;
+    var target=event.target||event.srcElement;
+    if(target==div){*/
+        test.style.backgroundColor="#f0c";test.style.zIndex=test.firstChild.nodeValue;test=null;_x=0;_y=0;}
+    //}
+ //return false;
+//}
+//moveDIV()
+/*window.addEventListener("mouseup",function(){test=null;_x=0;_y=0;div.style.backgroundColor="#f0c";},false)
+window.addEventListener("mousedown",function(event){if(event.target==div){test=document.getElementById("test");_x=x-div.offsetLeft;_y=y-div.offsetTop;div.style.backgroundColor="#3CF";}},false)
+window.addEventListener("mousemove",function(event){x=event.clientX;y=event.clientY;dd1.innerHTML=x+"!!"+_x+"/"+div.offsetLeft;dd2.innerHTML=y+"!!"+_y+"/"+div.offsetTop;if(test!=null){test.style.top=y-_y+"px";test.style.left=x-_x+"px";}},false)*/
+ 
+</script>
+</body>
+</html>

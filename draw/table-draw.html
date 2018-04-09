@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>table抽奖</title>
+    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
+    <style>
+    .wrapper{background-color:#e4e4e4;}
+    .header{background-color:#f0f0f0;height:60px;}
+    .main{width:1200px;margin:0 auto;height:3000px;background:#fff;position:relative;}
+
+    .rotaryBox{width:600px;height:600px;margin:0 auto;}
+    .rotaryBox table{width:600px;height:600px;border:0 none;table-layout:fixed;border:1px solid #bf2693;}
+    .rotaryBox table td{height:33.3333%;vertical-align:middle;border:1px solid #bf2693;}
+    .rotaryBox table td.lottery-unit .rot{width:100%;height:100%;background-color:#ba3693;}
+    .rotaryBox table td.lottery-unit .rot p{height:188px;text-align:center;line-height:188px;font-size:18px;border:5px solid #ed6eca;color:#ffe3f7;font-weight:bold;text-shadow:0 2px 2px rgba(0,0,0,0.4);}
+    .rotaryBox table td.but .startBtn{width:100%;height:100%;background-color:#f60;}
+    .rotaryBox table td.but .startBtn a{display:block;height:188px;text-align:center;line-height:188px;font-size:26px;border:5px solid #f90;color:#ffe3f7;font-weight:bold;text-shadow:0 2px 2px rgba(0,0,0,0.4);}
+    
+    #lottery table tr td.active .rot{background-color:#fa0;}
+    </style>
+    <script src="../js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header"></div>
+        <div class="main">
+            <div class="rotaryBox" id="lottery">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="lottery-unit lottery-unit-0">
+                                <div class="rot rot0"><p>电脑</p></div>
+                            </td>
+                            <td class="lottery-unit lottery-unit-1">
+                                <div class="rot rot1"><p>奶茶券</p></div>
+                            </td>
+                            <td class="lottery-unit lottery-unit-2">
+                                <div class="rot rot2"><p>手办</p></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="lottery-unit lottery-unit-7">
+                                <div class="rot rot7"><p>iphone6</p></div>
+                            </td>
+                            <td class="but">
+                                <div class="startBtn"><a href="javascript:void(0);">开始抽奖</a></div>
+                            </td>
+                            <td class="lottery-unit lottery-unit-3">
+                                <div class="rot rot3"><p>勋章</p></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="lottery-unit lottery-unit-6">
+                                <div class="rot rot6"><p>测试虚拟奖品</p></div>
+                            </td>
+                            <td class="lottery-unit lottery-unit-5">
+                                <div class="rot rot5"><p>T恤</p></div>
+                            </td>
+                            <td class="lottery-unit lottery-unit-4">
+                                <div class="rot rot4"><p>虚拟奖品1000</p></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+    /**抽检begin**/
+    $(function(){
+        var jieguo=[0,3,4,5];
+        var lottery={
+                index:-1,   //当前转动到哪个位置
+                count:0,    //总共有多少个位置
+                timer:0,    //setTimeout的ID，用clearTimeout清除
+                speed:200,  //初始转动速度
+                times:0,    //转动次数
+                cycle:50,   //转动基本次数：即至少需要转动多少次再进入抽奖环节
+                prize:-1,   //中奖位置
+                init:function(id){
+                    if ($("#"+id).find(".lottery-unit").length>0) {
+                        $lottery = $("#"+id);
+                        $units = $lottery.find(".lottery-unit");
+                        this.obj = $lottery;
+                        this.count = $units.length;
+                        $lottery.find(".lottery-unit-"+this.index).addClass("active");
+                    };
+                },
+                roll:function(){
+                    var index = this.index;
+                    var count = this.count;
+                    var lottery = this.obj;
+                    $(lottery).find(".lottery-unit-"+index).removeClass("active");
+                    index += 1;
+                    if (index>count-1) {
+                        index = 0;
+                    };
+                    $(lottery).find(".lottery-unit-"+index).addClass("active");
+                    this.index=index;
+                    return false;
+                },
+                stop:function(index){
+                    this.prize=index;
+                    return false;
+                }
+            };
+        
+            function roll(){
+                lottery.times += 1;
+                lottery.roll();
+                if (lottery.times > lottery.cycle+10 && lottery.prize==lottery.index) {
+                    clearTimeout(lottery.timer);
+                    //lottery.prize=-1;
+                    lottery.times=0;
+                    _click=false;
+                    if(lottery.prize==0){console.log(lottery.prize);}
+                    else{console.log(lottery.prize);}
+                }else{
+                    if (lottery.times<lottery.cycle) {
+                        lottery.speed -= 10;
+                    }else if(lottery.times==lottery.cycle) {
+                        //var index = Math.random()*(lottery.count)|0;
+                        //lottery.prize = 5;        
+                    }else{
+                        if (lottery.times > lottery.cycle+10 && ((lottery.prize==0 && lottery.index==7) || lottery.prize==lottery.index+1)) {
+                            lottery.speed += 110;
+                        }else{
+                            lottery.speed += 20;
+                        }
+                    }
+                    if (lottery.speed<40) {
+                        lottery.speed=40;
+                    };
+                    //console.log(lottery.times+'^^^^^^'+lottery.speed+'^^^^^^^'+lottery.prize);
+                    lottery.timer = setTimeout(roll,lottery.speed);
+                }
+                return false;
+            }
+        
+            var _click=false;//是否已进入转动抽奖
+        
+            window.onload=function(){
+                //lottery.init('lottery');
+                $("#lottery .but").click(function(){
+                    if (_click) {
+                        return false;
+                    }else{
+                        //无接口测试
+                        /*lottery.init('lottery');
+                        lottery.speed=100;
+                        lottery.prize=0;
+                        roll();*/
+                        _click=true;
+                        lotteryData({code:1});
+                        //loadData('../trimString.php','url='+encodeURIComponent('http://csolwxevt.tiancity.com/UserHandler/PrizeDrawHandler.ashx?oid='+openid+'&no='+lotteryInfo.No),'lotteryData');
+                        return false;
+                    }
+                });
+            };
+            
+            //抽检回调
+            function lotteryData(data){
+                if(data.code==1){
+                    lottery.init('lottery');
+                    lottery.prize!=-1?lottery.index=lottery.prize:lottery.index=-1;
+                    lottery.speed=100;
+                    lottery.prize=jieguo[Math.floor(Math.random()*4)];
+                    //lottery.prize=4;
+                    roll();
+                }
+                else{
+                    _click=false;
+                }
+            }
+    })
+    /*抽奖 end*/
+    </script>
+</body>
+</html>

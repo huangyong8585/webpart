@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/><!--删除默认的苹果工具栏和菜单栏-->
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>摇一摇</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    
+    #niudanji{width:40.46875%;position:absolute;left:30%;top:20%;}
+    #niudanji img.dan{width:86.872586%;position:absolute;left:7%;top:24%;-webkit-transform-origin:center 37%;transform-origin:center 37%;-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-transition:-webkit-transform .2s linear;transition:transform .2s linear;}
+    #niudanji img.bull{width:18.5328%;position:absolute;right:20%;bottom:16%;opacity:0;-webkit-transform:scale(0.75,0.75) rotate(0deg);transform:scale(0.75,0.75) rotate(0deg);/*-webkit-transition:all .5s ease-out;transition:all .5s ease-out;*/}
+    #niudanji.rotate img.dan{-webkit-transform:rotate(360deg);transform:rotate(360deg);}
+    #niudanji.result img.bull{opacity:1;-webkit-animation:droproll 1s ease-out .2s 1;animation:droproll 1s ease-out .2s 1;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;}
+    @-webkit-keyframes droproll {
+        0% {right:20%;bottom:16%;-webkit-transform:scale(0.75,0.75) rotate(0deg);}
+        20% {right:15%;bottom:0;-webkit-transform:scale(1,1) rotate(0deg);}
+        100% {right:0;bottom:0;-webkit-transform:scale(1,1) rotate(360deg);}
+    }
+    @keyframes droproll {
+        0% {right:20%;bottom:16%;transform:scale(0.75,0.75) rotate(0deg);}
+        20% {right:15%;bottom:0;transform:scale(1,1) rotate(0deg);}
+        100% {right:0;bottom:0;transform:scale(1,1) rotate(360deg);}
+    }
+    @-webkit-keyframes rotate {from {-webkit-transform: rotate(0deg);} to {-webkit-transform: rotate(360deg);}}
+    @keyframes rotate {from {transform: rotate(0deg);} to {transform: rotate(360deg);}}
+
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+    </style>
+</head>
+<body>
+    <article class="wrapper">
+        <div id="niudanji">
+            <img src="http://static.sdg-china.com/mir2/pic/mir2_act/niudanji/ndj0.png" class="imgw100" />
+            <img src="http://static.sdg-china.com/mir2/pic/mir2_act/niudanji/dan.png" class="dan" />
+            <img src="http://static.sdg-china.com/mir2/pic/mir2_act/niudanji/bull.png" class="bull" />
+        </div>
+        <div id="qrcode"></div>
+    </article>
+    <script src="../js/Qrcode.js"></script>
+    <script>
+    function init(){
+        if (window.DeviceMotionEvent) {
+            window.addEventListener('devicemotion', deviceMotionHandler, false);
+        } else {
+            //alert('not support mobile event');
+        }
+    }
+    function deviceMotionHandler(eventData) {
+        var acceleration = eventData.accelerationIncludingGravity;
+        var curTime = new Date().getTime();
+        var NDJ=document.getElementById("niudanji")
+        if ((curTime - last_update) > 100) {
+            var diffTime = curTime - last_update;
+            last_update = curTime;
+            x = acceleration.x;
+            y = acceleration.y;
+            z = acceleration.z;
+            var speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+            if (speed > SHAKE_THRESHOLD&&SHAKE_ON_OFF&&NDJ.getAttribute('isnow')!=="true") {
+                SHAKE_ON_OFF=false;
+                playNiudanji(NDJ);
+                //playNiudanji(document.getElementById("niudanji"));
+                //ajax("GET","Handler/GetAward.ashx","",GetAward);
+                //ingotRain.className="animate";
+                //tips.innerHTML="摇动了"+(count++);
+            }
+            last_x = x;
+            last_y = y;
+            last_z = z;
+        }
+    }
+    var SHAKE_THRESHOLD = 3000,SHAKE_ON_OFF=true;
+    var last_update = 0;
+    var x = y = z = last_x = last_y = last_z = 0;
+
+    //转动扭蛋器
+    function playNiudanji(obj){
+        if(obj.className=="result"){
+            obj.className="rotate";
+            slowdown.num=0.2;
+            obj.children[1].style.transitionDuration="0s";
+            obj.children[1].style.transform="rotate(0deg)";
+            slowdown(obj.children[1]);
+            return false;
+            }
+        obj.className="rotate";
+        slowdown(obj.children[1]);
+        }
+
+    slowdown.num=0.2;
+    function slowdown(obj){
+        slowdown.a=setTimeout(function(){
+            obj.style.transitionDuration="0s";
+            obj.style.transform="rotate(0deg)";
+            obj.parentNode.className="";
+            },slowdown.num*1000);
+        slowdown.num+=0.05;
+        if(slowdown.num>=0.6){
+            clearTimeout(slowdown.a);
+            slowdown.a=setTimeout(function(){obj.parentNode.className="result";/*alertpop("恭喜你抽中啥啥啥！");*/},slowdown.num*1000);
+            return false;
+            }
+        slowdown.b=setTimeout(function(){
+            obj.style.transitionDuration=slowdown.num+"s";
+            obj.style.transform="rotate(360deg)";
+            obj.parentNode.className="rotate";
+            slowdown(obj);
+            },slowdown.num*1000);
+        }
+
+    window.onload=function(){
+        init();
+        document.getElementById("niudanji").setAttribute('isnow',"false");
+        document.getElementById("niudanji").onclick=function(){
+            if(this.getAttribute('isnow')=="true"){return false;}
+            this.setAttribute('isnow',"true");
+            var that=this;
+            playNiudanji(that);
+            };
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+                //设置宽高
+                width : 96,
+                height : 96
+            });
+        qrcode.makeCode(window.location.href);
+    }
+    </script>
+</body>
+</html>

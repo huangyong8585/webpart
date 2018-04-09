@@ -1,0 +1,534 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>浓情端午 传奇龙舟节</title>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<style>
+@charset "utf-8";
+blockquote,body,caption,dd,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,iframe,img,label,legend,li,object,ol,p,pre,span,strong,table,tbody,td,tfoot,th,thead,tr,ul,article,section,aside,figure{border:0 none;margin:0;outline:0 none;padding:0;-webkit-text-size-adjust:none;}
+body,html{font-family:'Microsoft YaHei',Helvetica,Tahoma,StSun,SimSun,sans-serif;/*font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;*/-webkit-text-size-adjust:none;height:100%;}
+ol,ul,li{list-style:none}
+table{border-collapse:collapse;border-spacing:0}
+:focus{outline:0}
+button::-moz-focus-inner{padding:0;border:0}
+a:link,a:visited{text-decoration:none;color:#333;}
+a:hover{text-decoration:none;}
+a{-webkit-tap-highlight-color:rgba(255,0,0,0);}
+img{border:0;}
+.clearfix:after{display:block;clear:both;height:0;visibility:hidden;content:"."}
+.clearfix{display:block;*display:inline-block;zoom:1;}
+* html .clearfix{height:1%}
+.gold{color:#f08f00;}
+.hide{display:none}
+.tac{text-align:center}
+.w100{width:100%;}
+.imgw100{width:100%;display:block;}
+
+article{height:100%;overflow:hidden;}
+article section{height:100%;width:100%;overflow:hidden;position:relative;z-index:0;opacity:0;}
+.page0,.page1,.page2{position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;z-index:0;-webkit-transition:all .4s ease-out;transition:all .4s ease-out;}
+
+.page0{height:100%;background:url(image/wrap.jpg) 0 0/100% 100% no-repeat #005d88;overflow:hidden;z-index:0;opacity:0;}
+.page0 .logo{width:100%;padding:1em 0 0 1em;margin-bottom:1.5em;-webkit-transform:translateX(-90%);transform:translateX(-90%);-webkit-transition:-webkit-transform .4s ease 1.2s;transition:transform .4s ease 1.2s;}
+.page0 .logo .logo1{width:30.5%;margin-right:5%;}
+.page0 .slogan{width:100%;text-align:center;opacity:0;position:relative;z-index:2;
+-webkit-transform-origin:center center;transform-origin:center center;
+-webkit-transform:scale(0.001,0.001);transform:scale(0.001,0.001);
+-webkit-transition:-webkit-transform .3s ease-in-out 0s,opacity .8s linear .3s,background .5s ease-in .8s;transition:transform .3s ease-in-out 0s,opacity .8s linear .3s,background .5s ease-in .8s;}
+.page0 .slogan img{ width:84.6875%;
+-webkit-transform-origin:center center;transform-origin:center center;
+-webkit-transform:scale(0.001,0.001);transform:scale(0.001,0.001);
+-webkit-transition:-webkit-transform .3s ease .5s;transition:transform .3s ease .5s;}
+.page0 .boat{width:94.0625%;position:absolute;z-index:1;left:3%;bottom:15%;}
+.page0 .content{position:absolute;z-index:2;left:0;bottom:0;width:100%;text-align:center;box-sizing:border-box;height:50%;padding-top:50%;background:url(image/wave.png) 0 100%/100% auto no-repeat;}
+.page0 .content img{width:58.4375%;}
+.page2{background:url(image/wrap01.jpg) 0 0/100% 100% no-repeat #1c5187; box-sizing:border-box;padding:10%;text-align:center;}
+.page2 .txt{font-size:2em;color:green;font-weight:bold;background-image:-webkit-gradient(linear,0 0,0 bottom,from(rgba(255,179,52,1)),to(rgba(255,234,72,1)));-webkit-background-clip:text;-webkit-text-fill-color:transparent;/*text-shadow: 2px 2px 2px #303030, 0px 0px 4px #303030, 0px 0px 10px #303030;*/ line-height:1.5;margin-bottom:1.5em;}
+.page2 .adimage img{width:85.15625%;margin-bottom:5em;}
+.page2 .playagain{margin-bottom:3em;}
+
+article section.show0 .page0{opacity:1;z-index:5;}
+article section.show1 .page1{opacity:1;z-index:5;}
+article section.show2 .page2{opacity:1;z-index:5;}
+.activecodebut{padding:.25em .5em;background-image:-webkit-gradient(linear,0 0,0 bottom,from(#e4612e),to(#601f03));position:absolute;right:.5em;top:.5em;border:1px solid #7f2414;color:#fc0;font-size:0.9em;}
+
+#arena{position:relative;width:100%;height:100%;overflow:hidden;z-index:6; background:url(image/land0.jpg) center top/100% auto repeat-y;}
+#arenaBg{width:100%;height:10000%;background:url(image/endline.png) 50% 5%/100% auto no-repeat,url(image/land0.jpg) center top/100% auto repeat-y;-webkit-transform:translateY(-99%);transform:translateY(-99%);
+-webkit-transition:-webkit-transform .4s ease;transition:transform .4s ease;}
+#boat{width:33.4375%;height:42.9375%;position:absolute;left:50%;top:5%;-webkit-transform:translateY(100%);transform:translateY(100%);margin:0 0 0 -16.71875%;/*margin:-22.96875% 0 0 -16.71875%;*/background:url(image/boat.png) 0 0/200% auto no-repeat;-webkit-transition:-webkit-transform .8s ease;transition:transform .8s ease;}
+#boat.a1{ background-position:100% 0;}
+#time{width:174px;height:66px;position:absolute;top:1em;right:1em;background:url(image/timebg.png) 0 0 no-repeat;z-index:7;-webkit-transform-origin:right top;transform-origin:right top;}
+#time span{position:absolute;top:10px;width:25px;height:43px;background-image:url(image/nummber.png);background-repeat:no-repeat;}
+#time span:nth-child(1){left:18px;}
+#time span:nth-child(2){left:47px;}
+#time span:nth-child(3){left:104px;}
+#time span:nth-child(4){left:132px;}
+#time span.t0{ background-position:0 0;}
+#time span.t1{ background-position:0 -52px;}
+#time span.t2{ background-position:0 -104px;}
+#time span.t3{ background-position:0 -156px;}
+#time span.t4{ background-position:0 -208px;}
+#time span.t5{ background-position:0 -260px;}
+#time span.t6{ background-position:0 -312px;}
+#time span.t7{ background-position:0 -364px;}
+#time span.t8{ background-position:0 -416px;}
+#time span.t9{ background-position:0 -468px;}
+
+/*弹出层*/
+.popbox{display:none;position:fixed;width:100%;height:100%;overflow:hidden;left:0;top:0;z-index:10;opacity:0; background:rgba(0,0,0,0.6);
+-webkit-transition:opacity .2s ease-in-out;transition:opacity .2s ease-in-out;}
+.popbox .pop{position:absolute;width:100%;height:100%;left:0;top:0;z-index:11;}
+#tips .tip{width:87.65625%;height:27em;box-sizing:border-box;padding-top:12em;position:absolute;left:6.171875%;top:50%;margin-top:-13.5em;background:url(image/popbg.png) 0 0/100% 100% no-repeat;}
+#tips .tip .hand{width:40%;margin:0 auto;background:url(image/hand.png) 0 0/100% 100% no-repeat; margin-bottom:3.5em;}
+#tips .tip .iknow{text-align:center;}
+#tips .tip .iknow img{width:43%;}
+#activeCode .codeBox{width:87.65625%;height:20em;box-sizing:border-box;position:absolute; padding-top:5.5em;left:6.171875%;top:50%;margin-top:-10em;text-align:center;background:url(image/popbg01.png) 0 0/100% 100% no-repeat;}
+#activeCode .codeBox span{color:#c0801f;font-size:1.5em;line-height:2;}
+#activeCode .codeBox strong{color:#f2ce44;font-size:2em;line-height:2;}
+#activeCode .closepop{width:3em;height:3em;position:absolute;right:0;top:0;}
+
+
+/*alert弹出层*/
+.alertpopbox{display:none;position:fixed;width:100%;height:100%;left:0;top:0;background-color:rgba(0,0,0,0.6);z-index:20;}
+.alertpopbox .pop{display:none;position:absolute;width:68%;left:16%;top:50%;background-color:#fff;border-radius:.5em;}
+.alertpopbox .pop p{font-size:1em;line-height:1.5;padding:10% 5%;word-break:break-all;border-bottom:1px solid #d4d4d4;}
+.alertpopbox .pop a{display:inline-block;text-align:center;width:50%;font-size:1em;box-sizing:border-box;height:3em;line-height:3em;}
+.alertpopbox .pop a:last-child{border-left:1px solid #d4d4d4;}
+
+ 
+/*分享*/
+.sharetip{position:fixed;width:100%;height:100%;overflow:hidden;left:0;top:150%;background-color:rgba(0,0,0,0.6);z-index:150;-webkit-transform:translateY(350%);-moz-transform:translateY(350%);transform:translateY(350%);
+-webkit-transition:all .5s ease-in-out;-moz-transition:all .5s ease-in-out;transition:all .5s ease-in-out; text-align:right;}
+.sharetip img{width:20%;margin-right:3%;}
+.sharetip .tips{width:90%;display:block;text-align:center;margin:.25em auto 0;padding:.25em .5em;line-height:1.8;border:1px solid rgba(255,255,255,0.85);color:rgba(255,255,255,0.85);font-size:1.2em;}
+.sharetip .closeSharetip{width:6em;height:6em;border-radius:6em;position:absolute;right:-1.2em;bottom:-1.2em; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfAgMAAABiwP6qAAAACVBMVEUAAAAVCgIkGRJnPJyuAAAAAXRSTlMAQObYZgAAAFpJREFUGNNFkEEOACEIAyHhsEeexNP26WLTjGooChRqTGhVtHChhBvIC7KjFEVtvuv8DqcLXNo6qjB97jZr2em2UyMwCy/kUAUPzPSiO/P4Nsz8VKALpWjnNw4evAWS9iAWqwAAAABJRU5ErkJggg==) 45% 45% no-repeat rgba(255,255,255,0.5);background-size:2em 2em;}
+
+/*动画*/
+article.animate section{-webkit-transform:translate(0,0);transform:translate(0,0);opacity:1;}
+article.animate section .page0 .logo{-webkit-transform:translateX(0);transform:translateX(0);}
+article.animate section .page0 .slogan{-webkit-transform:scale(1,1);transform:scale(1,1);opacity:1; background-size:96% auto;}
+article.animate section .page0 .slogan img{-webkit-transform:scale(1,1);transform:scale(1,1);}
+article.animate section.show0 .page0 .boat{-webkit-animation:wave 2.5s ease-in 0s infinite alternate;animation:wave 2.5s ease-in 0s infinite alternate;}
+
+@-webkit-keyframes guide {
+    0% {-webkit-transform:translateY(10px);opacity:.5;}
+    100% {-webkit-transform:translateY(0px);opacity:1;}
+}
+@keyframes guide {
+    0% {-webkit-transform:translateY(10px);opacity:.5;}
+    100% {-webkit-transform:translateY(0px);opacity:1;}
+}
+
+@-webkit-keyframes wave{
+    0% {-webkit-transform:rotate(0deg);}
+	50% {-webkit-transform:rotate(5deg);}
+    100% {-webkit-transform:rotate(0deg);}
+}
+@keyframes wave{
+    0% {transform:rotate(0deg);}
+	50% {transform:rotate(5deg);}
+    100% {transform:rotate(0deg);}
+}
+
+
+
+@media screen and (max-width:320px) and (max-height:480px) {
+	.page0 .content{ padding-top:45%;}
+}
+@media screen and (max-width:320px) and (max-height:420px) {
+	.page0 .logo{ padding:.2em 0 0 .2em; margin-bottom:.5em;}
+	.page0 .boat{ bottom:19%;}
+	.page0 .content{ padding-top:37%;}
+	#boat{height:53.9375%;}
+	.page2 .adimage img{margin-bottom:2em;}
+	.page2 .playagain{margin-bottom:2em;}
+}
+
+@media screen and (min-width : 720px) and (min-height : 960px) {
+	.page0 .logo{ padding:.2em 0 0 .2em; margin-bottom:.5em;}
+	.page0 .boat{ bottom:19%;}
+	.page0 .content{ padding-top:37%;}
+	#boat{height:53.9375%;}
+	.page2 .txt{ margin-bottom:.5em;}
+	.page2 .adimage img{margin-bottom:2em;}
+	.page2 .playagain{margin-bottom:1.5em;}
+}
+
+
+@media screen and (max-width : 340px){
+	body{font-size:12px;}
+}
+@media screen and (min-width : 341px) and (max-width : 360px){
+	body{font-size:13px;}
+}
+@media screen and (min-width : 361px) and (max-width : 400px){
+	body{font-size:14px;}
+}
+@media screen and (min-width : 401px) and (max-width : 440px){
+	body{font-size:15px;}
+}
+@media screen and (min-width : 441px) and (max-width : 480px){
+	body{font-size:16px;}
+}
+@media screen and (min-width : 481px) and (max-width : 520px){
+	body{font-size:17px;}
+}
+@media screen and (min-width : 521px) and (max-width : 560px){
+	body{font-size:21px;}
+}
+@media screen and (min-width : 561px) and (max-width : 620px){
+	body{font-size:22px;}
+}
+@media screen and (min-width : 621px) and (max-width : 660px){
+	body{font-size:24px;}
+}
+@media screen and (min-width : 661px) and (max-width : 720px){
+	body{font-size:26px;}
+}
+@media screen and (min-width : 721px) and (max-width : 800px){
+	body{font-size:29px;}
+}
+@media screen and (min-width : 801px) {
+	body{font-size:31px;}
+}
+</style>
+</head>
+<body>
+	<audio src="drum02.mp3" preload="auto" loop id="drum"></audio>
+    <audio src="win.mp3" preload="auto" id="win"></audio>
+	<article>
+    	<header style="display:none;">
+        	<img src="image/share.jpg" />
+        </header>
+        <section class="show0">
+        	<div class="page0">
+                <div class="logo"><img src="image/logo.png" class="logo1" /></div>
+                <div class="slogan"><img src="image/slogan.png" /></div>
+                <div class="boat"><img src="image/boat00.png" class="imgw100" /></div>
+                <div class="content"><img src="image/begin.png" onclick="showpage(1);" /></div>
+                <div class="activecodebut" onclick="showPOP(1,'activeCode');">查看激活码</div>
+        	</div>
+            <div class="page1">
+                <div id="arena">
+                    <div id="arenaBg" style="-webkit-transform:translateY(-99%);transform:translateY(-99%);"></div>
+                    <div id="boat" style="-webkit-transform:translateY(100%);transform:translateY(100%);"></div>
+            	</div>
+                <div id="time"><span></span><span></span><span></span><span></span></div>
+            </div>
+            <div class="page2">
+            	<p class="txt">你用<span id="second"></span>秒到达了终点<br />超越了<span id="percentage">0</span>%的传奇玩家</p>
+                <div class="adimage"><a href="javascript:;"><img src="image/adimage.jpg" /></a></div>
+                <div class="playagain"><a href="javascript:location.reload();"><img src="image/againbut.png" class="imgw100" /></a></div>
+                <div class="share"><img src="image/sharebut.png" class="imgw100" onclick="showShareImg('分享成绩，即可获得“龙腾四海”新区礼包激活码哦！');" /></div>
+                <div class="activecodebut" style="right:.5em;bottom:.5em;top:auto;" onclick="showPOP(1,'activeCode')">查看激活码</div>
+            </div>
+        </section>
+    </article>
+    <!--弹出层-->
+    <div class="popbox">
+        <div class="pop" id="tips">
+            <div class="tip">
+                <div class="hand"><img src="image/hand0.png" class="imgw100" /></div>
+                <div class="iknow"><img src="image/iknow.png" id="iknowbut" /></div>
+            </div>
+        </div>
+    </div>
+    <!--弹出层-->
+    <!--弹出层-->
+    <div class="popbox">
+        <div class="pop" id="activeCode">
+            <div class="codeBox">
+				<span>恭喜你获得激活码</span><br /><strong></strong>
+                <div class="closepop"></div>
+            </div>
+        </div>
+    </div>
+    <!--弹出层-->
+    <!--alert弹出层-->
+    <div class="alertpopbox">
+        <div class="pop" id="alertpop">
+            <p></p>
+            <a href="javascript:;" class="closepop">确定</a><a href="javascript:;" class="closepop">取消</a>
+        </div>
+    </div>
+    <!--alert弹出层-->
+    <!--分享指引-->
+    <div class="sharetip" id="sharetip">
+        <div class="closeSharetip"></div>
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABlCAMAAAD+r9R1AAAAOVBMVEUAAAD19fXs7Ozi4uLv7+/v7+/l5eXp6enq6urw8PD19fXv7+/u7u76+vr6+vr////39/j7+/v///9S6T+3AAAAEHRSTlMA/g4FM18dSY7plrzUInhmWux2jAAAAzpJREFUaN7NlYF2qyAMQCegqAhV//9jX1LAFCpWop7zbqLQbd5kpOv+2Dj99wh6Xe3fA9h1XRtxv1c0K2DuF5v1jbvb69aAvntwkaW709stqw8QN/I+r2zWAKrH+8QjKhdI8MLyusv7WgA0Rr26x6vA5mPbiDu8AnzIp3mQNwxuWHYYbxhcdGG/RHvV25I0RV0dXIlVXBxcEXNFbJYDHN/rlkM016uXH1ie18KjM6Zf4SL8i0bw/hdFw7ytFP6VYQ9uzoxUy7tfjMHN89uFt3jHwMQ9LpwBat9hkONFdWgBujpv16AoCMlPt63QIOs+0ubPRjcRuWkda8RjdOVW2hPtee9rrkKd9aq5jkac/cuYKxnkycFVM54fXIPZxA2uMWnB8HlmgC09Q57EQkWp9O8BqreCoklf51uqJ34PLjMVIq9ojsUGvTvM/k47zBR35JU2xaGA+ovq2ZtsSt1nURlskU/ROl8UD091PBW1/2vHTw1PPCVWT4nbI3F7QeyeEpsBBAPEzWIxREAf7bi/KlZDBihJr/li9+X1/eJ1SWymoUADqdheO20MEJDkBfjidtpjiHRs8TiVGPAS7JMwbya8Jsgc/kkYYkJ/sIfFcL1yNAZyjwmj54rVGDEYXzj2SYwZmb5lekUqzdvni3UfGPtdu1HM0bk+ZYRMaljm6EiZ2OlXEMzR9a73iVfux+R5O/dBj5nrW2bD4Hv1r3AjSK95DbdvHASofQW0BtDOm51uU3qsgEm/heR4bbsP9u88rCMWuTDvHlAcsYLHdXuM4ExOAy1cuPj4rsM5CJ3TxiAYJyGVLkJywfIqpTFK4Mkw3mkqIa8Rjr/je3NSvaz1diQ6siuG1+axpxfVXmtBlfh2/XVa2VmkgwhLp7p3pdxf17DoMixeIZT1Su9me0slQveC6S2WiKdUc7xCdOKLDuNbX9Fw8KRRLFDTLomIrxJBL063W0JmJXADebpduXmkl8n4KiXKT2k3B3nQTu68wMmD2DqjAgDJ/Saxy3PtyngIRLRDUgna/LYGZ5HkW9sk5W8tPX+M2JbfXv9zdKSA3A/IbefXhFPvDwhM3FKERPxXCl4+0Uklcf8Ee95/7nB2fneLSRgAAAAASUVORK5CYII=" />
+        <span class="tips">有这样这么着调的好事，<br />赶紧的去奔走相告啊！</span>
+    </div>
+    <!--分享指引-->
+    <script src="http://static.sdg-china.com/copyright/mobileJS/m_mir2sCopyRight.js" charset="gb2312"></script>
+    <script>
+	//JSONP
+	function loadData(_url,data,fn){
+		var url = "",t=document.createElement("script");
+		//if(fn){url = _url+"?"+data+"&callback="+fn;}
+		//else{url = _url+"?"+data;}
+		url = _url+"?"+data;	
+		t.src=url,t.type="text/javascript",t.async=!0//,n.parentNode.insertBefore(t,n)
+		document.getElementsByTagName("head")[0].appendChild(t);
+		t.onload=function(){document.getElementsByTagName("head")[0].removeChild(t);if(!!fn){fn();}}
+		}
+	
+	//ajax
+	function ajax(method,url,para,callback){
+			var xmlhttp=new XMLHttpRequest(),_url,_para;
+			xmlhttp.onreadystatechange=function(){
+				if(xmlhttp.readyState==4&&xmlhttp.status==200){
+					callback(eval("(" +  xmlhttp.responseText + ")"));
+					}
+				};
+			if(method=="GET"){
+				_url=url+"?"+para;
+				_para=null;
+				}
+			else if(method=="POST"){
+				_url=url;
+				_para=para;
+				}
+			xmlhttp.open(method,_url,true);
+			xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+			xmlhttp.send(_para);
+			}
+	//ajax("GET","Handler/getCheckInfo.ashx","url="+window.location.href,wxConfigStatrt);
+	
+	//获取参数的hdindex
+	function getURLPara(str){
+		var ary=[],obj={},wls=window.location.search,temp='',i=0;
+		if(wls!==""){
+			if(wls.indexOf("&")!=-1){ary=wls.substring(1).split("&");}
+			else{ary[0]=wls.substring(1)}
+			i=ary.length;
+			for(;i--;){console.log(i);
+				temp=ary[i].split("=");
+				obj[temp[0]]=temp[1];
+				}
+			}
+		if(str){return obj[str];}
+		else{return obj;}
+	}
+	
+    (function(doc,win){
+        var boat=doc.getElementById("boat"),arenaBg=doc.getElementById("arenaBg"),distance=0.01,speed=800,arenaBgNow=99,moveNum=0;
+        var phoneWidth = parseInt(doc.body.clientWidth||doc.documentElement.clientWidth||win.screen.width),
+        	phoneHeight = parseInt(doc.body.clientHeight||doc.documentElement.clientHeight||win.screen.height);
+        var drum=doc.getElementById("drum"),winsound=doc.getElementById("win");
+			win.Percentage=0;
+		
+		var recalc = function () {
+			  var docEl = doc.getElementsByTagName("body")[0],clientWidth = (docEl.clientWidth||win.innerWidth),timeEl=doc.getElementById("time");
+			  if (!clientWidth) return;
+			  docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+			  timeEl.style.webkitTransform='scale('+(clientWidth / 640)+')';
+			  timeEl.style.transform='scale('+(clientWidth / 640)+')';
+			};
+	  	doc.addEventListener('DOMContentLoaded', recalc, false);
+                
+        var MOUSE_DOWN = 'ontouchstart' in doc ? 'touchstart' : 'mousedown',
+        	MOUSE_UP = 'ontouchend' in doc ? 'touchend' : 'mouseup',
+        	MOUSE_MOVE = 'ontouchmove' in doc ? 'touchmove' : 'mousemove';
+        
+        function touchmove(wrapper){
+            var y=_Y=Y=0,time=0;
+            var handle={
+                "move":function(e){
+                    e.stopPropagation();
+                    e.preventDefault();
+                    },
+                "end":function(e){
+                        _Y = (e.pageY||e.changedTouches[0].pageY);
+                        Y = _Y - y;
+						//手势向下拖到 页面向下滚动
+						if (Y > 100) {
+                            console.log("down");
+                            speed=((new Date().getTime())-time)/2;
+                            distance=Y/phoneHeight;
+                            console.log(speed,distance);
+                            roll();
+                            //box.style.webkitTransform='translateY(0%)';
+                            //box.style.transform='translateY(0%)';
+                        }
+                        //手势向上拖动 页面向上滚动
+                        else if (Y < -100) {
+                            console.log("up");
+                            //setTimeout(function(){moveQuiz(0);},450);
+                        }
+                        wrapper.removeEventListener(MOUSE_MOVE,handle.move,false);
+                        wrapper.removeEventListener(MOUSE_UP,handle.end,false);
+                    },
+                "start":function(e){
+						wrapper.removeEventListener(MOUSE_MOVE,handle.move,false);
+                        wrapper.removeEventListener(MOUSE_UP,handle.end,false);
+                        y = (e.pageY||e.changedTouches[0].pageY);time=(new Date().getTime());
+                        wrapper.addEventListener(MOUSE_MOVE,handle.move,false);
+                        wrapper.addEventListener(MOUSE_UP,handle.end,false);
+                        e.stopPropagation();
+                        //e.preventDefault();
+                    }
+                };
+            wrapper.addEventListener(MOUSE_DOWN,handle.start,false);
+        }
+        
+        function boatPosition(){
+            var nwoNum=returnStyleNumber(boat);
+            if(speed<800||distance>0.25){
+                nwoNum-=2;
+                if(nwoNum<=0){nwoNum=0;}
+                }
+            else{
+                nwoNum+=1;
+                if(nwoNum>=100){nwoNum=100;}
+                }
+            boat.style.webkitTransform='translateY('+nwoNum+'%)';
+            boat.style.transform='translateY('+nwoNum+'%)';
+            }
+        
+        function returnStyleNumber(obj){
+            var str=(obj.style.webkitTransform||obj.style.transform),fushu=(str.indexOf("-")>-1?'translateY(-':'translateY(');
+            return Number(str.replace(fushu,"").replace('%)',""));
+            }
+        
+        function roll(){
+            if(boat.Rowing){clearTimeout(boat.Rowing);}
+            moveNum=returnStyleNumber(arenaBg);
+            console.log(speed,distance);
+            if(moveNum<=5){winsound.play();ReachEnd();return false;}
+            else{
+                boatPosition();
+                arenaBgNow-=distance;
+                if(boat.className=="a1"){boat.className="";}
+                else{boat.className="a1";}
+                arenaBg.style.webkitTransform='translateY(-'+(arenaBgNow)+'%)';
+                arenaBg.style.transform='translateY(-'+(arenaBgNow)+'%)';
+                boat.Rowing= setTimeout(roll,speed);
+                distance>0.01?distance-=0.05:distance;
+                distance<0.01?distance=0.01:distance;
+                speed<800?speed+=100:speed;
+                }
+            return false;
+            }
+            
+        //roll();drum.play();
+        //touchmove(doc.getElementById('arena'));
+        function ReachEnd(){
+			if(!!ReachEnd.onoff){return false;}
+			ReachEnd.onoff=true;
+			clearInterval(countSecondTemp);
+			doc.getElementById('second').innerHTML=temptime;
+			//ajax("GET","../sailongzhou/inc/getRanking.php","second="+temptime,function(data){if(data.returncode==1){document.getElementById('percentage').innerHTML=data.percentage;Percentage=data.percentage}});
+			//ajax("GET","../inc/GetCheckInfo.php","url="+encodeURIComponent(window.location.href),wxConfigStatrt);
+			setTimeout(function(){showpage(2);drum.pause();},800);
+		}
+	
+		
+        doc.getElementById("iknowbut").onclick=function(){
+            clearInterval(handSwitch);
+            showPOP(false,'tips');
+            touchmove(doc.getElementById('arena'));
+            roll();
+			countSecond();
+            drum.play();
+            }
+            
+    })(document,window);
+	
+    window.onload=function(){
+        document.querySelector("body article").className="animate";
+    }
+    
+    function showpage(n){
+        document.querySelector('article section').className="show"+n;
+        if(n==1){
+            showPOP(true,'tips');
+            handanimate();
+            }
+    }
+    
+    var handSwitch=countSecondTemp=null,temptime=0;
+    function handanimate(){
+        var hand=document.querySelector("#tips .tip .hand img"),n=1;
+        handSwitch=setInterval(function(){
+            if(n==1){hand.style.opacity=0;n=0;}
+            else{hand.style.opacity=1;n=1;}
+            },300);
+        }
+	
+	//通话计时
+	function countSecond(){
+		var secondbox=document.querySelector("#time").getElementsByTagName('span'),timestr='';
+		var handleNum=function(n){
+			var a=Math.floor(n/60),b=n%60,str="";
+			if(n>=60){str+=(a>=10?a:"0"+a)+""+(b>=10?b:"0"+b)}
+			else{str+="00"+(b>=10?b:"0"+b);}
+			return str;
+		}
+		countSecondTemp=setInterval(function(){
+			temptime++;
+			timestr=handleNum(temptime);
+			for(var i=0;i<secondbox.length;i++){
+				secondbox[i].className="t"+timestr.charAt(i);
+				}
+			},1000);
+		}
+    
+	function alertpop(t){
+		var popobj=document.getElementById("alertpop");
+		popobj.parentNode.style.display="block";
+		popobj.style.display="block";
+		popobj.children[0].innerHTML=t;
+		popobj.style.marginTop=(0-popobj.offsetHeight/2)+"px";
+		popobj.children[1].onclick=popobj.children[2].onclick=function(){
+			popobj.parentNode.style.display="none";
+			popobj.style.display="none";
+			popobj.children[0].innerHTML='';
+			}
+		}
+	
+    //打开弹出层	
+    function showPOP(t,name){
+        var box=document.getElementById(name).parentNode;
+        if(t){
+            box.style.display="block";
+            box.children[0].children[0].style.marginTop=(0-box.children[0].children[0].offsetHeight/2)+"px";
+            setTimeout(function(){box.style.opacity=1;},100);
+            }
+        else{
+            box.style.display="none";
+            box.style.opacity=0;
+            }
+        if(box.getElementsByClassName("closepop").length>0){
+            box.getElementsByClassName("closepop")[0].onclick=function(){
+                box.style.display="none";
+                box.style.opacity=0;
+                }
+            }
+        }
+		
+	//打开分享指引
+	function showShareImg(t){
+		var box=document.getElementById("sharetip");
+		if(t){
+			box.children[2].innerHTML=t;
+			box.style.top=0;
+			box.style.webkitTransform='translateY(0)';
+			box.style.transform='translateY(0)';
+			box.children[0].onclick=function(){
+				box.style.top="150%";
+				box.style.webkitTransform='translateY(350%)';
+				box.style.transform='translateY(350%)';
+				}
+			}
+		else{
+			box.children[2].innerHTML="";
+			box.style.top="150%";
+			box.style.webkitTransform='translateY(350%)';
+			box.style.transform='translateY(350%)';
+			}
+		}
+    </script>
+</body>
+</html>

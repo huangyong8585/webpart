@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>一个一个切换</title>
+<style>
+*{margin:0;padding:0;}
+li{list-style:none;}
+body{ }
+/*左右切换*/
+.reviewbox{height:186px;padding:17px 0; margin-bottom:13px;position:relative; background-color:#e4842b;}
+.review{position:relative;width:894px;height:184px;border:1px solid #f60;overflow:hidden;margin:0 auto;}
+.review ul{width:3600px;}
+.review ul li{ width:150px;height:184px;overflow:hidden;float:left;margin-right:36px;}
+.review ul li img{ display:block;width:150px;height:184px;}
+.reviewbox a.prev,.reviewbox a.next{width:25px;height:25px;background-image:url(http://mat1.gtimg.com/sh/zt/supperman/prev-next.gif);background-repeat:no-repeat;display:block;position:absolute;z-index:10;top:100px;}
+.reviewbox a.prev{left:26px;}
+.reviewbox a.next{right:26px; background-position: right top;}
+</style>
+<script type="text/javascript" src="http://ud.sh.qq.com/statics/js/jquery-1.7.1.min.js?v=20130424" charset="utf-8"></script>
+</head>
+
+<body>
+	<!--左右切换-->
+    <div class="reviewbox">
+        <div class="review" id="review">
+            <ul>
+                <li><a href="javascript:void(0);"><img src="http://mat1.gtimg.com/sh/zt/girl/2ndtop10/s1.jpg" /></a></li>
+                <li><a href="javascript:void(0);"><img src="http://mat1.gtimg.com/sh/zt/girl/2ndtop10/s2.jpg" /></a></li>
+                <li><a href="javascript:void(0);"><img src="http://mat1.gtimg.com/sh/zt/girl/2ndtop10/s3.jpg" /></a></li>
+                <li><a href="javascript:void(0);"><img src="http://mat1.gtimg.com/sh/zt/girl/2ndtop10/s4.jpg" /></a></li>
+                <li><a href="javascript:void(0);"><img src="http://mat1.gtimg.com/sh/zt/girl/2ndtop10/s5.jpg" /></a></li>
+                <li><a href="javascript:void(0);"><img src="http://mat1.gtimg.com/sh/zt/girl/2ndtop10/s6.jpg" /></a></li>
+                <li><a href="javascript:void(0);"><img src="http://mat1.gtimg.com/sh/zt/girl/2ndtop10/s7.jpg" /></a></li>
+                <li><a href="javascript:void(0);"><img src="http://mat1.gtimg.com/sh/zt/girl/2ndtop10/s8.jpg" /></a></li>
+                <li><a href="javascript:void(0);"><img src="http://mat1.gtimg.com/sh/zt/girl/2ndtop10/s9.jpg" /></a></li>
+                <li><a href="javascript:void(0);"><img src="http://mat1.gtimg.com/sh/zt/girl/2ndtop10/s10.jpg" /></a></li>
+            </ul>
+        </div>
+        <a href="javascript:void(0);" class="prev"></a>
+        <a href="javascript:void(0);" class="next"></a>
+    </div>
+    <!--左右切换-->
+    <script>
+    function switchADlist(elementID,play_time){
+			var _div=$("#"+elementID+" ul");
+			var temp_time;
+			//play_img("left");W
+			//if(_div.height()==_div.parent().height()){ return false;}
+			temp_time=setTimeout(function(){play_img("left")},play_time);
+			/*_div.parent().hover(
+					   function(){clearTimeout(temp_time)},
+					   function(){temp_time=setTimeout(function(){play_img("left")},play_time);}
+					   )*/
+			$("#"+elementID).parent().find("a.prev").click(function(){if(!_div.is(":animated")&&!_div.children("li:first").is(":animated")){play_img("right");}});
+			$("#"+elementID).parent().find("a.next").click(function(){if(!_div.is(":animated")&&!_div.children("li:first").is(":animated")){play_img("left");}});
+			
+			function play_img(type){
+				if(temp_time){clearTimeout(temp_time);}
+				var div_f=_div.children("li:first"),div_l=_div.children("li:last"),div_width=div_f.width()+36,div_height=div_f.height(),
+				animateobj={},cssobj={};
+				animateobj.marginLeft=-(div_width)+"px";cssobj.marginLeft="0px";space=div_width;
+				if(type=="left"){_div.animate(animateobj,400,function(){_div.append(div_f);_div.css(cssobj);})}
+				if(type=="right"){_div.prepend(div_l);_div.css(animateobj);_div.animate(cssobj,400)}
+			temp_time=setTimeout(function(){play_img("left")},play_time);
+			}return false;
+		}
+		switchADlist("review",4000);
+    </script>
+</body>
+</html>

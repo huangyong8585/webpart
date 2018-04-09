@@ -1,0 +1,24 @@
+@charset "utf-8";
+/* CSS Reset */
+blockquote,body,caption,dd,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,iframe,img,input,label,legend,li,object,ol,p,pre,span,strong,table,tbody,td,tfoot,th,thead,tr,ul{border:0 none;margin:0;outline:0 none;padding:0;}
+body,html{font:12px/1.25 'Microsoft YaHei',Helvetica,Tahoma,StSun,SimSun,sans-serif; background-color:#fff;height:100%;}
+ol,ul,li{list-style:none}
+table{border-collapse:collapse;border-spacing:0;}
+:focus{outline:0;}
+button::-moz-focus-inner{padding:0;border:0;}
+input{-webkit-appearance:none;border-radius:none;background:none;border:0 none;margin:0;padding:0;}
+img{border:0;}
+a{outline:0;text-decoration:none;-webkit-tap-highlight-color:rgba(255,0,0,0);}
+a:hover{text-decoration:none;-moz-transition:all 0.5s;-webkit-transition:all 0.5s;-o-transition:all 0.5s;-ms-transition:all 0.5s;transition:all 0.5s;}
+a:link{-moz-transition:all 0.3s;-webkit-transition:all 0.3s;-o-transition:all 0.3s;-ms-transition:all 0.3s;transition:all 0.3s;}
+.clear{clear:both;display:block;margin:0;padding:0;}
+.clear-after:after{content:"";display:block;height:0;clear:both;visibility:hidden;}
+* .clear-after{zoom:1;}
+.fl{float:left;}
+.fr{float:right;}
+.clearfix:after{display:block;clear:both;height:0;visibility:hidden;content:".";}
+.clearfix{display:block;*display:inline-block;}
+* html .clearfix{height:1%;}
+.hide{display:none}
+.tac{ text-align:center;}
+.red{color:#983b03;}

@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>汉字转Unicode</title>
+</head>
+
+<body>
+<TABLE style="MARGIN-BOTTOM: 6px" cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+    <TR>
+      <TD style="FONT-WEIGHT: bold; FONT-SIZE: 18px; COLOR: #333333; LINE-HEIGHT: 22px; FONT-FAMILY:Arial,宋体;" align="middle">Unicode 编码转换器</TD>
+    </TR>
+    <TR>
+      <TD height=1></TD>
+    </TR>
+  </TBODY>
+</TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+    <TR>
+      <TD align=middle><TABLE style="BORDER-RIGHT: #a5bac6 1px solid; BORDER-TOP: #a5bac6 1px solid; BORDER-LEFT: #a5bac6 1px solid; BORDER-BOTTOM: #a5bac6 1px solid" cellSpacing=0 cellPadding=0 width="100%" border=0>
+          <TBODY>
+            <TR>
+              <TD class=nav><B>Unicode 编码转换器（Unicode 转换 ASCII，ASCII 转换Unicode）</B></TD>
+            </TR>
+            <TR>
+              <TD 
+                style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px">请输入要转换的内容<BR>
+                <TEXTAREA id=source style="WIDTH: 100%" rows=6>请把你需要转换的内容粘贴在这里。</TEXTAREA>
+                <INPUT class=submit onclick="A2U();" type=button value="ASCII 转换 Unicode↓">
+                <INPUT class=submit onclick="U2A();" type=button value="Unicode 转换 ASCII↓">
+                <INPUT class=submit onclick="C2U();" type=button value="汉字 转换 \u Unicode↓">
+                <INPUT class=submit onclick="U2C();" type=button value="\u Unicode 转换 汉字↓">
+                <BR>
+                <TEXTAREA id="result" style="WIDTH: 100%" rows="6"></TEXTAREA>
+                <BR>
+                <INPUT class="submit" onclick="preview()" type="button" value="预览转换代码"></TD>
+            </TR>
+          </TBODY>
+        </TABLE></TD>
+    </TR>
+  </TBODY>
+</TABLE>
+<script>
+function A2U() {
+ //ASCII -> Unicode
+ /*if (parseFloat(ScriptEngineMajorVersion() + '.' + ScriptEngineMinorVersion()) < 5.5){ 
+ alert('您的脚本引擎版本过低，请升级为5.5以上'); 
+ return; 
+ }*/
+ if (source.value == '') { 
+ alert('文本框中没有代码！'); 
+ return; 
+ }
+ result.value = '';
+ for (var i=0; i<source.value.length; i++)
+ result.value += '&#' + source.value.charCodeAt(i) + ';';
+}
+function U2A() { 
+ //Unicode -> ASCII
+ var code = source.value.match(/&#(\d+);/g);
+ if (code == null) { 
+ alert('文本框中没有合法的Unicode代码！'); 
+ return; 
+ }
+ result.value = '';
+ for (var i=0; i<code.length; i++)
+ result.value += String.fromCharCode(code[i].replace(/[&#;]/g, ''));
+}
+function preview() {
+ var win = window.open();
+ win.document.open('text/html', 'replace');
+ win.document.writeln(result.value);
+ win.document.close();
+}
+
+function C2U(){
+	if (source.value == '') {alert('文本框中没有代码！');return;}
+	 result.value = '';
+	 for (var i=0; i<source.value.length; i++){
+		 //alert(Number(source.value.charCodeAt(i),16));
+	 	result.value += '\\u' + source.value.charCodeAt(i).toString(16);
+	 }
+	}
+function U2C() { 
+ //Unicode -> ASCII
+ var code = source.value.split("\\u");
+ alert(code)
+ if (code == null) { 
+ alert('文本框中没有合法的Unicode代码！'); 
+ return; 
+ }
+ result.value = '';
+ for (var i=1; i<code.length; i++)//alert(parseInt(code[i],16));
+ result.value += String.fromCharCode(parseInt(code[i],16));
+}
+/*
+10进制转16进制：toString(16)
+16进制转10进制：parseInt(num,16)
+*/
+</script>
+</body>
+</html>

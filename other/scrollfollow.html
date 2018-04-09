@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>悬浮滚动条跟随</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style>
+.wrapper{background-color:#e4e4e4;}
+.header{background-color:#f0f0f0;height:261px;}
+.main{width:1200px;margin:0 auto;height:3000px;background:#fff;position:relative;}
+/*右侧悬浮*/
+#lovexin{width:165px;height:575px;overflow:hidden;background:url(https://bbsimg.tiancitycdn.com/clsbbs/web/cls_xf.png) no-repeat center center;position:absolute;right:-180px;top:-50px;}
+#lovexin a{display: block; width: 128px; height: 38px;}
+#lovexin .weibo{margin: 396px 0 0 20px;}
+#lovexin .kefu{margin: 2px 0 0 20px;}
+#lovexin .gototop{height:53px;width:140px;margin:48px 0 0 14px;}
+/*右侧悬浮*/
+</style>
+<script src="../js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+        <div class="header"></div>
+        <div class="main">
+            <!--右侧悬浮 begin -->
+            <div id="lovexin">
+                <a class="weibo" href="https://weibo.com/clsol" target="_blank"></a>
+                <a class="kefu" href="http://webonline.tiancity.com:8181/webstat/ucmonitor_login.jsp?type=1" target="_blank"></a>
+                <a class="gototop" title="返回顶部" href="javascript:void(0);" onclick="$('body,html').animate({scrollTop:0},300);" ></a>
+            </div>
+            <!--右侧悬浮 end -->
+        </div>
+	</div>
+    <script>
+    var RightFlag=$("#lovexin");
+    //右侧悬浮
+    $(window).scroll(function(){
+        var t=document.body.scrollTop||document.documentElement.scrollTop;
+        if(t>214){RightFlag.stop(true,false).animate({"top":t-261+"px"},400);}
+        else{RightFlag.stop(true,false).animate({"top":"-50px"},400);}
+    })
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>微信分享提醒</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    body{}
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    .btnbox{padding-top:30px;}
+    .btnbox a{display:block;width:200px;height:40px;margin:0 auto 20px;text-align:center;line-height:40px;border:1px solid #999;font-size:14px;border-radius:8px;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+
+	/*分享*/
+	.sharetip{position:fixed;width:100%;height:100%;overflow:hidden;left:0;top:150%;background-color:rgba(0,0,0,0.6);z-index:150;-webkit-transform:translateY(350%);-moz-transform:translateY(350%);transform:translateY(350%);
+	-webkit-transition:all .5s ease-in-out;-moz-transition:all .5s ease-in-out;transition:all .5s ease-in-out; text-align:right;}
+	.sharetip img{width:20%;margin-right:3%;}
+	.sharetip .tips{width:90%;display:block;text-align:center;margin:.25em auto 0;padding:.25em .5em;line-height:1.8;border:1px solid rgba(255,255,255,0.85);color:rgba(255,255,255,0.85);font-size:1.2em;}
+	.sharetip .closeSharetip{width:5em;height:5em;border-radius:5em;position:absolute;right:-1.2em;bottom:-1.2em;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfAgMAAABiwP6qAAAACVBMVEUAAAAVCgIkGRJnPJyuAAAAAXRSTlMAQObYZgAAAFpJREFUGNNFkEEOACEIAyHhsEeexNP26WLTjGooChRqTGhVtHChhBvIC7KjFEVtvuv8DqcLXNo6qjB97jZr2em2UyMwCy/kUAUPzPSiO/P4Nsz8VKALpWjnNw4evAWS9iAWqwAAAABJRU5ErkJggg==) 45% 45% no-repeat rgba(200,200,200,0.5);background-size:2em 2em;}
+	
+    </style>
+</head>
+<body>	
+	<article class="wrapper">
+		<div class="btnbox">
+			<a id="btn1" href="javascript:;">微信分享指引</a>
+		</div>
+        <!--分享指引-->
+        <div class="sharetip" id="sharetip">
+        	<div class="closeSharetip"></div>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABlCAMAAAD+r9R1AAAAPFBMVEUAAADq6ur39/fw8PDv7+/l5eXp6ens7Ozi4uLv7+/19fXv7+/u7u76+vr6+vr////39/j09PT7+/v///+GiKf8AAAAEHRSTlMAjvjpXx1JDgUzlrzUInhmUd/xXwAAA1NJREFUaN7NlYuSqyAMQNcnIEJ9/P+/3kTAFCpWop25J0Ho7vYkS2a7f2xs//cT+nU1fz/ArOtai+e9ol4B/bxYrxv2aa9dPQ8PsF8DS/ekt1tWFyCu5XNeWa8eVA/PiQdULpDghe31lPe1AGgMevWMV4HNxX4QT3gF+JB3cyMfGFyzHDA8MLjgwn6J9q63JWmMuju4HKu4Obgs+o5YLydYvtcup/Rcb798wfC8Bt46YbodFuFe1IL3vygYpn2ncK80e3BTYqRazv1iDG6aNhc+whMDE8+4cQbYuw69HBfVoQ3oyrzdjCIvJD899kKNLPtIm94b3UXkpn0oEQ/BlVrpTLTXva+pCHXVq6YyZnHNK+apkEZeHFwxw/XBzZhzOOAekjYMl1cG2NJ7yBNZqCiV/j5AtSko5vh1etzr1eLbR9o0JaZMpBX1uVij94DJPemEGWPPvNLEWBRQf0E9OZOJKfssyoMt8qlz1ummuPlVx2NW+792XP9ILOYfiVVdzy5mWA+K29ozv4envSG2dcy85dZ/fUusG9A0EB/cE4smAPpgbzCRG2LVJICS9D1fbD+8rl9ct8R6bDLUkIrtNeNOAwFJXoAvbscjmkDHFg9jjgaXYN+E3hhxjZAp/JvQxIh+b/eb5nrloDXkESNGxRWrIaAxPrDsmxgSEn3L9IpYmrbPF/eVZ6gO7VoxR2ermAEyqmGYoyNlZKdfQTBHV9nKJa7Uj8nzdvaNCjPVt8yGwfeqXv5BkL7nNdxuWAhQuwpo9aCdN7u+jamwAib9FpLjNe0x2L91sK5YpMK0e0BxxAre3rfnCM7keqCFhZuLzzqci+hT2hAE4yak6rOQXLC8SvUYOUDO+OswKiKt4a+/43tTYr0s9XYkOrMrhtekcaQXxV5jQBX5Dv1lWtkZpIPwW6e6rVLqL2tYdAkGlw9lnNK52d5cCd+9YHqzJcItlVyvEJ34oMP41Bc07D1xZAuUtEsi4qOE14vL7eaQSQk8QF5uV+4e6WQyvIoJ8kva3UEetJM7LXDxIvbOqABAcneI7PJauzJcAhHskFSCDt+t3pkl+tY+SfldS+8/R+zbd6/7ObpSQB4H5H5ye8TfBSQEJh4pfCLuKxkvn+CkkiR+liPvP4bMmOOdTLxVAAAAAElFTkSuQmCC" />
+            <span class="tips">点击右上角分享至朋友圈或发送给好友，邀好友一起来抽大奖！</span>
+        </div>
+        <!--分享指引-->
+		<div id="qrcode"></div>
+	</article>
+    <script src="../js/Qrcode.js"></script>
+	<script>
+		(function (doc, win) {
+                var docEl = doc.getElementsByTagName("body")[0].children[0],
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = (docEl.clientWidth||win.innerWidth);
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+                };
+        
+                if (!doc.addEventListener) return;
+                win.addEventListener(resizeEvt, recalc, false);
+                doc.addEventListener('DOMContentLoaded', recalc, false);
+            })(document, window);
+
+		//打开分享指引
+		function showShareImg(t){
+			var box=document.getElementById("sharetip");
+			if(t){
+				box.style.top=0;
+				box.style.webkitTransform='translateY(0)';
+				box.style.transform='translateY(0)';
+				box.children[0].onclick=function(){
+					box.style.top="150%";
+					box.style.webkitTransform='translateY(350%)';
+					box.style.transform='translateY(350%)';
+					}
+				}
+			else{
+				box.style.top="150%";
+				box.style.webkitTransform='translateY(350%)';
+				box.style.transform='translateY(350%)';
+				}
+			}
+
+		window.onload=function(){
+			document.getElementById('btn1').onclick=function(){ showShareImg(true) };
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }
+	</script>
+</body>
+</html>

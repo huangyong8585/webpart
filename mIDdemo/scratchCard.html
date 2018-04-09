@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>移动端交互设计-刮刮卡</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    body{}
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    .btnbox{padding-top:30px;}
+    .btnbox a{display:block;width:200px;height:40px;margin:0 auto 20px;text-align:center;line-height:40px;border:1px solid #999;font-size:14px;border-radius:8px;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+
+	
+	/*弹出层*/
+	.popbox{display:none;position:fixed;left:0;top:0;width:100%;height:100%;overflow:hidden;z-index:10;}
+	.popbox .pop{position:absolute;width:100%;height:100%;left:0;top:0;z-index:11; box-sizing:border-box;}
+	.popbox .closepop{width:5em;height:5em;border-radius:5em;position:absolute;right:-1.2em;bottom:-1.2em;z-index:12;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfAgMAAABiwP6qAAAACVBMVEUAAAAVCgIkGRJnPJyuAAAAAXRSTlMAQObYZgAAAFpJREFUGNNFkEEOACEIAyHhsEeexNP26WLTjGooChRqTGhVtHChhBvIC7KjFEVtvuv8DqcLXNo6qjB97jZr2em2UyMwCy/kUAUPzPSiO/P4Nsz8VKALpWjnNw4evAWS9iAWqwAAAABJRU5ErkJggg==) 45% 45% no-repeat rgba(200,200,200,0.5);background-size:2em 2em;}
+	.popbox header.head{background:#362e2b;position:relative;z-index:12;}
+	.popbox header.head h1{text-align:center;font-size:1.2em;line-height:2.58928em;color:#fff;}
+	.popbox header.head a{position:absolute;left:0;top:0;width:3.04186em;height:3.04186em;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAUBAMAAACkHKocAAAAJ1BMVEUAAAD///////////////////////////////////////////////+uPUo5AAAADHRSTlMAAQZcDMS7szeUQlWhWGIuAAAATUlEQVQI12MAAUEBMMXIAAECng0CIC5LzAIQLeB6mhHCNQBz3Q4zgbhMOQYKIK4amMsgWAPiImgBdaA4XB1MIdwcmLkwe2D2wtwBcxcAsiwPAkEHvOcAAAAASUVORK5CYII=) 50% 50%/auto 40% no-repeat;}
+	#ScratchBox{background:#654d35;-webkit-transform:translateX(100%);transform:translateX(100%);-webkit-transition:-webkit-transform .4s ease-in-out;transition:transform .4s ease-in-out;}
+	#ScratchBox.popbox .pop{padding:4em 7.8125% 2em;color:#fff;}
+	#ScratchBox.popbox .pop .scratchCont h2{color:#fddd2e;text-align:center;border-bottom:1px solid #fff;font-size:1.285em;padding:.3em 0 .55em;}
+	#ScratchBox.popbox .pop .scratchCont .drawinfo{padding:0.75em 0;}
+	#ScratchBox.popbox .pop .scratchCont .drawinfo p.fl b{color:#bc0101;}
+	#ScratchBox.popbox .pop .scratchCont .drawinfo a.fr{color:#fb6705;}
+	#ScratchBox.popbox .pop .scratchCont .tips{ padding-top:1em;line-height:1.6;font-size:0.75em;}
+	.drawbox{position:relative;z-index:12;}
+	.drawbox .draw{position:relative;z-index:13;width:100%;height:7em; background-color:#fff;}
+	.draw table{width:100%;height:100%;border:0 none;}
+	.draw table td{width:100%;height:100%;text-align:center;vertical-align:middle;border:0 none;}
+	.draw canvas{position:absolute;left:0;top:0;z-index:15;}
+	#drawresult{color:#532b06;word-break:break-all;}
+	#drawresult strong{color:#532b06;margin-left:3px;font-weight:normal;}
+    </style>
+</head>
+<body>	
+	<article class="wrapper">
+		<div class="btnbox">
+			<a id="btn1" href="javascript:;">刮刮卡弹出层</a>
+			<p class="tac">刮刮卡弹出层</p>
+		</div>
+		<!--刮奖弹出层-->
+		<div class="popbox" id="ScratchBox">
+        	<header class="head"><h1>刮奖</h1><a href="javascript:showScratchPOP();"></a></header>
+            <div class="pop">
+            	<div class="scratchCont">
+                	<h2>刮奖区</h2>
+                    <div class="drawinfo clearfix">
+                    	<p class="fl"><span>可刮奖次数：</span><b><span id="drawtimes2">0</span>次</b></p>
+                    	<a href="javascript:drawcanvas();" class="fr">再刮一次</a>
+                    </div>
+                    <div class="drawbox">
+                        <div class="draw" id="canvas">
+                            <table><tbody><tr><td id="drawresult" style="visibility:visible;">一个勺子</td></tr></tbody></table>
+                        </div>
+                    </div>
+                    <p class="tips">新签到用户可免费获得三次刮奖机会。<br />三次免费刮奖机会用完以后，可以使用积分继续抽奖，<br />每次抽奖消费50积分！</p>
+                    <p class="tips">刮开区域&nbsp;<strong id="visiblearea">0%</strong></p>
+                </div>
+            </div>
+        </div>
+        <!--刮奖弹出层-->
+		<div id="qrcode"></div>
+	</article>
+    <script src="../js/Qrcode.js"></script>
+	<script>
+		(function (doc, win) {
+                var docEl = doc.getElementsByTagName("body")[0].children[0],
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = (docEl.clientWidth||win.innerWidth);
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+                };
+        
+                if (!doc.addEventListener) return;
+                win.addEventListener(resizeEvt, recalc, false);
+                doc.addEventListener('DOMContentLoaded', recalc, false);
+            })(document, window);
+
+        //打开刮奖弹出层	
+		function showScratchPOP(t){
+			var box=document.getElementById("ScratchBox");
+			if(t){
+				box.style.display="block";
+				setTimeout(function(){
+					box.style.webkitTransform='translateX(0)';
+					box.style.transform='translateX(0)';
+					drawcanvas();
+					},100);
+				}
+			else{
+				box.style.webkitTransform='translateX(100%)';
+				box.style.transform='translateX(100%)';
+				setTimeout(function(){
+					box.style.display="none";
+					},450);
+				}
+			}
+
+		/*======刮刮卡的程序处理========*/
+		window.MOUSE_DOWN = 'ontouchstart' in document ? 'touchstart' : 'mousedown';
+		window.MOUSE_UP = 'ontouchend' in document ? 'touchend' : 'mouseup';
+		window.MOUSE_MOVE = 'ontouchmove' in document ? 'touchmove' : 'mousemove';
+		function drawcanvas(){
+			var Elementobj=document.getElementById('canvas');
+			var isAjaxGetGift=true;
+			//Elementobj.children[0].style.width=Elementobj.offsetWidth-6+"px";
+			if(Elementobj.getElementsByTagName('canvas').length>0){
+				Elementobj.removeChild(Elementobj.getElementsByTagName('canvas')[0]);
+				}
+			/*if(document.getElementById('drawtimes2').innerHTML=='0'){
+				alertpop('抽奖机会已用完',function(){showScratchPOP();});
+				}*/
+			//返回刮空的面积比例
+			var getTransparentPercent=function(ctx, width, height) {
+				var imgData = ctx.getImageData(0, 0, width, height),
+					pixles = imgData.data,
+					transPixs = [];
+				for (var i = 0, j = pixles.length; i < j; i += 4) {
+					var a = pixles[i + 3];
+					if (a < 128) {
+						transPixs.push(i);
+					}
+				}
+				return (transPixs.length / (pixles.length / 4) * 100).toFixed(2);
+			}
+			//window.onload = function(){
+			/**判断浏览器是否支持canvas**/
+				/*try{
+					document.createElement('canvas').getContext('2d');
+				}
+				catch(e){
+				var addDiv = document.createElement('div');
+				alert('您的手机不支持刮刮卡效果哦~!');
+				}
+			};*/
+			var u = navigator.userAgent,mobile = '';
+			if(u.indexOf('iPhone') > -1) mobile = 'iphone';
+			if(u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) mobile = 'Android';
+				function createCanvas(parent, width, height) {
+					var canvas = {};
+					canvas.node = document.createElement('canvas');
+					canvas.context = canvas.node.getContext('2d');
+					canvas.node.width = width || 100;
+					canvas.node.height = height || 100;
+					parent.appendChild(canvas.node);
+					return canvas;
+				}
+				function init(container, width, height, fillColor, type) {
+					var canvas = createCanvas(container, width, height);
+					var ctx = canvas.context;
+					// define a custom fillCircle method
+					ctx.fillCircle = function(x, y, radius, fillColor) {
+						this.fillStyle = fillColor;
+						this.beginPath();
+						this.moveTo(x, y);
+						this.arc(x, y, radius, 0, Math.PI * 2,false);
+						this.closePath();
+						this.fill();
+					};
+					ctx.clearTo = function(fillColor) {
+						//ctx.fillStyle = fillColor;
+						//ctx.fillRect(0, 0, width, height);
+						//ctx.fillStyle="#e91b1d";
+						//ctx.font='2em "微软雅黑"';
+						//ctx.textAlign="center";
+						//ctx.fillText("刮 奖 区",width/2,height/1.65);
+						//alert(ctx.measureText("刮 奖 区").width);
+						var beauty=new Image();
+						beauty.src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAh0AAADPBAMAAACjJ37ZAAAALVBMVEUyMjL///+srKx5eXnY2NiVlZVqamrs7Ozi4uLDw8NaWlq4uLhHR0ehoaH29vaDhapFAAAE/0lEQVR42u3aP4sTQRzG8cluEkQtfOJiVFBuVy20SljRExWyuv6BA1ER7CSgoO0dam1Qrj/txOJQGzsFa7G1SHH4CgQ734S/ndnNRTO7G8XCuXs+hSF318zXzczOZBURERERERERERERERERERERERERERERERERERERERERERERERERERH97+6l19X20sBAWfSx17ygp7aVBtCx9sDe4mVbkR5Y2O49QnxVuR2wDvm+/unuDWBV1fDj8xCxcle4OS349h6e/qmPuvmjHcd9GMpZO9dMg6LH49+H2Mt7jIHusC1vZ7yJY7U7juNFAK732HkGYpj3mJk/mpJi6OkPSh9YiRflre0KMx+TwrNUueotMoPiWrH0wCNPf1DkdynEynVLj00rURStK1dJAdEphtj/vUdrGQh0Dw+FQVmPC5Fw+p5t53GI5wvK3kPcLno0ynuclKKRyKaWKHL5ni3LcUAu7/IerTDvEaIrQ162fV48YI/KAReVs5pZjnNK2XsYvunR1HPqrm/YP1TVPbqXlKN2JQC65r/7VppetvQQ8amsxwcJoQMGqqYHOspRTezfKG44QmC/tYfIeiQ4/F6pT8C+rdujHZ+a7EneAajocfYb8P1SS/7tbd0eYtLDK+/RR66j/6i2x4Jyl296iLCsB7Q9xWtZj35HZdy+POp7NKH1istElfbQIRru93ixCGDV2sND5vBI92hfzf6utMe9EQ6dy3o8Ug4bwwjKexxe6pubjjHktaTHQJ+SHPrcd3r68OMNwIzZ2qN1BcCSPj+tOg+SHvlW5ytw2NkNzN24X2zPl0rmD1lgA2V6mPOP0h7idn6lOem17EWKXel6+Xx6M1rIe3hrCI6oqh5+Arg6fcg+v7BQs96aHl6Y7dQqeojTZvfrIh9atIagN1ePG+hGvcoeZgbpujl96IOP55G5a6jvcSBa7hxTqrKHuO1sD33++1nN1+OLuTGt7/EJwA/lsrl6eFM90jS9ZO+hT0dcXm/zHnLyMajusTNe1D1aEsOcmNh7NOHuAjPp0c1OjN9X9jDnQGl6Bcajkh53ALg7g+Q9tCDrsdfao4EZHXsPeUHD3fOPEJmqHibW3D1Ccyrg6lMRRY+j9T3mW1/CrEQfrj4F4AFIl8wsKPNHa/Y8uX0FQLag6HbDmh5f9HavPXK1R3YYWsyV1u8bzIIyubtfre6xe8OcBjzItv3KRQnQMz32zPSYGXAgo63sMc5P6tvLrk4gnySE6TGo6fEOeAKsVvXwN/DQLLShqz3yC+M0oCp7mCGG6B6p6BFONoYnccDN7/fzHmFtDz+RIXrIRmx1ElBYKWr50QnlJN3DjxJpUN3jrV4y1uwHIHlRt59zKI4rDkZHger51KwuL/XvgvXSHoXXkXZMOSjBfmC6R3tk6VGsoGMAz4ZVPXbJ8jyaHFC7JwGme3wc+LD0aI6AV+Z8XYLYrzOoprS4hk3y7bdzTI8Xcdwzb4Orth4J8gVjDDEoudFNMMXRc9QHwNM4Xp96a+mRQs8eYvcagGDJ1kNsgR5NBGqarUdSDG1z4AN7D2c3cqU9GrrHTI5geuK0NPMc/hrqV7+PAkCnaqSh/ToIHX4e+RfYU9vj1z9JtsTnYl61TyuYWwwHV9K/tMPtw+B/rp06++woERERERERERERERERERERERERERERERERERERERERERERERERERERERH9mZ/Vguw3G2RPQAAAAABJRU5ErkJggg==";
+						beauty.onload = function(){
+							ctx.drawImage(beauty, 0, 0,width,height);
+					   }
+					};
+					ctx.clearTo(fillColor || "#ddd");
+			canvas.node.addEventListener(window.MOUSE_DOWN,function(e){console.log(e);
+				canvas.isDrawing = true;
+				e.preventDefault();
+				if(isAjaxGetGift){
+					/*ajax('POST','inc/getAward.chk.php','type='+(FreeDraw?1:2),function(DATA){console.log(DATA);
+						if(DATA.returncode==1){
+							FreeTimes=DATA.data.freetimes;
+							Integraltimes=DATA.data.integraltimes;
+							RewardResult=DATA.data.itemname;
+							document.querySelector('#drawresult').innerHTML=(DATA.data.itemname!=="未中奖"&&DATA.data.itemname.length>0?'恭喜您<br>获得<strong>'+DATA.data.itemname+'</strong>':'未中奖');
+							document.querySelector('#drawresult').style.visibility='visible';
+							document.getElementById('integral').innerHTML=DATA.data.integral;
+							document.getElementById('drawtimes').innerHTML=document.getElementById('drawtimes2').innerHTML=FreeDraw?DATA.data.freetimes:DATA.data.integraltimes;
+							if(FreeTimes==0){document.getElementById('drawtimes').parentNode.style.display='none';document.getElementById('exchange').style.display="inline-block";}
+							}
+						else if(DATA.returncode==-201){alertpop(DATA.returnmsg,function(){showScratchPOP();});}
+						else{alertpop(DATA.returnmsg);}
+					});*/
+					isAjaxGetGift=false;
+				}
+			canvas.node.addEventListener(window.MOUSE_UP,function(e){
+				var TransparentPercent=getTransparentPercent(canvas.context,this.width,this.height);
+				console.log(TransparentPercent);
+				document.getElementById('visiblearea').innerHTML=TransparentPercent+"%";
+				if(TransparentPercent>=95){
+					canvas.isDrawing = false;
+					canvas.context.clearRect(0, 0, this.width, this.height);
+					//document.getElementsByTagName('canvas')[0].parentNode.removeChild(document.getElementsByTagName('canvas')[0]);
+					}
+				},false);
+			canvas.node.addEventListener(window.MOUSE_MOVE,function(e){
+						if(!canvas.isDrawing){return;}
+						e.preventDefault();
+						var x = e.targetTouches[0].pageX - this.parentNode.parentNode.offsetLeft-this.parentNode.offsetLeft;
+						var y = e.targetTouches[0].pageY - this.parentNode.parentNode.offsetTop-this.parentNode.offsetTop;
+						var fillColor = '#ff0000';
+						ctx.globalCompositeOperation = 'destination-out';
+						ctx.fillCircle(x, y, radius, fillColor);
+					},false);},false);
+				}
+				var radius = parseInt(getComputedStyle(document.querySelector("body"),0)['fontSize'])||20;
+				var container = document.getElementById('canvas');
+				init(container, Math.floor(container.offsetWidth), Math.floor(container.offsetHeight), '#d3d3d3', mobile); 
+				container.style.width=container.offsetWidth+"px";
+				container.style.height=container.offsetHeight+"px";
+				console.log(container.offsetWidth+"||"+container.offsetHeight);
+			}
+		/*======刮刮卡的程序处理========*/
+
+		window.onload=function(){
+			document.getElementById('btn1').onclick=function(){ showScratchPOP(true); };
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }
+	</script>
+</body>
+</html>

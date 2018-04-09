@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>整数的自定义滚动条</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style>
+.Screen{padding:16px 12px 15px 13px;}
+.screenshotsBox{ width:600px;height:394px;overflow:hidden;margin-bottom:10px;}
+.screenshotsBox ul{width:1050px;height:354px;overflow:auto;}
+.screenshotsBox ul li{float:left;width:200px;height:354px;overflow:hidden;}
+.screenshotsBox ul li img{ width:200px;height:354px;}
+#inside{width:600px;height:374px;overflow:auto;}
+.likeScroll{ background:url(image/likescroll_hbg.jpg) center top no-repeat;height:9px;padding:1px 0;position:relative; width:600px;}
+#Scroll{ background:url(image/scroll_hbg.gif) left top no-repeat;height:9px;/*padding-left:5px;*/position:absolute;left:0;top:1px;}
+#Scroll span{ display:block;height:9px;background:url(image/scroll_hbg.gif) right top no-repeat;/*padding-right:5px;margin-right:-5px;*/}
+</style>
+<script type="text/javascript" src="http://static.sdg-china.com/mir2/js/jquery-1.7.2.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+	<div class="Screen">
+        <div class="screenshotsBox" id="screenshotsBox">
+            <div id="inside">
+                <ul>
+                    <li><img src="http://static.sdg-china.com/jijiamobile/pic/ma/aide/image/1_01.jpg" /></li>
+                    <li><img src="http://static.sdg-china.com/jijiamobile/pic/ma/aide/image/2_01.jpg" /></li>
+                    <li><img src="http://static.sdg-china.com/jijiamobile/pic/ma/aide/image/3_01.jpg" /></li>
+                    <li><img src="http://static.sdg-china.com/jijiamobile/pic/ma/aide/image/4_01.jpg" /></li>
+                    <li><img src="http://static.sdg-china.com/jijiamobile/pic/ma/aide/image/5_01.jpg" /></li>
+                    
+                    <li><img src="http://static.sdg-china.com/jijiamobile/pic/ma/aide/image/1_01.jpg" /></li>
+                    <li><img src="http://static.sdg-china.com/jijiamobile/pic/ma/aide/image/2_01.jpg" /></li>
+                    <li><img src="http://static.sdg-china.com/jijiamobile/pic/ma/aide/image/3_01.jpg" /></li>
+                    <li><img src="http://static.sdg-china.com/jijiamobile/pic/ma/aide/image/4_01.jpg" /></li>
+                    <li><img src="http://static.sdg-china.com/jijiamobile/pic/ma/aide/image/5_01.jpg" /></li>
+                    <li><img src="http://static.sdg-china.com/jijiamobile/pic/ma/aide/image/1_01.jpg" /></li>
+                    <li><img src="http://static.sdg-china.com/jijiamobile/pic/ma/aide/image/2_01.jpg" /></li>
+                    <li><img src="http://static.sdg-china.com/jijiamobile/pic/ma/aide/image/3_01.jpg" /></li>
+                    <li><img src="http://static.sdg-china.com/jijiamobile/pic/ma/aide/image/4_01.jpg" /></li>
+                    <li><img src="http://static.sdg-china.com/jijiamobile/pic/ma/aide/image/5_01.jpg" /></li>
+                </ul>
+            </div>
+        </div>
+        <div class="likeScroll">
+            <div id="Scroll">
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <p id="look" style="width:400px;height:30px;line-height:30px; text-align:center;border:1px solid #f00; margin-left:20px;"></p>
+    <div id="canshu" style="width:400px;line-height:20px;border:1px solid #00f; margin-top:10px; margin-left:20px;"></div>
+    <script>
+    	/*function likeScroll(){
+	var image=$("#screenshotsBox li");
+	$("#screenshotsBox ul").width(210*image.length);
+	var image_w=$("#screenshotsBox ul").width();
+	var box_w=$("#screenshotsBox").width();
+	var inside = $("#inside")[0];
+	var local = $("#Scroll span")[0];
+	var local_p=local.parentNode;
+	var local_s=local_p.parentNode;
+	if(image_w<box_w||image_w==630){$("#Scroll").width(611);return false;}
+	else{$("#Scroll").width(box_w/image_w*box_w);}
+	var local_w=$("#Scroll").width();	
+	
+		function otherjisuan() { var num1 = Math.ceil(parseInt(local_p.style.left) * (image_w - box_w) / (box_w-local_w)); return num1 }
+		function moveDIV() {	//拖动的函数		
+            local.onmousedown = function (ev) {
+				var oEvent = ev||event; 
+				var x = oEvent.clientX - local_p.offsetLeft;
+				document.onmousemove = function (ev){
+					var oEvent = ev||event; 
+					xy = oEvent.clientX - x; 
+					if (xy>box_w-local_w-10) { xy = box_w-local_w-10;}
+					if (xy < 0) { xy = 0; } 
+					local_p.style.left = xy + "px";
+					inside.scrollLeft = otherjisuan();
+					}
+				document.onmouseup = function () 
+					{ 
+					document.onmousemove =null;
+					document.onmouseup =null;
+					}
+				return false;
+            }
+            
+        }
+        moveDIV();
+		
+	var scrollFunc=function(e){
+		e=e || window.event;
+		if(e.wheelDelta<0||e.detail>0){
+			inside.scrollLeft +=50;
+		}
+		else if(e.wheelDelta>0||e.detail<0){
+			
+			inside.scrollLeft -=50;
+		}
+		else{return}
+	}
+	var mousewheelevt=(/Firefox/i.test(navigator.userAgent))?"DOMMouseScroll": "mousewheel"//FF doesn't recognize mousewheel as of FF3.x
+	if(document.attachEvent){document.attachEvent("on"+mousewheelevt, scrollFunc)}//if IE (and Opera depending on user setting)
+	else if(document.addEventListener){document.addEventListener(mousewheelevt, scrollFunc, false)}//WC3 browsers
+	}
+	likeScroll();*/
+	function likeScroll(){
+	var image=$("#screenshotsBox li");
+	$("#screenshotsBox ul").width(200*image.length);
+	var image_w=$("#screenshotsBox ul").width();
+	var box_w=$("#screenshotsBox").width();
+	var inside = $("#inside")[0];
+	var local = $("#Scroll span")[0];
+	var local_p=local.parentNode;
+	var local_s=local_p.parentNode;
+	if(image_w<box_w||image_w==600){$("#Scroll").width(600);return false;}
+	else{$("#Scroll").width(Math.round(box_w/image_w*box_w));}
+	var local_w=Math.round(box_w/image_w*box_w);
+	document.getElementById("canshu").innerHTML="ul的宽度："+image_w+"<br>"+"外框的宽带："+box_w+"<br>"+"Scroll的宽度："+local_w+"<br>比例1："+box_w/image_w+"<br>比例2："+local_w/box_w;
+	
+		function jisuan() { var num = Math.ceil(inside.scrollLeft * (box_w-local_w) / (image_w - box_w));num<0?num=0:num=num;return num }
+		function otherjisuan() { var num1 = Math.ceil(parseInt(local_p.style.left) * (image_w - box_w) / (box_w-local_w));
+		/*num1-10<0?num1=0:num1=num1-10;*/ 
+		return num1 }
+		function moveDIV() {	//拖动的函数		
+            local.onmousedown = function (ev) {
+				var oEvent = ev||event; 
+				var x = oEvent.clientX - local_p.offsetLeft;
+				document.onmousemove = function (ev) {
+					var oEvent = ev||event; 
+					xy = oEvent.clientX - x; 
+					if (xy>box_w-local_w) { xy = box_w-local_w;}
+					if (xy < 0) { xy = 0; } 
+					local_p.style.left = xy + "px";
+					document.getElementById("look").innerHTML=inside.scrollLeft = otherjisuan();
+					//document.getElementById("look").innerHTML=inside.scrollLeft;
+				}
+				document.onmouseup = function () { document.onmousemove =null;document.onmouseup =null;}
+				return false;
+            }
+            
+        }
+        moveDIV();
+		/*
+		inside.onmouseover=function(){
+			//document.body.style.overflowY="hidden";
+			//document.body.style.paddingRight="16px";
+			}
+		inside.onmouseout=function(){
+			//document.body.style.overflowY="auto";
+			//document.body.style.paddingRight="0";
+			}
+		*/
+
+		if(jQuery.browser.mozilla){  
+			inside.addEventListener('DOMMouseScroll',function(e){  
+				inside.scrollTop += e.detail>0?60:-60;  
+				e.preventDefault();  
+			},false);  
+		}else{
+			inside.onmousewheel = function(e){
+				e = e || window.event;  
+				inside.scrollTop += e.wheelDelta>0?-60:60;
+				e.returnValue=false;
+				//ie9以上屏蔽事件冒泡
+				e.preventDefault();
+			}; 
+		}
+
+		var scrollFunc=function(e){
+		e=e || window.event;
+		document.getElementById("look").innerHTML=inside.scrollLeft;
+		if(e.wheelDelta<0||e.detail>0){
+			inside.scrollLeft +=50;
+		}
+		else if(e.wheelDelta>0||e.detail<0){
+			
+			inside.scrollLeft -=50;
+		}
+		else{return}
+		local_p.style.left = jisuan() + "px";
+		}
+		var mousewheelevt=(/Firefox/i.test(navigator.userAgent))?"DOMMouseScroll": "mousewheel"//FF doesn't recognize mousewheel as of FF3.x
+		if(document.attachEvent){inside.attachEvent("on"+mousewheelevt, scrollFunc)}//if IE (and Opera depending on user setting)
+		else if(document.addEventListener){inside.addEventListener(mousewheelevt, scrollFunc, false)}//WC3 browsers
+	}
+	likeScroll();
+    </script>
+</body>
+</html>

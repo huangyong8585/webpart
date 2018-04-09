@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+*{padding:0;margin:0;}
+body{position:relative;height:100%; background-color:#f0f0f0;}
+#wrap{width:1100px;height:700px;position:relative;background:#9af;}
+div{position:absolute;left:100px;top:100px;height:100px;width:100px;background-color:#FFF;cursor:move;/*-moz-user-select:-moz-none;*/}
+</style>
+</head>
+ 
+<body>
+<center id="wrap">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</center>
+<script>
+function moveDivs(){
+    var wrap=document.getElementById('wrap'),divs=wrap.getElementsByTagName("div");
+    var x,y,_x=0,_y=0,test=null;
+
+    for(var i=0,len=divs.length;i<len;i++){
+        divs[i].innerText=i;
+        divs[i].style.top=Math.floor(Math.random()*600)+"px"
+        divs[i].style.left=Math.floor(Math.random()*1000)+"px"
+        divs[i].style.zIndex=i;
+        divs[i].onmousedown=function(e){
+            var e=e||window.event;
+            test=this;
+            _x=e.clientX-this.offsetLeft;
+            _y=e.clientY-this.offsetTop;
+            this.style.zIndex=len+10;
+            this.style.backgroundColor="#3CF";console.log(_x,_y,x,y);
+
+            document.onmousemove=function(event){
+                event=event||window.event;
+                x=event.clientX-_x;y=event.clientY-_y;
+                if(x<=0){x=0;}
+                if(x>wrap.offsetWidth-test.offsetWidth){x=wrap.offsetWidth-test.offsetWidth}
+                if(y<=0){y=0;}
+                if(y>wrap.offsetHeight-test.offsetHeight){y=wrap.offsetHeight-test.offsetHeight}
+
+                if(test!=null){
+                    test.style.top=y+"px";
+                    test.style.left=x+"px";
+                    }
+                if(event.preventDefault){event.preventDefault();}
+                else{event.returnValue=false;}
+                }
+            document.onmouseup=function(event){
+                document.onmousemove=null;
+                document.onmouseup=null;
+                test.style.backgroundColor="#f0c";
+                test.style.zIndex=test.style.zIndex-10;
+                test=null;
+                _x=0;
+                _y=0;
+            }
+
+            }
+        }
+    
+} 
+moveDivs();
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="baidu-site-verification" content="IonoCQs8Sp" />
+<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="Copyright" content="ShandaGames" />
+<title>Video Test</title>
+<link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+<style type="text/css">
+
+section.page02{position:relative;width:100%;height:100%;z-index:0;background:#323232;}
+#StartAnimated{position:absolute;left:0;top:0;width:100%;height:100%;display:none;z-index:0;}
+.btns{width:100%;height:40px;position:absolute;left:0;top:0;background-color:rgba(255,255,255,0.5);z-index:10;}
+.btns a{display:block;height:40px; text-align:center;height:40px;float:left;width:30%;margin-right:3%;background:rgba(70,0,0,0.5);}
+</style>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</head>
+<body>
+	<!--<video webkit-playsinline="true" playsinline="true" autoplay="autoplay" type="video/mp4" x5-video-player-type="h5" width="100%" height="100%" id="cutscenesVideo">
+		<source src="http://static.sdg-china.com/jijiamobile/pic/sy_act/syrole/star2.mp4" type="video/mp4" />
+	</video>
+	<video src="http://static.sdg-china.com/jijiamobile/pic/cd_act/cd1002/vdmain.mp4" id="VideoMain" x-webkit-airplay="true" preload="auto" webkit-playsinline="true" playsinline="" width="414" height="736"></video>
+	<video autoplay="autoplay" width="100%" height="100%" id="cutscenesVideo">
+		<source src="http://static.sdg-china.com/jijiamobile/pic/sy_act/syrole/star2.mp4" type="video/mp4" />
+	</video>
+	<video class="video-source" width="100%" height="100%"  style="object-fit:fill"  webkit-playsinline="true" x-webkit-airplay="true" playsinline="true"  x5-video-player-type="h5" x5-video-orientation="h5" x5-video-player-fullscreen="true" preload="auto" src="http://static.sdg-china.com/jijiamobile/pic/sy_act/syrole/star2.mp4" id="cutscenesVideo"></video>-->
+	<section class="page02" id="videoCont">
+		<!--<video class="video-source" width="100%" height="100%" style="display:none;object-fit:fill;" webkit-playsinline="true" x-webkit-airplay="true" playsinline="true"  x5-video-player-type="h5" x5-video-orientation="h5" x5-video-player-fullscreen="true" preload="auto" src="http://static.sdg-china.com/jijiamobile/pic/sy_act/syrole/star1.mp4" id="cutscenesVideo1" class="hide"></video>
+	    <video class="video-source" width="100%" height="100%" style="display:none;object-fit:fill;" webkit-playsinline="true" x-webkit-airplay="true" playsinline="true"  x5-video-player-type="h5" x5-video-orientation="h5" x5-video-player-fullscreen="true" preload="auto" src="http://static.sdg-china.com/jijiamobile/pic/sy_act/syrole/star2.mp4" id="cutscenesVideo2" class="hide"></video>
+	    <video class="video-source" width="100%" height="100%" style="display:none;object-fit:fill;" webkit-playsinline="true" x-webkit-airplay="true" playsinline="true"  x5-video-player-type="h5" x5-video-orientation="h5" x5-video-player-fullscreen="true" preload="auto" src="http://static.sdg-china.com/jijiamobile/pic/sy_act/syrole/star3.mp4" id="cutscenesVideo3" class="hide"></video>-->
+    </section>
+	<div class="btns"><a href="javascript:playv(1);">视频一</a><a href="javascript:playv(2);">视频二</a><a href="javascript:playv(3);">视频三</a><br />测试安卓7.0以上版本的微信视频播放</div>
+	<script type="text/javascript">
+	/*window.onload=function(){
+		document.getElementById('cutscenesVideo').oncanplay=function(){this.play();}
+	}*/
+	/*var v1=document.getElementById('cutscenesVideo1'),v2=document.getElementById('cutscenesVideo2'),v3=document.getElementById('cutscenesVideo3');
+	document.addEventListener("WeixinJSBridgeReady", function () {
+	    //document.getElementById('cutscenesVideo').play();
+	    v1.play();v2.play();v3.play();
+        v1.pause();v2.pause();v3.pause();
+	  }, false);*/
+	function getAndroidVer(){
+    	var o=navigator.userAgent,android_ver=0,android_str='';
+    	if((o.indexOf("Android")==-1)){return android_ver;}
+    	android_str=o.substring(o.indexOf("Android"),o.indexOf("Android")+17);
+    	android_str=android_str.substring(0,android_str.indexOf(";"));
+    	android_str=android_str.replace('Android','');
+    	android_ver=parseFloat(android_str);
+    	return android_ver;
+    }
+
+
+	function playv(n){
+		var o=navigator.userAgent
+		var is_ios=(o.indexOf("iPhone")!=-1||o.indexOf("iPad")!=-1||o.indexOf("iPod")!=-1);
+		var is_android=(o.indexOf("Android")!=-1);
+		var android_ver=getAndroidVer();
+		var videoCont=document.querySelector('#videoCont')
+		if(is_android&&android_ver>=7){videoCont.innerHTML=('<video src="http://static.sdg-china.com/jijiamobile/pic/sy_act/syrole/StartAnimated.mp4" style="object-fit:fill;" width="100%" height="100%" id="StartAnimated"></video>');}
+		var cutscenesVideo=videoCont.children[0];
+        cutscenesVideo.style.display='block';
+        cutscenesVideo.play();
+        cutscenesVideo.onended=function(){
+        	cutscenesVideo.style.display='none';
+            alert('播放完了!!');
+        }
+	}
+	</script>
+</body>
+</html>

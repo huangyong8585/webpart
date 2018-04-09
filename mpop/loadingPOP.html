@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>移动端弹出层</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    body{}
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    .btnbox{padding-top:30px;}
+    .btnbox a{display:block;width:200px;height:40px;margin:0 auto 20px;text-align:center;line-height:40px;border:1px solid #999;font-size:14px;border-radius:8px;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+
+	/*图片弹出层*/
+	.popbox{display:none;position:absolute;width:100%;height:100%;overflow:hidden;left:0;top:0;z-index:100;opacity:0;-webkit-transition:opacity .8s ease-in-out;transition:opacity .8s ease-in-out;}
+	.popbox .pop{position:absolute;width:100%;height:100%;left:0;top:0;background:rgba(0,0,0,0.4);z-index:101;}
+	.cover{width:6em;height:6em;position:absolute;left:50%;top:50%;margin:-3em 0 0 -3em;text-align:center;background:rgba(255,255,255,0.75) url(https://img1.tiancitycdn.com/cls/event/2018/cls0213/images/load.gif) 50% 50%/40% 40% no-repeat;border-radius: 1em;}
+	</style>
+</head>
+<body>	
+	<article class="wrapper">
+		<div class="btnbox">
+			<a id="btn1" href="javascript:;">遮罩弹出层</a>
+			<p class="tac">loading遮罩弹出层</p>
+		</div>
+		<!--loading遮罩-->
+		<div class="popbox">
+			<div class="pop" id="loading">
+				<div class="cover"></div>
+			</div>
+		</div>
+		<!--loading遮罩-->
+
+		<div id="qrcode"></div>
+	</article>
+    <script src="../js/Qrcode.js"></script>
+	<script>
+		(function (doc, win) {
+                var docEl = doc.getElementsByTagName("body")[0].children[0],
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = (docEl.clientWidth||win.innerWidth);
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+                };
+        
+                if (!doc.addEventListener) return;
+                win.addEventListener(resizeEvt, recalc, false);
+                doc.addEventListener('DOMContentLoaded', recalc, false);
+            })(document, window);
+
+	    
+		//打开弹出层
+	    function showSomePOP(t,name){
+	        var box=document.getElementById(name).parentNode,
+	            contbox=box.children[0].children[0];
+	        if(t){
+	            box.style.display="block";
+	            contbox.style.marginTop=(0-contbox.offsetHeight/2)+"px";
+	            setTimeout(function(){box.style.opacity=1;},100);
+	            }
+	        else{
+	        	box.style.opacity=0;box.style.display="none";
+	        	}
+	        if(box.getElementsByClassName("closepop").length>0){
+	            box.getElementsByClassName("closepop")[0].onclick=function(){
+	                box.style.opacity=0;box.style.display="none";
+	                }
+	            }
+	        }
+
+
+		window.onload=function(){
+			document.getElementById('btn1').onclick=function(){ showSomePOP(1,'loading'); };
+			document.getElementById('loading').onclick=function(){ showSomePOP(0,'loading'); };
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }
+	</script>
+</body>
+</html>

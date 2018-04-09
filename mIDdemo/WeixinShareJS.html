@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>微信分享代码</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    body{}
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:auto;position:relative;background-color:#e4e4e4;}
+    .wrapper textarea{width:95%;height:80%;display:block;margin:0 auto;font-size:12px;font-family:Arial;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+
+    </style>
+</head>
+<body>	
+	<article class="wrapper">
+<!--点赞按钮-->
+<textarea>
+/***微信分享***/
+function wxConfigStatrt(data){console.log(data);
+    if(data.Tsuccess==0){return false;}
+    BindWXReady();
+    wx.config({
+        debug: false,
+        appId: 'wxe5b7f4b9d084f4e3',
+        timestamp: data.timestamp,
+        nonceStr: data.nonceStr,    
+        signature: data.sign,
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage'
+            ]
+    });
+}
+
+var shareTitle='日本殿堂级声优献声 《神域召唤》一大波声控福利降临';
+var shareDesc='《神域召唤》集结日本殿堂级全明星声优，带来纯正的日系游戏体验！';
+function BindWXReady(){
+    wx.ready(function(){
+        wx.onMenuShareTimeline({
+            title:shareTitle, // 分享标题
+            link:'http://act.sy.sdo.com/project/syzh20171116/mindex.html', // 分享链接
+            imgUrl:'http://static.sdg-china.com/jijiamobile/pic/sy_act/syzhm20171120/share.jpg', // 分享图标
+            success: function(){},
+            cancel: function(){}
+        });
+    
+        wx.onMenuShareAppMessage({
+            title:shareTitle, // 分享标题
+            desc: shareDesc, // 分享描述
+            link:'http://act.sy.sdo.com/project/syzh20171116/mindex.html', // 分享链接
+            imgUrl:'http://static.sdg-china.com/jijiamobile/pic/sy_act/syzhm20171120/share.jpg', // 分享图标
+            type: 'link', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function (){},
+            cancel: function(){}
+        });
+    });
+}
+$.get("http://wx.act.sdo.com/mg/auth/GetSharePara","url="+encodeURIComponent(window.location.href),function(data){
+    if(data.Code==0){
+        Data=eval('('+data.Attach+')');
+        wxConfigStatrt(Data);
+    }
+},'jsonp');
+/***微信分享***/
+</textarea>
+<!--点赞按钮-->
+		<div id="qrcode"></div>
+	</article>
+    <script src="../js/Qrcode.js"></script>
+	<script>
+		window.onload=function(){
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }
+	</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>移动端弹出层</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    body{}
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    .btnbox{padding-top:30px;}
+    .btnbox a{display:block;width:200px;height:40px;margin:0 auto 20px;text-align:center;line-height:40px;border:1px solid #999;font-size:14px;border-radius:8px;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+
+	/*弹出层*/
+	.popbox{display:none;position:fixed;width:100%;height:100%;overflow:hidden;left:0;top:0;background-color:rgba(0,0,0,0.6);z-index:10;
+	-webkit-transform:scale(0.001,0.001);transform:scale(0.001,0.001);-webkit-transform-origin:center center;transform-origin:center center;
+	-webkit-transition:-webkit-transform .4s ease-in-out;transition:transform .4s ease-in-out;}
+	.popbox .pop{position:absolute;width:100%;height:100%;left:0;top:0;z-index:11;box-sizing:border-box;padding:10% 6%;}
+	.popbox .closepop{width:6em;height:6em;border-radius:6em;position:absolute;right:-1.2em;bottom:-1.2em;z-index:12;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfAgMAAABiwP6qAAAACVBMVEUAAAAVCgIkGRJnPJyuAAAAAXRSTlMAQObYZgAAAFpJREFUGNNFkEEOACEIAyHhsEeexNP26WLTjGooChRqTGhVtHChhBvIC7KjFEVtvuv8DqcLXNo6qjB97jZr2em2UyMwCy/kUAUPzPSiO/P4Nsz8VKALpWjnNw4evAWS9iAWqwAAAABJRU5ErkJggg==) 45% 45% no-repeat rgba(200,200,200,0.5);background-size:2em 2em;}
+	.popbox .pop .popcontent{width:100%;height:100%;overflow:auto;font-size:1em;line-height:2;color:#303030;-webkit-overflow-scrolling:touch;}
+	.popbox .pop .popcontent h2{font-size:1.2em; margin-bottom:1em;}
+	.popbox .pop .popcontent h3{font-size:1.05em;padding:.8em 0; margin-bottom:.5em;}
+	.popbox .pop .popcontent p{ margin-bottom:1em;}
+	#isOver{background:#fff;}
+	#mycode .boxborder{border:1px solid #a23306;background:#580008;padding:4px;width:252px;height:252px;position:absolute;left:50%;top:50%; margin:-131px 0 0 -131px;z-index:11;}
+	#mycode .boxborder .codebox{border:1px solid #b18659;background:url(http://static.sdg-china.com/mir2/pic/mir2_act/niudanji/popbg.jpg) 0 100%/100% auto no-repeat #c7a46c;width:250px;height:250px;line-height:2.5;color:#540001;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center; text-align:center;font-size:14px;}
+	#mycode .boxborder .codebox strong{color:#973302;font-size:1.5em;}
+	#mycode .closepop{width:40px;height:40px;position:absolute;right:50%;top:50%;z-index:12;margin:-128px -128px 0 0;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfAgMAAABiwP6qAAAACVBMVEUAAAAVCgIkGRJnPJyuAAAAAXRSTlMAQObYZgAAAFpJREFUGNNFkEEOACEIAyHhsEeexNP26WLTjGooChRqTGhVtHChhBvIC7KjFEVtvuv8DqcLXNo6qjB97jZr2em2UyMwCy/kUAUPzPSiO/P4Nsz8VKALpWjnNw4evAWS9iAWqwAAAABJRU5ErkJggg==) 45% 45% no-repeat;background-size:40px;}
+    </style>
+</head>
+<body>	
+	<article class="wrapper">
+		<div class="btnbox">
+			<a id="btn1" href="javascript:;">激活码弹出层</a>
+			<a id="btn2" href="javascript:;">文章弹出层</a>
+			<p class="tac">由小变大的弹出层</p>
+		</div>
+		<!--弹出层-->
+		<div class="popbox">
+		    <div class="pop" id="isOver">
+		    	<div class="popcontent">
+		      	<h2>《传奇外传》致富攻略 三大套路赚钱稳</h2>
+		        <p>&ldquo;2016年6月，传奇系列网游将进行史上最大规模的全新改版，以《传奇外传》为首的新版新服将率先开启，守护所有玩家心中的经典传奇，开启全民赚钱时代！</p>
+		        <p>&ldquo;话说有钱走遍天下，无钱寸步难行。那么《传奇外传》的全民赚钱时代究竟是一种怎样的体验呢？各路英雄豪杰又将怎样何快速赚钱呢？今天给大家带来《传奇外传》致富攻略，三大套路助你出任CEO，全民做富翁！</p>
+		        <p><img src="http://static.sdg-china.com/mir2/pic/chuanqi/chuanqi_act/earnmoney/popimg01.jpg" style="width:100%" /></p>
+		        <p><strong>【赚钱攻略一：玩转聚灵珠 练级赚钱两不误】</strong><br />
+		        当玩家在《传奇外传》中达到一定等级时，可至NPC处领取聚灵珠。然后至特定地图：沃玛神殿3层、祖玛寺庙7层、石墓7层、霸者大厅打怪，通过打怪自然吸收经验至聚灵珠，灌满就可以出售给其他玩家啦！</p>
+		        <p><img src="http://static.sdg-china.com/mir2/pic/chuanqi/chuanqi_act/earnmoney/popimg02.jpg" style="width:100%" /></p>
+		        <p>&ldquo;游戏中聚灵珠分大、中、小三种，大聚灵珠可以吸收150万经验，中聚灵珠可以吸收96万经验，小聚灵珠可以吸收50万经验。只要勤打怪，经验自然满，练级赚钱两不误，你还愁囊中钱财羞涩吗？</p>
+		        <p><img src="http://static.sdg-china.com/mir2/pic/chuanqi/chuanqi_act/earnmoney/popimg03.jpg" style="width:100%" /></p>
+		        <p><strong>【赚钱攻略二：装备能挣钱 精英BOSS价比高】</strong><br />
+		        在每个勇士的自强道路中，总会打到极品装备，这时候头脑精明的老板们就已经行动起来了——把它卖给其他玩家，以此途径赚得盆满钵满，走在致富的起跑线。在《传奇外传》新版新服中，游戏推出了装备鉴定系统，圣战以上装备全部值钱，所以各位勇士不妨以此为借鉴，尽情利用极品装备野外掉落的设定，在各大地图的BOSS、精英怪蹲守，如果经过鉴定为极品属性，你完全可以坐等买家上门，届时成为垄断巨头也不是不可能哟！</p>
+		        <p><img src="http://static.sdg-china.com/mir2/pic/chuanqi/chuanqi_act/earnmoney/popimg04.jpg" style="width:100%" /></p>
+		        <p><strong>【赚钱攻略三：赚钱效率高 烟花地图是王道】</strong><br />
+		        《传奇外传》改版后新服将对复古烟花地图进行了良心改版，全新赚钱新玩法效率更高收益更好！当你在新服烟花地图打怪时，聚灵珠吸收经验效率将变高，除此之外还将额外掉落祝福油凭证、书页凭证以及神秘卷轴等物品。值得一提的是，神秘卷轴产出运2项链、高级衣服图纸以及其他稀有道具，结合以上两点赚钱方式，在烟花地图中所获收益将助你更快速更高效的赚钱，想想是不是都有点小激动呢！</p>
+		        <p><img src="http://static.sdg-china.com/mir2/pic/chuanqi/chuanqi_act/earnmoney/popimg05.jpg" style="width:100%" /></p>
+		        <p>&ldquo;不忘初心，守护记忆中的传奇；<br />大刀阔斧，开启全民赚钱时代！<br />《传奇外传》新模块、新玩法即将掀起全民赚钱风潮！<br />你还等什么？</p>
+		      </div>
+		    </div>
+		    <div class="closepop" onClick="showTextPOP();"></div>
+		</div>
+		<!--弹出层-->
+		<!--激活码-->
+		<div class="popbox">
+		    <div class="pop" id="mycode">
+		      <div class="closepop"></div>
+		      <div class="boxborder">
+		            <div class="codebox">您的礼包激活码：<br /><strong>ABCDEFGHIJKL</strong></div>
+		        </div>
+		    </div>
+		</div>
+		<!--激活码-->
+		<div id="qrcode"></div>
+	</article>
+    <script src="../js/Qrcode.js"></script>
+	<script>
+		(function (doc, win) {
+                var docEl = doc.getElementsByTagName("body")[0].children[0],
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = (docEl.clientWidth||win.innerWidth);
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+                };
+        
+                if (!doc.addEventListener) return;
+                win.addEventListener(resizeEvt, recalc, false);
+                doc.addEventListener('DOMContentLoaded', recalc, false);
+            })(document, window);
+
+		//打开弹出层	
+		function showTextPOP(t){
+			var box=document.getElementById("isOver"),box_p=box.parentNode;
+			if(t){
+				box.style.display="block";
+				box_p.style.display="block";
+				box.children[0].scrollTop=0;
+				setTimeout(function(){
+					box_p.style.webkitTransform='scale(1,1)';
+					box_p.style.transform='scale(1,1)';
+					},200);
+				}
+			else{
+				box_p.style.webkitTransform='scale(0.001,0.001)';
+				box_p.style.transform='scale(0.001,0.001)';
+				setTimeout(function(){
+					box.children[0].scrollTop=0;
+					box_p.style.display="none";
+					},300);
+				}
+			}
+
+		//打开弹出层	
+		function showPOP(t,name){
+			var box=document.getElementById(name).parentNode;
+			if(t){
+				box.style.display="block";
+				setTimeout(function(){box.style.opacity=1;box.style.webkitTransform='scale(1,1)';box.style.transform='scale(1,1)';},100);
+				}
+			else{
+				box.style.webkitTransform='scale(0.001,0.001)';
+				box.style.transform='scale(0.001,0.001)';
+				setTimeout(function(){
+					box.style.display="none";
+					box.style.opacity=0;
+				},300);
+				}
+			if(box.getElementsByClassName("closepop").length>0){
+				box.getElementsByClassName("closepop")[0].onclick=function(){
+						//box.style.display="none";box.style.opacity=0;
+						showPOP(false,name);
+					}
+				}
+			}
+
+		window.onload=function(){
+			document.getElementById('btn1').onclick=function(){ showPOP(1,'mycode'); };
+			document.getElementById('btn2').onclick=function(){ showTextPOP(1); };
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }
+	</script>
+</body>
+</html>

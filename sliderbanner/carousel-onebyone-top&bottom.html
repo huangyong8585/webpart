@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>一个一个切换</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style>
+*{margin:0;padding:0;}
+li{list-style:none;}
+body{font-size:12px;}
+a{ text-decoration:none;}
+/*左右切换*/
+.corner{ background:url(http://static.sdg-china.com/jijiamobile/pic/ma/templated/leyuan-top.jpg) center top no-repeat #e4842b;padding:5px 8px;height:239px;width:209px;overflow:hidden; margin:0 auto;}
+.corner h2{height:28px;padding:8px 0; text-align:center;}
+.corner .cornerlist{ width:209px;height:128px;overflow:hidden;}
+.corner ul li{ height:32px; line-height:32px; background:url(http://static.sdg-china.com/jijiamobile/pic/ma/templated/list-bg.jpg) left top no-repeat;}
+.corner ul li a{ color:#ffecb8; display:block;height:32px; line-height:32px;padding-left:7px;}
+.corner ul li a b{color:#fff;margin-right:12px;}
+.corner #up{ background:url(http://static.sdg-china.com/jijiamobile/pic/ma/templated/up.jpg) left top no-repeat; height:19px;width:30px;margin:5px auto 8px; cursor:pointer;}
+.corner #down{ background:url(http://static.sdg-china.com/jijiamobile/pic/ma/templated/down.jpg) left top no-repeat; height:19px;width:30px;margin:8px auto;cursor:pointer;}
+</style>
+<script type="text/javascript" src="../js/jquery-1.7.2.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+	<!--上下切换-->
+    <div class="corner">
+        <h2><img src="http://static.sdg-china.com/jijiamobile/pic/ma/templated/leyuan-title.jpg"></h2>
+        <div id="up"></div>
+        <div class="cornerlist">
+            <ul>
+                <li><a href="#">电击のPOWER！</a></li>
+                <li><a href="#">问题儿童都来自异世界？</a></li>
+                <li><a href="#">梦幻の运动季②</a></li>
+                <li><a href="#">梦幻の运动季</a></li>
+                <li><a href="#">彼岸の黄金乡</a></li>
+                <li><a href="#">剑神の觉醒</a></li>
+                <li><a href="#">义妹の逆推</a></li>
+                <li><a href="#">纯白❤华恋</a></li>
+                <li><a href="#">辉夜姬の传说</a></li>
+                <li><a href="#">萌兽の觉醒</a></li>
+                <li><a href="#">纯白的花嫁</a></li>
+                <li><a href="#">神界战争爆发</a></li>
+                <li><a href="#">星冠的奥义</a></li>
+                <li><a href="#">华丽的逆转</a></li>
+                <li><a href="#">闪耀吧！学园祭！</a></li>
+                <li><a href="#">妹妹大救出</a></li>
+                <li><a href="#">百万亚瑟王周年庆</a></li>
+                <li><a href="#">第二次冲击</a></li>
+                <li><a href="#">极上侍从选拔</a></li>
+                <li><a href="#">究极の雀神大会！</a></li> 
+            </ul>
+        </div>
+        <div id="down"></div>
+    </div>
+    <!--上下切换-->
+    <script>
+    function switchADlist(elementID,play_time){
+		var _div=$("."+elementID+">ul");
+		var temp_time;
+		//play_img("left");
+		if(_div.height()==_div.parent().height()){ return false;}
+		//temp_time=setTimeout(function(){play_img("left")},play_time);
+		/*_div.parent().hover(
+				   function(){clearTimeout(temp_time)},
+				   function(){temp_time=setTimeout(function(){play_img("left")},play_time);}
+				   )*/
+		$("#up").click(function(){if(!_div.is(":animated")&&!_div.children("li:first").is(":animated")){play_img("right");}});
+		$("#down").click(function(){if(!_div.is(":animated")&&!_div.children("li:first").is(":animated")){play_img("left");}});
+		
+		function play_img(type){
+			if(temp_time){clearTimeout(temp_time);}
+			var div_f=_div.children("li:first"),div_l=_div.children("li:last"),div_width=div_f.width(),div_height=div_f.height(),
+			animateobj={},cssobj={};
+			animateobj.marginTop=-(div_height)+"px";cssobj.marginTop="0px";space=div_height;
+			if(type=="left"){_div.animate(animateobj,400,function(){_div.append(div_f);_div.css(cssobj);})}
+			if(type=="right"){_div.prepend(div_l);_div.css(animateobj);_div.animate(cssobj,400)}
+		//temp_time=setTimeout(function(){play_img("left")},play_time);
+		}return false;
+	}
+	switchADlist("cornerlist",5000);
+    </script>
+</body>
+</html>

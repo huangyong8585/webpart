@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	@charset "utf-8";
+	blockquote,body,caption,dd,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,iframe,img,input,label,legend,li,object,ol,p,pre,span,strong,table,tbody,td,tfoot,th,thead,tr,ul{border:0 none;margin:0;outline:0 none;padding:0;}
+	body,html{font:12px/1.2 'Microsoft YaHei',roboto,SimSun,Helvetica,Tahoma,StSun,SimSun,sans-serif;}
+	ol,ul{list-style:none;}
+	table{border-collapse:collapse;border-spacing:0;}
+	:focus{outline:0;}
+	button::-moz-focus-inner{padding:0;border:0;}
+	a{outline:0;text-decoration:none;}
+	a:hover,a:hover *{text-decoration:none;-moz-transition:all 0.5s;-webkit-transition:all 0.5s;-o-transition:all 0.5s;-ms-transition:all 0.5s;transition:all 0.5s;}
+	a:link,a:link *{-moz-transition:all 0.3s;-webkit-transition:all 0.3s;-o-transition:all 0.3s;-ms-transition:all 0.3s;transition:all 0.3s;}
+	.fl{float:left;}
+	.fr{float:right;}
+	.clearfix:after{display:block;clear:both;height:0;visibility:hidden;content:".";}
+	.clearfix{display:block;*display:inline-block;}
+	* html .clearfix{height:1%;}
+	.tac{ text-align:center;}
+	.red{color:#F00;}
+	.jt{font-family:sans-serif;font-weight:normal;padding-left:3px;}
+	a.more{color:#fff;font-size:14px;width:110px; padding-left:12px;display:block;height:40px;line-height:40px;background:#0079be;}
+	a.more:hover{background:#303030;}
+	body{min-width:1170px;background:#1e1e1e;}
+
+	
+	.ItemMain{width:1140px;padding:0 15px;overflow:hidden;margin:0 auto;}
+	/*案例展示*/
+	#caseShow{}
+	#caseShow h2{ margin-bottom:41px;}
+	#caseShow .ItemMain{padding:50px 0 20px;}
+	#caseShow .decorateLine{border-bottom:1px solid #999;}
+	#caseShow .decorateLine span{background:#999;}
+	#caseShow .caseBox .caseNav{height:46px;line-height:46px;text-align:center;margin-bottom:40px;*height:50px;*line-height:50px;/*overflow:hidden;width:670px;margin:0 auto 39px;*/}
+	#caseShow .caseBox .caseNav span{}
+	#caseShow .caseBox .caseNav span a{color:#dedede;font-size:20px;padding:10px 26px;border:1px solid transparent;}
+	#caseShow .caseBox .caseNav span a:hover{color:#d3091d;}
+	#caseShow .caseBox .caseNav span.active a{color:#d3091d;border:1px solid #d3091d;}
+	#caseShowBox{width:1140px;min-height:216px;_height:216px;overflow:hidden;position:relative;-webkit-transition:height linear .4s;-moz-transition:height linear .4s;-o-transition:height linear .4s;-ms-transition:height linear .4s;transition:height linear .4s;}
+	#caseShowBox .showBox{/*float:left;*/width:285px;height:216px;position:absolute;left:0;top:0;overflow:hidden;opacity:1;
+	-webkit-transform-origin:center center;-moz-transform-origin:center center;-o-transform-origin:center center;-ms-transform-origin:center center;transform-origin:center center;
+	-webkit-transform:scale(1,1);-moz-transform:scale(1,1);-o-transform:scale(1,1);-ms-transform:scale(1,1);transform:scale(1,1);
+	-webkit-transition:all linear .5s;-moz-transition:all linear .5s;-o-transition:all linear .5s;-ms-transition:all linear .5s;transition:all linear .5s;}
+	#caseShowBox .showBox img{width:100%;/*height:100%;*/opacity:1;
+	-webkit-transform-origin:center center;-moz-transform-origin:center center;-o-transform-origin:center center;-ms-transform-origin:center center;transform-origin:center center;
+	-webkit-transform:scale(1,1);-moz-transform:scale(1,1);-o-transform:scale(1,1);-ms-transform:scale(1,1);transform:scale(1,1);
+	-webkit-transition:all linear .3s .2s;-moz-transition:all linear .3s .2s;-o-transition:all linear .3s .2s;-ms-transition:all linear .3s .2s;transition:all linear .3s .2s;}
+	#caseShowBox .showBox .TextLink{width:205px;height:141px;position:absolute;left:0;top:0;background-color:#11181e;text-align:center;color:#fff;padding:75px 40px 0;opacity:0;filter:alpha(opacity=0);
+	-webkit-transform-origin:center center;-moz-transform-origin:center center;-o-transform-origin:center center;-ms-transform-origin:center center;transform-origin:center center;
+	-webkit-transform:scale(1.5,1.5);-moz-transform:scale(1.5,1.5);-o-transform:scale(1.5,1.5);-ms-transform:scale(1.5,1.5);transform:scale(1.5,1.5);
+	-webkit-transition:all ease-in-out .2s;-moz-transition:all ease-in-out .2s;-o-transition:all ease-in-out .2s;-ms-transition:all linease-in-outear .2s;transition:all ease-in-out .2s;}
+	#caseShowBox .showBox .TextLink h3{font-size:22px;margin-bottom:16px;font-weight:normal;}
+	#caseShowBox .showBox .TextLink p{font-size:18px;margin-bottom:20px;}
+	#caseShowBox .showBox .TextLink .linkA{width:100px;margin:0 auto;}
+	#caseShowBox .showBox .TextLink .linkA span{width:41px;height:42px;background-image:url(../image/linkicon.png);background-repeat:no-repeat;}
+	#caseShowBox .showBox .TextLink .linkA span a{display:block;width:41px;height:42px;opacity:0;filter:alpha(opacity=0);background-image:url(../image/linkicon.png);background-repeat:no-repeat;}
+	#caseShowBox .showBox .TextLink .linkA .outLink{float:left;background-position:left top;}
+	#caseShowBox .showBox .TextLink .linkA .zoomImg{float:right;background-position:right top;}
+	#caseShowBox .showBox .TextLink .linkA .outLink a{background-position:left bottom;}
+	#caseShowBox .showBox .TextLink .linkA .zoomImg a{background-position:right bottom;}
+	#caseShowBox .showBox .TextLink .linkA span a:hover{opacity:1;filter:alpha(opacity=100);}
+	#caseShowBox .showBox:hover .TextLink{opacity:1;filter:alpha(opacity=100);-webkit-transform:scale(1,1);-moz-transform:scale(1,1);-o-transform:scale(1,1);-ms-transform:scale(1,1);transform:scale(1,1);-webkit-transition:all ease-in-out .2s .3s;-moz-transition:all ease-in-out .2s .3s;-o-transition:all ease-in-out .2s .3s;-ms-transition:all linease-in-outear .2s .3s;transition:all ease-in-out .2s .3s;}
+	#caseShowBox .showBox:hover img{opacity:0;-webkit-transform:scale(1.5,1.5);-moz-transform:scale(1.5,1.5);-o-transform:scale(1.5,1.5);-ms-transform:scale(1.5,1.5);transform:scale(1.5,1.5);-webkit-transition:all linear .3s;-moz-transition:all linear .3s;-o-transition:all linear .3s;-ms-transition:all linear .3s;transition:all linear .3s;}
+
+	</style>
+</head>
+<body>
+<!--caseShow begin-->
+<div id="caseShow" class="sectionBox blackBackground">
+	<div class="ItemMain">
+        <div class="caseBox">
+        	<div class="caseNav">
+	            <span class="active"><a href="javascript:void(0);" cat="*">所有</a></span>
+	            <!--<span><a href="javascript:void(0);" cat="video">宣传片｜花絮</a></span>
+	            <span><a href="javascript:void(0);" cat="photo">广告摄影</a></span>
+	            <span><a href="javascript:void(0);" cat="synth">商务肖像</a></span>
+	            <span><a href="javascript:void(0);" cat="web">页面设计</a></span>-->
+            </div>
+            <div id="caseShowBox" class="clearfix">
+            	<!--<div class="showBox web">
+                <a href="detail.html" target="_blank">
+                    <img src="image/img05.jpg" />
+                    <div class="TextLink">
+                    	<h3>膳魔师</h3>
+                        <p>膳魔师店铺装修</p>
+                    </div>
+                </a>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<!--caseShow end-->
+<script src="../js/jquery-1.7.2.min.js"></script>
+<script>
+var windowHeight=$(window).height(),windowWidth=$(window).width();
+var ie6=!-[1,]&&!window.XMLHttpRequest;
+var isIE678=!document.getElementsByClassName,isIE9=navigator.userAgent.indexOf("MSIE 9.0")>0;
+var listdata={"code":1,"message":"success","caselist":[{"id":"21","title":"\u7231\u5f7c\u96c5\u624b\u8868\u6d77\u62a5\u62cd\u6444","subtitle":"\u745e\u58eb\u8bbe\u8ba1\u5e08\u65f6\u5c1a\u54c1\u724c","desc":"\u901a\u8fc7\u65f6\u5c1a\u7b80\u6d01\u5927\u6c14\u7684\u62cd\u6444\u98ce\u683c\u4f53\u73b0\u300c\u7b80\u5355\u7f8e\u5b66\u300d\u548c\u300c\u54c1\u8d28\u7cbe\u51c6\u300d","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/58d9df11ae652.jpg","width":"266","height":"204","category":"2-1"},{"id":"20","title":"\u84c1\u5fc3\u73ab\u7470\u82b1\u8336\u5ba3\u4f20\u7247","subtitle":"\u84c1\u5fc3\u73ab\u7470\u82b1\u8336\uff0c\u505a\u7cbe\u81f4\u5973\u4eba","desc":"\u4e07\u7269\u6613\u901d\uff0c\u7f8e\u4ea6\u5982\u662f\uff0c\u4e0e\u5176\u50cf\u7537\u4eba\u4e00\u6837\u53bb\u594b\u6597\uff0c\u4e0d\u5982\u7528\u5c3d\u4e00\u751f\u53bb\u6d3b\u51fa\u4f5c\u4e3a\u5973\u4eba\u7684\u4e13\u5c5e\u7cbe\u5f69\u3002\u901a\u8fc7\u4e3b\u4eba\u516c\u4ece\u4e00\u4e2a\u5de5\u4f5c\u72c2\u4eba\u5230\u7cbe\u81f4\u5973\u4eba\u7684\u524d\u540e\u72b6\u6001\u7684\u5dee\u5f02\uff0c\u8be0\u91ca\u5973\u6027\u4e0d\u8981\u4e3a\u4e86\u4e89\u53d6\u793e\u4f1a\u5730\u4f4d\u7684\u5e73\u7b49\uff0c\u5374\u6253\u7834\u4e86\u7f8e\u4e3d\u7684\u5e73\u8861\uff0c\u7f8e\uff0c\u4e5f\u662f\u53ef\u4ee5\u9760\u81ea\u5df1\u4e89\u53d6\u6765\u7684\u3002","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/58d4d901a987e.jpg","width":"266","height":"204","category":"1-1"},{"id":"19","title":"zeal\u59ff\u65c5\u62c9\u6746\u7bb1","subtitle":"\u8f7b\u5de7\u4e0e\u65f6\u5c1a\u7684\u6676\u5f69\u7cfb\u5217\u62c9\u6746\u7bb1","desc":"zeal\u65e8\u5728\u6253\u9020\u575a\u56fa\u8f7b\u76c8\u7684\u65f6\u5c1a\u5973\u7bb1\u3002\u6211\u4eec\u7528\u65f6\u5c1a\u7684\u51e0\u4f55\u5143\u7d20\u4f5c\u4e3a\u80cc\u666f\uff0c\u4e0e\u7bb1\u5b50\u7684\u51e0\u4f55\u79d1\u6280\u611f\u4f5c\u4e3a\u547c\u5e94\uff0c\u9c9c\u8273\u7684\u5bf9\u6bd4\u8272\uff0c\u9c9c\u4eae\u593a\u76ee\uff0c\u4f53\u73b0\u59ff\u65c5\u7684\u65f6\u5c1a\u3001\u5e74\u8f7b\u7684\u7279\u6027\u3002","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/58d4c3cae6c3e.jpg","width":"266","height":"204","category":"2-2"},{"id":"18","title":"\u5b89\u83b1\u8d1d\u513f\u624b\u5305\u62cd\u6444","subtitle":"2016\/6\u6cd5\u56fd\u5b89\u83b1\u8d1d\u513f\u5973\u58eb\u624b\u5305\u62cd\u6444","desc":"\u753b\u9762\u5e72\u51c0\u7b80\u6d01\u548c\u9c9c\u660e\u7684\u8272\u5f69\u5bf9\u6bd4\u5177\u6709\u5f3a\u70c8\u7684\u89c6\u89c9\u6548\u679c\uff0c\u593a\u4eba\u773c\u7403\uff0c\u4f53\u73b0ambag\u9c9c\u8273\u7684\u989c\u8272\u4ee5\u53ca\u65f6\u5c1a\u7b80\u7ea6\u7684\u9020\u578b","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/57c9199b94b22.jpg","width":"266","height":"204","category":"2-1"},{"id":"17","title":"RIO\u9e21\u5c3e\u9152\u62cd\u6444","subtitle":"RIO\u9e21\u5c3e\u9152\u4ea7\u54c1\u62cd\u6444\u4e0e\u5408\u6210","desc":"\u62cd\u6444\u73bb\u7483\u5236\u54c1\u7684\u4ea7\u54c1\uff0c\u4e00\u5b9a\u8981\u62cd\u51fa\u73bb\u7483\u7684\u901a\u900f\u7684\u8d28\u611f\uff0c\u6240\u4ee5\u5728\u7528\u5149\u65b9\u9762\u5f88\u8bb2\u7a76\uff0c\u591a\u91c7\u7528\u9006\u5149\u4f5c\u4e3a\u4e3b\u5149\u6e90\u3002RIO\u9e21\u5c3e\u9152\u4e0d\u540c\u7684\u989c\u8272\u4ee3\u8868\u4e0d\u540c\u7684\u53e3\u5473\uff0c\u591a\u5f69\u6e10\u53d8\u7684\u80cc\u666f\u8272\uff0c\u4e0e\u4ea7\u54c1\u989c\u8272\u5f62\u6210\u547c\u5e94\uff0c\u6253\u9020\u9ad8\u7ea7\u7684\u89c6\u89c9\u6548\u679c\u3002","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/579b078aed2d6.jpg","width":"266","height":"204","category":"2-2"},{"id":"16","title":"\u5723\u6377\u7f57\u7537\u88c5\u5f62\u8c61\u5927\u7247","subtitle":"S.angelo 2014FW\u670d\u88c5\u5927\u7247","desc":"S.angelo 2014FW\u670d\u88c5\u6b3e\u5f0f\u4ee5\u590d\u53e4\u897f\u88c5\u4e3a\u4e3b\uff0c\u6240\u4ee5\u573a\u666f\u9009\u5728\u534a\u5c9b\u521b\u610f\u56ed\u533a\u5185\uff0c\u9009\u62e9\u6709\u4e00\u4e9b\u590d\u53e4\u5bb6\u5177\uff0c\u94a2\u7434\uff0c\u94c1\u7f51\uff0c\u4ee5\u53ca\u6591\u9a73\u7684\u7816\u5899\uff0c\u886c\u6258\u670d\u88c5\u4f4e\u8c03\u5962\u534e\u7684\u6c14\u8d28","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/5799c6ca3269b.jpg","width":"266","height":"204","category":"2-1"},{"id":"15","title":"\u4fe1\u6280\u4ea7\u54c1\u8be6\u60c5\u9875\u8bbe\u8ba1","subtitle":"3G\u4e91\u667a\u80fd\u5bfc\u822a\u4eea\u8be6\u60c5\u9875","desc":"\u6df1\u84dd\u8272\u7684\u80cc\u666f\u52a0\u4e0a\u79d1\u6280\u611f\u7684\u6548\u679c\uff0c\u4e3b\u8981\u4f53\u73b0\u4ea7\u54c1\u7684\u529f\u80fd\u6027\uff0c\u7ed9\u4eba\u53ef\u4fe1\u8d56\u7684\u54c1\u724c\u611f","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/5799be457418a.jpg","width":"266","height":"204","category":"3-6"},{"id":"14","title":"Fazeya\u82b1\u7d6e","subtitle":"Fazeya2015\u670d\u88c5\u62cd\u6444\u82b1\u7d6e","desc":"Fazeya2015\u670d\u88c5\u62cd\u6444\u82b1\u7d6e","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/5799b2ad86470.jpg","width":"266","height":"204","category":"1-8"},{"id":"13","title":"\u53ef\u81f3\u5bb6\u5c45\u5ba3\u4f20\u7247","subtitle":"2014\u53ef\u81f3\u5bb6\u5c45\u5ba3\u4f20\u7247","desc":"\u5bb6,\u5e94\u8be5\u662f\u4e00\u4e2a\u80fd\u591f\u6210\u5c31\u68a6\u60f3\u7684\u5730\u65b9\uff0c\u6bcf\u4e00\u4e2a\u4eba\u90fd\u9700\u8981\u751f\u6d3b\u5728\u81ea\u5df1\u559c\u6b22\u7684\u73af\u5883\u91cc\uff0c\u800c\u4e0d\u662f\u53ea\u62e5\u6709\u9999\u8f66\u540d\u8868\uff0c\u6700\u540e\u5374\u56de\u5230\u4e00\u4e2a\u6742\u4e71\u65e0\u7ae0\u7684\u5bb6\u91cc\u3002","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/5799b3414dfcc.jpg","width":"266","height":"204","category":"1-1"},{"id":"12","title":"\u4fe1\u6280\u5e97\u94fa\u9996\u9875\u8bbe\u8ba1","subtitle":"2016\u4fe1\u6280\u6c7d\u8f66\u7528\u54c1\u9996\u9875\u8bbe\u8ba1","desc":"\u7528\u5168\u5c4f\u7684\u65b9\u5f0f\u6e05\u6670\u7684\u5c55\u793a\u6bcf\u4e00\u6b3e\u4ea7\u54c1\u7684\u5356\u70b9\u548c\u4f18\u52bf\uff0c\u903b\u8f91\u5185\u5bb9\u6e05\u695a\uff1b\u8bbe\u8ba1\u5e26\u70b9\u79d1\u6280\u611f\uff0c\u7ed9\u4eba\u4e13\u4e1a\u53ef\u4fe1\u4efb\u7684\u611f\u89c9","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/57999d21be9aa.jpg","width":"266","height":"204","category":"3-5"},{"id":"11","title":"\u897f\u9910\u7f8e\u98df\u6444\u5f71","subtitle":"\u7528\u7f8e\u98df\u6253\u9020\u4e00\u573a\u8272\u5f69\u7684\u4ea4\u54cd\u4e50","desc":"\u5404\u79cd\u98df\u6750\u90fd\u6709\u81ea\u5df1\u7684\u6027\u683c\u548c\u8272\u5f69\uff0c\u4e0d\u540c\u7684\u8272\u5f69\u548c\u5473\u9053\u642d\u914d\u8d77\u6765\uff0c\u5b8c\u6210\u4e86\u4e00\u66f2\u5473\u857e\u7684\u4ea4\u54cd\u4e50","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/57999902805fe.jpg","width":"266","height":"204","category":"2-4"},{"id":"10","title":"\u5c3c\u5eb7\u6d4b\u8ddd\u4eea\u8be6\u60c5\u9875","subtitle":"\u5c3c\u5eb7coolshot\u7cfb\u5217\u6d4b\u8ddd\u4eea\u8be6\u60c5\u9875\u8bbe\u8ba1","desc":"\u7b80\u7ea6\u5f62\u5f0f\u611f\u5f3a\uff0c\u903b\u8f91\u5185\u5bb9\u6e05\u6670\uff0c\u91c7\u7528\u5c3c\u5eb7logo\u7684\u6807\u51c6\u7528\u8272\uff0c\u9ec4\u8272\u4e3a\u4e3b\u8272\u8c03\uff0c\u9ed1\u8272\u4e3a\u526f\u8272\u8c03\uff0c\u4f53\u73b0\u5c3c\u5eb7\u7684\u54c1\u724c\u8c03\u6027","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/579985d0ec21f.jpg","width":"266","height":"204","category":"3-6"},{"id":"9","title":"\u7f8e\u6d25\u6d53\u9ad8\u5c14\u592b\u8be6\u60c5\u9875","subtitle":"\u9ad8\u5c14\u592b\u7537\u58eb\/\u5973\u58eb\u7403\u6746\u8be6\u60c5\u9875\u8bbe\u8ba1","desc":"\u8bbe\u8ba1\u98ce\u683c\u7b80\u7ea6\u6709\u8d28\u611f\uff0c\u6839\u636e\u4ea7\u54c1\u7684\u914d\u8272\u505a\u76f8\u5e94\u7684\u989c\u8272\u642d\u914d\uff0c\u4fdd\u6301\u534f\u8c03\u7edf\u4e00\u6027","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/57997e1f81b49.jpg","width":"266","height":"204","category":"3-6"},{"id":"8","title":"Levis\u7ae5\u88c5\u6444\u5f71","subtitle":"Levis\u6625\u590f\u7cfb\u5217 \u91ca\u653e\u6d3b\u529b\u6fc0\u60c5","desc":"Levis\u6625\u590f\u7cfb\u5217\u91ca\u653e\u6d3b\u529b\u6fc0\u60c5\uff0c\u6f14\u7ece\u6f6e\u7ae5\u8da3\u98ce\u683c\u3002\u9009\u62e9\u7c7b\u4f3c\u4e8e\u7f8e\u56fd\u519c\u573a\u7684\u5916\u666f\u573a\u5730\uff0c\u5c0f\u670b\u53cb\u5c3d\u60c5\u73a9\u800d\uff0c\u4f53\u73b0Levis\u7ae5\u88c5\u7b80\u5355\u81ea\u7136\uff0c\u65f6\u5c1a\u968f\u6027\u7684\u98ce\u683c\u3002","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/57987ddbceff0.jpg","width":"266","height":"204","category":"2-3"},{"id":"7","title":"\u9093\u7984\u666e\u9ad8\u5c14\u592b\u8be6\u60c5\u9875","subtitle":"\u9ad8\u5c14\u592b\u7537\u58eb\/\u5973\u58eb\u7403\u6746\u8be6\u60c5\u9875\u8bbe\u8ba1","desc":"\u9ad8\u5c14\u592b\u7537\u58eb\/\u5973\u58eb\u7403\u6746\u8be6\u60c5\u9875\u8bbe\u8ba1\uff0c\u5927\u6c14\u7b80\u7ea6\u6709\u8d28\u611f","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/57983a5e6235d.jpg","width":"266","height":"204","category":"3-6"},{"id":"6","title":"MD\u4ea7\u54c1\u6444\u5f71","subtitle":"MD Sports\u4f11\u95f2\u8fd0\u52a8\u4ea7\u54c1\u6444\u5f71","desc":"MD Sports\u4f11\u95f2\u8fd0\u52a8\u4ea7\u54c1\uff0c\u4e0e\u5bb6\u4eba\u548c\u670b\u53cb\u4e00\u8d77\u4eab\u53d7\u6237\u5916\u7684\u4e50\u8da3","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/57982d152fd1f.jpg","width":"266","height":"204","category":"2-2"},{"id":"5","title":"MD\u5305\u88c5\u76d2\u8bbe\u8ba1","subtitle":"MD Sports\u4f11\u95f2\u8fd0\u52a8\u4ea7\u54c1\u5305\u88c5\u8bbe\u8ba1","desc":"MD Sports\u4e3b\u8425\u4f11\u95f2\u8fd0\u52a8\u4ea7\u54c1\uff0c\u7528\u7ea2\u84dd\u9ec4\u5bf9\u6bd4\u8272\u4f53\u73b0\u8fd0\u52a8\u7684\u6d3b\u529b","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/5798316a63940.jpg","width":"266","height":"204","category":"3-1"},{"id":"4","title":"2016\u79d1\u9ed8\u5bb6\u5177","subtitle":"\u79d1\u9ed8\u5bb6\u5177\u4ea7\u54c1\u56fe","desc":"\u610f\u5927\u5229\u73b0\u4ee3\u7b80\u7ea6\u5f0f\u5bb6\u5177\uff0c\u4f4e\u8c03\u5962\u534e\uff0c\u62cd\u6444\u548c\u540e\u671f\u4ee5\u7a81\u663e\u5bb6\u5177\u8d28\u611f\u6709\u4e3b","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/579830e6bc85e.jpg","width":"266","height":"204","category":"2-6"},{"id":"3","title":"\u6cd5\u56fd\u4e50\u5361\u514b\u6298\u9875\u8bbe\u8ba1","subtitle":"2016\u79cb\u6b3e&\u51ac\u6b3elookbook\u8bbe\u8ba1","desc":"\u7ad6\u5f0f\u6298\u9875\u8bbe\u8ba1\uff0c\u4e3b\u9898\u6e05\u6670\u660e\u786e\uff0c\u6392\u7248\u7b80\u6d01\u660e\u4e86\u7a81\u51fa\u670d\u88c5","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/5798306c54d1d.jpg","width":"266","height":"204","category":"3-2"},{"id":"2","title":"\u6cd5\u56fd\u4e50\u5361\u514b\u5e7f\u544a\u7247","subtitle":"\u201c\u81f4\u656c\u7ecf\u5178 \u8d70\u5411\u672a\u6765\u201d\u5e7f\u544a\u7247\u8bbe\u8ba1","desc":"\u63d0\u53d6\u4e50\u5361\u514blogo\u7684\u4e09\u89d2\u5f62\u5143\u7d20\uff0c\u4f5c\u4e3a\u753b\u9762\u7684\u4e3b\u5143\u7d20\uff0c\u4e50\u5361\u514b\u5386\u53f2\u5143\u7d20\u8d34\u56fe\u5728\u9519\u843d\u6446\u653e\u7684\u4e09\u89d2\u5f62\u4e0a\uff0c\u4eff\u4f5b\u4eba\u7269\u7f6e\u5165\u5386\u53f2\u7684\u6f6e\u6d41\u4e2d\u3002","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/57982f723d574.jpg","width":"266","height":"204","category":"3-3"},{"id":"1","title":"\u6cd5\u56fd\u4e50\u5361\u514b\u670d\u88c5\u62cd\u6444","subtitle":"2016\u79cb\u51ac\u4e3b\u9898\u62cd\u6444\u2014\u81f4\u656c\u7ecf\u5178 \u8d70\u5411\u672a\u6765","desc":"\u6574\u7ec4\u7247\u5b50\u90fd\u662f\u7b80\u6d01\u65f6\u5c1a\u7684\u98ce\u683c\uff0c\u7ea2\u84dd\u649e\u8272\u5177\u6709\u89c6\u89c9\u51b2\u51fb\u529b\uff0c\u4eba\u7269\u5149\u7ebf\u5bf9\u6bd4\u5f3a\u70c8\u7a81\u51fa\u670d\u88c5\u3002","img":"http:\/\/ciyuancc.bj.bcebos.com\/case\/57982ee35afd2.jpg","width":"266","height":"204","category":"2-1"}]};
+var CategoryData={"code":1,"message":"success","category":[{"name":"\u8be6\u60c5\u9875\u8bbe\u8ba1","nameEn":"Details page design","grade":"3","value":"3-6"},{"name":"\u5e97\u94fa\u88c5\u4fee","nameEn":"Shop decoration","grade":"3","value":"3-5"},{"name":"\u6d77\u62a5\u8bbe\u8ba1","nameEn":"poster design","grade":"3","value":"3-3"},{"name":"\u753b\u518c\u8bbe\u8ba1","nameEn":"Brochure Design","grade":"3","value":"3-2"},{"name":"VI\u8bbe\u8ba1","nameEn":"VI design","grade":"3","value":"3-1"},{"name":"\u54c1\u724c\u8bbe\u8ba1","nameEn":"brand design","grade":"0","value":"3"},{"name":"\u5efa\u7b51\u7a7a\u95f4","nameEn":"Building space","grade":"2","value":"2-6"},{"name":"\u7f8e\u98df\u6444\u5f71","nameEn":"Food photography","grade":"2","value":"2-4"},{"name":"\u670d\u88c5\u6444\u5f71","nameEn":"Clothing photography","grade":"2","value":"2-3"},{"name":"\u4ea7\u54c1\u6444\u5f71","nameEn":"Product photography","grade":"2","value":"2-2"},{"name":"\u5e7f\u544a\u6444\u5f71","nameEn":"Advertising photogra","grade":"2","value":"2-1"},{"name":"\u5546\u4e1a\u6444\u5f71","nameEn":"Commercial Photograp","grade":"0","value":"2"},{"name":"\u82b1\u7d6e","nameEn":"Highlights","grade":"1","value":"1-8"},{"name":"\u5ba3\u4f20\u7247","nameEn":"Videos","grade":"1","value":"1-1"},{"name":"\u89c6\u9891\u62cd\u6444","nameEn":"video","grade":"0","value":"1"}]};
+function categoryShow(objAry,objAry2){
+	$("#caseShowBox").height(Math.ceil(objAry.length/4)*216);
+	objAry2.each(function(i){
+		if(isIE678||isIE9){
+			$(this).animate({"left":parseInt(this.style.left)+142+"px","top":parseInt(this.style.top)+108+"px","width":0,"height":0,"opacity":0,"zIndex":1},400)
+			}
+		else{
+			this.style.left=parseInt(this.style.left)+142+"px";
+			this.style.top=parseInt(this.style.top)+108+"px";
+			this.style.width=0;
+			this.style.height=0;
+			this.style.opacity=0;
+			this.style.zIndex=1;
+			}
+	})
+	objAry.each(function(i){
+		if(isIE678||isIE9){
+			$(this).animate({"left":i%4*285+"px","top":Math.floor(i/4)*216+"px","width":"285px","height":"216px","opacity":1,"zIndex":2},400)
+			}
+		else{this.style.left=i%4*285+"px";
+			this.style.top=Math.floor(i/4)*216+"px";
+			this.style.width="285px";
+			this.style.height="216px";
+			this.style.opacity=1;
+			this.style.zIndex=2;
+			}
+	});
+}
+window.categoryShow=categoryShow;
+function handleCategory(data){
+	if(data.code==1){
+		var li_html='',i=0,len=data.category.length;
+		window.Category_key_value={};
+		for(i=0;i<len;i++){
+			if(data.category[i].value.length==1){
+				li_html+='<span><a href="javascript:void(0);" cat="'+data.category[i].nameEn.replace(/\s+/g,"")+'">'+data.category[i].name+'</a></span>';
+				Category_key_value[data.category[i].value]=data.category[i].nameEn.replace(/\s+/g,"");
+				}
+			}
+		$("#caseShow .caseBox .caseNav").append(li_html);
+		
+		$("#caseShow .caseNav span").click(function(){
+			$(this).addClass("active").siblings().removeClass("active");
+			var cnm=this.children[0].getAttribute("cat");
+			if(cnm=="*"){
+				categoryShow($(this).parent().next().children(),$);
+				}
+			else{
+				categoryShow($(this).parent().next().children("."+cnm),$(this).parent().next().children().not("."+cnm));
+				}
+			});
+		
+		//loadData("../inc/getCaseList.php","size=16&page=1",'handleCaseList');
+		handleCaseList(listdata);
+		}
+	}		
+//loadData("../inc/getCategory.php","",'handleCategory');
+handleCategory(CategoryData);
+
+function handleCaseList(data){
+	if(data.code==1){
+		var li_html='',i=0,len=data.caselist.length;
+		for(i=0;i<len;i++){
+				li_html+='<div class="showBox '+Category_key_value[data.caselist[i].category.split("-")[0]]+'"><a href="javascript:void('+data.caselist[i].id+');" target="_blank"><img src="'+data.caselist[i].img+'" /><div class="TextLink"><h3>'+data.caselist[i].title+'</h3><p>'+data.caselist[i].subtitle+'</p></div></a></div>';
+			}
+		$("#caseShowBox").html(li_html);
+		setTimeout(function(){categoryShow($("#caseShowBox").children(),$);},500);
+		}
+	}
+</script>
+</body>
+</html>

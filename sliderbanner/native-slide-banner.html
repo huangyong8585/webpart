@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>纯原生的JS图片切换</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style>
+#SlidePic{position:relative;width:580px;height:340px;overflow:hidden;}
+#SlidePic .localNumber{position:absolute;z-index:10;bottom:5px;right:5px;}
+#SlidePic .localNumber span{display:inline-block;float:left;width:16px;height:16px;background:#333;margin-left:2px;cursor:pointer;text-align:center;line-height:16px;font-family:arial;color:#fff;font-size:12px;}
+#SlidePic .localNumber span.active{background:#a00;}
+#SlidePic ul{position:relative;width:100%;height:100%;overflow:hidden;z-index:8;}
+#SlidePic ul li{display:none;position:absolute;left:0;top:0;width:100%;height:100%;padding:0;z-index:3;}
+#SlidePic ul li img{width:100%;height:100%;}
+#SlidePic ul li p{display:block;width:100%;height:30px;line-height:30px;color:#fff;text-indent:12px;text-align:left;position:absolute;left:0;bottom:0;background:url(http://static.sdg-china.com/mir2/pic/mir2_act/essay/alpha.png);}
+#SlidePic ul li p a{color:#fff;}
+</style>
+</head>
+<body>
+<div id="SlidePic">
+	<ul>
+		<li>
+			<a href="http://clsbbs.tiancity.com" target="_blank"><img src="http://img1.gtimg.com/hn/pics/hv1/143/125/1509/98154743.jpg" /></a>
+			<p><a href="http://clsbbs.tiancity.com" target="_blank">哈哈哈哈</a></p>
+		</li>
+		<li>
+			<a href="http://cls.tiancity.com" target="_blank"><img src="http://img1.gtimg.com/xian/pics/hv1/206/152/1517/98681891.jpg" /></a>
+			<p><a href="http://cls.tiancity.com" target="_blank">嘻嘻嘻嘻</a></p>
+		</li>
+		<li>
+			<a href="http://www.tiancity.com" target="_blank"><img src="http://img1.gtimg.com/xian/pics/hv1/58/29/1519/98780428.jpg" /></a>
+			<p><a href="http://www.tiancity.com" target="_blank">呵呵呵呵</a></p>
+		</li>
+	</ul>
+	<div class="localNumber"></div>
+</div>
+<script type="text/javascript">
+function SlidePicture(){
+	var n=0;
+	var objbox=document.getElementById('SlidePic');
+	var objul=objbox.children[0],objulliLen=objul.children.length;
+	var local=objbox.children[1];
+	var temp_time=null;
+
+	var update_location=function(_n){
+		var local_childs=local.children,i=0,len=local_childs.length;
+		for(;i<len;i++){local_childs[i].className='';}
+		local_childs[_n].className='active';
+		}
+
+	var addnumber=function(count){
+		var _html='';
+		for(var j=0;j<count;j++){_html+='<span>'+(j+1)+'</span>';}
+		local.innerHTML=_html;
+		local.onclick=function(e){
+			var event = e || window.event,target = event.target || event.srcElement;
+			if(target.nodeName.toLowerCase()==='span'){clearTimeout(temp_time);n=target.innerHTML-1;play_img(n);}
+			}
+		play_img(n);
+		}
+
+	var play_img=function(_n){
+		if(temp_time){clearTimeout(temp_time);}
+		update_location(_n);
+		var objul_childs=objul.children,i=0,len=objul_childs.length;
+		for(;i<len;i++){objul_childs[i].style.display='none';}
+		objul_childs[_n].style.display='block';
+		_n++;
+		if(_n==objulliLen){_n=0;}
+		n=_n;
+		temp_time=setTimeout(function(){play_img(_n)},5000);
+		}
+
+	addnumber(objulliLen);
+	
+}
+SlidePicture()
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试自己重写的JSONP</title>
+	<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+	<style>
+	.wrapper{background-color:#e4e4e4;}
+	.header{background-color:#f0f0f0;height:261px;text-align:center;line-height:261px;}
+	.main{width:1200px;margin:0 auto;height:800px;background:#fff;position:relative;}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+        <div class="header"><h1>自己重写的JSONP</h1></div>
+        <div class="main">
+        	<p>返回结果：</p><br />
+			<textarea id="reponseData" style="width:98%;height:500px;"></textarea>
+		</div>
+	</div>
+	<script src="../js/common.js"></script>
+	<script>
+		//JSONP
+	/*function loadData(_url,data,fn){
+		var nosamename=function(){
+			var tempname='jsonp',O=true,i=1;
+			while(O){
+				if(!window[tempname+i]){window[tempname+i]=1;O=false;}
+				else{i++;}
+			}return tempname+i;
+		}
+		var url = "",t=document.createElement("script"),fnName='';
+		if(!!fn&&(typeof fn == 'function')){
+			fnName=nosamename();window[fnName]=fn;
+			url = _url+"?"+data+"&callback="+fnName;
+		}
+		else if(fn){url = _url+"?"+data+"&callback="+fn;}
+		else{url = _url+"?"+data;}
+		//n=document.getElementsByTagName("script")[0];
+		//document.getElementsByTagName("head")[0].appendChild(t);
+		t.src=url,t.type="text/javascript",t.async=!0,t.charset="UTF-8"//,n.parentNode.insertBefore(t,n)
+		document.getElementsByTagName("head")[0].appendChild(t);
+		t.onload=function(){document.getElementsByTagName("head")[0].removeChild(t);}
+		}*/
+	loadData('http://api.act.sdo.com/UnionNews/List','gameCode=ma&category=6806,6807,6808,6809,6810&pageIndex=0&pageSize=1',function(data){
+		document.getElementById("reponseData").value=JSON.stringify(data);
+	})
+	</script>
+</body>
+</html>

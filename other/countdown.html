@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时</title>
+    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
+    <style>
+    .wrapper{background-color:#e4e4e4;}
+    .header{background-color:#f0f0f0;height:60px;}
+    .main{width:1200px;margin:0 auto;height:3000px;background:#fff;position:relative;}
+    
+    #getVcode{display:block;width:180px;height:40px;text-align:center;line-height:40px;color:#fff;background-color:#d2b991;margin:0 auto;}
+    </style>
+    <script src="../js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header"></div>
+        <div class="main">
+            <a id="getVcode" href="javascript:;">获取验证码</a>
+        </div>
+    </div>
+    <script>
+        function countdown(obj){
+            if(countdown.n==0){obj.innerHTML="重新获取";obj.className="";countdown.n=300;return false;}
+            if(!countdown.n){countdown.n=300;}
+            obj.innerHTML='重新获取('+countdown.n+')';
+            countdown.n--;
+            setTimeout(function(){countdown(obj);},1000);
+            }
+
+        document.getElementById("getVcode").onclick=function(){
+            if(this.className=="off"){return false;}
+            document.getElementById("getVcode").className="off";countdown(document.getElementById("getVcode"));
+            /*phone_val=phone.value.replace(/\s/g,"");
+            if(phone_val.length==0){alertpop("请填写手机号");}
+            else if(isNaN(phone_val)){alertpop("请正确填写手机号");}
+            else if(phone_val.length!==11){alertpop("请正确填写手机号");}
+            else if(!myreg.test(phone_val)){alertpop("请正确填写手机号");}
+            else{
+                //loadData("http://58.213.141.221:11227/wenkor/servapi/coupon/send_vcode","mobile="+phone_val,'handleGetVode');
+                ajax("GET",'getCode.php',"phone="+phone_val,function(data){
+                    if(data.status==1){document.getElementById("getVcode").className="off";countdown(document.getElementById("getVcode"));alertpop("验证码发送成功，请注意查收短信");}
+                    else{alertpop(data.msg);}
+                    });
+                }*/
+            };
+
+    </script>
+</body>
+</html>

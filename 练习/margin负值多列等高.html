@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>margin负值去除多余margin-right值</title>
+<style>
+*{margin:0;padding:0;}
+html,body,div{}
+#wrap{
+        overflow:hidden;
+        width:780px;
+        margin:0 auto;
+    }
+    #left,#center,#right{
+        margin-bottom:-200px;
+        padding-bottom:200px;
+    }
+    #left {
+        float:left;
+        width:240px;
+        background:#777;
+    }
+    #center {
+        float:left;
+        width:300px;
+        background:#888;
+    }
+    #right {
+        float:right;
+        width:240px;
+        background:#999;
+    }
+    p {color:#FFF;text-align:center}
+</style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="left">
+            <p style="height:50px">style="height:50px"</p>
+        </div>
+        <div id="center">
+            <p style="height:100px">style="height:100px"</p>
+        </div>
+        <div id="right">
+            <p style="height:200px">style="height:200px"</p>
+        </div>
+    </div>
+    <!--搞不清楚，强记吧-->
+</body>
+</html>

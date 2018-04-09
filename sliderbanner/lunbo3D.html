@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>3D 轮播</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style>
+	*{ margin:0; padding:0;}
+	.banner_box{
+		width:1200px; 
+		margin:0 auto 30px; 
+		padding-top:100px;
+		height:200px; 
+		overflow: hidden;
+	}
+	.banner{ width: 500px; height: 176px; margin:0 auto; position: relative;
+		-webkit-perspective:1000;
+		-moz-perspective:1000;
+		-o-perspective:1000;
+		-ms-perspective:1000;
+		perspective:1000;
+	}
+	.banner_box ,.banner{
+		-webkit-overflow-scrolling: touch;
+		-webkit-backface-visibility:hidden;
+	}
+	.banner img{
+		/*box-shadow: 0 4px 4px -2px rgba(0,0,0,0.4);*/
+		width:500px;height:187px;
+		position: absolute;
+		left:0px;
+		top:0px;
+		-webkit-box-reflect: below -10px -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(.88, transparent), to(white));
+	}
+	.banner div{
+		width:100%;height:100%;
+		position: absolute;
+		top:0px;
+		left:0px;
+		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3)
+	}
+	
+	.banner div,.banner img{
+		-webkit-transform-style:preserve-3d;
+		-webkit-transition:.6s;
+		-moz-transform-style:preserve-3d;
+		-moz-transition:.61s;
+		-o-transform-style:preserve-3d;
+		-o-transition:.6s;
+		-ms-transform-style:preserve-3d;
+		-ms-transition:.6s;
+		transform-style:preserve-3d;
+		transition:.6s;
+	}
+	
+	.banner_box span{
+		position: absolute;
+		top:0px;
+		z-index:999;right: 70px;
+		height: 25px;width:70px;
+		border: 1px solid #fff;
+		color:#fff;
+	}
+	.banner div.Imga{ 
+		z-index: 1;	
+		opacity: 0;
+		-webkit-transform:translateX(-550px) translateZ(-300px) rotateY(20deg) ;
+		-moz-transform:translateX(-550px) translateZ(-300px) rotateY(20deg) ;
+		-o-transform:translateX(-550px) translateZ(-300px) rotateY(20deg) ;
+		-ms-transform:translateX(-550px) translateZ(-300px) rotateY(20deg) ;
+		 transform: translateX(-550px) translateZ(-300px) rotateY(20deg);
+	}
+	.banner div.Imgb{
+		z-index: 2;
+		-webkit-transform:translateX(-450px) translateZ(-250px) rotateY(45deg) ;
+		-moz-transform:translateX(-450px) translateZ(-250px) rotateY(45deg) ;
+		-o-transform:translateX(-450px) translateZ(-250px) rotateY(45deg) ;
+		-ms-transform: translateX(-450px) translateZ(-250px) rotateY(45deg);
+		transform:translateX(-450px) translateZ(-250px) rotateY(45deg) ;
+	}
+	
+	.banner div.Imgc{z-index: 10;opacity: 1; visibility: visible;}
+	.banner div.Imgd{
+		z-index: 2; 
+		-webkit-transform:translateX(450px) translateZ(-250px) rotateY(-45deg) ;
+		-moz-transform:translateX(450px) translateZ(-250px) rotateY(-45deg) ;
+		-o-transform:translateX(450px) translateZ(-250px) rotateY(-45deg) ;
+		-ms-transform:translateX(450px) translateZ(-250px) rotateY(-45deg) ;
+		 transform: translateX(450px) translateZ(-250px) rotateY(-45deg);
+	}
+	.banner div.Imge{
+		z-index: 1;
+		opacity:0;
+		-webkit-transform:translateX(550px) translateZ(-300px) rotateY(-20deg) ;
+		-moz-transform:translateX(550px) translateZ(-300px) rotateY(-20deg) ;
+		-o-transform:translateX(550px) translateZ(-300px) rotateY(-20deg) ;
+		-ms-transform:translateX(550px) translateZ(-300px) rotateY(-20deg) ;
+		 transform: translateX(550px) translateZ(-300px) rotateY(-20deg);
+		 /*background-color: #ddd*/
+	}
+	.Imgg{
+		opacity: 0;
+		
+	}
+</style>
+<script type="text/javascript" class="library" src="../js/zepto.min.js"></script>
+</head>
+<body>
+	<div class="banner_box">
+		<div class="banner">
+			<div class='Imga'><a href='#'><span>title1</span><img src="../images/banner1.jpg"  /></a></div>
+	    	<div class='Imgb'><a href='#'><span>title2</span><img src="../images/banner2.jpg"  /></a></div>
+			<div class='Imgc'><a href='#'><span>title3</span><img src="../images/banner3.jpg"  /></a></div>
+			<div class='Imgd'><a href='#'><span>title4</span><img src="../images/banner4.jpg"  /></a></div>
+			<div class='Imge'><a href='#'><span>title5</span><img src="../images/banner5.jpg"  /></a></div>
+			<div class='Imgg'><a href='#'><span>title6</span><img src="../images/banner6.jpg"  /></a></div>
+			<div class='Imgg'><a href='#'><span>title7</span><img src="../images/banner7.jpg"  /></a></div>
+			<div class='Imgg'><a href='#'><span>title8</span><img src="../images/banner8.jpg"  /></a></div>
+    	</div>
+    </div>
+    <button id='btn_left'>left</button>
+    <button id='btn_right'>right</button>
+    <script>
+    	$('.banner').css('perspective',1000);
+		function TurnToRight(){
+			$('.Imge').attr('class','Imgg')
+			$('.Imgd').attr('class','Imge');
+			$('.Imgc').attr('class','Imgd');
+			$('.Imgb').attr('class','Imgc');
+			$('.Imga').attr('class','Imgb');
+			$('.Imgg').last().attr('class','Imga').prependTo($('.banner'));
+		}
+		function TurnToLeft(){
+			$('.Imga').attr('class','Imgg').appendTo($('.banner'));
+			$('.Imgb').attr('class','Imga');
+			$('.Imgc').attr('class','Imgb');
+			$('.Imgd').attr('class','Imgc');
+			$('.Imge').attr('class','Imgd');
+			$('.Imgg').first().attr('class','Imge');
+		}
+		$('#btn_left').click(function(){
+			TurnToLeft();
+			clearInterval(setAuto);autoRun();
+		})
+		$('#btn_right').click(function(){
+			TurnToRight();
+			clearInterval(setAuto);autoRun();
+		})
+		var setAuto;
+		function autoRun(){
+			setAuto = setInterval(function(){
+				TurnToLeft();
+			},5000)
+		}
+		autoRun();
+    </script>
+</body>
+</html>

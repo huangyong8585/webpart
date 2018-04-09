@@ -1,0 +1,577 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>大图弹出层</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style>
+.wrapper{background-color:#e4e4e4;}
+.header{background-color:#f0f0f0;height:60px;}
+.main{width:1002px;margin:0 auto;height:3000px;background:#fff;position:relative;}
+
+ul#pageContentList{margin-left:30px;width:972px;min-height:500px;position:relative;}
+ul#pageContentList li{position:absolute;border:1px solid #f4f4f4;}
+ul#pageContentList li .pic a{display:block;width:180px;color:#333;}
+ul#pageContentList li .pic a img{width:180px;}
+ul#pageContentList li a .intro{padding:4px 0 6px 10px;font-size:12px;line-height:1.8;}
+
+#zoom{z-index:99990;position:fixed;top:0;left:0;display:none;width:100%;height:100%;background:url(http://static.sdg-china.com/mir2/pic/mir2_act/essay/alpha.png);background:rgba(0,0,0,0.6);}
+#zoom .content{z-index:99991;position:absolute;top:50%;left:50%;width:200px;height: 00px;background:#fff no-repeat 50% 50%;padding:0;margin:-100px 0 0 -100px;box-shadow:-20px 20px 20px rgba(0,0,0,0.3);border-radius:4px;}
+#zoom .content.loading{background-image: url(http://static.sdg-china.com/mir2/pic/mir2_act/essay/loading.gif);}
+#zoom img{display:block;max-width: none;background: #ececec;box-shadow:0 1px 3px rgba(0,0,0,0.25);border-radius: 4px;}
+#zoom .close{z-index:99993;position:absolute;top:0;right:0;width:49px;height:49px;cursor:pointer;background:transparent url(http://static.sdg-china.com/mir2/pic/mir2_act/essay/close.png) no-repeat 50% 50%;opacity:1;filter:alpha(opacity=100);border-radius:0 0 0 4px;}
+#zoom .previous,#zoom .next{z-index:99992;position:absolute;top:50%;overflow:hidden;display:block;width:49px;height:49px;margin-top:-25px;}
+#zoom .previous{left:0;background:url(http://static.sdg-china.com/mir2/pic/mir2_act/essay/arrows.png) no-repeat 0 0;border-radius:0 4px 4px 0;}
+#zoom .next{right:0;background:url(http://static.sdg-china.com/mir2/pic/mir2_act/essay/arrows.png) no-repeat 100% 0;border-radius:4px 0 0 4px;}
+#zoom .close:hover{background-color:#da4f49;}
+#zoom .previous:hover,#zoom .next:hover{background-color:#0088cc;}
+</style>
+
+<script src="../js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+        <div class="header"></div>
+        <div class="main">
+            <ul class="gallery clearfix" id="pageContentList" style="height: 2950px;">
+                <li class="" style="left: 0px; top: 0px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan10.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan10.jpg" style="height:127.26px;">
+                            <p class="intro">作品：次元世界的C酱<br>作者：『逆廻』十六夜</p>
+                        </a>
+                    </div>
+                </li>
+                <li class="" style="left: 192px; top: 0px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan9.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan9.jpg" style="height:254.48275862068965px;">
+                            <p class="intro">作品：魔鬼身材尤莉<br>作者：Nanoo33</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 384px; top: 0px;" class="">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan7.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan7.jpg" style="height:239.89655172413794px;">
+                            <p class="intro">作品：李瑟钰<br>作者：慢散君丶</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 576px; top: 0px;" class="">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan6.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan6.jpg" style="height:239.89655172413794px;">
+                            <p class="intro">作品：李世赫<br>作者：慢散君丶</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 768px; top: 0px;" class="">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan5.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan5.jpg" style="height:240px;">
+                            <p class="intro">作品：尤莉<br>作者：慢散君丶</p>
+                        </a>
+                    </div>
+                </li>
+                <li class="" style="left: 0px; top: 194px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan4.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan4.jpg" style="height:182.475px;">
+                            <p class="intro">作品：封印者们与C酱<br>作者：刃湮骨</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 384px; top: 307px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan3.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan3.jpg" style="height:127.26px;">
+                            <p class="intro">作品：黑羊小队全家福<br>作者：DM丶CG</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 576px; top: 307px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan2.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan2.jpg" style="height:214.6271186440678px;">
+                            <p class="intro">作品：米斯丁<br>作者：狼仔648</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 768px; top: 307px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan1.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan1.jpg" style="height:126.72px;">
+                            <p class="intro">作品：世赫不懂怜香惜玉<br>作者：六叶草phb</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 192px; top: 321px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan20.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan20.jpg" style="height:111.96px;">
+                            <p class="intro">作品：瑟钰&amp;尤莉光甲<br>作者：慢散君丶</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 0px; top: 443px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan18.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan18.jpg" style="height:286.0691601976006px;">
+                            <p class="intro">作品：小米同人<br>作者：春太阳青</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 192px; top: 500px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan17.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan17.jpg" style="height:126.9px;">
+                            <p class="intro">作品：LEE<br>作者：YO0</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 384px; top: 501px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan16.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan16.jpg" style="height:255.41379310344828px;">
+                            <p class="intro">作品：猫耳瑟钰萌萌哒<br>作者：walding</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 768px; top: 501px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan41.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan41.jpg" style="height:235.8px;">
+                            <p class="intro">作品：意外？<br>作者：礼葬</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 576px; top: 589px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan40.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan40.jpg" style="height:182.82857142857142px;">
+                            <p class="intro">作品：我辣么萌！票呢！<br>作者：绫纱岚</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 192px; top: 694px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan39.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan39.jpg" style="height:186.01113172541744px;">
+                            <p class="intro">作品：缇娜的胖次，赞！<br>作者：三色猫</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 0px; top: 796px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan38.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan38.jpg" style="height:144px;">
+                            <p class="intro">作品：汝不平何以？缇娜！<br>作者：木户蕾</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 768px; top: 804px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan37.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan37.jpg" style="height:180px;">
+                            <p class="intro">作品：魔法少女缇娜<br>作者：makura</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 384px; top: 823px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan36.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan36.jpg" style="height:180px;">
+                            <p class="intro">作品：蕾比亚第夏日祭<br>作者：绿芽子</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 576px; top: 839px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan28.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan28.jpg" style="height:180px;">
+                            <p class="intro">作品：tina的微笑<br>作者：绿芽子</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 192px; top: 947px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan23.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan23.jpg" style="height:170px;">
+                            <p class="intro">作品：黑羊小队棒棒糖<br>作者：亚仯</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 0px; top: 1007px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan8.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan8.jpg" style="height:254.48275862068965px;">
+                            <p class="intro">作品：比基尼尤莉<br>作者：volovey</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 768px; top: 1051px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan26.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan26.jpg" style="height:120.08571428571429px;">
+                            <p class="intro">作品：ClosersTina<br>作者：木户蕾</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 384px; top: 1070px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan11.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan11.jpg" style="height:127.26px;">
+                            <p class="intro">作品：花嫁C酱<br>作者：『逆廻』十六夜</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 576px; top: 1086px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan12.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan12.jpg" style="height:127.26px;">
+                            <p class="intro">作品：女巫大姐<br>作者：DM丶CG</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 192px; top: 1184px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan34.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan34.jpg" style="height:111.6px;">
+                            <p class="intro">作品：蕾比雅大法好<br>作者：吃撑喵</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 768px; top: 1238px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan35.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan35.jpg" style="height:254.57142857142858px;">
+                            <p class="intro">作品：蕾比亚超可爱！<br>作者：紫咲satori</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 384px; top: 1264px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan22.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan22.jpg" style="height:233.41121495327104px;">
+                            <p class="intro">作品：女仆装小米<br>作者：時雨時桜de牛奶君</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 576px; top: 1280px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan21.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan21.jpg" style="height:245.2173913043478px;">
+                            <p class="intro">作品：正太小米出击<br>作者：時雨時桜de牛奶君</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 0px; top: 1328px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan46.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan46.jpg" style="height:277.45714285714286px;">
+                            <p class="intro">作品：束缚<br>作者：森林栄二</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 192px; top: 1363px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan45.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan45.jpg" style="height:240.8108108108108px;">
+                            <p class="intro">作品：èŒèŒå“’ç¼‡å¨œ<br>作者：yukiusa</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 768px; top: 1560px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan44.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan44.jpg" style="height:118.368px;">
+                            <p class="intro">作品：çº¢ç‹¼å°é˜Ÿç¼‡å¨œ<br>作者：ç»œæ¨±Samaä¸¶</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 384px; top: 1564px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan33.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan33.jpg" style="height:277.45714285714286px;">
+                            <p class="intro">作品：é›·æ¯”äºšåº”æ´<br>作者：ä¸‰è‰²çŒ«</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 576px; top: 1592px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan42.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan42.jpg" style="height:254.57142857142858px;">
+                            <p class="intro">作品：æ¨±èŠ±æ˜“é€<br>作者：ç»«çº±å²š</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 192px; top: 1671px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan15.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan15.jpg" style="height:255.36231884057972px;">
+                            <p class="intro">作品：å°¤èŽ‰å‡ºæµ´å›¾<br>作者：èŒå°½</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 0px; top: 1672px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan25.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan25.jpg" style="height:212.14285714285714px;">
+                            <p class="intro">作品：7æŠŠé“²å­<br>作者：ä¸‰è‰²çŒ«</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 768px; top: 1745px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan0.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan0.jpg" style="height:254.52px;">
+                            <p class="intro">作品：å…”å¥³éƒŽç‘Ÿé’°<br>作者：è·¯è¿‡æ»´å¤©å¤©</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 384px; top: 1908px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan14.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan14.jpg" style="height:254.5968882602546px;">
+                            <p class="intro">作品：å°ç±³åƒæ£’æ£’ç³–<br>作者：æ€€å¿µå¹è¿‡çš„é£Ž</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 576px; top: 1914px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan43.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan43.jpg" style="height:308.8560885608856px;">
+                            <p class="intro">作品：å‹‡è€…æœ€å–œæ¬¢å·¨ä¹³å•¦~<br>作者：å¤©ä¸Šå¤©ä¸‹è€å¸æœº</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 0px; top: 1951px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan13.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan13.jpg" style="height:254.8px;">
+                            <p class="intro">作品：Jå”åŒäººä½œå“<br>作者：â˜…è‹ç‹¼é‡Žå…½â˜…</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 192px; top: 1993px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan19.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan19.jpg" style="height:254.4px;">
+                            <p class="intro">作品：å¹¼ç²‰æ¯›<br>作者：ä¼¶ä¹ƒ</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 768px; top: 2067px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan24.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan24.jpg" style="height:272.64px;">
+                            <p class="intro">作品：3+3=6<br>作者：ä¼¶ä¹ƒ</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 384px; top: 2230px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan30.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan30.jpg" style="height:254.6086956521739px;">
+                            <p class="intro">作品：å…µå™¨å°‘å¥³ï¼ç¼‡å¨œï¼<br>作者：è›†è™«éŸ³</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 0px; top: 2273px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan59.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan59.jpg" style="height:126.18px;">
+                            <p class="intro">作品：äºŒè½¬å°¤èŽ‰<br>作者：å°é»‘å¿«è·‘ï¼</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 576px; top: 2311px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan58.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan58.jpg" style="height:254.52px;">
+                            <p class="intro">作品：è•¾æ¯”é›…å…”å¥³éƒŽ<br>作者：å²š</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 192px; top: 2314px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan57.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan57.jpg" style="height:247.68px;">
+                            <p class="intro">作品：æŽç‘Ÿé’°<br>作者：FREE_WIND_YO0</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 768px; top: 2407px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan56.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan56.jpg" style="height:100.98px;">
+                            <p class="intro">作品：ç‰™ç™½<br>作者：æœ¨æˆ·è•¾</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 0px; top: 2466px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan55.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan55.jpg" style="height:257.04px;">
+                            <p class="intro">作品：ç¼‡å¨œ<br>作者：CodeAign</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 384px; top: 2573px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan54.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan54.jpg" style="height:246.24px;">
+                            <p class="intro">作品：è•¾æ¯”é›…æ³³è£…<br>作者：ç´«å’²ã•ã¨ã‚Š</p>
+                        </a>
+                    </div>
+                </li>
+                <li style="left: 768px; top: 2575px;">
+                    <div class="pic">
+                        <a rel="ss" href="https://img1.tiancitycdn.com/cls/homepage/v1/images/pic/fan/fan53.jpg">
+                            <img src="https://img1.tiancitycdn.com/cls/homepage/v1/images/minpic/fan/fan53.jpg" style="height:307.8px;">
+                            <p class="intro">作品：è•¾æ¯”äºšå¤©ç©º<br>作者：ç´«å’²ã•ã¨ã‚Š</p>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+	</div>
+<script>  
+function lookBigPicture(){
+    //大图浏览
+    //(function(e){if(e(".gallery li").length==0)return false;function u(u){function c(){function h(e){e.show();n.removeClass("loading")}var t=e(this),r=parseInt(n.css("borderLeftWidth")),i=s-r*2,u=o-r*2,a=t.width(),f=t.height();if(a==n.width()&&a<=i&&f==n.height()&&f<=u){h(t);return}if(a>i||f>u){var l=u<f?u:f,c=i<a?i:a;if(l/f<=c/a){t.width(a*l/f);t.height(l)}else{t.width(c);t.height(f*c/a)}}n.animate({width:t.width(),height:t.height(),marginTop:-(t.height()/2)-r,marginLeft:-(t.width()/2)-r},200,function(){h(t)})}if(u)u.preventDefault();var a=e(this),f=a.attr("href");if(!f)return;var l=e(new Image).hide();e("#zoom .previous, #zoom .next").show();if(a.hasClass("zoom"))e("#zoom .previous, #zoom .next").hide();if(!r){r=true;t.show();e("body").addClass("zoomed")}n.html(l).delay(500).addClass("loading");l.load(c).attr("src",f);i=a}function a(){var t;if(i.parent()[0].children.length!=1&&i.index()!=0){t=i.prev();t.trigger("click")}else{t=i.parent().parent("li").prev();if(t.length==0)t=e(".gallery li:last-child");t.find(".pic a:last-child").trigger("click")}}function f(){var t,len=e(".gallery li").length;if(i.parent()[0].children.length>1&&i.index()!=i.parent()[0].children.length-1){t=i.next();t.trigger("click")}else{t=i.parent().parent("li").next();if(t.index()==-1)t=e(".gallery li:first-child");t.find(".pic a:first-child").trigger("click")}}function l(s){if(s)s.preventDefault();r=false;i=null;t.hide();e("body").removeClass("zoomed");n.empty()}function c(){s=e(window).width();o=e(window).height()}e("body").append('<div id="zoom"><a class="close"></a><a href="#previous" class="previous"></a><a href="#next" class="next"></a><div class="content loading"></div></div>');var t=e("#zoom").hide(),n=e("#zoom .content"),r=false,i=null,s=e(window).width(),o=e(window).height();(function(){t.on("click",function(t){t.preventDefault();if(e(t.target).attr("id")=="zoom")l()});e("#zoom .close").on("click",l);e("#zoom .previous").on("click",a);e("#zoom .next").on("click",f);e(document).keydown(function(e){if(!i)return;if(e.which==38||e.which==40)e.preventDefault();if(e.which==27)l();if(e.which==37&&!i.hasClass("zoom"))a();if(e.which==39&&!i.hasClass("zoom"))f()});if(e(".gallery li a").length==1)e(".gallery li a").eq(0).addClass("zoom");e(".zoom, .gallery li a").on("click",u);$(".pic a.ss").each(function(){list.push(item[i])})})();(function(){e(window).on("resize",c)})();(function(){e(window).on("mousewheel DOMMouseScroll",function(e){if(!i)return;e.stopPropagation();e.preventDefault();e.cancelBubble=false})})()})(jQuery);
+    (function(e) {
+    if (e(".gallery li").length == 0) return false;
+    function u(u) {
+        function c() {
+            function h(e) {
+                e.show();
+                n.removeClass("loading")
+            }
+            var t = e(this),
+            r = parseInt(n.css("borderLeftWidth")),
+            i = s - r * 2,
+            u = o - r * 2,
+            a = t.width(),
+            f = t.height();
+            if (a == n.width() && a <= i && f == n.height() && f <= u) {
+                h(t);
+                return
+            }
+            if (a > i || f > u) {
+                var l = u < f ? u: f,
+                c = i < a ? i: a;
+                if (l / f <= c / a) {
+                    t.width(a * l / f);
+                    t.height(l)
+                } else {
+                    t.width(c);
+                    t.height(f * c / a)
+                }
+            }
+            n.animate({
+                width: t.width(),
+                height: t.height(),
+                marginTop: -(t.height() / 2) - r,
+                marginLeft: -(t.width() / 2) - r
+            },
+            200,
+            function() {
+                h(t)
+            })
+        }
+        if (u) u.preventDefault();
+        var a = e(this),
+        f = a.attr("href");
+        if (!f) return;
+        var l = e(new Image).hide();
+        e("#zoom .previous, #zoom .next").show();
+        if (a.hasClass("zoom")) e("#zoom .previous, #zoom .next").hide();
+        if (!r) {
+            r = true;
+            t.show();
+            e("body").addClass("zoomed")
+        }
+        n.html(l).delay(500).addClass("loading");
+        l.load(c).attr("src", f);
+        i = a
+    }
+    function a() {
+        var t;
+        if (i.parent()[0].children.length != 1 && i.index() != 0) {
+            t = i.prev();
+            t.trigger("click")
+        } else {
+            t = i.parent().parent("li").prev();
+            if (t.length == 0) t = e(".gallery li:last-child");
+            t.find(".pic a:last-child").trigger("click")
+        }
+    }
+    function f() {
+        var t, len = e(".gallery li").length;
+        if (i.parent()[0].children.length > 1 && i.index() != i.parent()[0].children.length - 1) {
+            t = i.next();
+            t.trigger("click")
+        } else {
+            t = i.parent().parent("li").next();
+            if (t.index() == -1) t = e(".gallery li:first-child");
+            t.find(".pic a:first-child").trigger("click")
+        }
+    }
+    function l(s) {
+        if (s) s.preventDefault();
+        r = false;
+        i = null;
+        t.hide();
+        e("body").removeClass("zoomed");
+        n.empty()
+    }
+    function c() {
+        s = e(window).width();
+        o = e(window).height()
+    }
+    e("body").append('<div id="zoom"><a class="close"></a><a href="#previous" class="previous"></a><a href="#next" class="next"></a><div class="content loading"></div></div>');
+    var t = e("#zoom").hide(),
+    n = e("#zoom .content"),
+    r = false,
+    i = null,
+    s = e(window).width(),
+    o = e(window).height(); (function() {
+        t.on("click",
+        function(t) {
+            t.preventDefault();
+            if (e(t.target).attr("id") == "zoom") l()
+        });
+        e("#zoom .close").on("click", l);
+        e("#zoom .previous").on("click", a);
+        e("#zoom .next").on("click", f);
+        e(document).keydown(function(e) {
+            if (!i) return;
+            if (e.which == 38 || e.which == 40) e.preventDefault();
+            if (e.which == 27) l();
+            if (e.which == 37 && !i.hasClass("zoom")) a();
+            if (e.which == 39 && !i.hasClass("zoom")) f()
+        });
+        if (e(".gallery li a").length == 1) e(".gallery li a").eq(0).addClass("zoom");
+        e(".zoom, .gallery li a").on("click", u);
+        $(".pic a.ss").each(function() {
+            list.push(item[i])
+        })
+    })(); (function() {
+        e(window).on("resize", c)
+    })(); (function() {
+        e(window).on("mousewheel DOMMouseScroll",
+        function(e) {
+            if (!i) return;
+            e.stopPropagation();
+            e.preventDefault();
+            e.cancelBubble = false
+        })
+    })()
+})(jQuery);
+}
+window.onload=function(){lookBigPicture();};
+</script>
+</body>
+</html>
