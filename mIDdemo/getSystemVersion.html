@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>点赞效果</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    body{}
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    .system{position:relative;top:40%;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+
+    </style>
+</head>
+<body>	
+	<article class="wrapper">
+		<div class="system">
+			<p class="tac">你的手机系统是：</p>
+			<h1 class="tac"></h1>
+		</div>
+		<div id="qrcode"></div>
+	</article>
+    <script src="../js/Qrcode.js"></script>
+	<script>
+		(function (doc, win) {
+                var docEl = doc.getElementsByTagName("body")[0].children[0],
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = (docEl.clientWidth||win.innerWidth);
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+                };
+        
+                if (!doc.addEventListener) return;
+                win.addEventListener(resizeEvt, recalc, false);
+                doc.addEventListener('DOMContentLoaded', recalc, false);
+            })(document, window);
+
+        function get_ios_version(){
+		    var ua = navigator.userAgent.toLowerCase();
+		    var version = null;
+		    if (ua.indexOf("like mac os x") > 0) {
+		        var reg = /os [\d._]+/gi;
+		        var v_info = ua.match(reg);
+		        version = (v_info + "").replace(/[^0-9|_.]/ig, "").replace(/_/ig, "."); //得到版本号9.3.2或者9.0
+		        //version = parseInt(version.split('.')[0]); // 得到版本号第一位
+		    }
+
+		    return version;
+		}
+
+		function get_android_version() {
+            var ua = navigator.userAgent.toLowerCase();
+            var version = null;
+            if (ua.indexOf("android") > 0) {
+                var reg = /android [\d._]+/gi;
+                var v_info = ua.match(reg);
+                version = (v_info + "").replace(/[^0-9|_.]/ig, "").replace(/_/ig, "."); //得到版本号4.2.2
+                //version = parseInt(version.split('.')[0]);// 得到版本号第一位
+            }
+
+            return version;
+        }
+
+        var phoneSystem=(function(o){
+			if(o.indexOf("iPhone")!=-1||o.indexOf("iPad")!=-1||o.indexOf("iPod")!=-1){
+				return 'IOS '+get_ios_version();
+			}
+			else if(o.indexOf("Android")!=-1){
+				return 'Android '+get_android_version();
+			}
+			else{
+				return 'Other';
+			}
+		})(navigator.userAgent);
+
+		window.onload=function(){
+			document.querySelector('.system h1.tac').innerHTML=phoneSystem;
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }
+	</script>
+</body>
+</html>
