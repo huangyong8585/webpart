@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>左右滑动带数字</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style>
+.imgBox, .imgBox img { width: 580px; height: 340px; overflow: hidden; }
+.imgBox { position: relative; }
+.imgBox ul { width: 5800px; height: 340px; position: absolute; left: 0; top: 0; z-index: 3; }
+.imgBox ul li { float: left; width: 580px; height: 340px; overflow: hidden; }
+
+.imgBox .swiper-pagination{position:absolute;z-index:10;height:15px;overflow:hidden;bottom:5px;right:5px;}
+.imgBox .swiper-pagination span{display:block; float:left; text-align:center;width:15px;height:15px;line-height:15px;font-size:10px;background:#cdcdcd;margin-left:5px;cursor:pointer;}
+.imgBox .swiper-pagination span.active{ background:#FD017A;}
+</style>
+<script type="text/javascript" src="../js/jquery-1.7.2.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+    <div class="imgBox" id="imgBox">
+        <ul>
+            <li><a href="javascript:;"><img src="http://mat1.gtimg.com/cq/wx/wxgirls/top10/no72.jpg"></a></li>
+            <li><a href="javascript:;"><img src="http://mat1.gtimg.com/cq/wx/wxgirls/top10/no62.jpg"></a></li>
+            <li><a href="javascript:;"><img src="http://mat1.gtimg.com/cq/wx/wxgirls/top10/no102.jpg"></a></li>
+            <li><a href="javascript:;"><img src="http://mat1.gtimg.com/cq/wx/wxgirls/top10/no12.jpg"></a></li>
+            <li><a href="javascript:;"><img src="http://mat1.gtimg.com/cq/wx/wxgirls/top10/no22.jpg"></a></li>
+            <li><a href="javascript:;"><img src="http://mat1.gtimg.com/cq/wx/wxgirls/top10/no52.jpg"></a></li>
+            <li><a href="javascript:;"><img src="http://mat1.gtimg.com/cq/wx/wxgirls/top10/no92.jpg"></a></li>
+            <li><a href="javascript:;"><img src="http://mat1.gtimg.com/cq/wx/wxgirls/top10/no32.jpg"></a></li>
+            <li><a href="javascript:;"><img src="http://mat1.gtimg.com/cq/wx/wxgirls/top10/no42.jpg"></a></li>
+            <li><a href="javascript:;"><img src="http://mat1.gtimg.com/cq/wx/wxgirls/top10/no82.jpg"></a></li>
+        </ul>
+        <div class="swiper-pagination"></div>
+    </div>
+	<script>
+    	function Swiperbanner(elementID,activeClass,play_time){
+			var n = 0,temp_time = null;
+			var Swiper = $("#"+elementID+" ul"),
+                Swiper_child_first = Swiper.children('li:first'),
+			    Swiper_child_last = Swiper.children('li:last'),
+                Swiper_child_length = Swiper.children("li").size(),
+                Swiper_container_width = Swiper.parent().width(),
+                Swiper_wrapper_width = Swiper.width(Swiper_container_width*Swiper_child_length).width(),
+                SwiperPagination = Swiper.parent().children(".swiper-pagination");
+            
+			if(Swiper_child_length<=1||Swiper_child_length>10){return false;}
+			
+			if(play_time){
+                Swiper.hover(
+                    function(){clearTimeout(temp_time);},
+                    function(){temp_time=setTimeout(function(){handle.play_img(n)},play_time);}
+                    );
+            }
+            var handle={
+                play_img:function(num){
+                    if(temp_time){clearTimeout(temp_time);}
+                    this.update_location(num);
+                    if(num<Swiper_child_length&&num>-1){Swiper.animate({"left":-(Swiper_container_width*n)+"px"},500,function(){num++;n=num;});}
+                    if(num==Swiper_child_length){
+                            this.update_location(0);
+                            Swiper_child_first.css({"position":"relative","left":Swiper_container_width*num+"px"});
+                            Swiper.animate({"left":"-="+Swiper_container_width+"px"},500,function(){
+                                Swiper_child_first.removeAttr("style");
+                                Swiper.css("left","0px");
+                                num=1;n=num;
+                                });
+                        }
+                    if(num<0){
+                        this.update_location(Swiper_child_length-1);
+                        Swiper_child_last.css({"position":"relative","left":0-Swiper_wrapper_width+"px"});
+                        Swiper.animate({"left":Swiper_container_width+"px"},500,function(){
+                            Swiper_child_last.removeAttr("style");
+                            Swiper.css("left",0-(Swiper_wrapper_width-Swiper_container_width)+"px");
+                            num=Swiper_child_length;n=num;
+                            });
+                    }
+                   if(play_time){temp_time=setTimeout(function(){handle.play_img(num)},play_time);}
+				},
+                addnumber:function(count){
+                    var _html='',i=0;
+                    for(;i<count;i++){_html+='<span>'+(i+1)+'</span>';}
+                    SwiperPagination.html(_html).children('span').click(function(){
+                        n=$(this).index();
+                        handle.play_img(n);
+                        clearTimeout(temp_time);
+                        });
+                },
+                update_location:function(i){
+                    SwiperPagination.children('span').eq(i).addClass(activeClass).siblings().removeClass(activeClass);
+                }
+            };
+			
+            handle.addnumber(Swiper_child_length);
+            handle.play_img(n);
+		}
+	Swiperbanner("imgBox","active",3000);
+    </script>
+</body>
+</html>
