@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>简单日期控件</title>
+	<style>
+	@charset "utf-8";
+	blockquote,body,caption,dd,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,iframe,img,input,label,legend,li,object,ol,p,pre,span,strong,table,tbody,td,tfoot,th,thead,tr,ul{border:0 none;margin:0;outline:0 none;padding:0;}
+	body,html{font:12px/1.2 'Microsoft YaHei',roboto,SimSun,Helvetica,Tahoma,StSun,SimSun,sans-serif;}
+	ol,ul{list-style:none;}
+	table{border-collapse:collapse;border-spacing:0;}
+	:focus{outline:0;}
+	button::-moz-focus-inner{padding:0;border:0;}
+	a{outline:0;text-decoration:none;}
+	a:hover,a:hover *{text-decoration:none;-moz-transition:all 0.5s;-webkit-transition:all 0.5s;-o-transition:all 0.5s;-ms-transition:all 0.5s;transition:all 0.5s;}
+	a:link,a:link *{-moz-transition:all 0.3s;-webkit-transition:all 0.3s;-o-transition:all 0.3s;-ms-transition:all 0.3s;transition:all 0.3s;}
+	.fl{float:left;}
+	.fr{float:right;}
+	.clearfix:after{display:block;clear:both;height:0;visibility:hidden;content:".";}
+	.clearfix{display:block;*display:inline-block;}
+	* html .clearfix{height:1%;}
+	.tac{ text-align:center;}
+	.red{color:#F00;}
+	.jt{font-family:sans-serif;font-weight:normal;padding-left:3px;}
+	a.more{color:#fff;font-size:14px;width:110px; padding-left:12px;display:block;height:40px;line-height:40px;background:#0079be;}
+	a.more:hover{background:#303030;}
+	body{min-width:1170px;background:#fff;}
+
+	
+	/*DateCSS样式*/
+	#calendar{width:287px;height:195px;color:#333;display:block;overflow:hidden;}
+	#calendar .tableborder{width:280px;text-align:center;table-layout:fixed;border-bottom:1px solid #e2e2e2;}
+	#calendar .header{height:26px;font-size:12px;background-color:#5995f4;}
+	#calendar .header td{color:#fff;}
+	#calendar .header a{color:#fff;}
+	#calendar .header .yearmonth a{font-family:Arial;font-size:12px;color:#fff;}
+	#calendar .header td a.jt{display:block;width:30px;height:30px;text-align:center;line-height:30px;font-size:12px;font-family:SimSun;}
+	#calendar .header td a.jt:hover{color:#acd697;}
+	#calendar .category{color:#333;height:26px;width:30px;font-size:12px;letter-spacing:-1px;border-right:1px solid #e2e2e2;}
+	#calendar .altbg2{height:22px;font-size:12px;}
+	#calendar .altbg2 td{vertical-align:middle;border-collapse:collapse;border:1px solid #e2e2e2;}
+	#calendar .altbg2 td a,#calendar .altbg2 td span{display:block;height:22px;line-height:22px;}
+	#calendar .expire,#calendar .expire a:link,#calendar .expire a:visited{color:#333;}
+	#calendar .altbg2 td span{color:#ccc;/*当前日期后的颜色*/visibility:hidden;}
+	#calendar .default a{color:#333;/*当前日期后的颜色*/}
+	#calendar .checked a{ background:#5995f4;color:#fff;/*选定年份、选定月份及选定日期的颜色*/}
+	#calendar .today a{color:#333;/*当前年份、当前月份及当前日期的颜色*/}
+	#calendar_year{display:none;line-height:130%;background:#3CF;/*年份选择框分割线颜色*/position:absolute;z-index:10;}
+	#calendar_year .col{float:left;background:#3CF;/*年份选择框底色*/margin-left:0px;border:0px solid #3CF;/*年份选择框边框颜色及宽度*/padding:2px;}
+	#calendar_month{display:none;background:#3CF;/*月份选择框底色*/line-height:130%;border:0px solid #3CF;/*月份选择框边框颜色及宽度*/padding:2px;position:fixed;z-index:11;}
+	#calendar #year,#calendar #month{padding-right:2px;}
+
+	</style>
+</head>
+<body>
+<div class="calendar" id="calendarBox"></div>
+<script src="../js/jquery-1.7.2.min.js"></script>
+<script>
+function jcDate(NowTime){
+	var controlid = null; 
+	var currdate = null; 
+	var startdate = null; 
+	var enddate = null; 
+	var yy = null; 
+	var mm = null; 
+	var currday = null; 
+	var addtime = false; 
+	var today = new Date(NowTime); 
+	var lastcheckedyear = false; 
+	var lastcheckedmonth = false; 
+	function loadcalendar(){ 
+		s = ''; 
+		s += '<div id="calendar"><input type="hidden" value="" id="dateHideText">'; 
+		s += '<table class="tableborder">'; 
+	 
+		s += '<tr align="center" class="header"><td><a href="javascript:void(0);" id="d_prev" class="jt">&lt;</a></td><td colspan="5" class="yearmonth"><a href="javascript:void(0);" id="year"></a>年<a id="month" href="javascript:void(0);"></a>月</td><td><a href="javascript:void(0);" class="jt" id="d_next">&gt;</a></td></tr>'; 
+		s += '<tr class="category"><td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td></tr>'; 
+		for(var i = 0; i < 6; i++){
+			s += '<tr class="altbg2">'; 
+			for(var j = 1; j <= 7; j++) 
+			s += "<td id=d" + (i * 7 + j) + "></td>"; 
+			s += "</tr>"; 
+		} 
+		s += '</table></div>';/// 
+		/*s += '<div id="calendar_year"><div class="col">'; 
+		for(var k = 1930; k <= 2049; k++){
+			s += k != 1930 && k % 10 == 0 ? '</div><div class="col">' : ''; 
+			s += '<a href="#" onclick="refreshcalendar(' + k + ', mm);getElem(\'calendar_year\').style.display=\'none\';return false"><span' + (today.getFullYear() == k ? ' class="today"' : '') + ' id="calendar_year_' + k + '">' + k + '</span></a><br />'; 
+		} 
+		s += '</div></div>'; 
+		s += '<div id="calendar_month">'; 
+		for(var k = 1; k <= 12; k++){
+			s += '<a href="#" onclick="refreshcalendar(yy, ' + (k - 1) + ');getElem(\'calendar_month\').style.display=\'none\';return false"><span' + (today.getMonth()+1 == k ? ' class="today"' : '') + ' id="calendar_month_' + k + '">' + k + ( k < 10 ? ' ' : '') + ' 月</span></a><br />'; 
+		} 
+		s += '</div>'; */
+		//var nElement = document.createElement("div"); 
+		//nElement.innerHTML=s; 
+		document.getElementById("calendarBox").innerHTML=s;//.appendChild(nElement); 
+		getElem("calendar").getElementsByTagName("table")[0].onclick=function(event){
+			var e=event||window.event;
+			var _target=(e.target||e.srcElement);
+			if(_target.className=="prevMonth"){
+				controlid.value=_target.getAttribute("date");
+				//refreshcalendar(yy, mm-1);
+				setNowWeek(controlid.value);
+				showcalendar();
+				}
+			else if(_target.className=="nextMonth"){
+				controlid.value=_target.getAttribute("date");
+				//refreshcalendar(yy, mm+1);
+				setNowWeek(controlid.value);
+				showcalendar();
+				}
+			else if(_target.nodeName.toLowerCase()=="a"&&_target.href.indexOf("settime")>-1){
+				eval(_target.href.replace("javascript:",""));
+				return false;
+				}
+			}
+		getElem("d_prev").onclick=function(){refreshcalendar(yy, mm-1);}
+		getElem("d_next").onclick=function(){refreshcalendar(yy, mm+1);}	
+	} 
+	function returnMouthMaxNum(m,y){
+			return [31, y % 4 == 0 && y % 100 != 0  || y % 400 == 0 ? 29 : 28 ,31,30,31,30,31,31,30,31,30,31][m-1];
+			}
+	function parsedate(s){ 
+		/(\d+)\-(\d+)\-(\d+)\s*(\d*):?(\d*)/.exec(s); 
+		var m1 = (RegExp.$1 && RegExp.$1 > 1899 && RegExp.$1 < 2101) ? parseFloat(RegExp.$1) : today.getFullYear(); 
+		var m2 = (RegExp.$2 && (RegExp.$2 > 0 && RegExp.$2 < 13)) ? parseFloat(RegExp.$2) : today.getMonth() + 1; 
+		var m3 = (RegExp.$3 && (RegExp.$3 > 0 && RegExp.$3 < 32)) ? parseFloat(RegExp.$3) : today.getDate(); 
+		var m4 = (RegExp.$4 && (RegExp.$4 > -1 && RegExp.$4 < 24)) ? parseFloat(RegExp.$4) : 0; 
+		var m5 = (RegExp.$5 && (RegExp.$5 > -1 && RegExp.$5 < 60)) ? parseFloat(RegExp.$5) : 0; 
+		/(\d+)\-(\d+)\-(\d+)\s*(\d*):?(\d*)/.exec("0000-00-00 00\:00"); 
+		return new Date(m1, m2 - 1, m3, m4, m5); 
+	} 
+	function settime(d){ 	
+		var str=yy + "-" + zerofill(mm + 1) + "-" + zerofill(d);
+		controlid.value=str;
+		//setNowWeek(controlid.value);
+		//getThisDateHD(str)
+		alert(str);
+		showcalendar();
+		//controlid.value = yy + "-" + zerofill(mm + 1) + "-" + zerofill(d) + (addtime ? ' ' + zerofill($('hour').value) + ':' + zerofill($('minute').value) : ''); 
+	} 
+	function showcalendar(event, controlid1, addtime1, startdate1, enddate1){ 
+		controlid = getElem("dateHideText"); 
+		/*addtime = addtime1; 
+		startdate = startdate1 ? parsedate(startdate1) : false; 
+		enddate = enddate1 ? parsedate(enddate1) : false; */
+		currday = controlid.value ? parsedate(controlid.value) : today;  
+		refreshcalendar(currday.getFullYear(), currday.getMonth()); 
+		/*if(lastcheckedyear != false){
+			getElem('calendar_year_' + lastcheckedyear).className = 'default'; 
+			getElem('calendar_year_' + today.getFullYear()).className = 'today'; 
+		} 
+		if(lastcheckedmonth != false){
+			getElem('calendar_month_' + lastcheckedmonth).className = 'default'; 
+			getElem('calendar_month_' + (today.getMonth() + 1)).className = 'today'; 
+		} 
+		getElem('calendar_year_' + currday.getFullYear()).className = 'checked'; 
+		getElem('calendar_month_' + (currday.getMonth() + 1)).className = 'checked'; 
+		getElem('hourminute').style.display = addtime ? '' : 'none'; */
+		lastcheckedyear = currday.getFullYear(); 
+		lastcheckedmonth = currday.getMonth() + 1; 
+	}
+	function refreshcalendar(y, m){
+		var x = new Date(y, m, 1); 
+		var mv = x.getDay(); 
+		var d = x.getDate(); 
+		var dd = null;
+		var temp=0;
+		yy = x.getFullYear(); 
+		mm = x.getMonth(); 
+		var prevM=returnMouthMaxNum((mm-1<0?12:mm),yy);
+		var td_list=getElem("calendar").getElementsByTagName("td");
+		for(var iii=0,td_len=td_list.length;iii<td_len;iii++){
+			if(td_list[iii].className=="checked"){td_list[iii].className="";td_list[iii].removeAttribute("class");}
+			}
+		getElem("year").innerHTML = yy; 
+		getElem("month").innerHTML = reEnglishMonth(mm + 1);//mm + 1 > 9 ? (mm + 1) : '0' + (mm + 1);
+		
+		var prevDateStr=(mm-1<0?yy-1:yy)+"-"+(mm-1<0?12:mm)+"-";
+		var nextDateStr=(mm+1<12?yy:yy+1)+"-"+(mm+1<12?mm+2:1)+"-";
+		for(var i = mv; i >0; i--){
+			dd = getElem("d" + i); 
+			dd.innerHTML = "<span class=\"prevMonth\" date="+(prevDateStr+(prevM-(mv-i)))+">"+(prevM-(mv-i))+"</span>"; 
+			dd.className = ""; 
+		} 
+		while(x.getMonth() == mm){
+			dd = getElem("d" + (d + mv));
+			dd.innerHTML = '<a href="javascript:settime(' + d + ')">' + d + '</a>'; 
+			/*if(x.getTime() < today.getTime() || (enddate && x.getTime() > enddate.getTime()) || (startdate && x.getTime() < startdate.getTime())){
+				dd.className = 'expire'; 
+			} 
+			else {
+				dd.className = 'default'; 
+			} 
+			if(x.getFullYear() == today.getFullYear() && x.getMonth() == today.getMonth() && x.getDate() == today.getDate()){
+				dd.className = 'today'; 
+				//dd.firstChild.title = '今天'; 
+			} */
+			//if(x.getFullYear() == currday.getFullYear() && x.getMonth() == currday.getMonth() && x.getDate() == currday.getDate()){
+			if(x.getTime()=== currday.getTime()){
+				dd.className = 'checked';
+			}
+			else {
+				dd.className = 'default'; 
+			} 
+			x.setDate(++d);
+		} 
+		temp=d;
+		while(d + mv <= 42){
+			dd = getElem("d" + (d + mv)); 
+			dd.innerHTML = "<span class=\"nextMonth\" date="+(nextDateStr+(d-temp+1))+">"+(d-temp+1)+"</span>";
+			d++;
+		} 
+		/*if(addtime){
+			getElem('hour').value = zerofill(hh); 
+			getElem('minute').value = zerofill(ii); 
+		} */
+	} 
+	/*function showdiv(id) 
+	{ 
+		var p = getposition(getElem(id)); 
+		getElem('calendar_' + id).style.left = p['x']+'px'; 
+		getElem('calendar_' + id).style.top = (p['y'] + 16)+'px'; 
+		getElem('calendar_' + id).style.display = 'block'; 
+	}*/
+	function zerofill(s) 
+	{ 
+		var s = parseFloat(s.toString().replace(/(^[\s0]+)|(\s+$)/g, '')); 
+		s = isNaN(s) ? 0 : s; 
+		return (s < 10 ? '0' : '') + s.toString(); 
+	} 
+	function reEnglishMonth(n){
+		switch (n){
+			case 1:return "一";break;
+			case 2:return "二";break;
+			case 3:return "三";break;
+			case 4:return "四";break;
+			case 5:return "五";break;
+			case 6:return "六";break;
+			case 7:return "七";break;
+			case 8:return "八";break;
+			case 9:return "九";break;
+			case 10:return "十";break;
+			case 11:return "十一";break;
+			case 12:return "十二";break;
+			}
+		}
+	loadcalendar();
+	showcalendar();
+	
+	function getElem(objID){ 
+		return document.getElementById(objID); 
+	}
+}
+window.onload=function(){
+	jcDate(new Date().getTime());
+}
+</script>
+</body>
+</html>

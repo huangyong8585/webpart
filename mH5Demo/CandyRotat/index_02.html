@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>万圣糖果翻翻乐 HAPPY哈喽喂 天才宝贝</title>
+<script>
+var u_s=window.location.search,o=navigator.userAgent;
+if(u_s.indexOf("from=timeline")>-1||u_s.indexOf("from=singlemessage")>-1||u_s.indexOf("from=groupmessage")>-1){window.location.href="index_01.html";}
+
+if(o.indexOf("iPhone")!=-1||o.indexOf("iPad")!=-1||o.indexOf("iPod")!=-1){
+	phoneSystem = "iOS";
+	//window.location.href=
+	}
+else if(o.indexOf("Android")!=-1){
+	phoneSystem = 'Android';
+	//window.location.href="indexAndroid.html";
+	}
+else if(o.indexOf("Windows Phone")!=-1) {
+	phoneSystem = 'Windows Phone';
+	}
+</script>
+<style>
+@charset "utf-8";
+blockquote,body,caption,dd,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,iframe,img,label,legend,li,object,ol,p,pre,span,strong,table,tbody,td,tfoot,th,thead,tr,ul,article,section,aside,figure{border:0 none;margin:0;outline:0 none;padding:0;}
+body,html{font-family:'Microsoft YaHei',Helvetica,Tahoma,StSun,SimSun,sans-serif;background-color:#000;-webkit-text-size-adjust:none;height:100%;font-size:medium;}
+ol,ul,li{list-style:none}
+table{border-collapse:collapse;border-spacing:0}
+:focus{outline:0}
+button::-moz-focus-inner{padding:0;border:0}
+a:link,a:visited{text-decoration: none;color:#9b5e16;}
+a:hover{text-decoration:none;}
+a{-webkit-tap-highlight-color:rgba(255,0,0,0);}
+img{border:0;}
+.clear{clear:both;display:block;margin:0;padding:0}
+.clear-after:after{content:"";display:block;height:0;clear:both;visibility:hidden}
+* .clear-after{zoom:1}
+.hide{display:none}
+.clearfix:after{display:block;clear:both;height:0;visibility:hidden;content:"."}
+.clearfix{display:block;*display:inline-block;zoom:1;}
+* html .clearfix{height:1%}
+.tac{text-align:center}
+.w100{width:100%;}
+.imgw100{width:100%;display:block;}
+
+.hbox {display:-webkit-box;display:-moz-box;display:-ms-flexbox;-webkit-box-orient:horizontal;-moz-box-orient:horizontal;box-orient:horizontal;-ms-flex-direction:row;display:box;width:100%;}
+.vbox {display:-webkit-box;display:-moz-box;display:-ms-flexbox;-webkit-box-orient:vertical;-moz-box-orient:vertical;box-orient:vertical;-ms-flex-direction:column;display:box;height:100%;}
+.flex1 {-webkit-box-flex:1;-moz-box-flex:1;-ms-flex:1;box-flex:1;}
+.flex2 {-webkit-box-flex:2;-moz-box-flex:2;-ms-flex:2;box-flex:2;}
+.flex3 {-webkit-box-flex:3;-moz-box-flex:3;-ms-flex:3;box-flex:3;}
+.flex4 {-webkit-box-flex:4;-moz-box-flex:4;-ms-flex:4;box-flex:4;}
+.flex5 {-webkit-box-flex:5;-moz-box-flex:5;-ms-flex:5;box-flex:5;}
+
+.wrapper{position:relative;height:100%;}
+.wrapper section{position:absolute;left:0;top:0;width:100%;height:100%;/*display:none;*/opacity:0;overflow:hidden;-webkit-transition:opacity 1s ease;transition:opacity 1s ease;}
+
+
+.content2{height:100%;background:url(image/gamebg.png) center center/100% 100% no-repeat;}
+
+.wrapper .animated{opacity:1;/*animation: opacityto1 0.8s linear;-moz-animation:opacityto1 0.8s linear;-webkit-animation:opacityto1 0.8s linear;*/}
+
+/*分享*/
+.sharetip{position:fixed;width:100%;height:100%;left:0;top:150%;background-color:rgba(0,0,0,0.6);z-index:90;-webkit-transform:translateY(350%);-moz-transform:translateY(350%);transform:translateY(350%);
+-webkit-transition:all .5s ease-in-out;-moz-transition:all .5s ease-in-out;transition:all .5s ease-in-out; text-align:right;}
+.sharetip img{width:43.59375%; margin-right:3%;}
+.sharetip a{display:block;width:40%;height:3rem;color:#fff;border-radius:.5rem;box-shadow:0 0 10px rgba(200,200,200,0.5);background:#aaa1cd;text-align:center;line-height:3rem;font-size:1rem;position:absolute;left:30%;top:50%; margin-top:-1.5rem;}
+/*弹出层*/
+.popbox{position:fixed;width:100%;height:100%;left:0;top:0;background-color:rgba(0,0,0,0.6);z-index:10;-webkit-transform:translateY(-150%);-moz-transform:translateY(-150%);transform:translateY(-150%);
+-webkit-transition:transform .2s ease-in-out;-moz-transition:transform .2s ease-in-out;transition:transform .2s ease-in-out;}
+.pop{display:none;position:absolute;width:90%;left:5%;top:50%;background-color:rgba(86,71,142,0.85);border-radius:0.5em; padding-bottom:2%;}
+/*.pop .closepop{position:absolute;right:0;top:0;padding:4%; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfAgMAAABiwP6qAAAACVBMVEUAAAAVCgIkGRJnPJyuAAAAAXRSTlMAQObYZgAAAFpJREFUGNNFkEEOACEIAyHhsEeexNP26WLTjGooChRqTGhVtHChhBvIC7KjFEVtvuv8DqcLXNo6qjB97jZr2em2UyMwCy/kUAUPzPSiO/P4Nsz8VKALpWjnNw4evAWS9iAWqwAAAABJRU5ErkJggg==) center center no-repeat; background-size:70% 70%;}
+.pop .closepop img{height:1.4em;display:block;opacity:0;}*/
+.pop h3{font-size:2em; text-align:center;color:#ffea00;text-shadow:0 0 5px rgba(255,200,0,0.6);padding:4% 0 2%;line-height:1;font-weight:normal;}
+.pop p a{font-size:1em;line-height:2em;height:2.2em;text-align:center;background:-webkit-gradient(linear,0 0,0 70%,from(#aaa1cd),to(#504288));border:0.2em solid #504288; box-shadow:0 0 10px rgba(0,0,0,0.4);border-radius:0.4em;box-sizing:border-box;color:#fff;}
+.pop p.bbut{padding:4% 3% 2%;text-align:center;}
+.pop p.bbut a{display:inline-block;width:90%;height:2.3em;}
+.pop p.sbut{padding:2% 3% 4%;}
+.pop p.sbut a{display:inline-block;width:40%;margin:0 5%;}
+.pop .tel_box,.pop .city_center{padding:1% 8% 3%;}
+.pop .tel_box span,.pop .city_center span{display:block;font-size:1em;color:#f0f0f0;margin-bottom:2%;}
+.pop .tel_box input{width:94%;height:2em;line-height:2em;font-size:1em;font-weight:bold;letter-spacing:1px;border-radius:0.4em;border:1px solid #c0c0c0;padding:0 3%;}
+.pop .city_center select{display:inline-block;width:45%;height:2em;font-size:1em;border-radius:0.4em;border:1px solid #fff;box-sizing:border-box;}
+.pop .city_center select#select_city{margin-right:10%;}
+.alertpop{display:none;position:fixed;width:100%;height:100%;left:0;top:0;background-color:rgba(0,0,0,0.5);z-index:100;}
+.alertpop .alertbox{position:absolute;width:60%;left:20%;top:50%; background:#fff;border-radius:0.5em;overflow:hidden;}
+.alertpop .alertbox p{padding:8% 6%;font-size:1em; word-break:break-all;}
+.alertpop .alertbox .but{border-top:1px solid #b3d1fe;}
+.alertpop .alertbox .but a{display:inline-block;width:50%;height:2.5em;line-height:2.5em;text-align:center;box-sizing:border-box;color:#333;}
+.alertpop .alertbox .but a:first-child{border-right:1px solid #b3d1fe;}
+.alertpop .alertbox .but a:active{ background:#ccc;}
+
+.board .topplane{width:100%;height:15%;padding-top:0.5rem;margin-bottom:1.5rem;}
+.board .topplane .levelplane{float:left;width:33%;height:2rem;color:#ff0;font-size:1rem;text-indent:1rem;display:none;}
+.board .topplane .process{float:right;width:33%;height:2rem;display:none;}
+.board .topplane .scorebox{float:left;width:33%;height:2rem;color:#ff0;font-size:1rem;text-indent:1rem;display:none;}
+.board .topplane .process .timeplane{color:#ff0;font-size:1rem; text-indent:1rem;}
+.board .topplane:after{display:block;clear:both;height:0;visibility:hidden;content:"."}
+
+.board .gameplane{width:748px; /*height:668px;*/margin:0px auto;padding:30px 20px; background:url(image/bg.png) 0 0/auto 100% repeat-x; visibility:hidden;}
+.board .gameplane .cardplane{float:left;width:187px; height:187px; text-align:center;}
+.board .gameplane .card{width:170px; margin:0px auto 0px auto; position:relative;}
+.board .gameplane .card .list{position:absolute;}
+.board .gameplane .card .list img{/*border:1px solid #DEDEDE;*/border-radius:12px; margin-top:9px;/*-moz-box-shadow: 3px 3px 3px #666666;-webkit-box-shadow:3px 3px 3px #666666;box-shadow:3px 3px 3px #666666;*/cursor:pointer;}
+.board .gameplane:after{content:" ";display:block;clear:both;height:0;visibility:hidden;}
+
+.board .tips{width:70%;height:10rem;position:absolute;left:15%;top:50%;margin-top:-5rem;background:rgba(86,71,142,0.85);border-radius:0.75rem;display:none;}
+.board .tips p{color:#fff;height:5rem; line-height:3rem;padding:1rem 0;font-size:1rem; text-align:center;}
+.board .tips a{ display:block;width:40%;height:2rem;color:#f0f0f0;border-radius:.4rem; box-shadow:0 0 10px rgba(0,0,0,0.25);background:#aaa1cd;text-align:center; margin:0 auto;line-height:2rem;font-size:1rem;}
+
+.board #message{position:absolute;top:50%;left:50%;width:4rem;height:8rem;text-align:center;margin:-4rem 0 0 -2rem;line-height:4rem;font-size:3rem;opacity:0;display:none;}
+.board .message_start:after{/*background:url(images/start.png) 0 0/100% 100% no-repeat;*/content:"开始";color:#f60;font-weight:bold;}
+.board .message_success:after{/*background:url(images/success.png) 0 0/100% 100% no-repeat;*/content:"成功";color:#f00;font-weight:bold;}
+.board .message_fail:after{/*background:url(images/fail.png) 0 0/100% 100% no-repeat;*/content:"失败";color:#333;font-weight:bold;}
+.board .message_clear:after{/*background:url(images/clear.png) 0 0/100% 100% no-repeat;content:"通过";color:#0c3;font-weight:bold;*/}
+
+@media screen and (max-width:320px) and (max-height:480px) {
+	.board .topplane{height:12.5%;}
+}
+@media screen and (max-width:320px) and (max-height:420px) {
+	.board .topplane{height:7.5%;}
+}
+@media screen and (min-width:720px) and (min-height:960px) {
+	.board .topplane{height:7.5%;}
+}
+
+/** animate start **/
+.in {
+    -webkit-animation-timing-function: ease-out;
+    -webkit-animation-duration: 350ms;
+    -moz-animation-timing-function: ease-out;
+    -moz-animation-duration: 350ms;
+}
+.out {
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-duration: 225ms;
+    -moz-animation-timing-function: ease-in;
+    -moz-animation-duration: 225ms;
+}
+
+.viewport-flip {
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    position: absolute;
+}
+
+.flip {
+    -webkit-backface-visibility:hidden;
+    -webkit-transform:translateX(0); 
+    -moz-backface-visibility:hidden;
+    -moz-transform:translateX(0);
+}
+.flip.out {
+    -webkit-transform: rotateY(-90deg) scale(.9);
+    -webkit-animation-name: flipouttoleft;
+    -webkit-animation-duration: 175ms;
+    -moz-transform: rotateY(-90deg) scale(.9);
+    -moz-animation-name: flipouttoleft;
+    -moz-animation-duration: 175ms;
+}
+.flip.in {
+    -webkit-animation-name: flipintoright;
+    -webkit-animation-duration: 225ms;
+    -moz-animation-name: flipintoright;
+    -moz-animation-duration: 225ms;
+}
+.flip.out.reverse {
+    -webkit-transform: rotateY(90deg) scale(.9);
+    -webkit-animation-name: flipouttoright;
+    -moz-transform: rotateY(90deg) scale(.9);
+    -moz-animation-name: flipouttoright;
+}
+.flip.in.reverse {
+    -webkit-animation-name: flipintoleft;
+    -moz-animation-name: flipintoleft;
+}
+@-webkit-keyframes flipouttoleft {
+    from { -webkit-transform: rotateY(0); }
+    to { -webkit-transform: rotateY(-90deg) scale(.9); }
+}
+@-moz-keyframes flipouttoleft {
+    from { -moz-transform: rotateY(0); }
+    to { -moz-transform: rotateY(-90deg) scale(.9); }
+}
+@-webkit-keyframes flipouttoright {
+    from { -webkit-transform: rotateY(0) ; }
+    to { -webkit-transform: rotateY(90deg) scale(.9); }
+}
+@-moz-keyframes flipouttoright {
+    from { -moz-transform: rotateY(0); }
+    to { -moz-transform: rotateY(90deg) scale(.9); }
+}
+@-webkit-keyframes flipintoleft {
+    from { -webkit-transform: rotateY(-90deg) scale(.9); }
+    to { -webkit-transform: rotateY(0); }
+}
+@-moz-keyframes flipintoleft {
+    from { -moz-transform: rotateY(-90deg) scale(.9); }
+    to { -moz-transform: rotateY(0); }
+}
+@-webkit-keyframes flipintoright {
+    from { -webkit-transform: rotateY(90deg) scale(.9); }
+    to { -webkit-transform: rotateY(0); }
+}
+@-moz-keyframes flipintoright {
+    from { -moz-transform: rotateY(90deg) scale(.9); }
+    to { -moz-transform: rotateY(0); }
+}
+/** animate end */
+
+/*自定义动画*/
+@-webkit-keyframes opacityto1{0%{opacity:0;} 50%{opacity:0.5;} 100%{opacity:1;}}
+@-moz-keyframes opacityto1 {0%{opacity:0;} 50%{opacity:0.5;} 100%{opacity:1;}}
+@keyframes opacityto1 {0%{opacity:0;} 50%{opacity:0.5;} 100%{opacity:1;}}
+
+</style>
+</head>
+
+<body>
+	<header style="display:none;">
+    	<img src="image/share.jpg">
+    </header>
+	<article class="wrapper">
+        <section id="wrap2" class="content2 board">
+        	<!-- top plane start -->
+            <div class="topplane">
+                <div class="scorebox" id="scorebox">得分：<span id="score"></span></div>
+                <div class="levelplane" id="levelplane"><!--第--><span id="level" style=" display:none;"></span><!--关--></div>
+                <div class="process" id="process">
+                    <div class="timeplane" id="timeplane">剩余时间: <span id="livetime"></span></div>
+                </div>
+            </div>
+            <!-- top plane end -->
+        
+            <!-- game plane start -->
+            <div class="gameplane" id="gameplane"></div>
+            <!-- game plane end -->
+            <div class="tips" id="tips">
+            	<p>准备好了吗？</p>
+            	<a href="javascript:void(0)" id="startgame">开始游戏</a>
+            </div>
+            <!-- game message start -->
+            <div class="message_start" id="message"></div>
+            <!-- game message end -->
+        </section>
+	</article>
+    <!--弹出层-->
+    <div class="popbox">
+        <div class="pop" id="isOver">
+            <h3>GAME OVER</h3>
+            <div class="tel_box">
+                <span>请输入您的手机号</span>
+                <input id="phone" type="tel" maxlength="11">
+            </div>
+            <div class="city_center">
+                <span>请选择离您最近的中心进行兑换</span>
+                <select id="select_city"></select><select id="select_center"></select>
+            </div>
+            <p class="bbut"><a href="javascript:checkform();">提 交</a></p>
+            <p class="sbut"><a href="javascript:showShareImg();">去分享</a><a href="javascript:;" id="againgame">再来一次</a></p>
+        </div>
+    </div>
+    <!--弹出层-->
+    <!--alert层-->
+    <div class="alertpop" id="alertbox">
+        <div class="alertbox">
+            <p></p>
+            <div class="but">
+                <a href="javascript:showAlertBox();">确定</a><a href="javascript:showAlertBox();">取消</a>
+            </div>
+        </div>
+    </div>
+    <!--alert层-->
+    <!--分享指引-->
+    <div class="sharetip" id="sharetip"><img src="image/sharetip.png" /><!--<a href="javascript:void(0)" id="againgame">再来一次</a>--></div>
+    <!--分享指引-->
+	<script src="js/zepto.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/common.js" /></script>
+	<script type="text/javascript" src="js/main.js" /></script>
+    <script>
+		(function (doc, win) {
+          var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+              var clientWidth = docEl.clientWidth;
+              if (!clientWidth) return;
+			  docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+              //doc.getElementsByTagName('body')[0].style.fontSize = 12 * (clientWidth / 320) + 'px';
+            };
+
+          if (!doc.addEventListener) return;
+          win.addEventListener(resizeEvt, recalc, false);
+          doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+		
+		//打开分享指引
+		function showShareImg(){
+			var box=document.getElementById("sharetip");
+			box.style.top=0;
+			box.style.webkitTransform='translateY(0)';
+			box.style.transform='translateY(0)';
+			box.onclick=function(){
+				box.style.top="150%";
+				box.style.webkitTransform='translateY(350%)';
+				box.style.transform='translateY(350%)';
+				}
+			}
+
+		function showPage(num){
+			var wrap=document.getElementById("wrap"+num);
+			//var wrap=$("#wrap"+num);
+			//wrap.siblings("section").hide().removeClass("animated");
+			//wrap.show();
+			wrap.style.display="block";
+			setTimeout(function(){wrap.className+=" animated";},10);
+			}
+		showPage(2);
+		
+		var width=document.documentElement.clientWidth;
+		document.getElementById("gameplane").style.zoom=(width*(788/889))/788;
+		//document.getElementById("gameplane").style.webkitTransform="scale("+(width*(787/889))/787+")";
+		//document.getElementById("gameplane").style.transform="scale("+(width*(787/889))/787+")";
+		var ALL_CITY=false;
+		
+		function loadScript(url){
+			if(ALL_CITY){return false;}
+			else{var t=document.createElement("script");
+				t.src=url,t.type="text/javascript",t.async=!0;
+				document.getElementsByTagName("head")[0].appendChild(t);
+				t.onload=function(){addcitylist();}
+				}
+			}
+			
+		//打开弹出层	
+		function showPOP(t){
+			var box=document.getElementById("isOver");
+			if(t){
+				box.children[0].innerHTML=t;
+				box.style.display="block";
+				box.style.marginTop=(0-box.offsetHeight/2)+"px";
+				box.parentNode.style.webkitTransform='translateY(0)';
+				box.parentNode.style.transform='translateY(0)';
+				if(!ALL_CITY){loadScript('js/city.js');}
+				}
+			else{
+				box.parentNode.style.webkitTransform='translateY(-150%)';
+				box.parentNode.style.transform='translateY(-150%)';
+				setTimeout(function(){box.style.display="none";},300);
+				}
+			}
+				
+		//打开出alert层	
+		function showAlertBox(t){
+			var box=document.getElementById("alertbox");
+			if(t){
+				box.children[0].children[0].innerHTML=t;
+				box.style.display="block";
+				box.children[0].style.marginTop=(0-box.children[0].offsetHeight/2)+"px";
+				}
+			else{
+				box.style.display="none";
+				if(showAlertBox.success){
+					showPOP(false);
+					setTimeout(function(){showShareImg();},500);
+					}
+				}
+			}
+		
+	</script>
+</body>
+</html>

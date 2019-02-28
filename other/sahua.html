@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>撒花特效</title>
+<style>
+body,html{border:0;margin:0;outline:0;padding:0;background-color:#121212;-webkit-text-size-adjust:none;height:100%;overflow:hidden;}
+</style>
+</head>
+<body>
+<script>
+/* Copyright 2012-2018 Voormedia */
+"use strict";
+(function(e) {
+    function x(t, e) {
+        return e ? e(t) : t
+    }
+    function _(t) {
+        return ! (null === t || void 0 === t)
+    }
+    function O(t, e, n) {
+        return x(t && _(t[e]) ? t[e] : Hn[e], n)
+    }
+    function k(t) {
+        return parseInt(t, 16)
+    }
+    function P(t) {
+        var e = (t + "").replace(/[^0-9a-f]/gi, "");
+        return e.length < 6 && (e = e[0] + e[0] + e[1] + e[1] + e[2] + e[2]),
+        {
+            r: k(e.substring(0, 2)),
+            g: k(e.substring(2, 4)),
+            b: k(e.substring(4, 6))
+        }
+    }
+    function j(t) {
+        var e = O(t, "origin", Object);
+        return e.x = O(e, "x", Number),
+        e.y = O(e, "y", Number),
+        e
+    }
+    function E(t) {
+        var e = t.getContext("2d"),
+        n = window.devicePixelRatio || 1,
+        r = e.webkitBackingStorePixelRatio || e.mozBackingStorePixelRatio || e.msBackingStorePixelRatio || e.oBackingStorePixelRatio || e.backingStorePixelRatio || 1,
+        o = n / r;
+        t.width = document.documentElement.clientWidth ,
+        t.height = document.documentElement.clientHeight,
+        t.style.width = document.documentElement.clientWidth + "px",
+        t.style.height = document.documentElement.clientHeight + "px"
+		console.log(t.width,t.height);
+    }
+    function S(t) {
+        var e = document.createElement("canvas");
+        return E(e),
+        e.style.position = "absolute",
+        e.style.top = "0px",
+        e.style.left = "0px",
+        e.style.pointerEvents = "none",
+        e.style.zIndex = t,
+        e
+    }
+    function T(t) {
+        var e = t.angle * (Math.PI / 180),
+        n = t.spread * (Math.PI / 180);
+        return {
+            x: t.x,
+            y: t.y,
+            depth: .5 * Math.random() + .6,
+            wobble: 10 * Math.random(),
+            velocity: .5 * t.startVelocity + Math.random() * t.startVelocity,
+            angle2D: -e + (.5 * n - Math.random() * n),
+            tiltAngle: Math.random() * Math.PI,
+            color: P(t.color),
+            tick: 0,
+            totalTicks: t.ticks,
+            decay: t.decay,
+            random: Math.random() + 5,
+            tiltSin: 0,
+            tiltCos: 0,
+            wobbleX: 0,
+            wobbleY: 0
+        }
+    }
+
+    function A(t, e) {
+        e.x += Math.cos(e.angle2D) * e.velocity,
+        e.y += Math.sin(e.angle2D) * e.velocity + 5 * e.depth;
+		//Click_Position.x=e.pageX,
+		//Click_Position.y=e.pageY,
+        if(isNaN(e.x)){e.x=Click_Position.x;}
+        if(isNaN(e.y)){e.y=Click_Position.y;}
+        e.wobble += .1,
+        e.velocity *= e.decay,
+        e.tiltAngle += .02 * Math.random() + .12,
+        e.tiltSin = Math.sin(e.tiltAngle),
+        e.tiltCos = Math.cos(e.tiltAngle),
+        e.random = Math.random() + 4,
+        e.wobbleX = e.x + 10 * Math.cos(e.wobble) * e.depth,
+        e.wobbleY = e.y + 10 * Math.sin(e.wobble) * e.depth;
+        if(isNaN(e.wobbleX)){e.wobbleX=500;}
+        if(isNaN(e.wobbleY)){e.wobbleY=500;}
+        var n = e.tick++/e.totalTicks,r=e.x+e.random*e.tiltCos,o=e.y+e.random*e.tiltSin,i=e.wobbleX+e.random*e.tiltCos,a=e.wobbleY+e.random*e.tiltSin;t.fillStyle="rgba("+e.color.r+", "+e.color.g+", "+e.color.b+", "+(1-n)+")",t.beginPath();e.depth;return t.moveTo(Math.floor(e.x),Math.floor(e.y)),t.lineTo(Math.floor(e.wobbleX),Math.floor(o)),t.lineTo(Math.floor(i),Math.floor(a)),t.lineTo(Math.floor(r),Math.floor(e.wobbleY)),t.closePath(),t.fill(),e.tick<e.totalTicks}function C(t,e,n){function r(){a=s=null}var o=e.slice(),i=t.getContext("2d"),a=parseInt(t.style.width,10),s=parseInt(t.style.height,10);i.save(),i.scale(t.width/a,
+        t.height / s);
+        var c = new Promise(function(e) {
+            function c() {
+                a || s || (E(t), a = parseInt(t.style.width, 10), s = parseInt(t.style.height, 10), i.restore(), i.scale(t.width / a, t.height / s)),
+                i.clearRect(0, 0, a, s),
+                o = o.filter(function(t) {
+                    return A(i, t)
+                }),
+                o.length ? Gn(c) : (window.removeEventListener("resize", r), n(), e())
+            }
+            Gn(c)
+        });
+        return window.addEventListener("resize", r, !1),
+        {
+            addFettis: function(t) {
+                return o = o.concat(t),
+                c
+            },
+            canvas: t,
+            promise: c
+        }
+    }
+    function M(t, e) {
+        for (var n = O(e, "particleCount", Math.floor), r = O(e, "angle", Number), o = O(e, "spread", Number), i = O(e, "startVelocity", Number), a = O(e, "decay", Number), s = O(e, "colors"), c = O(e, "ticks", Number), u = O(e, "zIndex", Number), l = j(e), p = n, f = [], h = Wn ? Wn.canvas: S(u), d = l.x, y = l.y; p--;) f.push(T({
+            x: d,
+            y: y,
+            angle: r,
+            spread: o,
+            startVelocity: i,
+            color: s[p % s.length],
+            ticks: c,
+            decay: a
+        }));
+        return Wn ? Wn.addFettis(f) : (t.style.position = "relative", t.style.overflow = "hidden", t.appendChild(h), Wn = C(h, f,
+        function() {
+            Wn = null,
+            t.removeChild(h)
+        }), Wn.promise)
+    }
+
+    var _n, On, kn, Pn, jn, En, Sn, Tn, An, Cn, Mn, Dn, Rn, zn, In, Ln, $n, Nn, qn, Fn, Yn, Bn, Un, Vn, Gn = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+    function(t) {
+        window.setTimeout(t, 1e3 / 60)
+    },
+    Hn = {
+        particleCount: 50,
+        angle: 90,
+        spread: 100,
+        startVelocity: 25,
+        decay: .9,
+        ticks: 500,
+        zIndex: 100,
+        colors: ["#5BC0EB", "#2176AE", "#FDE74C", "#9BC53D", "#E55934", "#FA7921", "#FF4242"]
+    },
+    Wn = void 0, Xn = function(t) {
+        return t.preventDefault()
+    },
+    Jn = function(t) {
+        return t.stopPropagation()
+    }
+	
+	//保存点击的位置
+    var Click_Position={'x':0,'y':0};
+	
+    document.querySelector('body').onclick=function(e){
+			Click_Position.x=e.pageX,
+			Click_Position.y=e.pageY;
+			M(this,{x: e.pageX,y: e.pageY});
+    }
+})(document);
+</script>
+</body>
+</html>

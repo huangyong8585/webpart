@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>元素拖动实例</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style>
+.wrapper{background-color:#e4e4e4;}
+.header{background-color:#f0f0f0;height:60px;}
+.main{width:1002px;margin:0 auto;height:3000px;background:#fff;position:relative;}
+
+.hotword{width:278px;height:120px;border:1px solid #e2e2e2;overflow:hidden;}
+.hotword .hotwordball{width:278px;height:120px;position:relative;}
+.hotword .hotwordball a{position:absolute;top:0px;left:0px;color:#333;text-decoration:none;padding:3px 6px;white-space:nowrap;}
+.hotword .hotwordball a:hover {border:1px solid #eee;padding:2px 5px;}
+</style>
+
+<script src="../js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+        <div class="header"></div>
+        <div class="main">
+            <div class="hotword" id="hotword">
+                <div class="hotwordball" id="hotwordball">
+                    <a href="javascript:void(0);">black</a>
+                    <a href="javascript:void(0);">red</a>
+                    <a href="javascript:void(0);">orange</a>
+                    <a href="javascript:void(0);">yellow</a>
+                    <a href="javascript:void(0);">gold</a>
+                    <a href="javascript:void(0);">green</a>
+                    <a href="javascript:void(0);">blue</a>
+                    <a href="javascript:void(0);">cyan</a>
+                    <a href="javascript:void(0);"><span style="font-size:12px;color:#00D5FF;">三三三</span></a>
+                    <a href="javascript:void(0);"><span style="color:#E53333;font-size:18px;"><strong>四四四干活</strong></span></a>
+                </div>
+            </div>
+        </div>
+	</div>
+<script>  
+        function moveDivs(){
+        var wrap=document.getElementById('hotwordball'),divs=wrap.children;
+        var x,y,_x=0,_y=0,test=null;
+
+        for(var i=0,len=divs.length;i<len;i++){
+            divs[i].style.zIndex=i;
+            divs[i].onmousedown=function(e){
+                e=e||window.event
+                test=this;
+                _x=e.clientX-this.offsetLeft;
+                _y=e.clientY-this.offsetTop;
+                this.style.zIndex=len+10;
+                
+                document.onmousemove=function(event){
+                    var event=event||window.event;
+                    x=event.clientX-_x;y=event.clientY-_y;
+                    if(x<=0){x=0;}
+                    if(x>wrap.offsetWidth-test.offsetWidth){x=wrap.offsetWidth-test.offsetWidth}
+                    if(y<=0){y=0;}
+                    if(y>wrap.offsetHeight-test.offsetHeight){y=wrap.offsetHeight-test.offsetHeight}
+
+                    if(test!=null){
+                        test.style.top=y+"px";
+                        test.style.left=x+"px";
+                        }
+                    if(event.preventDefault){event.preventDefault();}
+                    else{event.returnValue=false;}
+                    }
+                document.onmouseup=function(){
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                    test.style.zIndex=test.style.zIndex-10;
+                    test=null;
+                    _x=0;
+                    _y=0;
+                    }
+                }
+            }
+        
+    } 
+
+    window.onload=function(){moveDivs();}
+</script>
+</body>
+</html>

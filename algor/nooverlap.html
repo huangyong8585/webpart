@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>计算元素是否重叠</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style>
+.wrapper{background-color:#e4e4e4;}
+.header{background-color:#f0f0f0;height:60px;}
+.main{width:1002px;margin:0 auto;height:3000px;background:#fff;position:relative;}
+
+.hotword{width:278px;height:120px;border:1px solid #e2e2e2;overflow:hidden;}
+.hotword .hotwordball{width:278px;height:120px;position:relative;}
+.hotword .hotwordball a{position:absolute;top:0px;left:0px;color:#333;text-decoration:none;padding:3px 6px;white-space:nowrap;}
+.hotword .hotwordball a:hover {border:1px solid #eee;padding:2px 5px;}
+</style>
+
+<script src="../js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+        <div class="header"></div>
+        <div class="main">
+            <div class="hotword" id="hotword">
+                <div class="hotwordball" id="hotwordball">
+                    <!-- <a href="javascript:void(0);">black</a>
+                    <a href="javascript:void(0);">red</a>
+                    <a href="javascript:void(0);">orange</a>
+                    <a href="javascript:void(0);">yellow</a>
+                    <a href="javascript:void(0);">gold</a>
+                    <a href="javascript:void(0);">green</a>
+                    <a href="javascript:void(0);">blue</a>
+                    <a href="javascript:void(0);">cyan</a>
+                    <a href="javascript:void(0);"><span style="font-size:12px;color:#00D5FF;">三三三</span></a>
+                    <a href="javascript:void(0);"><span style="color:#E53333;font-size:18px;"><strong>四四四干活</strong></span></a> -->
+                    <a target="_blank" href="javascript:void(0);"><span style="color:#FF9900;font-size:14px;"><span style="font-size:14px;color:#FF9900;"><b><span style="font-size:18px;">叛逆的三叉戟</span><span style="font-size:18px;"></span></b></span></span></a><a target="_blank" href="https://cls.tiancity.com/event/2019/0131FallenFashion/" style="left:60px;top:46px;"><span style="color:#000000;font-size:16px;"><span style="font-size:16px;color:#000000;"><b>堕落之翼</b></span></span></a>
+                    <a target="_blank" href="javascript:void(0);"><span style="font-size:16px;color:#CC33E5;"><strong>塞特梦魇</strong></span></a>
+                    <a target="_blank" href="javascript:void(0);"><span><span style="font-size:18px;"><span style="font-size:18px;color:#00D5FF;"><strong></strong></span><span style="background-color:#00D5FF;font-size:18px;color:#00D5FF;"><strong></strong></span></span><span style="font-size:18px;color:#00D5FF;"><strong>奉侍时装</strong></span></span></a>
+                    <a target="_blank" href="javascript:void(0);"><span style="font-size:14px;color:#EE33EE;"><strong>梦中少女</strong></span></a>
+                </div>
+            </div>
+        </div>
+	</div>
+<script>  
+    function CalculPosition(){
+        var abq=$('#hotwordball a'),Left=0,Top=0,Width=0,Height=0,len=abq.length,k=len-1,num=0;
+        var rectData=[];
+        var coincide=function(w,h,l,t){
+            var temp=true;
+            if(rectData.length==0){rectData.push({'l':l,'t':t,'w':w,'h':h});return temp;}
+            if(num>1000){rectData.push({'l':l,'t':t,'w':w,'h':h});num=0;return temp;}
+            for(var i=0;i<rectData.length;i++){
+                if(l + w > rectData[i].l && l < rectData[i].l + rectData[i].w && t + h > rectData[i].t && t < rectData[i].t + rectData[i].h){temp=false;break;}
+            }
+            if(temp){rectData.push({'l':l,'t':t,'w':w,'h':h});}
+            return temp;
+        }
+        var randomFn=function(w,h){
+            Left=Math.floor(Math.random()*w);
+            Top=Math.floor(Math.random()*h);
+            num++
+        }
+        while(k>-1){
+            Width=abq[k].offsetWidth,Height=abq[k].offsetHeight;
+            randomFn(278-Width,120-Height);
+            if(coincide(Width,Height,Left,Top)){
+                abq[k].style.left=Left+'px';
+                abq[k].style.top=Top+'px';
+                num=0;k--;
+            }else{
+                console.log('failed');
+            }
+        }
+    }
+    window.onload=function(){CalculPosition();}
+</script>
+</body>
+</html>
