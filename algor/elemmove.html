@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>鼠标晃动元素晃动</title>
+<link rel="stylesheet" href="../css/reset.css" />
+<script src="../js/jquery-1.7.2.min.js"></script>
+<style>
+.wrapper{position:relative;height:100%;overflow:hidden;background:#0ab6f0;}
+
+.guys{width:200px;height:200px;position:absolute;left:50%;top:50%;margin:-100px 0 0 -100px;background:#ff0;box-shadow:0 0 50px #000;}
+
+</style>
+</head>
+<body>
+	<div class="wrapper">
+            <div class="guys" data-step="100" id="guys"></div>
+	</div>
+
+<script>
+     setTimeout(function(){
+            var obj=$('#guys');
+           $(window).mousemove(function(ev){
+                var d = ev || event,
+                    e = d.clientX,
+                    f = d.clientY,
+                    wW = $(this).width()/2,
+                    wH = $(this).height()/2,
+                    x = parseInt(wW-e)/obj.attr('data-step')+'px',
+                    y = parseInt(wH-f)/obj.attr('data-step')+'px';
+                    obj.css({
+                        'transform':'translate3d('+x+','+y+',0px)'
+                    })
+                    //obj.style.transform='translate3d('+x+','+y+',0px)';
+            })
+       },1000)
+
+</script>
+</body>
+</html>
