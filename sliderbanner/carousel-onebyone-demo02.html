@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>一个一个切换</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style>
+/*左右切换*/
+.coverlist{position:relative;width:248px;margin-top:18px;}
+.coverlist #prevjt,.coverlist #nextjt{width:20px;height:40px;font-family:simsun;color:#323232;font-size:30px;font-weight:bold;position:absolute;top:50%;margin-top:-20px;z-index:2;}
+.coverlist #prevjt{left:0;text-align:left;}
+.coverlist #nextjt{right:0;text-align:right;}
+.coverlist #prevjt:active{left:-2px;}
+.coverlist #nextjt:active{right:-2px;}
+.coverlist .coverBox{width:212px;height:151px;overflow:hidden;position:relative;margin:0 auto;z-index:1;border-radius:16px;overflow:hidden;}
+.coverlist .coverBox ul{width:21200px;height:151px;position:absolute;left:0;top:0;}
+.coverlist .coverBox ul li{width:212px;height:151px;overflow:hidden; float:left;margin-right:0;cursor:pointer;}
+.coverlist .coverBox i.zoom{display:block;width:27px;height:27px;position:absolute;right:5px;bottom:5px;background:url(http://static.sdg-china.com/jijiamobile/pic/dq_act/darkmoonpark/images/zoomicon.png) 0 0 no-repeat;}
+.coverBox ul li img{width:212px;height:151px;}
+</style>
+<script type="text/javascript" src="../js/jquery-1.7.2.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+	<!--coverlist begin-->
+	<div class="coverlist">
+		<a href="javascript:void(0);" id="prevjt" class="st ts">&lt;</a>
+		<a href="javascript:void(0);" id="nextjt" class="st ts">&gt;</a>
+		<div class="coverBox" id="coverBox">
+			<ul>
+              	<li><img src="../images/1.jpg"></li>
+              	<li><img src="../images/2.jpg"></li>
+              	<li><img src="../images/3.jpg"></li>
+              	<li><img src="../images/4.jpg"></li>
+              	<li><img src="../images/5.jpg"></li>
+			</ul>
+			<i class="zoom"></i>
+		</div>             
+	</div>
+	<!--coverlist end-->
+
+    <script>
+    
+		function switchImg(elementID,play_time){
+			var _div=$("#"+elementID+" ul");
+			var _width=_div.children("li").eq(0).width();
+			//var temp_time;
+			//play_img("left");
+			if(_div.children().size()<=1){return false;}
+			//temp_time=setTimeout(function(){play_img("left")},play_time);
+			/*_div.parent().hover(
+			 function(){clearTimeout(temp_time)},
+			 function(){temp_time=setTimeout(function(){play_img("left")},play_time);}
+			 )*/
+			//if(_div.children().size()<=1){$("#"+elementID+">a").hide();return false;}
+			_div.width(_width*_div.children().size());
+			$("#prevjt").click(function(){if(!_div.is(":animated")&&!_div.children("li:first").is(":animated")){play_img("right");}});
+			$("#nextjt").click(function(){if(!_div.is(":animated")&&!_div.children("li:first").is(":animated")){play_img("left");}});
+
+			function play_img(type){
+					//if(temp_time){clearTimeout(temp_time);}
+					var div_f=_div.children("li:first"),div_l=_div.children("li:last"),div_width=_width,div_height=div_f.height(),
+									animateobj={},cssobj={};
+					animateobj.marginLeft=-(div_width)+"px";cssobj.marginLeft="0px";space=div_width;
+					if(type=="left"){_div.animate(animateobj,400,function(){_div.append(div_f);_div.css(cssobj);})}
+					if(type=="right"){_div.prepend(div_l);_div.css(animateobj);_div.animate(cssobj,400)}
+					//temp_time=setTimeout(function(){play_img("left")},play_time);
+			}
+		}
+		switchImg("coverBox",5000);
+    </script>
+</body>
+</html>

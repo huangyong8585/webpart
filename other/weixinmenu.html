@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>微信菜单</title>
+<link rel="stylesheet" href="../css/reset.css" />
+<script src="../js/jquery-1.7.2.min.js"></script>
+<style>
+input, textarea, select{vertical-align:middle;}
+.btn{display:inline-block;background-color:#0072C6;-moz-border-radius:2px;-webkit-border-radius:2px;border:0;color:#FFF;padding:6px 15px;font-weight:bold;text-transform:capitalize;cursor:pointer;-webkit-appearance:none;}
+.btnGray{display:inline-block;background-color:#EEE;-moz-border-radius:2px;-webkit-border-radius:2px;border:0;color:#666;padding:6px 15px;font-weight:bold;text-transform:capitalize;cursor:pointer;-webkit-appearance:none;}
+.btnPayment{display:inline-block;background-color:#ff4246;color:#FFF;padding:7px 28px;text-transform:capitalize;cursor:pointer;font-weight:bold;font-size:14px;text-align:center;-webkit-appearance:none;}
+.inpMain{border:1px solid #DBDBDB;background-color:#FFF;padding:4px 5px;color:#999;font-size:12px;line-height:20px;-webkit-appearance:none;}
+.inpFlie{border:1px solid #DBDBDB;background-color:#FFF;padding:5px 5px;color:#999;-webkit-appearance:none;}
+.textArea{border:1px solid #DBDBDB;background-color:#FFF;padding:4px 5px;color:#999;font-size:12px;line-height:20px;-webkit-appearance:none;}
+.textAreaAuto{border:1px solid #DBDBDB;background-color:#FFF;padding:0;color:#999;font-size:12px;line-height:20px;resize:none;min-height:40px;-webkit-appearance:none;}
+select{border:1px solid #DBDBDB;padding:5px 5px 5px 2px;}
+a.uploadBut{display:none;line-height:32px;padding:0 12px;margin-left:10px;background-color:#0C6;color:#fff;vertical-align:middle;}
+#preview{height:32px;width:auto;display:none;vertical-align:middle;}
+.remind{color:#c0c0c0;vertical-align:middle; margin-left:8px;}
+
+/*自定义菜单*/
+#CustomMenu{padding:20px;}
+#CustomMenu h3{border-bottom:1px solid #D7D7D7;color:#666666;font-size:28px;padding:20px;margin-bottom:30px;font-weight:normal;}
+#CustomMenu .preview{width:317px;height:580px;border:1px solid #e7e7eb;background:url(data:image/png;base64,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) center center no-repeat;position:relative;}
+#CustomMenu .defineBox{width:640px;margin-left:64px;}
+#CustomMenu .preview .pagedemo{width:317px;height:465px;background:#fff;position:absolute;left:0;top:64px;}
+#CustomMenu .preview ul{width:273px;height:50px;position:absolute;right:0;bottom:0;}
+#CustomMenu .preview ul li{float:left;width:90px;height:50px;line-height:50px;border-left:1px solid #e7e7ed;text-align:center;position:relative;cursor:pointer;}
+#CustomMenu .preview ul li i{padding-left:7px; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHAgMAAAC5PL9AAAAADFBMVEW9vr/7+/vm5ubExMU70B84AAAAGUlEQVQI12PIecLQwMFw1IcBCIBkAwdQBAA9qwXTmGGq7gAAAABJRU5ErkJggg==) 0 50% no-repeat;margin-right:6px;}
+#CustomMenu .preview ul.menu1 li{width:272px;}
+#CustomMenu .preview ul.menu2 li{width:135px;}
+#CustomMenu .preview ul.menu3 li{width:90px;}
+#CustomMenu .preview ul li .second{display:none;position:absolute;left:50%;bottom:60px; margin-left:-50px;border:1px solid #d1d1d1;background-color:#fbfbfb;padding:7px;}
+#CustomMenu .preview ul li .second dd{ border-top:1px solid #e7e7eb;width:84px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+#CustomMenu .preview ul li .second dd:first-child{border-top:0 none;}
+#CustomMenu .preview ul li .second b{position:absolute;width:10px;height:6px; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGAgMAAACHnudVAAAADFBMVEX////7+/vn5+vc3Nye5xdBAAAAIElEQVQI12O4GprAsDV0A4Nu2AEG7mgGBqY3DAwMGxgAXZYGjMvKB9UAAAAASUVORK5CYII=) 0 0 no-repeat; left:50%;bottom:-6px; margin-left:-5px;}
+#CustomMenu .defineBox dl{border-bottom:1px solid #e4e4e4;padding-bottom:10px;margin-bottom:10px;}
+#CustomMenu .defineBox dl dt{margin-bottom:10px;padding:5px 0 5px 10px;position:relative;}
+#CustomMenu .defineBox dl span.adddelete{display:inline-block;width:90px;margin-left:16px;height:30px;line-height:30px; vertical-align:middle;}
+#CustomMenu .defineBox dl span.adddelete i,#CustomMenu .defineBox dl span.adddelete b{float:left;width:30px;height:30px;margin-right:10px;cursor:pointer;}
+#CustomMenu .defineBox dl span.adddelete i{background:url(data:image/gif;base64,R0lGODlhDAAMAIAAACi3ef///yH5BAAHAP8ALAAAAAAMAAwAAAIXhBEZx6h91IIuMYmz3pzfR0lUNUHiUQAAOw==) 50% 50% no-repeat #28B779;}
+#CustomMenu .defineBox dl span.adddelete b{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMBAMAAACkW0HUAAAAIVBMVEUAAADExMTExMTExMTExMTExMTExMTExMTExMTExMTExMQUrEz3AAAACnRSTlMA3MsPHNMewcC4xL12jwAAAE1JREFUCNdjCExgYGATZagSY2BIXM5gtNCBRUqZgVlLxHGRAQOQC+QwALkgDgOL1EIHIOW4SEsExFE2AnKBypiB3ChloOKlDDMMgIo7AVWtDoxToMKUAAAAAElFTkSuQmCC) 50% 50% no-repeat #ff2828;}
+#CustomMenu .defineBox dl dd{margin-bottom:10px;padding:5px 0 5px 42px;position:relative;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAPBAMAAAAFYbKSAAAAD1BMVEUAAADf39/d3d3a2trj4+M/Il7XAAAAAXRSTlMAQObYZgAAACFJREFUCNdjcGBAAQqoXAG8XAVSuEaCSEAITZaaXAMUHgBPGALhfwFb0gAAAABJRU5ErkJggg==) 10px 12px no-repeat;}
+#CustomMenu .defineBox .actionBtn{float:right;display:inline-block;background-color:#28B779;padding:0 20px;height:27px;line-height:27px;color:#FFFFFF;font-size:13px;font-weight:bold;}
+#CustomMenu .defineBox .add{background:#28B779 url(data:image/gif;base64,R0lGODlhDAAMAIAAACi3ef///yH5BAAHAP8ALAAAAAAMAAwAAAIXhBEZx6h91IIuMYmz3pzfR0lUNUHiUQAAOw==) no-repeat 15px 50%; padding-left:35px;}
+#CustomMenu .defineBox dl p.tips{position:absolute;left:0;top:0;height:40px;line-height:40px;padding:0 5px;color:#00F;font-weight:bold;font-size:16px;}
+
+.menujson{}
+
+</style>
+</head>
+<body>
+<div id="dcWrap">
+  <!-- dcMain begin -->
+	<div id="dcMain">
+		<div id="CustomMenu" class="mainBox">
+			<h3>自定义菜单</h3>
+			<div class="preview fl">
+				<div class="pagedemo">
+					<iframe src="" frameborder="0" scrolling="yes" width="317" height="465" id="pagedemoIframe"></iframe>
+				</div>
+				<ul class="menu">
+					<!--<li><i></i>菜单名称<div class="second"><dl><dd>一二三四五六七</dd><dd>一二三四五六七</dd><dd>一二三四五六七</dd><dd>一二三四五六七</dd><dd>一二三四五六七</dd></dl><b></b></div></li>
+					<li><i></i>菜单名称<div class="second"><dl><dd>一二三四五六七</dd><dd>一二三四五六七</dd><dd>一二三四五六七</dd><dd>一二三四五六七</dd><dd>一二三四五六七</dd></dl><b></b></div></li>
+					<li><i></i>菜单名称<div class="second"><dl><dd>一二三四五六七</dd><dd>一二三四五六七</dd><dd>一二三四五六七</dd><dd>一二三四五六七</dd><dd>一二三四五六七</dd></dl><b></b></div></li>-->
+				</ul>
+			</div>
+			<div class="defineBox fl" id="defineBox">
+				<!--<dl>
+					<dt OrderID="1"><input type="text" maxlength="4" size="20" name="MenuName" class="inpMain">&nbsp;&nbsp;<select name="Type"><option value="VIEW">VIEW</option><option value="CLICK">CLICK</option></select>&nbsp;&nbsp;<input type="text" size="40" name="Url" class="inpMain"><span class="adddelete"><i></i><b></b></span></dt>
+				</dl>
+				<dl>
+					<dt><input type="text" maxlength="4" size="20" class="inpMain">&nbsp;&nbsp;<select><option value="view">View</option><option value="click">Click</option></select>&nbsp;&nbsp;<input type="text" maxlength="4" size="40" class="inpMain"><span class="adddelete"><i></i><b></b></span></dt>
+				  <dd><input type="text" maxlength="7" size="15" class="inpMain">&nbsp;&nbsp;<select><option value="view">View</option><option value="click">Click</option></select>&nbsp;&nbsp;<input type="text" maxlength="4" size="30" class="inpMain"><span class="adddelete"><b></b></span></dd>
+				</dl>-->
+				<!-- <input class="btn" id="submit" type="submit" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="btnGray" type="button" id="look" value="预览">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="btn" id="synchro" type="button" style="background-color:#3C6;" value="同步到微信菜单"> -->
+				<input class="btn" type="button" id="look" value="预览">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="btn" id="synchro" type="button" style="background-color:#3C6;" value="同步到微信菜单">
+				<a href="javascript:void(0);" id="addFirstMenu" class="actionBtn add">添加一级菜单</a>
+			</div>
+			<div class="clear"></div>
+			<div class="menujson" id="menujson"></div>
+		</div>
+	</div>
+	<!-- dcMain end -->
+<script>
+function IsURL(str){
+    //return !!str.match(/(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g);
+	return !!str.match(/^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/);
+}
+
+function selectchange(obj){
+	var lastInp=$(obj).next();
+	if(obj.value=="click"){lastInp.attr('name',"Key");}
+	else if(obj.value=="view"){lastInp.attr('name',"Url");}
+}
+
+var Is_Setted=false;
+var SubmittIng=false;
+
+$(function(){
+	//添加一级菜单
+	$("#addFirstMenu").click(function(){
+		var dl=$(this).parent().children("dl");
+		var inputSub=$("#look");
+		inputSub.before('<dl><dt OrderID="'+(dl.size()+1)+'"><input type="text" maxlength="4" size="20" name="MenuName" class="inpMain">&nbsp;&nbsp;<select onchange="selectchange(this)" name="Type"><option value="view">链接</option><option value="click">关键词</option></select>&nbsp;&nbsp;<input type="text" size="40" name="Url" class="inpMain"><span class="adddelete"><i></i><b></b></span></dt></dl>');
+		if(dl.size()==2){$(this).hide();}
+		});
+		
+	//添加二级菜单或者删除一级菜单
+	$("#defineBox").delegate('dl span.adddelete','click',function(e){
+		var that=this,dl=$(that.parentNode.parentNode),dt=dl.children("dt");
+		//console.log(e.target.nodeName.toLowerCase(),that.parentNode.nodeName.toLowerCase());
+		if(e.target.nodeName.toLowerCase()=='i'){
+			dt.children("select").hide();
+			dt.children("input").eq(1).hide();
+			dt.children("input").eq(0).attr("size",75);
+			if(dl.children("dd").size()<5){dl.append('<dd OrderID="'+(dl.children("dd").size()+1)+'"><input type="text" maxlength="15" size="15" name="MenuName" class="inpMain">&nbsp;&nbsp;<select onchange="selectchange(this)" name="Type"><option value="view">链接</option><option value="click">关键词</option></select>&nbsp;&nbsp;<input type="text" size="30" name="Url" class="inpMain"><span class="adddelete"><b></b></span></dd>');}
+			else{alert('最多只能添加五个二级菜单！');}
+			}
+		else if(e.target.nodeName.toLowerCase()=='b'){
+			if(that.parentNode.nodeName.toLowerCase()=='dd'){
+				if(confirm('确认要删除吗？')){
+					deleteMenuInfo(that.parentNode);
+					//$(that.parentNode).remove();
+					}
+				}
+			else if(that.parentNode.nodeName.toLowerCase()=='dt'){
+				if(dl.children("dd").size()>0){alert('请先删除二级菜单！');}
+				else if(dl.parent().children('dl').size()==1){alert('不可删除全部菜单！');}
+				else{
+					if(confirm('确认要删除吗？')){
+						deleteMenuInfo(that.parentNode);
+						//$(dl).remove();
+						//if(dl.parent().children('dl').size()<3){$("#addFirstMenu").show();}
+						}
+					}
+				}
+			}
+		});
+
+	//预览
+	$("#look").click(function(){
+		var temp=true,xxhtml='';
+		$('#defineBox input[type="text"]:visible').each(function(){
+			if(this.value.length==0){this.focus();temp=false;alert("不能为空01！");return false;}			
+			});
+		if(temp){
+			$('#defineBox dl').each(function(i){xxhtml+=makeMenuHtml(this);})
+			$("#CustomMenu .preview ul").html('').append(xxhtml).attr('class','menu'+$('#defineBox dl').size());
+		}
+		});
+	//预览点击操作
+	$("#CustomMenu .preview ul").delegate('li','click',function(e){console.log(e.target,e.target.getAttribute('tourl'));
+			if(e.target.getAttribute('tourl')){$('#pagedemoIframe').attr('src',e.target.getAttribute('tourl'));}
+			var obj=$(this),obj2=obj.children(".second");
+			if(obj2.size()>0&&obj2.is(":visible")){obj2.hide();}
+			else if(obj2.size()>0){obj2.show().parent().siblings('li').children('.second').hide();}
+			else if(obj2.size()==0){obj.siblings('li').children('.second').hide();}
+		});
+	//初始化预览html
+	function makeMenuHtml(obj){
+		var dd=obj.getElementsByTagName("dd"),i=0,len=dd.length,
+		html='<li'+(len==0&&obj.children[0].children[1].value=='view'?' tourl="'+obj.children[0].children[2].value+'"':'')+'>'+(len>0?'<i></i>':'')+obj.children[0].children[0].value,
+		htm='<div class="second"><dl>';
+		for(;i<len;i++){
+			if(dd[i].children[1].value=='view'){htm+='<dd tourl="'+dd[i].children[2].value+'">'+dd[i].children[0].value+'</dd>';}
+			else{htm+='<dd>'+dd[i].children[0].value+'</dd>';}
+			}
+		htm+='</dl><b></b></div>';
+		len>0?html+=htm+'</li>':html+='</li>';
+		return html;
+		}
+
+	
+	
+	function getButtonsJSON(){
+		var buttonObj={"button":[]};
+		var temp=true;
+		var button_obj=null;
+		var sub_button_obj=null;
+		$('#defineBox input[type="text"]:visible').each(function(){
+			if(this.value.length==0){this.focus();temp=false;alert("不能为空02！");return false;}		
+			if(this.name=='Url'&&!IsURL(this.value)){this.focus();/*console.log(IsURL(this.value));*/temp=false;alert("必须为合法的域名地址！");return false;}	
+			});
+		if(temp){
+			$('#defineBox dl').each(function(){
+				if(this.children.length===1){
+					button_obj={}
+					button_obj.type=this.children[0].children[1].value;
+					button_obj.name=this.children[0].children[0].value;
+					if(button_obj.type==='click'){button_obj.key=this.children[0].children[2].value;}
+					else if(button_obj.type==='view'){button_obj.url=this.children[0].children[2].value;}
+				}
+				else{
+					button_obj={"name":'',"sub_button":[]};
+					button_obj.name=this.children[0].children[0].value;
+					$(this.getElementsByTagName('dd')).each(function(){
+						sub_button_obj={};
+						sub_button_obj.type=this.children[1].value;
+						sub_button_obj.name=this.children[0].value;
+						if(sub_button_obj.type==='click'){sub_button_obj.key=this.children[2].value;}
+						else if(sub_button_obj.type==='view'){sub_button_obj.url=this.children[2].value;}
+						button_obj.sub_button.push(sub_button_obj);
+					})
+
+				}
+			buttonObj.button.push(button_obj);
+			})
+			return JSON.stringify(buttonObj)
+			//console.log(JSON.stringify(buttonObj));
+			}
+		}
+	$("#synchro").click(function(){
+		if(SubmittIng){return false;}
+		SubmittIng=true;
+		var ButtonsJSON=getButtonsJSON();
+		if(!ButtonsJSON){return false;}
+		if(confirm('确定要同步到微信菜单？')){
+			$('#menujson').text(ButtonsJSON);
+			/*if(Is_Setted){
+				//先删除再提交
+				$.post('../inc/WeixinMenu.php',"rec=delete",function(data){
+					if(data.code==0&&data.success){
+						$.post('../inc/WeixinMenu.php',"rec=create&btn="+ButtonsJSON,function(data){SubmittIng=false;
+							if(data.code==0&&data.success){Is_Setted=true;alert('同步成功');location.reload();}
+						},'json');
+					}else{
+						SubmittIng=false;
+					}
+				},'json');
+			}
+			else{
+				$.post('../inc/WeixinMenu.php',"rec=create&btn="+ButtonsJSON,function(data){
+					SubmittIng=false;
+					if(data.code==0&&data.success){Is_Setted=true;alert('同步成功');location.reload();}
+				},'json');
+			}*/
+		}
+	})
+});
+
+
+function deleteMenuInfo(obj){
+	var O=(obj.nodeName.toLowerCase()=='dd'?obj:obj.parentNode),OP=(O.nodeName.toLowerCase()=="dd"?obj.parentNode:null);
+		$(O).remove();
+		if(O.nodeName.toLowerCase()=="dl"&&$("#defineBox").children('dl').size()<3){$("#addFirstMenu").show();}
+		if(O.nodeName.toLowerCase()=="dd"&&OP.children.length==1){
+			OP.children[0].children[0].setAttribute("size",20);
+			$(OP.children[0].children[1]).show();
+			$(OP.children[0].children[2]).show();
+			}
+		return false;
+}
+
+function initmenudata(data){
+	var defineBox=$("#defineBox");
+	var i=0,k=0,btnary=data.button,len=btnary.length,sub_btn=null,dl,dt,dd;
+	for(;i<len;i++){
+		$("#addFirstMenu").click();
+		dt=defineBox.children("dl").last().children("dt")[0];
+		dt.children[0].value=btnary[i].name;
+		if(!btnary[i].sub_button||btnary[i].sub_button.length==0){
+			dt.children[1].value=btnary[i].type;
+			dt.children[2].setAttribute('name',btnary[i].type==='click'?'Key':(btnary[i].type==='view'?'Url':''));
+			dt.children[2].value=btnary[i][(btnary[i].type==='click'?'key':(btnary[i].type==='view'?'url':''))];
+		}
+		else{
+			k=0;
+			sub_btn=btnary[i].sub_button;
+			for(;k<sub_btn.length;k++){
+				$(dt).children("span.adddelete").children("i").click();
+				dd=$(dt).parent().children('dd').last()[0];
+				dd.children[0].value=sub_btn[k].name;
+				dd.children[1].value=sub_btn[k].type;
+				dd.children[2].setAttribute('name',sub_btn[i].type==='click'?'Key':(sub_btn[i].type==='view'?'Url':''));
+				dd.children[2].value=sub_btn[k][(sub_btn[k].type==='click'?'key':(sub_btn[k].type==='view'?'url':''))];
+			}
+		}
+	}
+	$("#look").click();
+}
+$(window).load(function(){
+	/*SubmittIng=true;
+	$.post('../inc/WeixinMenu.php',"rec=get",function(data){SubmittIng=false;
+		if(data.code==0&&data.success){
+			initmenudata(data.data.menu);
+			Is_Setted=true;
+		}
+	},'json');*/
+
+	initmenudata({
+    "button": [{
+        "name": "百度",
+        "sub_button": [{
+            "type": "view",
+            "name": "贴吧",
+            "url": "https://tieba.baidu.com/index/tbwise/forum?shownew=1",
+            "sub_button": []
+        },
+        {
+            "type": "view",
+            "name": "图片",
+            "url": "http://image.baidu.com/wisehomepage/feeds",
+            "sub_button": []
+        },
+        {
+            "type": "view",
+            "name": "搜索",
+            "url": "https://m.baidu.com",
+            "sub_button": []
+        },
+        {
+            "type": "view",
+            "name": "地图",
+            "url": "https://map.baidu.com/mobile/webapp/index/index/",
+            "sub_button": []
+        }]
+    },
+    {
+        "name": "新浪",
+        "sub_button": [{
+            "type": "view",
+            "name": "新闻",
+            "url": "http://news.sina.cn",
+            "sub_button": []
+        },
+        {
+            "type": "view",
+            "name": "财经",
+            "url": "http://finance.sina.cn",
+            "sub_button": []
+        },
+        {
+            "type": "view",
+            "name": "体育",
+            "url": "http://sports.sina.cn/",
+            "sub_button": []
+        },
+        {
+            "type": "view",
+            "name": "微博",
+            "url": "http://m.weibo.cn",
+            "sub_button": []
+        }]
+    },
+    {
+        "name": "腾讯",
+        "sub_button": [{
+            "type": "view",
+            "name": "游戏",
+            "url": "http://xw.qq.com/m/games",
+            "sub_button": []
+        },
+        {
+            "type": "view",
+            "name": "娱乐",
+            "url": "http://xw.qq.com/m/ent",
+            "sub_button": []
+        },
+        {
+            "type": "view",
+            "name": "科技 ",
+            "url": "http://xw.qq.com/m/tech",
+            "sub_button": []
+        }]
+    }]
+});
+	Is_Setted=true;
+})
+</script>
+</body>
+</html>
