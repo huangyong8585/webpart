@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* CSS Reset */
-article,aside,blockquote,body,caption,dd,div,dl,dt,em,fieldset,figure,form,h1,h2,h3,h4,h5,h6,html,iframe,img,label,legend,li,object,ol,p,pre,section,span,strong,table,tbody,td,tfoot,th,thead,tr,ul{border:0;margin:0;outline:0;padding:0}
+article,aside,body,caption,dd,div,dl,dt,em,fieldset,figure,form,h1,h2,h3,h4,h5,h6,html,iframe,img,label,legend,li,object,ol,p,pre,section,span,strong,table,tbody,td,tfoot,th,thead,tr,ul{border:0;margin:0;outline:0;padding:0}
 body,html{font-family:'Microsoft YaHei',Helvetica,Tahoma,StSun,SimSun,sans-serif;font-size:16px;background-color:#fff;-webkit-text-size-adjust:none;height:100%;overflow:hidden;}
 body{min-height:416px;max-width:640px;max-height:1008px;margin:0 auto;}
 li,ol,ul{list-style:none}

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <title>发帖子</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+<style>
+.forumpost{width:100%;height:100%;overflow:hidden;background:#f0f0f0;box-sizing:border-box;padding:1em;}
+.forumpost .forumpost-title{border:0 none;background:#fff;width:100%;font-size:1em;font-family:'Microsoft YaHei',Helvetica,Tahoma,StSun,SimSun,sans-serif;padding:1em;box-sizing:border-box;margin-bottom:1em;border-radius:0.5em;}
+.forumpost .forumpost-text{border:0 none;background:#fff;width:100%;height:30%;font-size:1em;line-height:2;font-family:'Microsoft YaHei',Helvetica,Tahoma,StSun,SimSun,sans-serif;padding:0.5em 1em;resize:none;box-sizing:border-box;border-radius:0.5em 0.5em 0 0;overflow:auto;}
+.forumpost .forumpost-btn{display:block;text-align:center;background:#cf3f3f;color:#fff;font-size:1em;padding:1em 0;border-radius:0.5em;}
+.forumpost .forumpost-text img{width:7.5%;vertical-align:middle;}
+.emoji-picture{height:2em;line-height:2em;padding:0.5em 1em;background:#FFF;border-radius:0 0 0.5em 0.5em;border-top:1px solid #f6f6f6;}
+.emoji-picture span{display:block;width:2em;height:2em;float:left;margin-right:1em;transition:opacity 0.33s linear;}
+#emojiIcon{opacity:0.33;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAolBMVEUAAAAAAADm5uY7OzvFxcVOTk4AAADQ0NCnp6fw8PCbm5uysrIAAAArKysAAAAWFhZ3d3eGhoYAAABeXl4AAAAAAAAbGxsAAACQkJDa2toBAQEgICAwMDAAAABpaWlvb2+6urpGRkYAAAAAAAABAQELCwsnJyddXV0AAAAAAAABAQEBAQEUFBQAAAAAAAB9fX0AAAAAAAABAQEkJCRWVlYAAAA8AZuiAAAANnRSTlMA/hPBM6ztKFELXkXi0hDwgnG9mUIH481oHxfZzK2Tij21oX9m892jmG9WTujEkHpeKSLjozMRvnvmAAACcklEQVRIx5WV6XaiQBBG66Np9i1AwA3F3dGoMcm8/6sNcWJ3g2Dw/vBgwaWarqrTdM9ruiw8VBjH035Encjndx4Q+qzCf6u0YvXYCv54CLmja3RF051tBuwu3ca7B+Zo9ZhtceDUkekjBnPbbugc3r7txsEIHerA+sTp9S76B2xInWgcRdCILZHQQyIcg0aOGf3CC2J1bQdM6VfOWCh7hTn1IMFKXMeZ1kexfVxuFYRLvdAR/7SVwaknMxx+dsvsq2hhfk3ibak3EdLqN4Uu3/KbMrxu9MIXAXedmHcVnHA1NjeCal2RVHyA63UDwFhJ7iClFKXasgyYu0opMlS8yICJJS3f6h/gcoBZ8olvvkiyiSmeNDdyC6xtUbymwj3yuPq4GzEA2bS+sEGtmqT0sP0VAmDnUrv7fDVAiORfNp5aWnOT/Xlt4wd1pU8/O5Uyo37ILEbynHIG5fPnlMSg3eY5heW0Xw+fMexwQSPDekbR8U4Uiwkzkw67THQ5Yx9Eq1ATvZDZrcoEXHRlXv2M4Nw6H+Kyhiu7rMSK1LG0fYzb0jCIAeHVUFZcYMk0LYWN5IyVWP6/2H3e3s2B832HgIl8VZIrI+PWZ9oESOxmjvFQNL44zPZwFce3pOSyyjBFTQoS7EJTHleVNLN009StaALIw03beCOpvMafom2cMRQyMcQ2w9/agZ9vhGM7PMOVt/lAE+PHkFKN4BiWynjqrmW5ujKlpi8MubYCLw/Gd+2JVdWPcb1dMDmKUeudS4yt3iJMYbxTF4cczKmNnOZwGMuAHpAWxnoyHbjfdSmdKQuRr4TQRXA4HT0D3xj5YvVBTf4BeW0jBbBn/ugAAAAASUVORK5CYII=) 50% 50% no-repeat;background-size:90% 90%;}
+#pictureIcon{opacity:0.33;background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAANmfvwAAAAaVBMVEUAAAB7e3uDg4OAgIB6enr4+PjR0dGWlpafn5+Kior19fWampru7u7q6urk5OTg4ODNzc3AwMC7u7ukpKT6+vrx8fHc3NzY2NjU1NS1tbWysrKsrKypqamhoaGTk5P////l5eXb29uOjo7Dut+FAAAAAXRSTlMAQObYZgAAAM1JREFUOMu90tkOwiAURdFzLrR01tZ5Hv7/Iy0hVI1YTEy6X5rASoEApouRABGMZec1IvEXwomJoazGSUry/B+JLxRu2UXJgVWEzKkW46Tica6bENlt4ZIcyMsA2VFguxgWwJazD9Jyr0/o69ykyT157vCADVPgyj1sa97eSartETKV2I24SvVGNszsp1AL0ytXzfSFrHvhb6uBL+PzYc5YDsMthgrV+r80qlz64QQvHXXiSK1MgnA8OSL3bwIdCZFa8gLfqigAQ2kOYbIe/nkGEGQJbKcAAAAASUVORK5CYII=) 50% 100% no-repeat;background-size:90% 90%;}
+#emojiIcon.current,#pictureIcon.current{opacity:1;}
+.otherContents{margin:1em 0;background:#fff;padding:0.5em;border-radius:0.5em;}
+/*表情*/
+.emoji-drop-panel{display:none;width:100%;height:11em;position:relative;}
+.emoji-drop-panel:after{content:" ";position:absolute;left:1em;top:-0.9em;width:1em;height:1em;background:#fff;-webkit-transform:rotate(45deg);transform:rotate(45deg);} 
+.emotion-content-container{height:100%;overflow:auto;-webkit-overflow-scrolling:touch;}
+.emotion-content-container .content a{display:block;float:left;width:10%;}
+.emotion-content-container .content a img{display:block;width:100%;}
+.picture-panel{display:none;width:100%;height:11em;position:relative;}
+.picture-panel:after{content:" ";position:absolute;left:4em;top:-0.9em;width:1em;height:1em;background:#fff;-webkit-transform:rotate(45deg);transform:rotate(45deg);}
+/*图片上传*/
+.picture-panel .imgfile{width:5em;height:5em;float:left;margin-left:0.5em;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHYAAAB2CAMAAAAqeZcjAAAAP1BMVEUAAACjo6Ojo6OVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWXl5eVlZWXl5eVlZWVlZWampqampqVlZWVlZWjo6PMQ3YkAAAAE3RSTlMARLvelmkiRLtaqg0Hei3oNMuMLyDklwAAASxJREFUaN7t28FugzAQRdEHJsDYBkMn//+tBactVJYqRaXTJLwrscCbs0KMwEYuinfaYO2iW4evOC8RX0nSJQN2KQk+elO1YvPdpqZhjPjzwjSkT1dU1QcYFfzCCQC3qDDM6zwBaBsXYFgQsJetbVt0XQfjVDVfP0eWLFmyJ2Odc+j7How9d5wuysiSfWF2qnPWbHXNkb1jujBgi8iS/RVbThcneW7JkiVrwdZF842tyw5kr3f0sOw2XRiwRWS/VxUNN6Mqw66Hes1zuiBLlizZ07P8dkEWZaHK4Ynin5EysmTJkuW+C8Y4XZAl+79shGlxZZ3qCNNGVQevOsC0QdVDVts0SSqIbh5hWxgiUKCWidHBHMG+UbeQ08NXcilgV2PF6gW7xDsDdjti9g5qm2WNzjYjAAAAAABJRU5ErkJggg==) 50% 50%/100% 100% no-repeat;position:relative;z-index:4;}
+.picture-panel .imgfile:first-child{margin-left:0;}
+.picture-panel .imgfile p{position:relative;z-index:4;height:100%;width:100%;overflow: hidden;}
+.picture-panel .imgfile p img{display:block;max-width:100%;max-height:100%;/*min-width:100%;min-height:100%;*/width:auto;height:auto;position: absolute;top:0;right:0;bottom:0;left:0;margin:auto;}
+.picture-panel .imgfile p.show,.picture-panel .imgfile p.load{z-index:6;}
+.picture-panel .imgfile p.show:after{content:" ";display:block;width:100%;height:100%;position:absolute;left:0;top:0;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABDCAMAAAD04Zh8AAAARVBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////9SnXPCAAAAFnRSTlMA8jSq7BWEDGNo+Xp0YH9vBt4luaFT45E2IgAAAVdJREFUWMOl1jlyxTAMA1AqISVZiyXbCe9/1IzzC/QgGnev0AwMihSJxETmbwT4Grdc2o0HUrplNh884I9Iya51s8D3+y1VPRceeDO81RAg1lWzMQBSm68I8HnOozAAMtVPCkC6pxkCxIa2bAyAHO5HCBDLTYcxADKT9xAg+3StDICU4+0IAyALHeEAsVP1NBJARwYPoCMMgFT1vBkAGZ4qCeCXk7KxADrCAujIMhLAc3YKQNAREpCy1LOxAJ4zBIjlpB0AlXl58h+J5HH3EHA3v7yjZtS4YpZJAB1hAcwyD0jJrquwAGaZBTDLNQSILcwyAaAjLICOGAtglkOA7OxaeQCzzAKYZR7ALPMAOsICmGUSwI6cmwVwuvIATlcWQEd4AKcrC6AjLIBZnjSAjhgHoCN+hACxjI6w6zybDx5ARwAQ2fX/OS8GwOmqt/TIgWH9EdkSiskfgbIUXBFIt/sAAAAASUVORK5CYII=) 50% 50%/40% auto no-repeat rgba(0,0,0,0.3);}
+.picture-panel .imgfile p.load:after{content:" ";display:block;width:100%;height:100%;position:absolute;left:0;top:0;background:url(data:image/gif;base64,R0lGODlhHgAeAPIEAP///93d3bu7u5mZmQAA/wAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQFBQAEACwAAAAAHgAeAAADeUi6zAAtyqkevSqEZtkY2KJtS6d8YJiRFbR8qqiVLoHGMv2mlCA0o9YJ5uERfD7GrEEcNhXIpAr1ZERD1JD0UsV5vzFqdiouj7FmsHrNNU66kTNFXryR7btnV4+3ue1EfX4YTYVuaDyGh21FjWF8dY9Mf4uSbHGVEQkAIfkEBQUABAAsAgAAABUADAAAAzRIuqwRLUryJhOiVQZAw9myKZ33hQ60dBIoqkQ5Ye9qDsMZbjKB4xeUjfEDWibFo8WoJCQAACH5BAUFAAQALAcAAAAVAAwAAAMzSLokwjAyJ+EYkLIQ7J3PwnUeuJEepmjEWH1r2KLRpWouAwALfOo7XiUS3A2JwaPEyEgAACH5BAUFAAQALA4AAAAQABAAAAMuOEPc7urJFp0Qs7KLpSbXRGicSHbZAoZOEEgs47qiPL/1XTf07v9AgHAoFBGJCQAh+QQFBQAEACwSAAIADAAVAAADLUg6o/6sPSjnYtbhTOIUwvWAoEWWH8mhXOtaQSzHzzy/+AMA7r63vh8n2OMREgAh+QQFBQAEACwSAAcADAAVAAADLUi6OsPMOUjkhJa2p7v/QiiGzDh+KBUE37p67qsAABPPNCQTuUfXPmDn9+lBEgAh+QQFBQAEACwOAA4AEAAQAAADL0i6Ov6OMQilvTgzIfTmnUeA3BUEX0kAgHKin8IuZza79XXj2E68uhYjJ/FpjJkEACH5BAUFAAQALAcAEgAVAAwAAAM2SLrMMy1K8t68tMIFQBSCUymdRwSBAoYiaZ6pykblgi6r1DE3PnM7W0z2IwSFDRBG0VtGmpcEACH5BAUFAAQALAIAEgAVAAwAAAM0SKoA+xC2Fiubzkb8QojDsFCdpwiCEoqWeaYqG3nfu6yVa9/yQj+oB64ECQp7FqMmCYMkAAAh+QQFBQAEACwAAA4AEAAQAAADLgi6Sv6OMUirvfiGkN3e2QdiIiQI1ficKDEM2Pm8FzvDlnznukNXPR+u4xp2XgkAIfkEBQUABAAsAAAHAAwAFQAAAy1IBKD+izXoJKNV4ry7D2AIPqLonagiCNu6Uu4Lxc8wqGxtd/tm3z4g5scTJgAAIfkEBQUABAAsAAACAAwAFQAAAy5IugTAsLnIJlXuXblCgJnieZVGjOSFbufHvpAgzzJD03DODsPF85EfECL09SgJADs=) 50% 50%/33% auto no-repeat rgba(0,0,0,0.3);}
+.picture-panel .imgfile input{opacity:0;width:100%;height:100%;position:absolute;left:0;top:0;z-index:5;}
+
+.preview{display:none;position:absolute;left:0;top:0;z-index:10;width:100%;height:100%;background:#fff;box-sizing:border-box;padding:1em;-webkit-transform:translateY(-120%);transform:translateY(-120%);-webkit-transition:transform 0.33s ease-in-out;transition:transform 0.33s ease-in-out;overflow: hidden;}
+.preview .previewCont{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;}
+.preview .previewCont h2{height:60px;line-height:50px;margin-bottom:20px;border-bottom:1px solid #ccc;font-size:24px;font-weight:normal;}
+.preview .previewCont .articletxt p{font-size:12px;line-height:1.75;margin-bottom:16px;}
+.preview .previewCont .articletxt p img.emoji{vertical-align:middle;width:auto;height:20px;}
+.preview .closepop{width:3em;height:3em;border-radius:0.5em;position:absolute;left:1em;bottom:1em;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfAgMAAABiwP6qAAAACVBMVEUAAAAVCgIkGRJnPJyuAAAAAXRSTlMAQObYZgAAACZJREFUGNNjAANGBihggTEEYAwHBlxKFAgrESBFCVwEoQaui96KAF4yAnkB4H5CAAAAAElFTkSuQmCC) 30% 50% no-repeat rgba(190,190,190,1);background-size:66% 66%;}
+
+</style>
+</head>
+<body>
+    <!-- 发帖 -->
+    <div class="forumpost">
+        <input type="text" id="forumPostTitle" name="title" class="forumpost-title" maxlength="10" placeholder="帖子标题（最多10字）" />
+        <div id="editbox" class="forumpost-text" contenteditable="true" placeholder="帖子内容（最多140字）"></div>
+        <textarea id="forumPostText" name="contents" class="forumpost-text" maxlength="140" style="display: none;" placeholder="帖子内容（最多140字）"></textarea>
+        <div class="emoji-picture">
+            <span id="emojiIcon"></span>
+            <span id="pictureIcon"></span>
+        </div>
+        <div class="otherContents">
+            <div class="picture-panel" id="pictureBox">
+                <div class="imgfile"><p></p><input type="file" name="upload[]"></div>
+                <div class="imgfile"><p></p><input type="file" name="upload[]"></div>
+                <div class="imgfile"><p></p><input type="file" name="upload[]"></div>
+                <div class="imgfile"><p></p><input type="file" name="upload[]"></div>
+            </div>
+            <div class="emoji-drop-panel" id="emojiBox" style="display:block;">
+                <div class="emotion-content-container">
+                    <div class="content clearfix">
+                        <a href="javascript:;" commandvalue="/微笑"><img src="../images/emoji/em_1.png" /></a>
+                        <a href="javascript:;" commandvalue="/撇嘴"><img src="../images/emoji/em_2.png" /></a>
+                        <a href="javascript:;" commandvalue="/色"><img src="../images/emoji/em_3.png" /></a>
+                        <a href="javascript:;" commandvalue="/发呆"><img src="../images/emoji/em_4.png" /></a>
+                        <a href="javascript:;" commandvalue="/得意"><img src="../images/emoji/em_5.png" /></a>
+                        <a href="javascript:;" commandvalue="/流泪"><img src="../images/emoji/em_6.png" /></a>
+                        <a href="javascript:;" commandvalue="/害羞"><img src="../images/emoji/em_7.png" /></a>
+                        <a href="javascript:;" commandvalue="/闭嘴"><img src="../images/emoji/em_8.png" /></a>
+                        <a href="javascript:;" commandvalue="/睡"><img src="../images/emoji/em_9.png" /></a>
+                        <a href="javascript:;" commandvalue="/大哭"><img src="../images/emoji/em_10.png" /></a>
+                        <a href="javascript:;" commandvalue="/尴尬"><img src="../images/emoji/em_11.png" /></a>
+                        <a href="javascript:;" commandvalue="/发怒"><img src="../images/emoji/em_12.png" /></a>
+                        <a href="javascript:;" commandvalue="/调皮"><img src="../images/emoji/em_13.png" /></a>
+                        <a href="javascript:;" commandvalue="/呲牙"><img src="../images/emoji/em_14.png" /></a>
+                        <a href="javascript:;" commandvalue="/惊讶"><img src="../images/emoji/em_15.png" /></a>
+                        <a href="javascript:;" commandvalue="/难过"><img src="../images/emoji/em_16.png" /></a>
+                        <a href="javascript:;" commandvalue="/酷"><img src="../images/emoji/em_17.png" /></a>
+                        <a href="javascript:;" commandvalue="/冷汗"><img src="../images/emoji/em_18.png" /></a>
+                        <a href="javascript:;" commandvalue="/抓狂"><img src="../images/emoji/em_19.png" /></a>
+                        <a href="javascript:;" commandvalue="/吐"><img src="../images/emoji/em_20.png" /></a>
+                        <a href="javascript:;" commandvalue="/偷笑"><img src="../images/emoji/em_21.png" /></a>
+                        <a href="javascript:;" commandvalue="/:,@-D"><img src="../images/emoji/em_22.png" /></a>
+                        <a href="javascript:;" commandvalue="/白眼"><img src="../images/emoji/em_23.png" /></a>
+                        <a href="javascript:;" commandvalue="/傲慢"><img src="../images/emoji/em_24.png" /></a>
+                        <a href="javascript:;" commandvalue="/饥饿"><img src="../images/emoji/em_25.png" /></a>
+                        <a href="javascript:;" commandvalue="/困"><img src="../images/emoji/em_26.png" /></a>
+                        <a href="javascript:;" commandvalue="/惊恐"><img src="../images/emoji/em_27.png" /></a>
+                        <a href="javascript:;" commandvalue="/流汗"><img src="../images/emoji/em_28.png" /></a>
+                        <a href="javascript:;" commandvalue="/憨笑"><img src="../images/emoji/em_29.png" /></a>
+                        <a href="javascript:;" commandvalue="/::,@"><img src="../images/emoji/em_30.png" /></a>
+                        <a href="javascript:;" commandvalue="/奋斗"><img src="../images/emoji/em_31.png" /></a>
+                        <a href="javascript:;" commandvalue="/咒骂"><img src="../images/emoji/em_32.png" /></a>
+                        <a href="javascript:;" commandvalue="/疑问"><img src="../images/emoji/em_33.png" /></a>
+                        <a href="javascript:;" commandvalue="/嘘"><img src="../images/emoji/em_34.png" /></a>
+                        <a href="javascript:;" commandvalue="/晕"><img src="../images/emoji/em_35.png" /></a>
+                        <a href="javascript:;" commandvalue="/::8"><img src="../images/emoji/em_36.png" /></a>
+                        <a href="javascript:;" commandvalue="/衰"><img src="../images/emoji/em_37.png" /></a>
+                        <a href="javascript:;" commandvalue="/骷髅"><img src="../images/emoji/em_38.png" /></a>
+                        <a href="javascript:;" commandvalue="/敲打"><img src="../images/emoji/em_39.png" /></a>
+                        <a href="javascript:;" commandvalue="/再见"><img src="../images/emoji/em_40.png" /></a>
+                        <a href="javascript:;" commandvalue="/擦汗"><img src="../images/emoji/em_41.png" /></a>
+                        <a href="javascript:;" commandvalue="/抠鼻"><img src="../images/emoji/em_42.png" /></a>
+                        <a href="javascript:;" commandvalue="/鼓掌"><img src="../images/emoji/em_43.png" /></a>
+                        <a href="javascript:;" commandvalue="/糗大了"><img src="../images/emoji/em_44.png" /></a>
+                        <a href="javascript:;" commandvalue="/坏笑"><img src="../images/emoji/em_45.png" /></a>
+                        <a href="javascript:;" commandvalue="/左哼哼"><img src="../images/emoji/em_46.png" /></a>
+                        <a href="javascript:;" commandvalue="/右哼哼"><img src="../images/emoji/em_47.png" /></a>
+                        <a href="javascript:;" commandvalue="/哈欠"><img src="../images/emoji/em_48.png" /></a>
+                        <a href="javascript:;" commandvalue="/鄙视"><img src="../images/emoji/em_49.png" /></a>
+                        <a href="javascript:;" commandvalue="/委屈"><img src="../images/emoji/em_50.png" /></a>
+                        <a href="javascript:;" commandvalue="/快哭了"><img src="../images/emoji/em_51.png" /></a>
+                        <a href="javascript:;" commandvalue="/阴险"><img src="../images/emoji/em_52.png" /></a>
+                        <a href="javascript:;" commandvalue="/亲亲"><img src="../images/emoji/em_53.png" /></a>
+                        <a href="javascript:;" commandvalue="/吓"><img src="../images/emoji/em_54.png" /></a>
+                        <a href="javascript:;" commandvalue="/可怜"><img src="../images/emoji/em_55.png" /></a>
+                        <a href="javascript:;" commandvalue="/菜刀"><img src="../images/emoji/em_56.png" /></a>
+                        <a href="javascript:;" commandvalue="/西瓜"><img src="../images/emoji/em_57.png" /></a>
+                        <a href="javascript:;" commandvalue="/啤酒"><img src="../images/emoji/em_58.png" /></a>
+                        <a href="javascript:;" commandvalue="/篮球"><img src="../images/emoji/em_59.png" /></a>
+                        <a href="javascript:;" commandvalue="/乒乓"><img src="../images/emoji/em_60.png" /></a>
+                        <a href="javascript:;" commandvalue="/咖啡"><img src="../images/emoji/em_61.png" /></a>
+                        <a href="javascript:;" commandvalue="/饭"><img src="../images/emoji/em_62.png" /></a>
+                        <a href="javascript:;" commandvalue="/猪头"><img src="../images/emoji/em_63.png" /></a>
+                        <a href="javascript:;" commandvalue="/玫瑰"><img src="../images/emoji/em_64.png" /></a>
+                        <a href="javascript:;" commandvalue="/凋谢"><img src="../images/emoji/em_65.png" /></a>
+                        <a href="javascript:;" commandvalue="/:showlove"><img src="../images/emoji/em_66.png" /></a>
+                        <a href="javascript:;" commandvalue="/爱心"><img src="../images/emoji/em_67.png" /></a>
+                        <a href="javascript:;" commandvalue="/心碎"><img src="../images/emoji/em_68.png" /></a>
+                        <a href="javascript:;" commandvalue="/蛋糕"><img src="../images/emoji/em_69.png" /></a>
+                        <a href="javascript:;" commandvalue="/闪电"><img src="../images/emoji/em_70.png" /></a>
+                        <a href="javascript:;" commandvalue="/炸弹"><img src="../images/emoji/em_71.png" /></a>
+                        <a href="javascript:;" commandvalue="/刀"><img src="../images/emoji/em_72.png" /></a>
+                        <a href="javascript:;" commandvalue="/足球"><img src="../images/emoji/em_73.png" /></a>
+                        <a href="javascript:;" commandvalue="/瓢虫"><img src="../images/emoji/em_74.png" /></a>
+                        <a href="javascript:;" commandvalue="/便便"><img src="../images/emoji/em_75.png" /></a>
+                        <a href="javascript:;" commandvalue="/月亮"><img src="../images/emoji/em_76.png" /></a>
+                        <a href="javascript:;" commandvalue="/太阳"><img src="../images/emoji/em_77.png" /></a>
+                        <a href="javascript:;" commandvalue="/礼物"><img src="../images/emoji/em_78.png" /></a>
+                        <a href="javascript:;" commandvalue="/拥抱"><img src="../images/emoji/em_79.png" /></a>
+                        <a href="javascript:;" commandvalue="/强"><img src="../images/emoji/em_80.png" /></a>
+                        <a href="javascript:;" commandvalue="/弱"><img src="../images/emoji/em_81.png" /></a>
+                        <a href="javascript:;" commandvalue="/握手"><img src="../images/emoji/em_82.png" /></a>
+                        <a href="javascript:;" commandvalue="/胜利"><img src="../images/emoji/em_83.png" /></a>
+                        <a href="javascript:;" commandvalue="/抱拳"><img src="../images/emoji/em_84.png" /></a>
+                        <a href="javascript:;" commandvalue="/勾引"><img src="../images/emoji/em_85.png" /></a>
+                        <a href="javascript:;" commandvalue="/拳头"><img src="../images/emoji/em_86.png" /></a>
+                        <a href="javascript:;" commandvalue="/差劲"><img src="../images/emoji/em_87.png" /></a>
+                        <a href="javascript:;" commandvalue="/爱你"><img src="../images/emoji/em_88.png" /></a>
+                        <a href="javascript:;" commandvalue="/NO"><img src="../images/emoji/em_89.png" /></a>
+                        <a href="javascript:;" commandvalue="/OK"><img src="../images/emoji/em_90.png" /></a>
+                        <a href="javascript:;" commandvalue="/爱情"><img src="../images/emoji/em_91.png" /></a>
+                        <a href="javascript:;" commandvalue="/飞吻"><img src="../images/emoji/em_92.png" /></a>
+                        <a href="javascript:;" commandvalue="/跳跳"><img src="../images/emoji/em_93.png" /></a>
+                        <a href="javascript:;" commandvalue="/发抖"><img src="../images/emoji/em_94.png" /></a>
+                        <a href="javascript:;" commandvalue="/怄火"><img src="../images/emoji/em_95.png" /></a>
+                        <a href="javascript:;" commandvalue="/转圈"><img src="../images/emoji/em_96.png" /></a>
+                        <a href="javascript:;" commandvalue="/磕头"><img src="../images/emoji/em_97.png" /></a>
+                        <a href="javascript:;" commandvalue="/回头"><img src="../images/emoji/em_98.png" /></a>
+                        <a href="javascript:;" commandvalue="/跳绳"><img src="../images/emoji/em_99.png" /></a>
+                        <a href="javascript:;" commandvalue="/:oY"><img src="../images/emoji/em_100.png" /></a>
+                        <a href="javascript:;" commandvalue="/激动"><img src="../images/emoji/em_101.png" /></a>
+                        <a href="javascript:;" commandvalue="/:hiphot"><img src="../images/emoji/em_102.png" /></a>
+                        <a href="javascript:;" commandvalue="/献吻"><img src="../images/emoji/em_103.png" /></a>
+                        <a href="javascript:;" commandvalue="/左太极"><img src="../images/emoji/em_104.png" /></a>
+                        <a href="javascript:;" commandvalue="/右太极"><img src="../images/emoji/em_105.png" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="javascript:submitNote();" class="forumpost-btn">提交</a>
+    </div>
+    <!-- 发帖 -->
+    <div class="preview" id="previewPOP">
+        <div class="previewCont" id="previewCont">
+            <h2></h2>
+            <div class="articletxt"></div>
+        </div>
+        <div class="closepop" onclick="showPreviewPOP()"></div>
+    </div>
+    <script src="../js/zepto.min.js"></script>
+    <script>
+        function showPreviewPOP(t){
+            var box=document.getElementById("previewPOP");
+            if(t){
+                box.style.display="block";
+                setTimeout(function(){
+                    box.style.webkitTransform='translateY(0)';
+                    box.style.transform='translateY(0)';
+                },10);            
+            }
+            else{
+                box.style.webkitTransform='translateY(-120%)';
+                box.style.transform='translateY(-120%)';
+                setTimeout(function(){
+                    box.style.display="none";
+                },350);
+            }
+        }
+        
+
+
+        function emoji_to_html(str){
+            var emojiary=["/微笑","/撇嘴","/色","/发呆","/得意","/流泪","/害羞","/闭嘴","/睡","/大哭","/尴尬","/发怒","/调皮","/呲牙","/惊讶","/难过","/酷","/冷汗","/抓狂","/吐","/偷笑","/:,@-D","/白眼","/傲慢","/饥饿","/困","/惊恐","/流汗","/憨笑","/::,@","/奋斗","/咒骂","/疑问","/嘘","/晕","/::8","/衰","/骷髅","/敲打","/再见","/擦汗","/抠鼻","/鼓掌","/糗大了","/坏笑","/左哼哼","/右哼哼","/哈欠","/鄙视","/委屈","/快哭了","/阴险","/亲亲","/吓","/可怜","/菜刀","/西瓜","/啤酒","/篮球","/乒乓","/咖啡","/饭","/猪头","/玫瑰","/凋谢","/:showlove","/爱心","/心碎","/蛋糕","/闪电","/炸弹","/刀","/足球","/瓢虫","/便便","/月亮","/太阳","/礼物","/拥抱","/强","/弱","/握手","/胜利","/抱拳","/勾引","/拳头","/差劲","/爱你","/NO","/OK","/爱情","/飞吻","/跳跳","/发抖","/怄火","/转圈","/磕头","/回头","/跳绳","/:oY","/激动","/:hiphot","/献吻","/左太极","/右太极"],
+            i=0,len=emojiary.length,tempString=str;
+            var re =null;
+            for(;i<len;i++){
+                //console.log('\\'+emojiary[i]+'\\g');
+                re=new RegExp(emojiary[i],'g');
+                tempString=tempString.replace(re,'<img src="../images/emoji/em_'+(i+1)+'.png" class="emoji" />');
+                //console.log(re);
+            }
+            return tempString;
+        }
+
+
+        function submitNote(){
+            var title=$('#forumPostTitle'),title_val=title.val();
+            var contents=$('#forumPostText'),contents_val=contents.val()+'next_is_image_url_array';
+            $('#pictureBox>.imgfile>p>img').each(function(i){
+                if(this.getAttribute('uploaded')==='true'&&this.src.length<100){
+                    contents_val+=(i==0?'':'||')+this.src;
+                }
+            })
+            if(title_val==0){alert('请填写你的帖子标题！');}
+            else if(contents_val.length==0){alert('请填写你的帖子内容！');}
+            else{
+                var contAry=contents_val.split('next_is_image_url_array');
+                var outputPicHtml=function(arystr){
+                    if(!arystr){return '';}
+                    var imgary=arystr.split('||'),i=0,len=imgary.length,imghtml='';
+                    for(;i<len;i++){
+                        imghtml+='<img src="'+imgary[i]+'" class="imgw100" ><br />';
+                    }
+                    return imghtml;
+                };
+                $('#previewCont>h2').text(title_val).siblings('.articletxt').html('<p>'+emoji_to_html(contAry[0])+'</p>'+outputPicHtml(contAry[1]));
+                showPreviewPOP(1);
+                //contents.text(contents_val);
+                /*showCoverPOP(1);
+                $.get(ajaxUrl+'PostNote?','title='+encodeURIComponent(title_val)+'&contents='+encodeURIComponent(contents_val),function(data){
+                    showCoverPOP(0);
+                    if(data.Code==0&&data.Success){
+                        alertpop('提交成功',function(){location.reload();});
+                    }
+                    else{
+                        alertpop(data.Message);
+                    }
+                },ajaxType)*/
+            }
+        }
+
+        //压缩图片
+	    function compressPicture(picObj,pic){
+            var canvas=document.createElement("canvas"),ctx=canvas.getContext("2d"),saveImageDATA='';
+            var bili=picObj.width/picObj.height,w=(picObj.width>640?640:picObj.width),h=w/bili;
+                canvas.width=w;canvas.height=h;
+                ctx.drawImage(picObj,0,0, picObj.width,picObj.height,0,0,canvas.width,canvas.height);
+                pic.src = saveImageDATA = canvas.toDataURL();
+                $.post('http://crotnet.gz01.bdysite.com/crotnetWebsiteAdmin/saveImage/saveBase64Image.php',"mode=banner&dataimg="+encodeURIComponent(saveImageDATA),function(data){
+                    if(data.code==0){
+                        pic.setAttribute('uploaded','true');
+                        pic.src = data.imgurl;
+					}else{
+                        alertpop("上传失败，请稍后重试！");
+
+                    }
+                },'json')
+                /*$.post(ajaxUrl+'UploadImg',"fileBase64="+encodeURIComponent(saveImageDATA),function(data){
+                    if(data.Code==0&&data.Success){
+                        pic.setAttribute('uploaded','true');
+                        pic.src = data.Attach;
+					}
+                    else{
+                        alertpop(data.Message);
+                    }
+                },'json')*/
+		}
+
+        var File = function(){
+            var file = {};
+            /*图片预览*/
+            file.previewImage = function(file){
+                var showcase = file.parentNode.children[0];
+                /*if(file.files[0].size>5*1024*1024){
+                    file.value='';
+                    alertpop("上传图片不能大于5M，请先进行压缩再上传");
+                }*/
+                if (file.files && file.files[0]){
+                    var img = new Image(),image = new Image();
+                    image.onload = function(){
+                        showcase.appendChild(this);
+                        if(this.getAttribute('uploaded')==='true'){
+                            showcase.className="show";
+                        }
+                    }
+                    img.onload = function(){
+                        compressPicture(this,image)
+                        //showcase.appendChild(img);
+                        showcase.className="load";
+                    }
+                    var reader = new FileReader();
+                    reader.onload = function(evt){img.src = evt.target.result;}
+                    reader.readAsDataURL(file.files[0]);
+                    showcase.onclick=function(e){
+                        var t=e.target,j=0;
+                        if(t.nodeName.toLowerCase()=='p'&&t.className=="show"||t.nodeName.toLowerCase()=='img'&&t.parentNode.className=="show"){
+                            showcase.removeChild(showcase.children[0]);
+                            showcase.className="";
+                            file.value="";
+                        }
+                    }
+                }
+            }
+            //
+            return file;
+        }();
+
+        $(function(){
+            //表情和图片层的显示切换
+            $('.emoji-picture>span').click(function(){
+              $(this).addClass('current').siblings('span.current').removeClass('current');
+              $('#'+this.getAttribute('id').replace('Icon','Box')).show().siblings('div').hide();  
+            })
+            
+            var editbox=$('#editbox');
+            var inputEventHandle=function(){
+                var lastEditVal='';
+                var byforinnertext=function(obj){
+                    var t=obj,childary=t.childNodes,editVal='';
+                    var i=0,len=childary.length;
+                    //console.log(childary);
+                    for(;i<len;i++){
+                        if(childary[i].nodeType==1){
+                            if(childary[i].nodeName.toLowerCase()=='img'&&childary[i].getAttribute('src').indexOf('emoji')>-1&&childary[i].getAttribute('alt')){editVal+=childary[i].getAttribute('alt');}
+                            else if(childary[i].nodeName.toLowerCase()=='br'){editVal+='<br>';}
+                            else{editVal+=byforinnertext(childary[i])}
+                            //else if(childary[i].innerText.replace(/\s/g,'').length>0){editVal+=childary[i].innerText;}
+                            //else if(childary[i].textContent.replace(/\s/g,'').length>0){editVal+=childary[i].textContent;}
+                        }
+                        else if(childary[i].nodeType==3){editVal+=childary[i].textContent;}
+                        /*if(childary[i].nodeType==1&&childary[i].nodeName.toLowerCase()=='img'){editVal+=childary[i].getAttribute('alt');}
+                        else if(childary[i].nodeType==1&&childary[i].nodeName.toLowerCase()=='div'){editVal+=childary[i].innerHTML;}
+                        else if(childary[i].nodeType==1&&childary[i].nodeName.toLowerCase()=='br'){editVal+='<br>';}
+                        else if(childary[i].nodeType==1&&childary[i].nodeName.toLowerCase()=='span'){editVal+=childary[i].innerHTML;}
+                        else if(childary[i].nodeType==1&&childary[i].nodeName.toLowerCase()=='p'){editVal+=childary[i].innerHTML;}
+                        else if(childary[i].nodeType==3){editVal+=childary[i].textContent;}*/
+                    }
+                    return editVal;
+                }
+                lastEditVal=byforinnertext(editbox[0]);
+                $('#forumPostText').val(lastEditVal);
+                console.log(lastEditVal);
+            }
+
+            //点击表情的处理
+            $('#emojiBox>.emotion-content-container>.content').click(function(e){
+                e.preventDefault;
+                var t=e.target;
+                if(t.nodeName.toLowerCase()=='a'){t=e.target;}
+                else if(t.nodeName.toLowerCase()=='img'&&t.parentNode.nodeName.toLowerCase()=='a'){t=t.parentNode;}
+                else{return false;}
+                //t.children[0].setAttribute('alt',t.getAttribute('commandvalue'));
+                editbox.append(t.innerHTML.replace('png"','png" alt="'+t.getAttribute('commandvalue')+'"'));
+                inputEventHandle();
+            })
+            
+            //
+            editbox[0].oninput=inputEventHandle;
+
+            $('#pictureBox input').on('change', function() {
+                var suffix3=this.value.substr(-3).toLowerCase(),suffix4=this.value.substr(-4).toLowerCase();
+                if(suffix3=='png'||suffix3=='jpg'||suffix3=='gif'||suffix3=='bmp'||suffix4=='jpeg'||suffix4=='webm'){}
+                else{alertpop('只能上传图片');this.value='';return false;}
+                if(this.value==''){$(this).parent().children('p').click();}
+                else{File.previewImage(this);}
+            });
+            
+        })
+    </script>
+</body>
+</html>

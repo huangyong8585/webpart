@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>meta viewport</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+<style>
+.wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+.wrapper p{font-size:16px;font-family:Arial;}
+#qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+</style>
+</head>
+<body>	
+	<article class="wrapper">
+        <blockquote>
+            <p>&lt;meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;</p>
+            <p>&lt;meta name="format-detection" content="telephone=no" /&gt;</p>
+            <p>&nbsp;</p>
+            <p>&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;</p>
+            <p>&nbsp;</p>
+        </blockquote>
+        <blockquote>
+            <p>计算出来的mate viewport：</p>
+            <p id="jisuan"></p>
+            <p><sub>这个计算出来的mate viewport可以在页面中直接定义像素单位，然后自动整体缩放至屏幕尺寸</sub></p>
+        </blockquote>
+        <div id="qrcode"></div>
+	</article>
+    <script src="../js/Qrcode.js"></script>
+	<script>
+        // 初始化layout
+        (function(){
+            if (/Android (\d+\.\d+)/.test(navigator.userAgent)) {
+                var version = parseFloat(RegExp.$1);
+                if (version > 2.3) {
+                    var phoneScale = parseInt(window.screen.width) / 640,
+                        meata=document.createElement('meta'),
+                        meatatxt='&lt;meta name="viewport" content="width=640,minimum-scale=' + phoneScale + ',maximum-scale=' + phoneScale + ',target-densitydpi=device-dpi"&gt;';
+                        meata.setAttribute('name',"viewport");
+                        meata.setAttribute('content',"width=640,minimum-scale=" + phoneScale + ",maximum-scale=" + phoneScale + ",target-densitydpi=device-dpi");
+                        //document.getElementsByTagName("head")[0].appendChild(meata);
+                        document.getElementById('jisuan').innerHTML=meatatxt;
+                } 
+                else 
+                {
+                    var meatatxt='&lt;meta name="viewport" content="width=640,target-densitydpi=device-dpi"&gt;';
+                    var meata=document.createElement('meta');
+                    meata.setAttribute('name',"viewport");
+                    meata.setAttribute('content',"width=640,target-densitydpi=device-dpi");
+                    //document.getElementsByTagName("head")[0].appendChild(meata);
+                    document.getElementById('jisuan').innerHTML=meatatxt;
+                }
+            } 
+            else 
+            {
+                var phoneScale = parseInt(window.screen.width) / 640,
+                    meata=document.createElement('meta'),
+                    meatatxt='&lt;meta name="viewport" content="width=640,minimum-scale=' + phoneScale + ',maximum-scale=' + phoneScale + ',target-densitydpi=device-dpi"&gt;';
+                    meata.setAttribute('name',"viewport");
+                    meata.setAttribute('content',"width=640,minimum-scale=" + phoneScale + ",maximum-scale=" + phoneScale + ",target-densitydpi=device-dpi");
+                    //document.getElementsByTagName("head")[0].appendChild(meata);
+                    document.getElementById('jisuan').innerHTML=meatatxt;
+            }
+        })();
+
+		window.onload=function(){
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }		
+	</script>
+</body>
+</html>

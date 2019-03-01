@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>CSS em单位</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+<style>
+@media screen and (min-width:320px) and (max-width:340px){
+    body{font-size:12px}
+}
+@media screen and (min-width:341px) and (max-width:360px){
+    body{font-size:13px}
+}
+@media screen and (min-width:361px) and (max-width:380px){
+    body{font-size:14px}
+}
+@media screen and (min-width:381px) and (max-width:400px){
+    body{font-size:15px}
+}
+@media screen and (min-width:401px) and (max-width:420px){
+    body{font-size:16px}
+}
+@media screen and (min-width:421px) and (max-width:440px){
+    body{font-size:17px}
+}
+@media screen and (min-width:441px) and (max-width:460px){
+    body{font-size:18px}
+}
+@media screen and (min-width:461px) and (max-width:480px){
+    body{font-size:19px}
+}
+@media screen and (min-width:481px) and (max-width:500px){
+    body{font-size:20px}
+}
+@media screen and (min-width:501px) and (max-width:520px){
+    body{font-size:21px}
+}
+@media screen and (min-width:521px) and (max-width:540px){
+    body{font-size:22px}
+}
+@media screen and (min-width:541px) and (max-width:560px){
+    body{font-size:23px}
+}
+@media screen and (min-width:561px) and (max-width:580px){
+    body{font-size:24px}
+}
+@media screen and (min-width:581px) and (max-width:600px){
+    body{font-size:25px}
+}
+@media screen and (min-width:601px) and (max-width:620px){
+    body{font-size:26px}
+}
+@media screen and (min-width:621px) and (max-width:640px){
+    body{font-size:27px}
+}
+@media screen and (min-width:641px){
+    body{font-size:28px}
+}
+.wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+#qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+</style>
+</head>
+<body>	
+	<article class="wrapper">
+		<p style="width:1em;height:1em;background:#f39;"></p>
+		<p style="color:#f00;">上面的红色正方形宽高为1em*1em</p>
+		<br /><br /><br />
+		<div style="width:10em;height:5em;background:#36f;">宽10em，高5em</div>
+		<div id="qrcode"></div>
+	</article>
+    <script src="../js/Qrcode.js"></script>
+	<script>		
+
+		window.onload=function(){
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }		
+	</script>
+</body>
+</html>

@@ -50,29 +50,32 @@ function getURLPara(str){
 		if(wls.indexOf("&")!=-1){ary=wls.substring(1).split("&");}
 		else{ary[0]=wls.substring(1)}
 		i=ary.length;
-		for(;i--;){console.log(i);
-			temp=ary[i].split("=");
-			obj[temp[0]]=temp[1];
-			}
-		}
+		for(;i--;){
+            if(ary[i].indexOf('=')>-1){
+                temp=ary[i].split("=");
+                obj[temp[0]]=decodeURIComponent(temp[1].replace(/\+/g,"%20"));
+            }
+        }
+	}
 	if(str){return obj[str];}
 	else{return obj;}
 }
 
 (function (doc, win) {
-		//var docEl = doc.documentElement,
-		var docEl = doc.getElementsByTagName("body")[0],
-				resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-				recalc = function () {
-					var clientWidth = (docEl.clientWidth||win.innerWidth);console.log(clientWidth,win.innerWidth);
-					if (!clientWidth) return;
-					docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
-					//doc.getElementsByTagName('body')[0].style.fontSize = 12 * (clientWidth / 320) + 'px';
-				};
-			if (!doc.addEventListener) return;
-			win.addEventListener(resizeEvt, recalc, false);
-			doc.addEventListener('DOMContentLoaded', recalc, false);
-		})(document, window);
+	var docEl = doc.documentElement,
+		docBody = doc.getElementsByTagName("body")[0],
+			resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+			recalc = function () {
+				var clientWidth = (docEl.clientWidth||win.innerWidth);
+				if (!clientWidth) return;
+				docBody.style.fontSize = 12 * (clientWidth / 320) + 'px';	//body的fontsize em单位
+				if(clientWidth >= 750){docEl.style.fontSize = '100px';} 	//html的fontsize rem单位
+				else{docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';}
+			};
+		if (!doc.addEventListener) return;
+		win.addEventListener(resizeEvt, recalc, false);
+		doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
 
 //模拟alert
 function alertpop(t){
