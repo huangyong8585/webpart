@@ -273,7 +273,7 @@ function initmenudata(data){
 				dd=$(dt).parent().children('dd').last()[0];
 				dd.children[0].value=sub_btn[k].name;
 				dd.children[1].value=sub_btn[k].type;
-				dd.children[2].setAttribute('name',sub_btn[i].type==='click'?'Key':(sub_btn[i].type==='view'?'Url':''));
+				dd.children[2].setAttribute('name',sub_btn[k].type==='click'?'Key':(sub_btn[k].type==='view'?'Url':''));
 				dd.children[2].value=sub_btn[k][(sub_btn[k].type==='click'?'key':(sub_btn[k].type==='view'?'url':''))];
 			}
 		}
@@ -289,7 +289,7 @@ $(window).load(function(){
 		}
 	},'json');*/
 
-	initmenudata({
+	/*initmenudata({
     "button": [{
         "name": "百度",
         "sub_button": [{
@@ -365,7 +365,8 @@ $(window).load(function(){
             "sub_button": []
         }]
     }]
-});
+});*/
+	initmenudata({"button":[{"name":"阳光政务","sub_button":[{"type":"view","name":"税收法规","url":"http:\/\/www.jx-n-tax.gov.cn\/col\/col23381\/index.html","sub_button":[]},{"type":"view","name":"机关政讯","url":"http:\/\/www.jx-n-tax.gov.cn\/col\/col23314\/index.html","sub_button":[]}]},{"name":"办税查询","sub_button":[{"type":"view","name":"办税指南","url":"http:\/\/wx.syxfedj.com\/index.php?g=portal&m=list&a=index&id=14","sub_button":[]},{"type":"view","name":"办税地图","url":"http:\/\/wx.syxfedj.com\/index.php?g=portal&m=list&a=index&id=11","sub_button":[]},{"type":"view","name":"税额计算","url":"http:\/\/wx.syxfedj.com\/index.php?g=portal&m=list&a=index&id=41","sub_button":[]}]},{"name":"便民服务","sub_button":[{"type":"view","name":"实时取号","url":"http:\/\/www.runright.com.cn\/tax\/takenum.html","sub_button":[]},{"type":"view","name":"社保缴纳","url":"http:\/\/www.etax-jx.gov.cn\/etaxbf\/weixin\/faceAuth","sub_button":[]}]}]});
 	Is_Setted=true;
 })
 </script>
