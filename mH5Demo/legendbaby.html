@@ -1,0 +1,302 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>传奇新区爆服 美女宝贝助威</title>
+<script src="../js/zepto.min.js"></script>
+<script src="../js/hhSwipe.js"></script>
+<style>
+@charset "utf-8";
+blockquote,body,caption,dd,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,iframe,img,label,legend,li,object,ol,p,pre,span,strong,table,tbody,td,tfoot,th,thead,tr,ul,article,section,aside,figure{border:0 none;margin:0;outline:0 none;padding:0;-webkit-text-size-adjust:none;}
+body,html{font-family:'Microsoft YaHei',Helvetica,Tahoma,StSun,SimSun,sans-serif;/*font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;*/-webkit-text-size-adjust:none;height:100%;min-height:416px;}
+ol,ul,li{list-style:none}
+table{border-collapse:collapse;border-spacing:0}
+:focus{outline:0}
+button::-moz-focus-inner{padding:0;border:0}
+a:link,a:visited{text-decoration: none;color:#9b5e16;}
+a:hover{text-decoration:none;}
+a{-webkit-tap-highlight-color:rgba(255,0,0,0);}
+img{border:0;}
+.clear{clear:both;display:block;margin:0;padding:0}
+.clear-after:after{content:"";display:block;height:0;clear:both;visibility:hidden}
+* .clear-after{zoom:1}
+.hide{display:none}
+.clearfix:after{display:block;clear:both;height:0;visibility:hidden;content:"."}
+.clearfix{display:block;*display:inline-block;zoom:1;}
+* html .clearfix{height:1%}
+.gold{color:#f08f00;}
+.tac{text-align:center}
+.w100{width:100%;}
+.imgw100{width:100%;display:block;}
+
+
+.contentBox{}
+.content{padding:10% 0;}
+.content .swimgBox .prevjt,.content .swimgBox .nextjt{display:block;width:4.5333%;position:absolute;top:43.7%;}
+.content .swimgBox .prevjt{left:5%;}
+.content .swimgBox .nextjt{right:5%;}
+.content .swimgBox .prevjt img,.content .swimgBox .nextjt img{width:100%;display:block;}
+.content .swimgBox{overflow:hidden;width:100%;position:relative;}
+.content .swimgBox ul{overflow:hidden;width:100%;}
+.content .swimgBox ul li{display:block;width:100%;float:left;position:relative;z-index:0;}
+.content .swimgBox ul li .image{border:0.5em solid #cc6c24; box-sizing:border-box;width:66%;overflow:hidden;margin:0 auto;position:relative;}
+.content .swimgBox ul li .image img{width:100%;height:21em;display:block;}
+.content .swimgBox ul li .imagesBox{position:absolute;left:0;top:0;height:100%;width:0;z-index:3;-webkit-transform:translateX(0);transform:translateX(0);-webkit-transition:-webkit-transform ease .5s;transition:transform ease .5s;}
+.content .swimgBox ul li .imagesBox img{ display:inline-block;}
+.content .image .flower{width:45%;padding-left:5%;height:2em;line-height:2em; text-align:center;position:absolute;right:0;bottom:0;z-index:5;background:url(http://static.sdg-china.com/mir2/pic/mir2_act/IamLegendBaby/bg0.png) right top/100% 100% no-repeat;}
+.content .image .flower b{display:inline-block;color:#ffd801;font-size:1em;font-weight:normal;vertical-align:middle;padding-left:.5em;}
+.content .image .flower em{display:inline-block;height:2em;width:2em;background:url(http://static.sdg-china.com/mir2/pic/mir2_act/IamLegendBaby/rose.png) 0 0/100% 100% no-repeat;vertical-align:middle;margin-left:.5em;}
+.content .swimgBox ul li .text{width:82%;margin:5% auto 0;color:#ffd801;line-height:2em;display:none;}
+.content .swimgBox ul li .text h2{font-size:1.25em;}
+.content .swimgBox ul li .text h3{font-size:1.25em;}
+.content .swimgBox ul li .text p{font-size:1em;}
+.content .bigbut{width:80%; display:block;margin:2em auto 0;padding:.2em 0 .5em;text-align:center;border-top:1px solid #722b19;border-left:1px solid #7f2414;border-bottom:1px solid #8f593a; border-right:1px solid #7f2414;background:-webkit-linear-gradient(#dd4111,#5a2303);background:linear-gradient(#dd4111,#5a2303);}
+.content .bigbut:active{background: -webkit-linear-gradient(#5a2303,#dd4111);background:linear-gradient(#5a2303,#dd4111);}
+.content .bigbut strong{ display:block;color:#f1c750;letter-spacing:0.2em;font-size:2em;-webkit-text-stroke:1px #331102;text-stroke:1px #331102;}
+.content .bigbut span{ display:block;color:#ffea00;font-size:1em;}
+.content #canvass{padding:.8em 0 1.1em;}
+
+
+/*弹出层*/
+.popbox{display:none;position:fixed;width:100%;height:100%;overflow:hidden;left:0;top:0;background-color:rgba(0,0,0,0.6);z-index:10;
+-webkit-transform:scale(0.001,0.001);transform:scale(0.001,0.001);-webkit-transform-origin:center center;transform-origin:center center;
+-webkit-transition:-webkit-transform .2s ease-in-out;transition:transform .2s ease-in-out;}
+.popbox .pop{position:absolute;width:100%;height:100%;left:0;top:0;z-index:11;}
+.popbox .pop img{width:100%;}
+.popbox .closepop{width:6em;height:6em;border-radius:6em;position:absolute;right:-1.2em;bottom:-1.2em;z-index:12;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfAgMAAABiwP6qAAAACVBMVEUAAAAVCgIkGRJnPJyuAAAAAXRSTlMAQObYZgAAAFpJREFUGNNFkEEOACEIAyHhsEeexNP26WLTjGooChRqTGhVtHChhBvIC7KjFEVtvuv8DqcLXNo6qjB97jZr2em2UyMwCy/kUAUPzPSiO/P4Nsz8VKALpWjnNw4evAWS9iAWqwAAAABJRU5ErkJggg==) 45% 45% no-repeat rgba(255,255,255,0.5); background-size:2em 2em;}
+
+
+
+/*动画*/
+.content .image .flower.play em{animation:changeleft 1s;-webkit-animation:changeleft 1s;}
+
+@-webkit-keyframes changeleft{
+	0%{-webkit-transform:translateX(0px);} 
+	50%{-webkit-transform:translateX(6px);} 
+	60%{-webkit-transform:translateX(-6px);} 
+	70%{-webkit-transform:translateX(4px);} 
+	80%{-webkit-transform:translateX(-4px);} 
+	90%{-webkit-transform:translateX(2px);} 
+	95%{-webkit-transform:translateX(-2px);} 
+	100%{-webkit-transform:translateX(0);}
+}
+@keyframes changeleft {
+	0%{transform:translateX(0px);} 
+	50%{transform:translateX(6px);} 
+	60%{transform:translateX(-6px);} 
+	70%{transform:translateX(4px);} 
+	80%{transform:translateX(-4px);} 
+	90%{transform:translateX(2px);} 
+	95%{transform:translateX(-2px);} 
+	100%{transform:translateX(0);}
+}
+
+@media screen and (max-width : 340px){
+	body{font-size:12px;}
+}
+@media screen and (min-width : 341px) and (max-width : 360px){
+	body{font-size:13px;}
+}
+@media screen and (min-width : 361px) and (max-width : 400px){
+	body{font-size:14px;}
+}
+@media screen and (min-width : 401px) and (max-width : 440px){
+	body{font-size:15px;}
+}
+@media screen and (min-width : 441px) and (max-width : 480px){
+	body{font-size:16px;}
+}
+@media screen and (min-width : 481px) and (max-width : 520px){
+	body{font-size:17px;}
+}
+@media screen and (min-width : 521px) and (max-width : 560px){
+	body{font-size:21px;}
+}
+@media screen and (min-width : 561px) and (max-width : 620px){
+	body{font-size:22px;}
+}
+@media screen and (min-width : 621px) and (max-width : 660px){
+	body{font-size:24px;}
+}
+@media screen and (min-width : 661px) and (max-width : 720px){
+	body{font-size:26px;}
+}
+@media screen and (min-width : 721px) and (max-width : 800px){
+	body{font-size:29px;}
+}
+@media screen and (min-width : 801px) {
+	body{font-size:31px;}
+}
+</style>
+</head>
+<body>
+	<article>
+    	<!--<header>
+        	<h1 style="display:none;"><img src="http://static.sdg-china.com/mir2/pic/mir2_act/IamLegendBaby/share.jpg" /></h1>
+        	<img src="http://static.sdg-china.com/mir2/pic/mir2_act/IamLegendBaby/banner01.jpg" class="imgw100" />
+        </header>-->
+        <section class="contentBox">
+        	<div class="content">
+                <div class="swimgBox" id="swimgBox">
+                    <ul>
+                        <li>
+                            <div class="image" imgary="14513834918421_1.jpg"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK0AAADaAQMAAADuRlB5AAAABlBMVEXx8fHd3d15gsgEAAAAiElEQVRYw+3TMQ6CQBCF4Z8GOo+gN5GjsZ3X4ih2tpZbkEGj5b5kQwIU8P7yKyaTSQbnnHPO7Vo3/4uj8ENyNJInJGeGNbhfY4jeu871m/zwpTkNioNecaZbwE8axSMoTnAXDFxLDuBS8gS0JWfNb82j5lRy+3UEM4fkW5YMp+XqzzvnnHNumz4IBgNQF9NHvwAAAABJRU5ErkJggg==" /><strong class="flower"><em></em><b></b></strong></div>
+                            <div class="text"><h2></h2><h3></h3><h3></h3><p></p></div>
+                        </li>
+                    </ul>
+                    <a href="javascript:;" class="prevjt"><img src="http://static.sdg-china.com/mir2/pic/mir2_act/IamLegendBaby/jt-left.gif" /></a>
+                	<a href="javascript:;" class="nextjt"><img src="http://static.sdg-china.com/mir2/pic/mir2_act/IamLegendBaby/jt-right.gif" /></a>
+                </div>
+                <a href="javascript:;" class="bigbut" id="giftFlower"><strong>送花支持</strong><span>为选手送花即可获得新区激活码</span></a>
+                <!--<a href="javascript:;" class="bigbut" id="canvass"><strong>为她拉票</strong><span></span></a>-->
+            </div>
+        </section>
+        <!--弹出层-->
+        <div class="popbox">
+            <div class="pop" id="isOver"></div>
+            <div class="closepop" onClick="showPOP();"></div>
+        </div>
+        <!--弹出层-->
+    </article>
+<script>
+	(function (doc, win) {
+          //var docEl = doc.documentElement,
+		  var docEl = doc.getElementsByTagName("body")[0],
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+              var clientWidth = (docEl.clientWidth||win.innerWidth);console.log(clientWidth,win.innerWidth);
+              if (!clientWidth) return;
+			  docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+              //doc.getElementsByTagName('body')[0].style.fontSize = 12 * (clientWidth / 320) + 'px';
+            };
+
+          if (!doc.addEventListener) return;
+          win.addEventListener(resizeEvt, recalc, false);
+          doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+		
+	var phoneWidth = parseInt(document.body.clientWidth||document.documentElement.clientWidth||window.screen.width);
+  	var phoneHeight = parseInt(document.body.clientHeight||document.documentElement.clientHeight||window.screen.height);
+	console.log(phoneWidth,phoneHeight);
+	var defaultImage="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK0AAADaAQMAAADuRlB5AAAABlBMVEXx8fHd3d15gsgEAAAAiElEQVRYw+3TMQ6CQBCF4Z8GOo+gN5GjsZ3X4ih2tpZbkEGj5b5kQwIU8P7yKyaTSQbnnHPO7Vo3/4uj8ENyNJInJGeGNbhfY4jeu871m/zwpTkNioNecaZbwE8axSMoTnAXDFxLDuBS8gS0JWfNb82j5lRy+3UEM4fkW5YMp+XqzzvnnHNumz4IBgNQF9NHvwAAAABJRU5ErkJggg==";
+	
+	var slider={
+		"nowCount":0,
+		"loadSwImageConfig":{
+				"num":0,
+				"timetemp":null,
+				"img":null,
+				"imgAry":[],
+				"imgsbox":null,
+				"movePX":0
+				},
+		"readySwImage":function(){
+			var that=slider.loadSwImageConfig;
+			if(that.timetemp){clearTimeout(that.timetemp);}
+			that.img=document.getElementById("swimgBox").children[0].children[slider.nowCount].children[0].children[0];
+			that.imgAry=that.img.parentNode.getAttribute("imgary").split(",")
+			that.movePX=(1/that.imgAry.length*100).toFixed(4);
+			if(!that.img.parentNode.getAttribute("ishaveimgbox")){
+				var boxhtml=null;
+				boxhtml=document.createElement("div");
+				boxhtml.className="imagesBox";
+				boxhtml.style.width=that.imgAry.length*100+"%";
+				that.imgsbox=boxhtml;
+				that.img.parentNode.appendChild(boxhtml);
+				that.img.parentNode.setAttribute("ishaveimgbox","true");
+				}
+			else{
+				that.imgsbox=that.img.parentNode.children[2];
+				//that.imgsbox.style.webkitTransform='translateX(0)';
+				//that.imgsbox.style.transform='translateX(0)';
+				}
+			that.num=that.imgsbox.children.length;
+			if(that.imgAry.length==1||that.imgAry.length==that.imgsbox.children.length){that.num=0;}
+			slider.moveSwImage();
+			},
+		"moveSwImage":function(){
+			var that=slider.loadSwImageConfig,imghtml=null;
+			if(that.timetemp){clearTimeout(that.timetemp);}
+			if(!that.imgsbox.getAttribute("isloaded")){
+				imghtml=document.createElement("img");
+				imghtml.src=that.imgAry[that.num].replace(".jpg","_1.jpg");
+				imghtml.style.width=that.movePX+"%";
+				that.imgsbox.appendChild(imghtml);
+				imghtml.addEventListener("click",function(){showPOP(this.src.replace("_1.jpg",".jpg"));},false);
+				}
+			that.imgsbox.style.webkitTransform='translateX('+(0-that.movePX*that.num)+'%)';
+			that.imgsbox.style.transform='translateX('+(0-that.movePX*that.num)+'%)'
+			if(that.num<that.imgAry.length&&that.imgAry.length>1){that.num++}
+			else if(that.imgAry.length==1){that.imgsbox.setAttribute("isloaded","true");return false;}
+			if(that.num==that.imgAry.length){that.num=0;that.imgsbox.setAttribute("isloaded","true");}
+			if(that.imgAry.length>1){that.timetemp=setTimeout(function(){slider.moveSwImage();},5000);}
+			}
+		};
+	
+	//打开弹出层	
+	function showPOP(t){
+		var box=document.getElementById("isOver").parentNode,img=null;
+		if(t){
+			img=new Image();
+			img.onload=function(){
+				var xy=this.width/this.height,bsize="";
+				if(xy>1){bsize="90% auto";}//横躺长方形
+				else if(xy<1){bsize="auto 90%";}//横躺长方形
+				else{bsize="90% auto";}//正方形
+				box.children[0].style.background="url("+img.src+") center center/"+bsize+" no-repeat";
+				}
+			img.src=t;
+			box.children[0].style.background="url("+t+") center center/90% auto no-repeat";
+			box.style.display="block";
+			setTimeout(function(){
+				box.style.webkitTransform='scale(1,1)';
+				box.style.transform='scale(1,1)';
+				},100);
+			}
+		else{
+			box.style.webkitTransform='scale(0.001,0.001)';
+			box.style.transform='scale(0.001,0.001)';
+			setTimeout(function(){box.children[0].style.background="none";box.style.display="none";console.log("kill it");},300);
+			}
+		}
+		
+   	//获取json拼接html
+	//$.getJSON('inc/getbao.asp',"",function(data){
+	(function(data){
+		if(data.Code!==1||data.data.length==0){alert("服务器端错误,请稍后重试");return false;}
+		var html="",i=0;
+		for(;i<data.data.length;i++){
+			html+='<li><div class="image" imgary="'+data.data[i].Pic+'"><img babyId="'+data.data[i].id+'" src="'+defaultImage+'" /><strong class="flower"><em></em><b>'+data.data[i].flower+'</b></strong></div><div class="text"><h2>昵称：'+data.data[i].name+'</h2><h3>来自：'+data.data[i].Game+'</h3><h3>区服：'+(data.data[i].AreaCh+"-"+data.data[i].GroupCh)+'</h3><p>'+data.data[i].introduces+'</p></div></li>'
+			}
+		$("#swimgBox ul").html(html);
+		
+		//轮播	
+		var slider02=Swipe(document.getElementById('swimgBox'),{
+				auto: false,
+				stopPropagation: true,
+				continuous: true,
+				callback: function(pos) {
+					console.log(pos);
+					slider.nowCount=pos;
+					slider.readySwImage();
+				}
+			});
+		$("#swimgBox").children(".prevjt").click(function(){slider02.prev();})
+		$("#swimgBox").children(".nextjt").click(function(){slider02.next();})
+		slider.readySwImage();
+		})({"Code":1,"data":[{"id":"66","name":"紫曦","Game":"传奇续章","AreaCh":"新续章一区","GroupCh":"经典(电信)","introduces":"我是IS推荐的传奇宝贝紫曦。我的IS号是174420074。很高兴认识大家，希望传奇续章越来越激情，希望在15号开放的新区里遇见大家。","Pic":"http://fu5.sdo.com/10060/201601/14522229412369.jpg,http://fu5.sdo.com/10060/201601/14522229456392.jpg,http://fu5.sdo.com/10060/201601/14522229487527.jpg,http://fu5.sdo.com/10060/201601/14522229534570.jpg","flower":"1213"},{"id":"64","name":"周药药","Game":"热血传奇时长版","AreaCh":"海纳百川（百区电信专区）","GroupCh":"电信专区","introduces":"大家好，我的IS号是271133849。很高兴认识大家。我是一个普通的传奇玩家。和大家一样，喜欢打架，喜欢泡IS聊天。听说秒卡区15号又要开新区了，有没有人来带带我呀。","Pic":"http://fu5.sdo.com/10060/201601/14522211322265.jpg,http://fu5.sdo.com/10060/201601/14522211366618.jpg,http://fu5.sdo.com/10060/201601/14522211422303.jpg,http://fu5.sdo.com/10060/201601/14522211465811.jpg,http://fu5.sdo.com/10060/201601/14522211516659.jpg","flower":"3145"},{"id":"63","name":"雲歌","Game":"传奇外传","AreaCh":"至高无上（60区双线）","GroupCh":"至高无上","introduces":"大家好，我是IS推荐宝贝雲歌。我是个活泼好动的女孩，会里公认的开心果。这次，我会为传奇外传的玩家们助威，8号传奇外传新区不见不散。","Pic":"http://fu5.sdo.com/10060/201601/14522204914379.jpg,http://fu5.sdo.com/10060/201601/14522204953142.jpg,http://fu5.sdo.com/10060/201601/14522204996664.jpg","flower":"1160"},{"id":"56","name":"依依","Game":"传奇外传","AreaCh":"至高无上（60区双线）","GroupCh":"至高无上","introduces":"大家新年快乐。我是IS传奇宝贝依依，我的IS号是271001393。喜欢外传里激情的PK。希望传奇外传8号的新区人气火爆，大家一起激情打架！","Pic":"http://fu5.sdo.com/10060/201601/14519859087534.jpg,http://fu5.sdo.com/10060/201601/14519859153050.jpg,http://fu5.sdo.com/10060/201601/14519859196565.jpg,http://fu5.sdo.com/10060/201601/14519859232294.jpg","flower":"2699"},{"id":"54","name":"晓慧","Game":"热血传奇","AreaCh":"经典回归一区","GroupCh":"王者(电信)","introduces":"我是IS的传奇宝贝晓慧。很高兴认识大家。祝所有传奇玩家在全民竞赛里都能玩的开心，多打到好东西，传奇新区能一直红火。","Pic":"http://fu5.sdo.com/10060/201601/14519843049056.jpg,http://fu5.sdo.com/10060/201601/14519843099352.jpg,http://fu5.sdo.com/10060/201601/14519843147205.jpg,http://fu5.sdo.com/10060/201601/14519843189554.jpg","flower":"1197"},{"id":"53","name":"小雅","Game":"热血传奇","AreaCh":"经典回归一区","GroupCh":"王者(电信)","introduces":"我是传奇玩家小雅。在这里首先祝大家新年一切顺利，也希望热血传奇的玩家能在全民竞技里胜出，为传奇争光。我的IS号是272237414","Pic":"http://fu5.sdo.com/10060/201601/14519836194531.jpg,http://fu5.sdo.com/10060/201601/14519836236825.jpg,http://fu5.sdo.com/10060/201601/14519836282492.jpg,http://fu5.sdo.com/10060/201601/14519836319496.jpg,http://fu5.sdo.com/10060/201601/14519836351013.jpg","flower":"2452"},{"id":"52","name":"小流氓","Game":"传奇续章","AreaCh":"名扬四海（三十三区）","GroupCh":"名扬(电信)","introduces":"我是来自传奇续章的小流氓。2016年到啦，祝所有传奇玩家新年快乐，恭喜发财，多捡到好东西，少被爆~记得要给我投票噢","Pic":"http://fu5.sdo.com/10060/201601/14519830867161.jpg,http://fu5.sdo.com/10060/201601/14519830906059.jpg,http://fu5.sdo.com/10060/201601/14519830944577.jpg,http://fu5.sdo.com/10060/201601/14519830987126.jpg,http://fu5.sdo.com/10060/201601/14519831035597.jpg","flower":"2400"},{"id":"51","name":"夏诺","Game":"传奇外传","AreaCh":"至高无上（60区双线）","GroupCh":"至高无上","introduces":"我是IS推荐的传奇宝贝夏诺。我IS的直播号是200286126。我会在传奇外传1月8号开放的新区里等着大家噢。传奇外传的勇士们，加油~~","Pic":"http://fu5.sdo.com/10060/201601/14519826973745.jpg,http://fu5.sdo.com/10060/201601/14519827038607.jpg,http://fu5.sdo.com/10060/201601/14519827084272.jpg,http://fu5.sdo.com/10060/201601/14519827184458.jpg","flower":"1347"},{"id":"44","name":"么么","Game":"传奇续章","AreaCh":"新续章一区","GroupCh":"经典(电信)","introduces":"大家好，我是续章玩家么么~~。很高兴能有这样一个平台，让我有机会认识更多的传奇爱好者。听说最近又要开新区了，新区里有没有人带我呀。","Pic":"http://fu5.sdo.com/10060/201601/14519759559776.jpg,http://fu5.sdo.com/10060/201601/14519759604239.jpg,http://fu5.sdo.com/10060/201601/14519759652605.jpg","flower":"1452"},{"id":"42","name":"鹿啊","Game":"热血传奇","AreaCh":"经典回归一区","GroupCh":"王者(电信)","introduces":"大家好，我是IS推荐宝贝大鹿。在传奇新区里ID叫鹿啊。刚开始玩，还不是很会玩，经常在外面就被杀了，大家手下留情呀。我的IS号是272609159.","Pic":"http://fu5.sdo.com/10060/201601/14519746318909.jpg,http://fu5.sdo.com/10060/201601/14519746361207.jpg,http://fu5.sdo.com/10060/201601/14519746416711.jpg,http://fu5.sdo.com/10060/201601/14519746465350.jpg","flower":"1572"},{"id":"40","name":"凌睿","Game":"传奇续章","AreaCh":"新续章一区","GroupCh":"经典(电信)","introduces":"我是传奇续章的小菜鸟——凌睿。在里面，经常因为操作不好，被说，不过大家还是很疼我的，祝续章的玩家能在全名竞赛里拔得头筹。","Pic":"http://fu5.sdo.com/10060/201601/14519737463777.jpg,http://fu5.sdo.com/10060/201601/14519737521299.jpg,http://fu5.sdo.com/10060/201601/14519737569175.jpg","flower":"776"},{"id":"39","name":"冷雁","Game":"热血传奇时长版","AreaCh":"白金韩版二区","GroupCh":"摘星（双线）","introduces":"我是冷雁。记得第一次玩传奇，是跟着前前前男友去网吧玩的。没想到一玩已经四年了。现在，男朋友早已经不在一起了，却和传奇还在一起。祝传奇秒卡区火爆，自己能打到更多的好东西。","Pic":"http://fu5.sdo.com/10060/201601/14519699089950.jpg,http://fu5.sdo.com/10060/201601/14519699159939.jpg,http://fu5.sdo.com/10060/201601/14519699216790.jpg","flower":"1400"},{"id":"38","name":"可馨","Game":"热血传奇","AreaCh":"经典回归一区","GroupCh":"王者(电信)","introduces":"我是热血传奇玩家可馨。现在在玩经典回归区。我喜欢有英雄的版本，打起来让宝宝帮忙，不是很累。我的IS号是174692650，在IS上叫木可儿~","Pic":"http://fu5.sdo.com/10060/201601/14519690363396.jpg,http://fu5.sdo.com/10060/201601/14519690428172.jpg,http://fu5.sdo.com/10060/201601/14519690486061.jpg,http://fu5.sdo.com/10060/201601/14519690555970.jpg","flower":"2013"},{"id":"37","name":"君紫","Game":"传奇外传","AreaCh":"至高无上（60区双线）","GroupCh":"至高无上","introduces":"大家好，我是IS推荐的传奇宝贝，我的IS号是174653539。平时，在各个传奇里，我最喜欢玩传奇外传，因为练级速度比较快,PK也不比其他游戏差。相信传奇外传新区一定会激情的，1月8号，等你来噢！","Pic":"http://fu5.sdo.com/10060/201601/14519685391688.jpg,http://fu5.sdo.com/10060/201601/14519685483477.jpg,http://fu5.sdo.com/10060/201601/14519685546330.jpg,http://fu5.sdo.com/10060/201601/14519685623581.jpg","flower":"2256"},{"id":"35","name":"尐老虎","Game":"传奇续章","AreaCh":"新续章一区","GroupCh":"经典(电信)","introduces":"大家好，我是传奇续章的宝贝尐老虎。最喜欢纷纷的可爱的东西啦，大家在续章里看到我，千万别打我噢。我的is号是157081564","Pic":"http://fu5.sdo.com/10060/201601/14519674934170.jpg,http://fu5.sdo.com/10060/201601/14519674985343.jpg,http://fu5.sdo.com/10060/201601/14519675048840.jpg,http://fu5.sdo.com/10060/201601/14519675133966.jpg","flower":"1221"},{"id":"34","name":"浣儿","Game":"热血传奇","AreaCh":"15周年专区","GroupCh":"豪情（电信）","introduces":"我是IS推荐的传奇宝贝——浣儿。传奇里的ID也叫这个。希望热血传奇越来越火，祝热血传奇的玩家在全民竞赛里取得好成绩，我会为大家加油的。","Pic":"http://fu5.sdo.com/10060/201601/14519671071696.jpg,http://fu5.sdo.com/10060/201601/14519671158744.jpg,http://fu5.sdo.com/10060/201601/14519671234225.jpg,http://fu5.sdo.com/10060/201601/14519671308236.jpg","flower":"1332"},{"id":"32","name":"黑猫","Game":"热血传奇","AreaCh":"经典回归一区","GroupCh":"王者(电信)","introduces":"大家好，我是IS推荐的传奇宝贝，我叫黑猫，IS号是272684188。希望热血传奇15年越办越好，朋友永远吧散，全民竞赛激情不断。","Pic":"http://fu5.sdo.com/10060/201601/14519660881934.jpg,http://fu5.sdo.com/10060/201601/14519661411618.jpg,http://fu5.sdo.com/10060/201601/14519661479359.jpg,http://fu5.sdo.com/10060/201601/14519661571105.jpg","flower":"825"},{"id":"31","name":"风筝","Game":"热血传奇时长版","AreaCh":"海纳百川（百区电信专区）","GroupCh":"电信专区","introduces":"我是秒卡区玩家风筝。喜欢百区经典的设置，在这里，秒卡收费，没元宝活动，所以大家实力差别不是很大。欢迎大家来秒卡区找我玩呀！","Pic":"http://fu5.sdo.com/10060/201601/14519657191511.jpg,http://fu5.sdo.com/10060/201601/14519657297851.jpg,http://fu5.sdo.com/10060/201601/14519657369502.jpg,http://fu5.sdo.com/10060/201601/14519657438554.jpg","flower":"1757"},{"id":"30","name":"独","Game":"传奇外传","AreaCh":"斗转星移（57区双线）","GroupCh":"斗转星移","introduces":"我是传奇外传玩家。我叫独。小时候，我很寂寞，但自从开始玩传奇后，我不再孤独。在这里，结识了太多太多的朋友，大家都很照顾我。谢谢传奇，传奇行会的兄弟们！","Pic":"http://fu5.sdo.com/10060/201601/14519646118603.jpg,http://fu5.sdo.com/10060/201601/14519646184855.jpg","flower":"687"},{"id":"29","name":"淡墨","Game":"传奇归来","AreaCh":"新归来1区(双线)","GroupCh":"雷霆","introduces":"我在传奇归来新区里叫淡墨，我的is号是103413414。为传奇全民竞赛加油，希望传奇归来的玩家都棒棒哒，比赛什么时候开始啊，好期待哟!","Pic":"http://fu5.sdo.com/10060/201601/14519642136152.jpg,http://fu5.sdo.com/10060/201601/14519642184964.jpg,http://fu5.sdo.com/10060/201601/14519642288872.jpg,http://fu5.sdo.com/10060/201601/14519642456519.jpg","flower":"2492"},{"id":"28","name":"宠儿","Game":"热血传奇","AreaCh":"经典回归一区","GroupCh":"归来(双线)","introduces":"我是一位热血传奇的忠实玩家。别看我年纪小，到现在其实已经玩了5年了。在传奇里认识了不少人，喜欢跟着行会朋友一起打装备、下地……谢谢大家给我鲜花。","Pic":"http://fu5.sdo.com/10060/201601/14519636513897.jpg,http://fu5.sdo.com/10060/201601/14519636588641.jpg,http://fu5.sdo.com/10060/201601/14519636646008.jpg,http://fu5.sdo.com/10060/201601/14519636715909.jpg","flower":"954"},{"id":"27","name":"Diana","Game":"传奇外传","AreaCh":"气吞山河（59区双线）","GroupCh":"气吞山河","introduces":"我的IS号是163812415。除了在IS上客串客串主播，我最大的爱好就是玩传奇。喜欢传奇里那种爽快的激情，也喜欢被家族朋友宠着的感觉。","Pic":"http://fu5.sdo.com/10060/201601/14519627938272.jpg,http://fu5.sdo.com/10060/201601/14519628034704.jpg,http://fu5.sdo.com/10060/201601/14519628099529.jpg,http://fu5.sdo.com/10060/201601/14519628188607.jpg","flower":"953"},{"id":"26","name":"C宝宝","Game":"传奇续章","AreaCh":"新续章一区","GroupCh":"经典(电信)","introduces":"大家好，我是IS推荐的传奇宝贝。我玩的是传奇续章，续章虽然是传奇里开得比较玩的，但感觉很激情，希望在这里认识更多的朋友。","Pic":"http://fu5.sdo.com/10060/201601/14519619566001.jpg,http://fu5.sdo.com/10060/201601/14519619692045.jpg,http://fu5.sdo.com/10060/201601/14519619803003.jpg,http://fu5.sdo.com/10060/201601/14519619914442.jpg,http://fu5.sdo.com/10060/201601/14519620028128.jpg","flower":"1259"},{"id":"25","name":"ぃ☆妞儿メ","Game":"热血传奇","AreaCh":"传奇一区","GroupCh":"雷霆","introduces":"我是一名传奇爱好者，玩了好几年传奇了??无忧无虑，觉得在热血传奇的世界里会很开心，很快乐，就像我的生活一样！","Pic":"http://fu5.sdo.com/10060/201601/14519557664828.jpg,http://fu5.sdo.com/10060/201601/14519557685325.jpg,http://fu5.sdo.com/10060/201601/14519557692822.jpg,http://fu5.sdo.com/10060/201601/14519557705132.jpg,http://fu5.sdo.com/10060/201601/14519557719586.jpg","flower":"147"},{"id":"23","name":"传奇月月","Game":"传奇归来","AreaCh":"新归来1区(双线)","GroupCh":"雷霆","introduces":"传奇热爱者?打传奇打了6年?传奇粉","Pic":"http://fu5.sdo.com/10060/201601/14517930195227.jpg,http://fu5.sdo.com/10060/201601/14517930352612.jpg,http://fu5.sdo.com/10060/201601/14517930565939.jpg,http://fu5.sdo.com/10060/201601/14517931058049.jpg,http://fu5.sdo.com/10060/201601/14517931182525.jpg","flower":"1680"},{"id":"22","name":"·南栀倾寒▲","Game":"热血传奇","AreaCh":"传奇一区","GroupCh":"雷霆","introduces":"五千个日夜?同一个传奇?《热血传奇》与你同在！！！！！","Pic":"http://fu5.sdo.com/10060/201601/14516656319148.jpg,http://fu5.sdo.com/10060/201601/14516656469171.jpg","flower":"998"},{"id":"21","name":"Oo冷oo香oO","Game":"传奇归来","AreaCh":"新归来1区(双线)","GroupCh":"雷霆","introduces":"冷香——爱传奇，爱战斗，爱兄弟……","Pic":"http://fu5.sdo.com/10060/201601/14515832038211.jpg,http://fu5.sdo.com/10060/201601/14515832054803.jpg,http://fu5.sdo.com/10060/201601/14515832088200.jpg,http://fu5.sdo.com/10060/201601/14515832092294.jpg,http://fu5.sdo.com/10060/201601/14515832108968.jpg","flower":"2881"},{"id":"19","name":"※呦呦※鹿鸣※","Game":"热血传奇","AreaCh":"九州盛世","GroupCh":"开疆（电信）","introduces":"春天的后面不是秋，传奇游戏不必为年龄发愁，你会在战斗中发现自己还是那么的年轻哦<br>我就是一个来自四川成都，爱传奇的宝贝，欢迎大家多多支持，点支持滴最可爱哦<br>祝福大家游戏开心，生活愉快","Pic":"http://fu5.sdo.com/10060/201512/14515339204537.jpg,http://fu5.sdo.com/10060/201512/14515339223121.jpg,http://fu5.sdo.com/10060/201512/14515339235910.jpg,http://fu5.sdo.com/10060/201512/14515339233160.jpg,http://fu5.sdo.com/10060/201512/14515339244201.jpg","flower":"3164"},{"id":"18","name":"曰月","Game":"热血传奇","AreaCh":"经典回归一区","GroupCh":"王者(电信)","introduces":"非常非常喜欢传奇，伴随我成长的游戏，祝盛大传奇越办越好哦~~谢谢！！！","Pic":"http://fu5.sdo.com/10060/201512/14515288616606.jpg,http://fu5.sdo.com/10060/201512/14515285273327.jpg","flower":"2782"},{"id":"17","name":"ぁ落落ぁ","Game":"热血传奇","AreaCh":"九州盛世","GroupCh":"开疆（电信）","introduces":"爱打才会赢，这是玩传奇的一种态度,也是对人生的一种态度，我是传奇资深老宝贝，来自四川成都，将竞选十大传奇宝贝。希望各位玩家多多关照，多多投票","Pic":"http://fu5.sdo.com/10060/201512/14514803808895.jpg,http://fu5.sdo.com/10060/201512/14514803811509.jpg,http://fu5.sdo.com/10060/201512/14514803824661.jpg,http://fu5.sdo.com/10060/201512/14514803848876.jpg,http://fu5.sdo.com/10060/201512/14514803854950.jpg","flower":"3088"},{"id":"16","name":"星儿宝贝","Game":"传奇归来","AreaCh":"一区(电信)","GroupCh":"归来一区","introduces":"我是星儿宝贝，大家要多支持我哦！","Pic":"http://fu5.sdo.com/10060/201512/14514555244287.jpg","flower":"2999"},{"id":"15","name":"珊珊","Game":"传奇外传","AreaCh":"至高无上（60区双线）","GroupCh":"至高无上","introduces":"大家好，我是传奇外传玩家，我喜欢外传里练习速度很快的这种爽快感。感觉很激情，很刺激。希望在全民竞赛里，传奇外传的玩家能取得好成绩。","Pic":"http://fu5.sdo.com/10060/201512/14513834918421.jpg,http://fu5.sdo.com/10060/201512/14514869109928.jpg","flower":"5602"},{"id":"14","name":"芥末","Game":"传奇续章","AreaCh":"新续章一区","GroupCh":"经典(电信)","introduces":"我是IS推荐的传奇宝贝芥末，我得IS号是127170624。出了玩传奇，我业余时间也会客串一把主播。传奇游戏里我最爱的是传奇续章，我为续章代言，我为续章玩家加油！","Pic":"http://fu5.sdo.com/10060/201512/14513830356966.jpg,http://fu5.sdo.com/10060/201512/14513825823813.jpg,http://fu5.sdo.com/10060/201512/14513830518267.jpg,http://fu5.sdo.com/10060/201512/14514868328410.jpg","flower":"2930"},{"id":"13","name":"莎拉","Game":"热血传奇","AreaCh":"经典回归一区","GroupCh":"王者(电信)","introduces":"我是IS推荐的传奇宝贝，IS号是2154136。在热血传奇新区里叫莎拉。我喜欢有英雄的传奇版本，可能是我操作烂吧，嘿嘿。但不喜欢内功和心法。我会为热血传奇的玩家呐喊助威的。","Pic":"http://fu5.sdo.com/10060/201512/14513829308751.jpg,http://fu5.sdo.com/10060/201512/14513829377912.jpg,http://fu5.sdo.com/10060/201512/14513829518873.jpg,http://fu5.sdo.com/10060/201512/14514867915753.jpg","flower":"2976"},{"id":"11","name":"兰蔻","Game":"传奇归来","AreaCh":"新归来1区(双线)","GroupCh":"雷霆","introduces":"大家好，我是IS推荐的传奇归来玩家。以前也玩过一段时间续章。喜欢传奇归来时因为练级速度不快，大家差距不是特别大。这次也准备去新区玩，有没有一起的？","Pic":"http://fu5.sdo.com/10060/201512/14513820564061.jpg,http://fu5.sdo.com/10060/201512/14514867618267.jpg","flower":"4329"},{"id":"10","name":"小琪","Game":"热血传奇","AreaCh":"传奇一区","GroupCh":"雷霆","introduces":"大家好，我叫小琪。本来想参加全民竞赛的，但想想自己的技术太菜，还是来当啦啦队吧。热血传奇的玩家，加油加油加油，重要事情说三遍，把奖杯捧回热血传奇哟。","Pic":"http://fu5.sdo.com/10060/201512/14513819505575.jpg,http://fu5.sdo.com/10060/201512/14513819577258.jpg,http://fu5.sdo.com/10060/201512/14513819698314.jpg,http://fu5.sdo.com/10060/201512/14514865881254.jpg","flower":"3010"},{"id":"7","name":"晗晗","Game":"热血传奇时长版","AreaCh":"白金典藏专区","GroupCh":"新雷霆（电信）","introduces":"我是IS推荐的传奇宝贝晗晗。初中的时候，哥哥带着我开始打传奇，之后就一发不可收拾了。现在我在玩白金区。秒卡收费比较公平，也适合我这样的女屌丝。各路传奇英雄，加油！","Pic":"http://fu5.sdo.com/10060/201512/14513807626286.jpg,http://fu5.sdo.com/10060/201512/14513807755648.jpg,http://fu5.sdo.com/10060/201512/14513807812216.jpg,http://fu5.sdo.com/10060/201512/14513807885182.jpg,http://fu5.sdo.com/10060/201512/14514865278852.jpg","flower":"2021"},{"id":"6","name":"怪兽","Game":"热血传奇","AreaCh":"经典回归一区","GroupCh":"归来(双线)","introduces":"热血传奇是个大家庭，这里有PK的激情，也有爱情，更有公会的亲情。祝传奇全民竞赛火爆！去新区有没有哥哥愿意照我呀~~嘻嘻~","Pic":"http://fu5.sdo.com/10060/201512/14513798662934.jpg,http://fu5.sdo.com/10060/201512/14513798808651.jpg,http://fu5.sdo.com/10060/201512/14513799044506.jpg,http://fu5.sdo.com/10060/201512/14513799124018.jpg,http://fu5.sdo.com/10060/201512/14514864887837.jpg","flower":"2973"},{"id":"5","name":"蛋蛋","Game":"热血传奇时长版","AreaCh":"白金韩版二区","GroupCh":"摘星（双线）","introduces":"我是百区玩家。后来玩了新百区。我喜欢百区版本里考操作取胜的公平性。我会一直坚持玩下去的，支持盛大，支持传奇，支持百区的给我点赞噢。","Pic":"http://fu5.sdo.com/10060/201512/14513797244686.jpg,http://fu5.sdo.com/10060/201512/14514864406351.jpg","flower":"2975"},{"id":"4","name":"贝拉","Game":"热血传奇","AreaCh":"经典回归一区","GroupCh":"王者(电信)","introduces":"我是IS推荐宝贝，我的名字叫贝拉。12月31日热血新区，我会去玩哒！热血传奇的玩家最厉害，冠军一定来自热血传奇！","Pic":"http://fu5.sdo.com/10060/201512/14513793948279.jpg,http://fu5.sdo.com/10060/201512/14513794071435.jpg,http://fu5.sdo.com/10060/201512/14513794137105.jpg,http://fu5.sdo.com/10060/201512/14513794216739.jpg,http://fu5.sdo.com/10060/201512/14514864037951.jpg","flower":"5788"},{"id":"3","name":"小师妹","Game":"传奇续章","AreaCh":"新续章一区","GroupCh":"经典(电信)","introduces":"我平时喜欢玩传奇。以前玩热血，现在玩续章，我IS号是201582，欢迎大家找我玩。","Pic":"http://fu5.sdo.com/10060/201512/14513791277763.jpg,http://fu5.sdo.com/10060/201512/14513791354241.jpg,http://fu5.sdo.com/10060/201512/14514863457372.jpg","flower":"3984"},{"id":"2","name":"瑟雨","Game":"传奇归来","AreaCh":"新归来1区(双线)","GroupCh":"雷霆","introduces":"大家好，我叫瑟雨。玩传奇归来一年啦，我会在新区等你，ID也叫瑟雨。希望归来的玩家能赢得比赛的胜利！","Pic":"http://fu5.sdo.com/10060/201512/14513786868632.jpg,http://fu5.sdo.com/10060/201512/14513786904762.jpg,http://fu5.sdo.com/10060/201512/14514552688643.jpg","flower":"5728"},{"id":"58","name":"美丽心情","Game":"热血传奇","AreaCh":"经典回归一区","GroupCh":"王者(电信)","introduces":"在游戏里一直是一个人孤单的玩耍，想认识朋友一起打BOSS。","Pic":"http://fu5.sdo.com/10060/201601/14520780293501.jpg","flower":"137"},{"id":"59","name":"夏洋","Game":"热血传奇","AreaCh":"情比金坚(89区)","GroupCh":"情比金坚","introduces":"假如有一天　　&lt;br/&gt;<br>你遇到了跟她长得一模一样的人　&lt;br/&gt;<br>她真的就是她吗？&lt;br/&gt;<br>还有可能吗？　　&lt;br/&gt;<br>这是命运的宽容，&lt;br/&gt;<br>还是另一次不怀好意的玩笑。","Pic":"http://fu5.sdo.com/10060/201601/14520763488389.jpg,http://fu5.sdo.com/10060/201601/14520763568580.jpg,http://fu5.sdo.com/10060/201601/14520763701925.jpg,http://fu5.sdo.com/10060/201601/14520763771264.jpg,http://fu5.sdo.com/10060/201601/14520763882814.jpg","flower":"882"},{"id":"74","name":"瑶瑶","Game":"传奇归来","AreaCh":"新归来1区(双线)","GroupCh":"雷霆","introduces":"爱传奇爱生活。is号1059046.欢迎大家过来聊天哈。。一起游戏。","Pic":"http://fu5.sdo.com/10060/201601/14527495008899.jpg,http://fu5.sdo.com/10060/201601/14527495781280.jpg,http://fu5.sdo.com/10060/201601/14527495797371.jpg","flower":"159"},{"id":"60","name":"迷迷糊糊、","Game":"热血传奇","AreaCh":"经典回归一区","GroupCh":"王者(电信)","introduces":"我是一个性格活泼的女孩~~希望通过这个平台找到更多一起玩的玩家~~","Pic":"http://fu5.sdo.com/10060/201601/14521339623279.jpg,http://fu5.sdo.com/10060/201601/14521339648767.jpg,http://fu5.sdo.com/10060/201601/14521339656027.jpg,http://fu5.sdo.com/10060/201601/14521339666999.jpg,http://fu5.sdo.com/10060/201601/14521339677661.jpg","flower":"678"},{"id":"68","name":"颜","Game":"热血传奇","AreaCh":"传奇一区","GroupCh":"雷霆","introduces":"热血传奇一直是我最喜欢的一款游戏?也是唯一","Pic":"http://fu5.sdo.com/10060/201601/14523242593428.jpg,http://fu5.sdo.com/10060/201601/14523242675719.jpg,http://fu5.sdo.com/10060/201601/14523242785863.jpg,http://fu5.sdo.com/10060/201601/14523242913765.jpg","flower":"1602"},{"id":"73","name":"抹去记忆","Game":"传奇归来","AreaCh":"新归来1区(双线)","GroupCh":"雷霆","introduces":"传奇让我们相识，相识，携手传奇路，有你，有我","Pic":"http://fu5.sdo.com/10060/201601/14525745499952.jpg,http://fu5.sdo.com/10060/201601/14525746195471.jpg,http://fu5.sdo.com/10060/201601/14525746979284.jpg,http://fu5.sdo.com/10060/201601/14525747624974.jpg","flower":"188"},{"id":"67","name":"千雨","Game":"传奇归来","AreaCh":"新归来1区(双线)","GroupCh":"雷霆","introduces":"我来自成都,玩传奇归来三年多了,希望给我个称号嘛,谢谢哦!","Pic":"http://fu5.sdo.com/10060/201601/14522623834671.jpg,http://fu5.sdo.com/10060/201601/14522623841554.jpg,http://fu5.sdo.com/10060/201601/14522623824282.jpg,http://fu5.sdo.com/10060/201601/14522623834249.jpg,http://fu5.sdo.com/10060/201601/14522623882730.jpg","flower":"300"},{"id":"43","name":"芒果","Game":"热血传奇时长版","AreaCh":"白金韩版首测区","GroupCh":"追月（双线）","introduces":"大家好，我是IS推荐宝贝芒果。平时我玩白金区，这个区像老传奇一样是秒卡收费的，没有元宝商城和活动，很绿色，但PK对操作要求高。我很菜，好在家族的人都很照顾我，打架的时候我就躲后面，嘿嘿。","Pic":"http://fu5.sdo.com/10060/201601/14519753001230.jpg,http://fu5.sdo.com/10060/201601/14519753074876.jpg,http://fu5.sdo.com/10060/201601/14519753129556.jpg,http://fu5.sdo.com/10060/201601/14519753196063.jpg","flower":"1800"}]})
+	
+	document.getElementById("giftFlower").onclick=function(){
+		var flow=document.getElementById("swimgBox").children[0].children[slider.nowCount].children[0].children[1];
+		flow.className="flower play";
+		//ajax 献花
+		setTimeout(function(){flow.className="flower";},1500);
+		//window.location.href="http://mygm.sdo.com/v1/oauth/authorize?appid=791000107&state=1405320116&display=layer&redirect_url=http%3A%2F%2Fchuanqi.sdo.com%2FProject%2FIamLegendBaby%2Flogin.asp%3FType%3D2%26id%3D"+slider.loadSwImageConfig.img.getAttribute("babyId");
+		}
+	/*document.getElementById("canvass").onclick=function(){
+		window.location.href="canvass.html?babyId="+slider.loadSwImageConfig.img.getAttribute("babyId")+"#isshare";
+		}*/
+   </script>
+</body>
+</html>
