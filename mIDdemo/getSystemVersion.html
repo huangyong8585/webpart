@@ -11,9 +11,8 @@
     <style>
     body{}
     .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
-    .system{position:relative;top:40%;}
+    .system{position:relative;top:30%;}
     #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
-
     </style>
 </head>
 <body>	
@@ -46,6 +45,13 @@
         function get_ios_version(){
 		    var ua = navigator.userAgent.toLowerCase();
 		    var version = null;
+		    var try_get_phone_brand=function(ua){
+            	var brand='';
+            	if (ua.indexOf("iphone") > -1){brand='iphone';}
+            	else if (ua.indexOf("ipad") > -1){brand='ipad';}
+            	else if (ua.indexOf("ipod") > -1){brand='ipod';}
+				return brand;
+            }
 		    if (ua.indexOf("like mac os x") > 0) {
 		        var reg = /os [\d._]+/gi;
 		        var v_info = ua.match(reg);
@@ -53,7 +59,7 @@
 		        //version = parseInt(version.split('.')[0]); // 得到版本号第一位
 		    }
 
-		    return version;
+		    return version+'-'+try_get_phone_brand(ua);
 		}
 
 		function get_android_version() {
@@ -107,7 +113,7 @@
 			var phoneWidth = parseInt(document.body.clientWidth||document.documentElement.clientWidth||window.screen.width);
 			var phoneHeight = parseInt(document.body.clientHeight||document.documentElement.clientHeight||window.screen.height);
 			document.querySelector('.system h1.tac').innerHTML=phoneSystem;
-			document.querySelector('.system h2.tac').innerHTML='宽：'+phoneWidth+'　　　　高：'+phoneHeight;
+			document.querySelector('.system h2.tac').innerHTML='宽：'+phoneWidth+'　　高：'+phoneHeight;
 	        var qrcode = new QRCode(document.getElementById("qrcode"), {
 	                //设置宽高
 	                width : 96,
