@@ -21,6 +21,8 @@
 		<div class="system">
 			<p class="tac">你的手机系统是：</p>
 			<h1 class="tac"></h1>
+			<p class="tac">你的手机显示宽高是：</p>
+			<h2 class="tac"></h2>
 		</div>
 		<div id="qrcode"></div>
 	</article>
@@ -56,6 +58,28 @@
 		function get_android_version() {
             var ua = navigator.userAgent.toLowerCase();
             var version = null;
+            var try_get_phone_brand=function(ua){
+            	var brand='';
+            	if (ua.indexOf("huawei") > -1){brand='huawei';}
+            	else if (ua.indexOf("honor") > -1){brand='honor';}
+            	else if (ua.indexOf("xiaomi") > -1){brand='xiaomi';}
+            	else if (ua.indexOf("redmi") > -1){brand='redmi';}
+				else if (ua.indexOf("oppo") > -1){brand='oppo';}
+				else if (ua.indexOf("vivo") > -1){brand='vivo';}
+				else if (ua.indexOf("meizu") > -1){brand='meizu';}
+				else if (ua.indexOf("lenovo") > -1){brand='lenovo';}
+				else if (ua.indexOf("htc") > -1){brand='htc';}
+				else if (ua.indexOf("nubia") > -1){brand='nubia';}
+				else if (ua.indexOf("samsung") > -1){brand='samsung';}
+				else if (ua.indexOf("coolpad") > -1){brand='coolpad';}
+				else if (ua.indexOf("sony") > -1){brand='sony';}
+				else if (ua.indexOf("oneplus") > -1){brand='oneplus';}
+				else if (ua.indexOf("smartisan") > -1){brand='smartisan';}
+				else if (ua.indexOf("nokia") > -1){brand='nokia';}
+				else if (ua.indexOf("360") > -1){brand='360';}
+				else if (ua.indexOf("zte") > -1){brand='zte';}
+				return brand;
+            }
             if (ua.indexOf("android") > 0) {
                 var reg = /android [\d._]+/gi;
                 var v_info = ua.match(reg);
@@ -63,7 +87,7 @@
                 //version = parseInt(version.split('.')[0]);// 得到版本号第一位
             }
 
-            return version;
+            return version+'-'+try_get_phone_brand(ua);
         }
 
         var phoneSystem=(function(o){
@@ -79,7 +103,10 @@
 		})(navigator.userAgent);
 
 		window.onload=function(){
+			var phoneWidth = parseInt(document.body.clientWidth||document.documentElement.clientWidth||window.screen.width);
+			var phoneHeight = parseInt(document.body.clientHeight||document.documentElement.clientHeight||window.screen.height);
 			document.querySelector('.system h1.tac').innerHTML=phoneSystem;
+			document.querySelector('.system h2.tac').innerHTML='宽：'+phoneWidth+'　　　　高：'+phoneHeight;
 	        var qrcode = new QRCode(document.getElementById("qrcode"), {
 	                //设置宽高
 	                width : 96,
