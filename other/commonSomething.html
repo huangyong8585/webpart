@@ -125,6 +125,45 @@ body{background-color:#e4e4e4;height:auto;}
 				</p>
 			</div>
 			<div class="box">
+				<h2>JS 判断是否为数组</h2>
+				<p>
+						function isArray(arr){　　<span style="color:#999">//不太靠谱的</span><br />
+						　　　if((arr instanceof Array)&&(arr.constructor === Array)){}<br />
+						}<br /><br />
+						function isArray(arr) {　　<span style="color:#999">//比较靠谱的</span><br />
+						　　　return Object.prototype.toString.call(arr) === '[object Array]';<br />
+						}<br /><br />
+						function isArray(value){<br />
+						　　　if (typeof Array.isArray === "function"){　　<span style="color:#999">//ES5新增Array.isArray()</span><br />
+						　　　　　return Array.isArray(value);<br />
+						　　　}else{<br />
+						　　　　　return Object.prototype.toString.call(value) === "[object Array]";<br />
+						　　　}<br />
+						}<br />
+				</p>
+			</div>
+			<div class="box">
+				<h2>JS 判断对象是否为函数</h2>
+				<p>
+						
+						function isFunction(fn) {<br />
+						　　　if(!!fn&&(typeof fn).toLowerCase()==='function'){　}<br />
+						　　　return Object.prototype.toString.call(fn) === '[object Function]';<br />
+						}<br /><br />
+						
+				</p>
+			</div>
+			<div class="box">
+				<h2>JS 判断对象是否为对象</h2>
+				<p>
+						
+						function isObject(obj) {<br />
+						　　　return Object.prototype.toString.call(obj) === '[object Object]';<br />
+						}<br /><br />
+						
+				</p>
+			</div>
+			<div class="box">
 				<h2>常用的手机页面viewport声明方式</h2>
 				<p>		
 						&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;<br />
@@ -230,6 +269,23 @@ body{background-color:#e4e4e4;height:auto;}
 						<img src="data:image/gif;base64,R0lGODlhFQAVAIABAHR0dAAAACH5BAEAAAEALAAAAAAVABUAAAItRI6pabaPXJCQKVrx0Tf7Oj3cgo1iBJ4muHotiabxzJ41ZLbcG1ryRvs1fqQCADs=" style="width:auto;" />　　
 						<span style="color:#999">//下方为这个gif叉号图片的base64编码 83B</span><br />
 						data:image/gif;base64,R0lGODlhFQAVAIABAHR0dAAAACH5BAEAAAEALAAAAAAVABUAAAItRI6pabaPXJCQKVrx0Tf7Oj3cgo1iBJ4muHotiabxzJ41ZLbcG1ryRvs1fqQCADs=<br /><br />
+
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAATlBMVEUAAACQt9WLud2HuuOGu+WNuNqLudyKud+Jud+JuuCHu+OGu+WQt9aOuNiOuNiLud2Kud6IuuGIuuKIuuKHuuKHuuOHu+OGu+SGu+SSttOk7P+aAAAAGXRSTlMA/dZoDu3fwbejTgf89fTYyYSAfHBfWTAqS2zOYQAAAHpJREFUGNNVi0kOhDAQxDoNIRv77v9/dJQEjcCXki2VPKjKhwuuT3Dg3t4aMO3LPdbia4lBB2DdgEFDlB7AriKbBeilMXTt8+wwjZRSQ/VSlrxL9oJnzjPjpaIESUkC+oSRQ0EPxuqJP6mEE5hinICzhL13d97bmV3kB5JHCBhDzK2/AAAAAElFTkSuQmCC" style="width:auto;" />
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAATlBMVEUAAACQt9WLud2HuuOGu+WNuNqLudyKud+Jud+JuuCHu+OGu+WQt9aOuNiOuNiLud2Kud6IuuGIuuKIuuKHuuKHuuOHu+OGu+SGu+SSttOk7P+aAAAAGXRSTlMA/dZoDu3fwbejTgf89fTYyYSAfHBfWTAqS2zOYQAAAHpJREFUGNNVi0kOhDAQxDoNIRv77v9/dJQEjcCXki2VPKjKhwuuT3Dg3t4aMO3LPdbia4lBB2DdgEFDlB7AriKbBeilMXTt8+wwjZRSQ/VSlrxL9oJnzjPjpaIESUkC+oSRQ0EPxuqJP6mEE5hinICzhL13d97bmV3kB5JHCBhDzK2/AAAAAElFTkSuQmCC" style="-webkit-filter:grayscale(100%);filter:grayscale(100%);" />　　
+						<span style="color:#999">//下方为这个PNG五角星图片的base64编码 306B</span><br />
+						data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAATlBMVEUAAACQt9WLud2HuuOGu+WNuNqLudyKud+Jud+JuuCHu+OGu+WQt9aOuNiOuNiLud2Kud6IuuGIuuKIuuKHuuKHuuOHu+OGu+SGu+SSttOk7P+aAAAAGXRSTlMA/dZoDu3fwbejTgf89fTYyYSAfHBfWTAqS2zOYQAAAHpJREFUGNNVi0kOhDAQxDoNIRv77v9/dJQEjcCXki2VPKjKhwuuT3Dg3t4aMO3LPdbia4lBB2DdgEFDlB7AriKbBeilMXTt8+wwjZRSQ/VSlrxL9oJnzjPjpaIESUkC+oSRQ0EPxuqJP6mEE5hinICzhL13d97bmV3kB5JHCBhDzK2/AAAAAElFTkSuQmCC<br /><br />
+
+
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAACSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttLDUWjVAAAADnRSTlMAEPqShgrr6d69qEg2GdzbypsAAAA9SURBVAjXY3B6BwYqDHoQxiOGd1DA8I4BDN7BRYiX4kMRgZlsB2E8ZmCVevdSUFAwgIGBsa+WAQKObQCRAOwRUuN2WOHxAAAAAElFTkSuQmCC" style="width:auto;" />
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAACSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttLDUWjVAAAADnRSTlMAEPqShgrr6d69qEg2GdzbypsAAAA9SURBVAjXY3B6BwYqDHoQxiOGd1DA8I4BDN7BRYiX4kMRgZlsB2E8ZmCVevdSUFAwgIGBsa+WAQKObQCRAOwRUuN2WOHxAAAAAElFTkSuQmCC" style="-webkit-filter:grayscale(100%);filter:grayscale(100%);" />　　
+						<span style="color:#999">//下方为这个PNG图片的base64编码 201B</span><br />
+						data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAACSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttLDUWjVAAAADnRSTlMAEPqShgrr6d69qEg2GdzbypsAAAA9SURBVAjXY3B6BwYqDHoQxiOGd1DA8I4BDN7BRYiX4kMRgZlsB2E8ZmCVevdSUFAwgIGBsa+WAQKObQCRAOwRUuN2WOHxAAAAAElFTkSuQmCC<br /><br />
+
+
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAMAAABl5a5YAAAAM1BMVEUAAACSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttLdir3bAAAAEHRSTlMAgL+PIN+fYFBAEO/PMK9winCrVwAAAGJJREFUGNN9jEkOwCAMxBygLF3n/68tVFUFHGrlYksZOtbdGHByg3uNIUny3b+vvoXPy6LKRSPHgOnB0tGmPFEfO1JBHdT7DW4ONoc8B6ZwNgldSGCK5OX1bQWKBTjMtWhwA9OHCi6k/HncAAAAAElFTkSuQmCC" style="width:auto;" />
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAMAAABl5a5YAAAAM1BMVEUAAACSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttLdir3bAAAAEHRSTlMAgL+PIN+fYFBAEO/PMK9winCrVwAAAGJJREFUGNN9jEkOwCAMxBygLF3n/68tVFUFHGrlYksZOtbdGHByg3uNIUny3b+vvoXPy6LKRSPHgOnB0tGmPFEfO1JBHdT7DW4ONoc8B6ZwNgldSGCK5OX1bQWKBTjMtWhwA9OHCi6k/HncAAAAAElFTkSuQmCC" style="-webkit-filter:grayscale(100%);filter:grayscale(100%);" />　　
+						<span style="color:#999">//下方为这个PNG图片的base64编码 246B</span><br />
+						data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAMAAABl5a5YAAAAM1BMVEUAAACSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttKSttLdir3bAAAAEHRSTlMAgL+PIN+fYFBAEO/PMK9winCrVwAAAGJJREFUGNN9jEkOwCAMxBygLF3n/68tVFUFHGrlYksZOtbdGHByg3uNIUny3b+vvoXPy6LKRSPHgOnB0tGmPFEfO1JBHdT7DW4ONoc8B6ZwNgldSGCK5OX1bQWKBTjMtWhwA9OHCi6k/HncAAAAAElFTkSuQmCC<br /><br />
 				</p>
 			</div>
 		</div>
