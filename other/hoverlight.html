@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>CCS hover 光影划过</title>
+<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+<style>
+.wrapper{height:100%;}
+a.mouseover{display:block;width:200px;height:80px;line-height:80px;text-align:center;position:relative;left:50%;top:50%;margin:-40px 0 0 -100px;overflow:hidden;font-size:20px;color:#fff;background-color:rgb(3,168,177);border-radius:10px;}
+a.mouseover:before {content:" ";position:absolute;width:100%;height:100%;top:0;left:-100%;overflow:hidden;
+background: -moz-linear-gradient(left, rgba(255,255,255,0)0, rgba(255,255,255,.2)50%, rgba(255,255,255,0)100%);
+background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255,255,255,0)), color-stop(50%, rgba(255,255,255,.2)), color-stop(100%, rgba(255,255,255,0)));
+background: -webkit-linear-gradient(left, rgba(255,255,255,0)0, rgba(255,255,255,.2)50%, rgba(255,255,255,0)100%);
+background: -o-linear-gradient(left, rgba(255,255,255,0)0, rgba(255,255,255,.2)50%, rgba(255,255,255,0)100%);
+-webkit-transform: skewX(-30deg);
+-moz-transform: skewX(-30deg)
+}
+a.mouseover:hover{box-shadow:0 0 10px #666;}
+a.mouseover:hover:before { left: 150%; transition: left 1s ease 0s;}
+
+
+</style>
+</head>
+<body>
+	<div class="wrapper">
+		<a href="javascript:void(0);" class="mouseover">鼠标悬停试试~</a>
+	</div>
+</body>
+</html>

@@ -50,6 +50,20 @@ body{background-color:#e4e4e4;height:auto;}
 				</p>
 			</div>
 			<div class="box">
+				<h2>一些正则</h2>
+				<p>
+					var email_reg = /^([0-9A-Za-z\-_\.]+)@([0-9A-Za-z]+\.[A-Za-z]{2,3}(\.[A-Za-z]{2})?)$/g;　　<span style="color:#999">//邮箱正则</span><br />
+					var phone_reg = /^1[0-9]\d{9}$/;　　<span style="color:#999">//手机正则</span><br />
+					var empty_reg = /\s/g;　　<span style="color:#999">//空白正则</span><br />
+					var number_reg = /[0-9]/g;　　<span style="color:#999">//数字正则</span><br />
+					var notnumber_reg = /[^0-9]/g;　　<span style="color:#999">//非数字正则</span><br />
+					var UpperCase_reg = /[A-Z]/g;　　<span style="color:#999">//大写字母正则</span><br />
+					var LowerCase_reg = /[a-z]/g;　　<span style="color:#999">//小写字母正则</span><br />
+					var Chinese_reg = /^[\u4e00-\u9fa5]+$/;　　<span style="color:#999">//汉字正则</span><br />
+					var re=new RegExp("/微笑",'g');　var str=str.replace(re,'哈哈哈');　　<span style="color:#999">//动态正则</span><br />
+				</p>
+			</div>
+			<div class="box">
 				<h2>双核浏览器强制急速模式</h2>
 				<p>
 					&lt;meta name="renderer" content="webkit|ie-comp|ie-stand"&gt;　　<span style="color:#999">//浏览器自取值</span><br />
@@ -164,6 +178,102 @@ body{background-color:#e4e4e4;height:auto;}
 				</p>
 			</div>
 			<div class="box">
+				<h2>获取IE版本</h2>
+				<p>
+				function IEVersion() {<br />
+				　　　var userAgent = navigator.userAgent;<br />
+				　　　var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1;　　　<span style="color:#999">//判断是否IE&lt;11浏览器</span>  <br />
+				　　　var isEdge = userAgent.indexOf("Edge") > -1 && !isIE;　　　<span style="color:#999">//判断是否IE的Edge浏览器</span>  <br />
+				　　　var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;<br />
+				　　　if(isIE) {<br />
+				　　　　　　var reIE = new RegExp("MSIE (\\d+\\.\\d+);");<br />
+				　　　　　　reIE.test(userAgent);<br />
+				　　　　　　var fIEVersion = parseFloat(RegExp["$1"]);<br />
+				　　　　　　if(fIEVersion == 7) {return 7;}<br />
+				　　　　　　else if(fIEVersion == 8) {return 8;}<br />
+				　　　　　　else if(fIEVersion == 9) {return 9;} <br />
+				　　　　　　else if(fIEVersion == 10) {return 10;} <br />
+				　　　　　　else {return 6;}　　　<span style="color:#999">//IE版本&lt;=7</span><br />
+				　　　}<br />
+				　　　else if(isEdge) {return 'edge';}　　　<span style="color:#999">//edge</span><br />
+				　　　else if(isIE11) {return 11;}　　　<span style="color:#999">//IE11</span><br />
+				　　　else{return -1;}　　　<span style="color:#999">//不是ie浏览器</span><br />
+				}
+				</p>
+			</div>
+			<div class="box">
+				<h2>获取浏览器品牌及版本</h2>
+				<p>
+				function getBrowserInfo(){<br />
+				　　　var Sys = {};<br />
+				　　　var ua = navigator.userAgent.toLowerCase();<br />
+				　　　var re =/(msie|firefox|chrome|opera|safari|version).*?([\d.]+)/;<br />
+				　　　var m = ua.match(re);<br />
+				　　　<span style="color:#999">//Sys.browser = m[1].replace(/version/, "safari");</span><br />
+				　　　Sys.browser = (m[1].indexOf('version')>-1?m[1].replace(/version/, "safari"):m[1]);<br />
+				　　　Sys.ver = m[2];<br />
+				　　　return Sys.browser+'_'+Sys.ver;<br />
+				}
+				</p>
+			</div>
+			<div class="box">
+				<h2>获取操作系统</h2>
+				<p>
+				function setDeviceAndOS(){<br />
+					　　　var UA = window.navigator.userAgent;<br />
+					　　　var name = "unknown";<br />
+					　　　if(UA.indexOf("Android") != -1){name = "Android";}<br />
+					　　　else if(UA.indexOf("iPhone") != -1){name = "iPhone";}<br />
+					　　　else if(UA.indexOf("SymbianOS") != -1){name = "SymbianOS";}<br />
+					　　　else if(UA.indexOf("Windows Phone") != -1){name = "Windows Phone";}<br />
+					　　　else if(UA.indexOf("iPad") != -1){name = "iPad";}<br />
+					　　　else if(UA.indexOf("iPod") != -1){name = "iPod";}<br />
+					　　　if(name != "unknown"){return 'mobile/'+name;}　　　<span style="color:#999">//手机操作系统</span><br /><br />
+					　　　if (UA.indexOf("Windows NT 10.0")!= -1){name="Windows 10";}<br />
+					　　　else if (UA.indexOf("Windows NT 6.2") != -1){name="Windows 8";}<br />
+					　　　else if (UA.indexOf("Windows NT 6.1") != -1){name="Windows 7";}<br />
+					　　　else if (UA.indexOf("Windows NT 6.0") != -1){name="Windows Vista";}<br />
+					　　　else if (UA.indexOf("Windows NT 5.1") != -1){name="Windows XP";}<br />
+					　　　else if (UA.indexOf("Windows NT 5.0") != -1){name="Windows 2000";}<br />
+					　　　else if (UA.indexOf("Mac") != -1){name="Mac/iOS";}<br />
+					　　　else if (UA.indexOf("X11") != -1){name="UNIX";}<br />
+					　　　else if (UA.indexOf("Linux") != -1){name="Linux";}<br />
+					　　　return 'pc/'+name;　　　<span style="color:#999">//电脑操作系统</span><br />
+				}
+				</p>
+			</div>
+			<div class="box">
+				<h2>获取IOS或者安卓系统版本</h2>
+				<p>
+				function get_mobilesystem_version(){<br />
+					　　　var ua=window.navigator.userAgent.toLowerCase();<br />
+					　　　var get_ios_version=function(){<br />
+					　　　　　var version = null;<br />
+					　　　　　if (ua.indexOf("like mac os x") > 0) {<br />
+					　　　　　　　　var reg = /os [\d._]+/gi;<br />
+					　　　　　　　　var v_info = ua.match(reg);<br />
+					　　　　　　　　version = (v_info + "").replace(/[^0-9|_.]/ig, "").replace(/_/ig, ".");　　　<span style="color:#999">//得到版本号9.3.2或者9.0</span><br />
+					　　　　　　　　<span style="color:#999">//version = parseInt(version.split('.')[0]);　　　// 得到版本号第一位</span><br />
+					　　　　　}<br />
+					　　　　　return version;<br />
+					　　　};<br />
+					　　　var get_android_version=function(){<br />
+					　　　　　var version = null;<br />
+					　　　　　if (ua.indexOf("android") > 0) {<br />
+					　　　　　　　　var reg = /android [\d._]+/gi;<br />
+					　　　　　　　　var v_info = ua.match(reg);<br />
+					　　　　　　　　version = (v_info + "").replace(/[^0-9|_.]/ig, "").replace(/_/ig, ".");　　　<span style="color:#999">//得到版本号4.2.2</span><br />
+					　　　　　　　　<span style="color:#999">//version = parseInt(version.split('.')[0]);　　　// 得到版本号第一位</span><br />
+					　　　　　}<br />
+					　　　　　return version;<br />
+					　　　};<br />
+					　　　if(ua.indexOf("iphone")!=-1||ua.indexOf("ipad")!=-1||ua.indexOf("ipod")!=-1){return 'IOS '+get_ios_version();}<br />
+					　　　else if(ua.indexOf("android")!=-1){return 'Android '+get_android_version();}<br />
+					　　　else{return 'Other';}<br />
+				}
+				</p>
+			</div>
+			<div class="box">
 				<h2>常用的手机页面viewport声明方式</h2>
 				<p>		
 						&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;<br />
@@ -178,8 +288,10 @@ body{background-color:#e4e4e4;height:auto;}
 			<div class="box">
 				<h2>PC reset CSS</h2>
 				<p>		
+						<span style="color:#999">/* CSS Reset */</span><br />
 						@charset "utf-8";<br />
-						blockquote,body,caption,dd,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,iframe,img,label,legend,li,object,ol,p,pre,span,strong,table,tbody,td,tfoot,th,thead,tr,ul,article,section,aside,figure{margin:0;outline:0 none;padding:0;-webkit-text-size-adjust:none;}<br />
+						html{-webkit-text-size-adjust:none;}<br />
+						blockquote,body,caption,dd,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,iframe,img,label,legend,li,object,ol,p,pre,span,strong,table,tbody,td,tfoot,th,thead,tr,ul,article,section,aside,figure,input,button,select,textarea{margin:0;outline:0 none;padding:0;}<br />
 						body,html{font-family:'Microsoft YaHei',Helvetica,Tahoma,StSun,SimSun,sans-serif;font-size:12px;height:100%;}<br />
 						ol,ul,li{list-style:none}<br />
 						table{border-collapse:collapse;border-spacing:0;}<br />
@@ -195,36 +307,34 @@ body{background-color:#e4e4e4;height:auto;}
 						.fr{float:right;}<br />
 						.hide{display:none}<br />
 						.tac{text-align:center}<br />
-						.img100{width:100%;display:block;}<br />
+						.tar{text-align:right;}<br />
 						.main{width:1200px;margin:0 auto;position:relative;}
-
 				</p>
 			</div>
 			<div class="box">
 				<h2>Mobile reset CSS</h2>
 				<p>		
+						<span style="color:#999">/* CSS Reset */</span><br />
 						@charset "utf-8";<br />
-						blockquote,body,caption,dd,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,iframe,img,label,legend,li,object,ol,p,pre,span,strong,table,tbody,td,tfoot,th,thead,tr,ul,article,section,aside,figure{margin:0;outline:0 none;padding:0;-webkit-text-size-adjust:none;}<br />
-						body,html{font-family:'Microsoft YaHei',Helvetica,Tahoma,StSun,SimSun,sans-serif;font-size:16px;height:100%;background-color:#fff;overflow:hidden;}<br />
-						ol,ul,li{list-style:none}<br />
+						html{-webkit-text-size-adjust:none;}<br />
+						blockquote,body,caption,dd,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,iframe,img,label,legend,li,object,ol,p,pre,span,strong,table,tbody,td,tfoot,th,thead,tr,ul,article,section,aside,figure,input,button,select,textarea{margin:0;outline:0;padding:0;}<br />
+						body,html{font-family:'Microsoft YaHei',Helvetica,Tahoma,StSun,SimSun,sans-serif;font-size:16px;height:100%;overflow:hidden;}<br />
+						body{min-height:268px;min-width:320px;max-width:750px;max-height:1182px;margin:0 auto;}<br />
+						ol,ul,li{list-style:none;}<br />
 						table{border-collapse:collapse;border-spacing:0;}<br />
-						:focus{outline:0}<br />
-						button::-moz-focus-inner{padding:0;border:0}<br />
+						:focus{outline:0;}<br />
 						a{outline:0;text-decoration:none;-webkit-tap-highlight-color:rgba(255,0,0,0);}<br />
 						input{-webkit-appearance:none;border-radius:none;background:none;border:0 none;margin:0;padding:0;}<br />
+						input[type=button],input[type=submit],input[type=file],input[type="reset"],button,select,textarea {-webkit-appearance:none;border-radius:0;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}<br />
 						img{border:0;}<br />
-						.clearfix:after{display:block;clear:both;height:0;visibility:hidden;overflow:hidden;font-size:0;content:"."}<br />
-						.clearfix{display:block;*display:inline-block;zoom:1;}<br />
-						* html .clearfix{height:1%}<br />
+						.clearfix:after{display:block;content:".";clear:both;height:0;font-size:0px;overflow:hidden;visibility:hidden;}<br />
+						.clearfix{display:block;zoom:1;}<br />
 						.fl{float:left;}<br />
 						.fr{float:right;}<br />
-						.hide{display:none}<br />
-						.tac{text-align:center}<br />
-						.tar{text-align:right}<br />
-						.img100{display:block;width:100%;}<br />
-						body{max-width:750px;margin:0 auto;}<br />
-						input[type=button],input[type=submit],input[type=file],input[type="reset"],button,select,textarea {-webkit-appearance:none;border-radius:0;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
-
+						.hide{display:none;}<br />
+						.tac{text-align:center;}<br />
+						.tar{text-align:right;}<br />
+						.img100{display:block;width:100%;}
 				</p>
 			</div>
 			<div class="box">
