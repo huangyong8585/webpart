@@ -109,17 +109,18 @@
 			}
 		})(navigator.userAgent);
 
-		window.onload=function(){
-			var phoneWidth = parseInt(document.body.clientWidth||document.documentElement.clientWidth||window.screen.width);
-			var phoneHeight = parseInt(document.body.clientHeight||document.documentElement.clientHeight||window.screen.height);
-			document.querySelector('.system h1.tac').innerHTML=phoneSystem;
-			document.querySelector('.system h2.tac').innerHTML='宽：'+phoneWidth+'　　高：'+phoneHeight;
-	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+		var qrcode = new QRCode(document.getElementById("qrcode"), {
 	                //设置宽高
 	                width : 96,
 	                height : 96
 	            });
 	        qrcode.makeCode(window.location.href);
+
+		window.onload=window.onresize=function(){
+			var phoneWidth = parseInt(document.body.clientWidth||document.documentElement.clientWidth||window.screen.width);
+			var phoneHeight = parseInt(document.body.clientHeight||document.documentElement.clientHeight||window.screen.height);
+			document.querySelector('.system h1.tac').innerHTML=phoneSystem;
+			document.querySelector('.system h2.tac').innerHTML='宽：'+phoneWidth+'　　高：'+phoneHeight;
 	    }
 	</script>
 </body>
