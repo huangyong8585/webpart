@@ -50,6 +50,15 @@ body{background-color:#e4e4e4;height:auto;}
 				</p>
 			</div>
 			<div class="box">
+				<h2>双核浏览器强制急速模式</h2>
+				<p>
+					&lt;meta name="renderer" content="webkit|ie-comp|ie-stand"&gt;　　<span style="color:#999">//浏览器自取值</span><br />
+					&lt;meta name="renderer" content="webkit"&gt;　　<span style="color:#999">//默认用极速核</span><br />
+					&lt;meta name="renderer" content="ie-comp"&gt;　　<span style="color:#999">//默认用ie兼容内核</span><br />
+					&lt;meta name="renderer" content="ie-stand"&gt;　　<span style="color:#999">//默认用ie标准内核</span><br />
+				</p>
+			</div>
+			<div class="box">
 				<h2>一些正则</h2>
 				<p>
 					var email_reg = /^([0-9A-Za-z\-_\.]+)@([0-9A-Za-z]+\.[A-Za-z]{2,3}(\.[A-Za-z]{2})?)$/g;　　<span style="color:#999">//邮箱正则</span><br />
@@ -61,15 +70,6 @@ body{background-color:#e4e4e4;height:auto;}
 					var LowerCase_reg = /[a-z]/g;　　<span style="color:#999">//小写字母正则</span><br />
 					var Chinese_reg = /^[\u4e00-\u9fa5]+$/;　　<span style="color:#999">//汉字正则</span><br />
 					var re=new RegExp("/微笑",'g');　var str=str.replace(re,'哈哈哈');　　<span style="color:#999">//动态正则</span><br />
-				</p>
-			</div>
-			<div class="box">
-				<h2>双核浏览器强制急速模式</h2>
-				<p>
-					&lt;meta name="renderer" content="webkit|ie-comp|ie-stand"&gt;　　<span style="color:#999">//浏览器自取值</span><br />
-					&lt;meta name="renderer" content="webkit"&gt;　　<span style="color:#999">//默认用极速核</span><br />
-					&lt;meta name="renderer" content="ie-comp"&gt;　　<span style="color:#999">//默认用ie兼容内核</span><br />
-					&lt;meta name="renderer" content="ie-stand"&gt;　　<span style="color:#999">//默认用ie标准内核</span><br />
 				</p>
 			</div>
 			<div class="box">
@@ -87,6 +87,53 @@ body{background-color:#e4e4e4;height:auto;}
 					function IsPhoneNumber(num){<br />
 					　　　return !!str.match(/^((1[0-9]{2})+\d{8})$/);<br />
 					}
+				</p>
+			</div>
+			<div class="box">
+				<h2>自己写的ajax and jsonp</h2>
+				<p>
+					<span style="color:#999">//ajax</span><br />
+					function ajax(method,url,para,callback){<br />
+					　　　var xmlhttp=new XMLHttpRequest(),_url,_para;<br />
+					　　　xmlhttp.onreadystatechange=function(){<br />
+					　　　　　if(xmlhttp.readyState==4&&xmlhttp.status==200){<br />
+					　　　　　　　callback(JSON.parse(xmlhttp.responseText));<br />
+					　　　　　}<br />
+					　　　};<br />
+					　　　if(method=="GET"){<br />
+					　　　　　_url=url+"?"+para;<br />
+					　　　　　_para=null;<br />
+					　　　}<br />
+					　　　else if(method=="POST"){<br />
+					　　　　　_url=url;<br />
+					　　　　　_para=para;<br />
+					　　　}<br />
+					　　　xmlhttp.open(method,_url,true);<br />
+					　　　xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');<br />
+					　　　xmlhttp.send(_para);<br />
+					}<br /><br />
+
+					<span style="color:#999">//JSONP</span><br />
+					function jsonp(_url,data,fn){<br />
+					　　　var nosamename=function(){<br />
+					　　　　　var tempname='jsonp',O=true,i=1;<br />
+					　　　　　while(O){<br />
+					　　　　　　　if(!window[tempname+i]){window[tempname+i]=1;O=false;}<br />
+					　　　　　　　else{i++;}<br />
+					　　　　　}<br />
+					　　　　　return tempname+i;<br />
+					　　　　　}<br />
+					　　　var url = "",t=document.createElement("script"),fnName='';<br />
+					　　　if(!!fn&&(typeof fn == 'function')){<br />
+					　　　　　fnName=nosamename();window[fnName]=fn;<br />
+					　　　　　url = _url+"?"+data+"&callback="+fnName;<br />
+					　　　}<br />
+					　　　else if(fn){url = _url+"?"+data+"&callback="+fn;}<br />
+					　　　else{url = _url+"?"+data;}<br />
+					　　　t.src=url,t.type="text/javascript",t.async=!0,t.charset="UTF-8";<br />
+					　　　document.getElementsByTagName("head")[0].appendChild(t);<br />
+					　　　t.onload=function(){document.getElementsByTagName("head")[0].removeChild(t);}<br />
+					}<br />
 				</p>
 			</div>
 			<div class="box">
