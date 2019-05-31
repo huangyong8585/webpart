@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>移动端弹出层 akb48</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    body{}
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    .btnbox{padding-top:30px;}
+    .btnbox a{display:block;width:200px;height:40px;margin:0 auto 20px;text-align:center;line-height:40px;border:1px solid #999;font-size:14px;border-radius:8px;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+	
+	/*akb弹出框*/
+	.popbox {position:fixed;width:100%;height:100%;left:0;top:0;background-color:rgba(0,0,0,.6);z-index:90;-webkit-transform:translateY(-150%);-moz-transform:translateY(-150%);transform:translateY(-150%);transition:all .5s ease-in-out;}
+	.popbox .pop{display:none;width:100%;height:3.72rem;position:absolute;top:50%;left:0;-webkit-transform:translateY(-50%);transform:translateY(-50%);text-align:center;background-size:100% 100%;background-repeat:no-repeat;background-position:50% 50%;}
+	.popbox .pop .closepop {position:absolute;left:50%;bottom:-0.35rem;width:0.45rem;height:0.45rem;background:url(https://static.web.sdo.com/jijiamobile/pic/akb/mhaiwai2/popclose.png) 50% 50% no-repeat;background-size:100% 100%;-webkit-transform:translateX(-50%);transform:translateX(-50%);z-index:99;}
+
+	.popbox .yuyue{background-image:url(https://static.web.sdo.com/jijiamobile/pic/akb/mhaiwai2/popbg01.png);}
+	.popbox .yuyue .yuyueCon{width:100%;height:100%;position:absolute;top:0;left:0;}
+	.popbox .yuyue input{height:0.54rem;width:3.68rem;line-height:0.3rem;padding:0.12rem 0;font-size:0.2rem;outline:none;background:#fff;margin:1.53rem 0 0.32rem 1.76rem;border:1px solid #ccc;box-sizing:border-box;text-align:center;color:#323232;border-radius:0.1rem;display:block;}
+	.popbox .yuyue input::-webkit-input-placeholder {color:#878787;font-size:0.2rem;}
+	.popbox .yuyue .yy_btn{display:block;width:28.26666666666667%;height:0.5rem;border-radius:0.5rem;line-height:0.5rem;background-color:#ff97b8;color:#fff;font-size:0.24rem;letter-spacing:0.02rem;margin:0 auto;}
+	
+	#successBox {background-image:url(https://static.web.sdo.com/jijiamobile/pic/akb/mhaiwai2/popbg02.png);}
+	#successBox .resultCont{height:100%;background:url(https://static.web.sdo.com/jijiamobile/pic/akb/mhaiwai2/successbg.png) 50% 50%/100% 100% no-repeat;}
+	#successBox .resultCont p{height:100%;font-size:1em;color:#000;padding:0 1rem;display:flex;justify-content:center;align-items:center;}
+
+	#failBox {background-image:url(https://static.web.sdo.com/jijiamobile/pic/akb/mhaiwai2/popbg02.png);}
+	#failBox .resultCont{height:100%;}
+	#failBox .resultCont p{height:100%;font-size:0.2rem;color:#000;padding:0 1rem;text-indent:-0.66rem;padding-top:0.16rem;display:flex;justify-content:center;align-items:center;}
+    </style>
+</head>
+<body>	
+	<article class="wrapper">
+		<div class="btnbox">
+			<a id="btn1" href="javascript:;">预约弹出层 AKB</a>
+			<a id="btn2" href="javascript:showPOP('loginpop');">预约成功 AKB</a>
+			<a id="btn3" href="javascript:showPOP('loginpop');">预约失败 AKB</a>
+			<p class="tac">地城邂逅的弹出层<br /><br /></p>
+		</div>
+		
+		<div id="qrcode"></div>
+	</article>
+
+    <!-- pre-order POP -->
+    <div class="popbox">
+      <div class="pop yuyue" id="yudingPopBox">
+        <a href="javascript:;" class="closepop"></a>
+        <div class="yuyueCon">
+          <input type="email" id="email" writing="no" placeholder="ENTER YOUR EMAIL" />
+          <a href="javascript:void(0);" class="yy_btn">SUBMIT</a>
+        </div>
+      </div>
+    </div>
+    <!-- pre-order POP -->
+    <!--success pop-->
+    <div class="popbox">
+        <div class="pop" id="successBox">
+            <a href="javascript:;" class="closepop"></a>
+            <div class="resultCont"><p></p></div>
+        </div>
+    </div>
+    <!--success pop-->
+    <!--fail pop-->
+    <div class="popbox">
+        <div class="pop" id="failBox">
+            <a href="javascript:;" class="closepop"></a>
+            <div class="resultCont"><p></p></div>
+        </div>
+    </div>
+    <!--fail pop-->
+
+	<script src="../js/jquery-1.7.2.min.js"></script>
+    <script src="../js/Qrcode.js"></script>
+	<script>
+		(function (doc, win) {
+            var docEl = doc.documentElement,
+            	bodyEl=doc.getElementsByTagName("body")[0].children[0],
+            	resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = (docEl.clientWidth||win.innerWidth);
+                    if (!clientWidth) return;
+                    if (clientWidth >= 1080) {docEl.style.fontSize = '100px';} 
+			        else {docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';}
+                    bodyEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+                };
+    
+                if (!doc.addEventListener) return;
+                win.addEventListener(resizeEvt, recalc, false);
+                doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+
+        //预约弹出层
+		function preOrderPOP(){
+		    var box=document.getElementById("yudingPopBox");
+		    box.style.display="block";
+		    box.parentNode.style.webkitTransform='translateY(0)';
+		    box.parentNode.style.transform='translateY(0)';
+		    box.children[0].onclick=function(){
+		      box.parentNode.style.webkitTransform='translateY(-150%)';
+		      box.parentNode.style.transform='translateY(-150%)';
+		      setTimeout(function(){
+		        box.style.display="none";
+		        //box.style.height="auto";
+		      },300);
+		    }
+		}
+		//BeforeyuyuePop()
+		  
+		//预约成功弹出层
+		function resultpop(str,txt){
+		    var box=document.getElementById(str+"Box");
+		    box.style.display="block";
+		    if(str==='fail'){box.children[1].children[0].innerHTML=txt;}
+		    if(str==='success'){$('#yudingPopBox>.closepop').click();}
+		    box.parentNode.style.webkitTransform='translateY(0)';
+		    box.parentNode.style.transform='translateY(0)';
+		    box.children[0].onclick=function(){
+		      box.parentNode.style.webkitTransform='translateY(-150%)';
+		      box.parentNode.style.transform='translateY(-150%)';
+		      setTimeout(function(){
+		        box.style.display="none";
+		      },300);
+		    }
+		}
+
+		window.onload=function(){
+			document.getElementById('btn1').onclick=function(){preOrderPOP();};
+			document.getElementById('btn2').onclick=function(){resultpop('success');};
+			document.getElementById('btn3').onclick=function(){resultpop('fail','The email address cannot be empty！');};
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }
+	</script>
+</body>
+</html>

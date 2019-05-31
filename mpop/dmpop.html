@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>移动端弹出层 地城邂逅</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    body{}
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    .btnbox{padding-top:30px;}
+    .btnbox a{display:block;width:200px;height:40px;margin:0 auto 20px;text-align:center;line-height:40px;border:1px solid #999;font-size:14px;border-radius:8px;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+
+    @-webkit-keyframes erwmLine {
+		0% {-webkit-transform: translate(0,0)}
+		100% {-webkit-transform: translate(0,3.8rem)}
+	}
+
+	@keyframes erwmLine {
+		0% {transform: translate(0,0)}
+		100% {transform: translate(0,3.8rem)}
+	}
+
+	/*地下城邂逅*/
+	.popbox{position:absolute;width:100%;height:100%;left:0;top:0;background-color:rgba(0,0,0,.6);z-index:90;-webkit-transform:translateY(-150%);transform:translateY(-150%);transition:all .5s ease-in-out;}
+	.popbox .pop{display:none;position:absolute;width:96%;left:2%;top:50%;background-color:#252526;}
+	.popbox .pop .bigbtn{display:block;width:2rem;height:0.75rem;line-height:0.75rem;border-radius:0.1rem;letter-spacing:0.05rem;text-indent:0.05rem;margin:0 auto;text-align:center;background:#b39042;color:#fff;font-size:0.3rem;font-weight:bold;}
+	.popbox .pop .okbtn{display:block;width:1.3rem;height:0.3rem;line-height:1;border-radius:0.1rem;letter-spacing:0.05rem;text-indent:0.05rem;margin:0 auto;text-align:center;background:#b39042;color:#fff;font-size:0.28rem;padding:0.1rem 0;font-weight:bold;}
+	.popbox .pop .closepop{position:absolute;width:0.5rem;height:0.5rem;right:0.1rem;top:0.1rem;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAWBAMAAAAoU0G7AAAAGFBMVEUAAACzkEKzkEKzkEKzkEKzkEKzkEKzkEJ2YBqCAAAAB3RSTlMAWFdSKbu6RZfkvgAAAGdJREFUGNNjYA5mgAJTAwb3cgEIm7G8hIG5vBDCES83ABECEIlCGAkWg1IwITANlwAzwAJQqSJ1kARMCigBA0zl5QoYHIQyDAMQRmNYinAOskMVIBJQUxgQnlMvB3sbZnMJUoCYGQAAumcf4k2GrpMAAAAASUVORK5CYII=) 50% 50%/24px 22px no-repeat;}
+	/*温馨提示*/
+	.popbox .pop01{display:none;position:absolute;width:70%;left:15%;top:50%;background-color:#252526;border:1px solid #b39042;border-radius:0.33rem;overflow:hidden;text-align:center;-webkit-transform:translateY(-50%);transform:translateY(-50%);}
+	.popbox .pop01 .popcontbox{width:100%;padding:0.5rem 0.2rem;box-sizing:border-box;}
+	.popbox .pop01 .popcontbox h2{color:#e9c36d;font-size:0.38rem;letter-spacing:0.1rem;padding-bottom:0.5rem;}
+	.popbox .pop01 .popcontbox p{color:#ebebeb;font-size:0.24rem;margin-bottom:0.75rem;}
+
+	/*微信二维码*/
+	.popbox .pop01 .popcontbox .wxqrcode{width:3.8rem;height:3.8rem;margin:0 auto;position:relative;}
+	.popbox .pop01 .popcontbox .wxqrcode:after{content:' ';display:block;position:absolute;left:0;top:0;width:3.8rem;height:1px;background-color:rgba(0,0,0,0.75);box-shadow:0 0 0.1rem rgba(0,0,255,1);animation:erwmLine 2s linear infinite alternate;-webkit-animation:erwmLine 2s linear infinite alternate}
+	.popbox .pop01 .popcontbox .wxqrcode img{display:block;width:100%;height:100%;}
+	.popbox .pop01 .popcontbox .wxqrcodetxt {display:block;font-size:0.36rem;color:#5aa6f4;height:1rem;line-height:1rem;}
+
+	/*登录*/
+	.popbox .loginpop{display:none;position:absolute;width:90%;left:5%;top:50%;background-color:#252526;border:1px solid #b39042;border-radius:0.33rem;overflow:hidden;text-align:center;-webkit-transform:translateY(-50%);transform:translateY(-50%);}
+	.popbox .loginpop .popcontbox{width:100%;padding:0.2rem 0.2rem 0.5rem;box-sizing:border-box;}
+	.popbox .loginpop .popcontbox h2{color:#e9c36d;font-size:0.38rem;letter-spacing:0.1rem;padding:0.3rem 0;}
+	.popbox .loginpop .popcontbox .formitem{height:0.5rem;width:70%;margin:0 auto;text-align:left;padding:0.1rem 0 0.15rem;}
+	.popbox .loginpop .popcontbox .formitem input{display:block;width:100%;color:#fff;padding:0 0.15rem;font-size:0.2rem;height:0.5rem;line-height:0.5rem;background:#1b1b1b;box-sizing:border-box;border:1px solid #6d5e3d;}
+	.popbox .loginpop .popcontbox .formitem #loginCode{width:65%;}
+	.popbox .loginpop .popcontbox .formitem .getcode{float:right;display:inline-block;width:30%;height:0.5rem;line-height:0.5rem;text-align:center;box-sizing:border-box;border:1px solid #6d5e3d;color:#6d5e3d;font-size:0.2rem;}
+	.popbox .loginpop .popcontbox .formitem .off{color:#999;border-color:#999;}
+	.popbox .loginpop .popcontbox .okbtn{margin:0.333rem auto;}
+    </style>
+</head>
+<body>	
+	<article class="wrapper">
+		<div class="btnbox">
+			<a id="btn1" href="javascript:;">温馨提示 地城邂逅</a>
+			<a id="btn2" href="javascript:showPOP('loginpop');">手机号登录 地城邂逅</a>
+			<a id="btn3" href="javascript:showKRPOP('<div class=wxqrcode><img src=https://static.web.sdo.com/jijiamobile/pic/dm/act/20190521testquota/wxqrcode.png></div><b class=wxqrcodetxt>扫一扫关注微信公众号</b>');">微信弹出框 地城邂逅</a>
+			<p class="tac">地城邂逅的弹出层</p>
+		</div>
+		
+		<div id="qrcode"></div>
+	</article>
+	<!--pop01-->
+    <div class="popbox">
+        <div class="pop pop01" id="kindpop">
+            <div class="popcontbox"></div>
+            <a href="javascript:;" class="closepop"></a>
+        </div>
+    </div>
+    <!--//pop01-->
+    <!--loginpop-->
+    <div class="popbox">
+        <div class="pop loginpop" id="loginpop">
+            <div class="popcontbox">
+                <h2>登 录</h2>
+                <div class="loginCont">
+                    <div class="formitem"><input type="tel" maxlength="11" placeholder="填写手机号" id="loginPhone" /></div>
+                    <div class="formitem"><a href="javascript:void(0);" class="getcode">获取验证码</a><input type="tel" maxlength="6" placeholder="填写验证码" id="loginCode" /></div>
+                    <a href="javascript:;" class="okbtn">登录</a>
+                </div>
+            </div>
+            <a href="javascript:;" class="closepop"></a>
+        </div>
+    </div>
+    <!--//loginpop-->
+	<script src="../js/jquery-1.7.2.min.js"></script>
+    <script src="../js/Qrcode.js"></script>
+	<script>
+		(function (doc, win) {
+                var docEl = doc.documentElement,
+                	bodyEl=doc.getElementsByTagName("body")[0].children[0],
+                	resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+	                recalc = function () {
+	                    var clientWidth = (docEl.clientWidth||win.innerWidth);
+	                    if (!clientWidth) return;
+	                    if (clientWidth >= 1080) {docEl.style.fontSize = '100px';} 
+				        else {docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';}
+	                    bodyEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+	                };
+        
+	                if (!doc.addEventListener) return;
+	                win.addEventListener(resizeEvt, recalc, false);
+	                doc.addEventListener('DOMContentLoaded', recalc, false);
+            })(document, window);
+
+        function showKRPOP(str){
+		    var box=document.getElementById('kindpop'),boxCont=box.children[0];
+		    box.style.display="block";
+		    box.parentNode.style.webkitTransform='translateY(0)';
+		    box.parentNode.style.transform='translateY(0)';
+		    boxCont.innerHTML=str;
+		    box.children[1].onclick=function(){
+		      box.parentNode.style.webkitTransform='translateY(-150%)';
+		      box.parentNode.style.transform='translateY(-150%)';
+		      setTimeout(function(){
+		        box.style.display="none";
+		        //box.style.height="auto";
+		      },300);
+		    }
+		}
+
+		//关闭弹出层
+		function closePOP(str){
+		    var box=document.getElementById(str);
+		    box.style.display="none";
+		    box.parentNode.style.webkitTransform='translateY(-150%)';
+		    box.parentNode.style.transform='translateY(-150%)';
+		}
+
+		//打开弹出层
+		function showPOP(str,t){
+		    var box=document.getElementById(str);
+		    box.style.display="block";
+		    box.parentNode.style.webkitTransform='translateY(0)';
+		    box.parentNode.style.transform='translateY(0)';
+		    if(t){$(box).parent().siblings('.popbox').children('.pop:visible').children('a.closepop').click();}
+		    box.children[1].onclick=function(){
+		      box.parentNode.style.webkitTransform='translateY(-150%)';
+		      box.parentNode.style.transform='translateY(-150%)';
+		      setTimeout(function(){
+		        box.style.display="none";
+		        //box.style.height="auto";
+		      },300);
+		    }
+		}
+
+
+		window.onload=function(){
+			document.getElementById('btn1').onclick=function(){showKRPOP('<h2>温馨提示</h2><p>招募好友需要你先登录！</p><a href="javascript:void(0);" onclick="showPOP(\'loginpop\',1);" class="bigbtn">点击登录</a>');};
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }
+	</script>
+</body>
+</html>

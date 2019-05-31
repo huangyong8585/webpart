@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>移动端视频弹出层</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    body{}
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    .btnbox{padding-top:30px;}
+    .btnbox a{display:block;width:200px;height:40px;margin:0 auto 20px;text-align:center;line-height:40px;border:1px solid #999;font-size:14px;border-radius:8px;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+
+	.popbox{position:absolute;width:100%;height:100%;left:0;top:0;background-color:rgba(0,0,0,.6);z-index:90;-webkit-transform:translateY(-150%);transform:translateY(-150%);transition:all .5s ease-in-out;}
+	.popbox .pop{display:none;position:absolute;width:96%;left:2%;top:50%;background-color:#252526;}
+	.popbox .pop .closepop{position:absolute;width:0.5rem;height:0.5rem;right:0.1rem;top:0.1rem;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAWBAMAAAAoU0G7AAAAGFBMVEUAAACzkEKzkEKzkEKzkEKzkEKzkEKzkEJ2YBqCAAAAB3RSTlMAWFdSKbu6RZfkvgAAAGdJREFUGNNjYA5mgAJTAwb3cgEIm7G8hIG5vBDCES83ABECEIlCGAkWg1IwITANlwAzwAJQqSJ1kARMCigBA0zl5QoYHIQyDAMQRmNYinAOskMVIBJQUxgQnlMvB3sbZnMJUoCYGQAAumcf4k2GrpMAAAAASUVORK5CYII=) 50% 50%/24px 22px no-repeat;}
+
+	.popbox .pop .videoCont{width:100%;padding:0.2rem;border:1px solid #b39042;box-sizing: border-box;}
+	.popbox .pop .videoCont video{display:block;width:100%;height:100%;}
+	#videobox .closepop{top:-0.66rem;right:0;width:0.6rem;height:0.6rem;background-color:#252526;background-size:80% auto;}
+    </style>
+</head>
+<body>	
+	<article class="wrapper">
+		<div class="btnbox">
+			<a id="btn1" href="javascript:;">视频弹出层</a>
+			<p class="tac">由上滑入的视频弹出层</p>
+		</div>
+		<!--video pop-->
+	    <div class="popbox">
+	        <div class="pop" id="videobox">
+	            <div class="videoCont">
+	                <!-- <video src="###" style="object-fit:fill;" controls="controls" webkit-playsinline="true" x-webkit-airplay="true" playsinline="true"  x5-video-player-type="h5" x5-video-orientation="h5" x5-video-player-fullscreen="true" width="100%" height="100%"></video> -->
+	            </div>
+	            <a href="javascript:;" class="closepop"></a>
+	        </div>
+	    </div>
+	    <!--//video pop-->
+
+		<div id="qrcode"></div>
+	</article>
+    <script src="../js/Qrcode.js"></script>
+	<script>
+		(function (doc, win) {
+                var docEl = doc.documentElement,
+                	bodyEl=doc.getElementsByTagName("body")[0].children[0],
+                	resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+	                recalc = function () {
+	                    var clientWidth = (docEl.clientWidth||win.innerWidth);
+	                    if (!clientWidth) return;
+	                    if (clientWidth >= 1080) {docEl.style.fontSize = '100px';} 
+				        else {docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';}
+	                    bodyEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+	                };
+        
+	                if (!doc.addEventListener) return;
+	                win.addEventListener(resizeEvt, recalc, false);
+	                doc.addEventListener('DOMContentLoaded', recalc, false);
+            })(document, window);
+
+		///打开视频弹出层
+		function showvideopop(){
+		    var o=navigator.userAgent
+		    var is_ios=(o.indexOf("iPhone")!=-1||o.indexOf("iPad")!=-1||o.indexOf("iPod")!=-1);
+		    var is_android=(o.indexOf("Android")!=-1);
+		    var box = document.getElementById("videobox");
+		    var videoCont = box.children[0];
+		    var videoObj = null;
+		    if(is_ios){videoCont.innerHTML=('<video src="https://static.web.sdo.com/jijiamobile/pic/dm/reserve/media/popvideo.mp4" style="object-fit:fill;" controls="controls" width="100%" height="auto" webkit-playsinline="true" x-webkit-airplay="true" playsinline="true" x5-video-player-type="h5" x5-video-orientation="h5" x5-video-player-fullscreen="true"></video>');}
+		    if(is_android){videoCont.innerHTML=('<video src="https://static.web.sdo.com/jijiamobile/pic/dm/reserve/media/popvideo.mp4" style="object-fit:fill;" controls="controls" width="100%" height="auto"></video>');}
+		    box.style.display="block";
+		    box.style.marginTop=(0-box.offsetHeight/2)+"px";
+		    box.parentNode.style.webkitTransform='translateY(0)';
+		    box.parentNode.style.transform='translateY(0)';
+		    videoObj = videoCont.children[0];
+		    videoObj.play();   
+		    box.children[1].onclick=function(){
+		        box.parentNode.style.webkitTransform='translateY(-150%)';
+		        box.parentNode.style.transform='translateY(-150%)';
+		        setTimeout(function(){
+		            box.style.display="none";
+		            videoObj.pause();
+		            videoCont.innerHTML='';
+		        },300);
+		    }
+		}
+
+
+		window.onload=function(){
+			document.getElementById('btn1').onclick=function(){showvideopop();};
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }
+	</script>
+</body>
+</html>

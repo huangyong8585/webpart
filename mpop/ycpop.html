@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>移动端弹出层 梦色卡司</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    body{}
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+    .btnbox{padding-top:30px;}
+    .btnbox a{display:block;width:200px;height:40px;margin:0 auto 20px;text-align:center;line-height:40px;border:1px solid #999;font-size:14px;border-radius:8px;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+
+	/*梦色卡司*/
+	.popbox{position:absolute;width:100%;height:100%;left:0;top:0;background-color:rgba(0,0,0,.6);z-index:90;-webkit-transform:translateY(-150%);transform:translateY(-150%);transition:all .5s ease-in-out;}
+	.popbox .pop{display:none;position:absolute;width:86%;left:7%;top:50%;background:url(https://static.web.sdo.com/jijiamobile/pic/yc/h5web1/popbg02.png) 0 100%/100% auto no-repeat,url(https://static.web.sdo.com/jijiamobile/pic/yc/h5web1/popbg.png) 0 0/100% auto no-repeat;}
+	.popbox .pop .bigbtn{display:block;width:2rem;height:0.75rem;line-height:0.75rem;border-radius:0.1rem;letter-spacing:0.05rem;text-indent:0.05rem;margin:0 auto;text-align:center;background:#b39042;color:#fff;font-size:0.3rem;font-weight:bold;}
+	.popbox .pop .okbtn{display:block;width:1.3rem;height:0.3rem;line-height:1;border-radius:0.1rem;letter-spacing:0.05rem;text-indent:0.05rem;margin:0 auto;text-align:center;background:#b39042;color:#fff;font-size:0.28rem;padding:0.1rem 0;font-weight:bold;}
+	.popbox .pop .closepop{position:absolute;width:0.8rem;height:0.8rem;right:0;top:-0.85rem;background:url(https://static.web.sdo.com/jijiamobile/pic/yc/h5web1/closepop.png) 0 0/100% auto no-repeat;}
+	.popbox .pop .popcontbox h2{color:#e9c36d;font-size:0.32rem;}
+
+	.popbox .pop01{display:none;position:absolute;width:86%;left:7%;top:50%;text-align:center;-webkit-transform:translateY(-50%);transform:translateY(-50%);}
+	.popbox .pop01 .popcontbox{width:100%;padding:0.2rem 0.2rem 0.5rem;box-sizing:border-box;}
+	.popbox .pop01 .popcontbox h2{padding:0.2rem 0 0.5rem;color:#a08f5d;}
+	.popbox .pop01 .popcontbox p{color:#99864c;font-size:0.24rem;margin-bottom:0.5rem;}
+	.popbox .pop01 .popcontbox p b.oncetips{display:block;color:#900;margin-top:0.3rem;font-weight:normal;}
+
+	.popbox .pop02{display:none;position:absolute;width:86%;left:7%;top:50%;text-align:center;-webkit-transform:translateY(-50%);transform:translateY(-50%);}
+	.popbox .pop02 .popcontbox{width:100%;padding:0.2rem 0.2rem 0.5rem;box-sizing:border-box;}
+	.popbox .pop02 .popcontbox h2{padding:0.3rem 0 0.2rem;color:#a08f5d;font-size:0.3rem;text-align:center;line-height:2;}
+	.popbox .pop02 .popcontbox a.subbtn{display:block;margin:0.1rem auto;width:3rem;height:0.92rem;background:url(https://static.web.sdo.com/jijiamobile/pic/yc/pcweb1/popbtn01.png) 0 0/100% auto no-repeat;}
+	.popbox .pop02 .popcontbox .formitem{padding-bottom:0.15rem;width:4rem;height:0.5rem;margin:0 auto;overflow:hidden;position:relative;}
+	.popbox .pop02 .popcontbox .formitem label{display:block;float:left;white-space:nowrap;width:0.7rem;font-size:0.2rem;color:#99864c;height:0.5rem;line-height:0.5rem;margin-right:0.3rem;vertical-align:middle;}
+	.popbox .pop02 .popcontbox .formitem input{display:block;float:left;width:3rem;height:0.5rem;font-size:0.2rem;color:#323232;border:1px solid #cfbe8a;padding:0.1rem 0.2rem;border-radius:0.5rem;vertical-align:middle;box-sizing:border-box;}
+	.popbox .pop02 .popcontbox .formitem input::-webkit-input-placeholder{color:#c7c7c7;}
+	.popbox .pop02 .popcontbox .formitem .getcode{display:block;position:absolute;top:0;right:0.25rem;font-size:0.14rem;width:1rem;height:0.5rem;line-height:0.5rem;text-align:center;color:#9c844e;}
+	.popbox .pop02 .popcontbox .formitem .off{color:#898989;}
+    </style>
+</head>
+<body>	
+	<article class="wrapper">
+		<div class="btnbox">
+			<a id="btn1" href="javascript:;">温馨提示 梦色卡司</a>
+			<a id="btn2" href="javascript:showPOP('yuyuepop');">手机号登录 梦色卡司</a>
+			<p class="tac">梦色卡司的弹出层</p>
+		</div>
+		
+		<div id="qrcode"></div>
+	</article>
+    <!--pop01-->
+    <div class="popbox">
+        <div class="pop pop01" id="pop01">
+            <div class="popcontbox"></div>
+            <a href="javascript:;" class="closepop"></a>
+        </div>
+    </div>
+    <!--//pop01-->
+    <!--yuyuepop-->
+    <div class="popbox">
+        <div class="pop pop02" id="yuyuepop">
+            <div class="popcontbox">
+                <h2>剧本家大人，请填写您的预约信息！</h2>
+                <div class="formitem"><label>手机号</label><input type="text" id="yuyueformPhone" maxlength="11" placeholder="请填写手机号码" /></div>
+                <div class="formitem"><label>验证码</label><a href="javascript:void(0);" class="getcode">获取验证码</a><input type="text" id="yuyueformCode" maxlength="6" placeholder="填写验证码" /></div>
+                <a href="javascript:void(0);" class="subbtn"></a>
+            </div>
+            <a href="javascript:;" class="closepop"></a>
+        </div>
+    </div>
+    <!--//yuyuepop-->
+	<script src="../js/jquery-1.7.2.min.js"></script>
+    <script src="../js/Qrcode.js"></script>
+	<script>
+		(function (doc, win) {
+                var docEl = doc.documentElement,
+                	bodyEl=doc.getElementsByTagName("body")[0].children[0],
+                	resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+	                recalc = function () {
+	                    var clientWidth = (docEl.clientWidth||win.innerWidth);
+	                    if (!clientWidth) return;
+	                    if (clientWidth >= 1080) {docEl.style.fontSize = '100px';} 
+				        else {docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';}
+	                    bodyEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+	                };
+        
+	                if (!doc.addEventListener) return;
+	                win.addEventListener(resizeEvt, recalc, false);
+	                doc.addEventListener('DOMContentLoaded', recalc, false);
+            })(document, window);
+
+		function showKindPOP(str){
+		    var box=document.getElementById('pop01'),boxCont=box.children[0];
+		    box.style.display="block";
+		    box.parentNode.style.webkitTransform='translateY(0)';
+		    box.parentNode.style.transform='translateY(0)';
+		    boxCont.innerHTML=str;
+		    box.children[1].onclick=function(){
+		      box.parentNode.style.webkitTransform='translateY(-150%)';
+		      box.parentNode.style.transform='translateY(-150%)';
+		      setTimeout(function(){
+		        box.style.display="none";
+		        //box.style.height="auto";
+		      },300);
+		    }
+		}
+
+		//关闭弹出层
+		function closePOP(str){
+		    var box=document.getElementById(str);
+		    box.style.display="none";
+		    box.parentNode.style.webkitTransform='translateY(-150%)';
+		    box.parentNode.style.transform='translateY(-150%)';
+		}
+
+		//打开弹出层
+		function showPOP(str,t){
+		    var box=document.getElementById(str);
+		    box.style.display="block";
+		    box.parentNode.style.webkitTransform='translateY(0)';
+		    box.parentNode.style.transform='translateY(0)';
+		    if(t){$(box).parent().siblings('.popbox').children('.pop:visible').children('a.closepop').click();}
+		    box.children[1].onclick=function(){
+		      box.parentNode.style.webkitTransform='translateY(-150%)';
+		      box.parentNode.style.transform='translateY(-150%)';
+		      setTimeout(function(){
+		        box.style.display="none";
+		        //box.style.height="auto";
+		      },300);
+		    }
+		}
+
+
+		window.onload=function(){
+			document.getElementById('btn1').onclick=function(){showKindPOP('<h2>温馨提示</h2><p>接受邀请，需要您先预约或登录。</p><a href="javascript:void(0);" onclick="showPOP(\'yuyuepop\',1);" class="bigbtn">立即前往</a>');};
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }
+	</script>
+</body>
+</html>

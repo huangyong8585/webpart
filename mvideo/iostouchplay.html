@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="UTF-8">
+    <title>苹果设备触摸音乐播放</title>
+    <link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+    <style>
+    body{}
+    .wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#700;}
+    .btnbox{padding-top:30px;}
+    .btnbox a{display:block;width:200px;height:40px;margin:0 auto 20px;text-align:center;line-height:40px;border:1px solid #999;font-size:14px;border-radius:8px;}
+    #qrcode{width:96px;height:96px;padding:7px;background:#fff;position:absolute;left:50%;bottom:20px;margin-left:-55px;}
+
+	.music{display:none;width:2em;height:2em;position:absolute;right:1em;top:1em;z-index:105;}
+	.music img{ width:100%;}
+	.rotateImg img{-moz-animation:rotate 2s linear infinite;-webkit-animation:rotate 2s linear infinite;animation:rotate 2s linear infinite;}
+
+	@-webkit-keyframes rotate{0%{-webkit-transform:rotate(0deg);} 50%{-webkit-transform:rotate(180deg);} 100%{-webkit-transform:rotate(360deg);}}
+	@keyframes rotate {0%{transform:rotate(0deg);} 50%{transform:rotate(180deg);} 100%{transform:rotate(360deg);}}
+    </style>
+</head>
+<body>	
+	<article class="wrapper">
+		<!--音乐按钮-->
+        <div class="music"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAAxlBMVEUAAAAAAAD///////8SEhL///8JCQkgICD///93d3eoqKj7+/v////v7+/9/f329vb////Ly8u8vLz///+Li4v////////////////39/fKyspKSkr///+CgoIwMDDr6+v///+3t7fm5ub09PT///////////+NjY18fHxQUFA/Pz8eHh7///9NTU1LS0v///////9sbGzl5eUlJSWrq6vz8/Po6Oji4uLU1NSgoKCBgYFfX1////99fX0uLi6rq6uqqqr/////JqCTAAAAQXRSTlOZAPvtna6Xllu8nvz+9eXPvamjm5hLPBwD+uCtp5iV8u/Xuvj11NLFvq+qoaCVlXp4ubijnvfw7ebMwLSol5XR0f74VT4AAAILSURBVDjLnZXpVuJAEIXLDlmEhC2EJUFCQFlEBRRHnVFn7vu/1MhEutLpzniO91e68p2cSlfVLTpTNezv7IUlhLWwd/1h6aUKR2MoGkeVsNcG/Fand+s6jnvb67R8oO0Z4YENNLsTKmjSbQL2QIc9C9bBoZKcw0fYK8MhMHMZqv3ZUy53BoQqfANRJyrAox/yuS5wU4RDXF6QogAv8vniEiHDHkSJpRSNc6YFvBM8sCBz4C9j9IszwXTwCduYkQHGPJHHe9g57MFyy2ztcfkMBA+ns2vB+we3OQmGR8kmBuIaJ9I+whGajgE+p1oM/JTVaSL6gMfokg4f72LzXEiki/EZDeFPKmBKUv70xMeQ+mhRFUxLP5ahFvq0RacapqeGDHWwIxs9EyxyOGO4B5uucGeC/RxeBTJ0hyuy4Jpg5PA6lSEXFgk4/4O5Ux2IL+BlUIS/SCPbF9PgHzTC16T8oPnqSHDr89WZivKwTjaNFZ+5KFq5r1+e0IjnPCZcbq2R9gGOmnO23EjlFl0BObzmGLeo2vyJQK6RnD9u/nysDjIW41OpHCg5VtrANk4wXwYPLFuBCv+WGFuBZjJZnvCSMTYZzb42WfCYZnxtbF+KMb5Rpd7YGNlyNbHlGs1cl3sPhKY1UdfXRN3C1KtaQO9F9J0X0PdWGyt6haJX89Lkdby1F1Mhpgt7q63jvyQdUzVIY/DfAAAAAElFTkSuQmCC" /></div>
+		<audio src="https://static.web.sdo.com/jijiamobile/pic/moonbiadu/here-we-are-again.mp3" preload="auto" loop id="musicAudio"></audio>
+        <!--音乐按钮-->
+
+		<div id="qrcode"></div>
+	</article>
+    <script src="../js/Qrcode.js"></script>
+	<script>
+		(function (doc, win) {
+                var docEl = doc.getElementsByTagName("body")[0].children[0],
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = (docEl.clientWidth||win.innerWidth);
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 12 * (clientWidth / 320) + 'px';
+                };
+        
+                if (!doc.addEventListener) return;
+                win.addEventListener(resizeEvt, recalc, false);
+                doc.addEventListener('DOMContentLoaded', recalc, false);
+            })(document, window);
+
+		
+		//播放音乐
+	    var musicState = 0, sound = $("#musicAudio")[0], soundWrap = $('.music');_Sound=sound;_SoundWrap=soundWrap;
+	    function initMusic() {
+	        0 === musicState && (sound.play(), musicState = 1)
+	    }
+	    function toggleMusic() {
+	        if (sound.paused) {
+	            soundWrap.addClass("rotateImg");
+	            sound.play();
+	            Music_Is_Play=true;
+	            return;
+	        }
+	        soundWrap.removeClass("rotateImg");
+	        setTimeout(function () { sound.pause();Music_Is_Play=false; }, 0)
+	    }
+	    soundWrap[0].addEventListener('click',toggleMusic,false);
+	    var IosHanle=function(){soundWrap.addClass("rotateImg");initMusic();wrapper.removeEventListener('touchstart',IosHanle);}
+
+	    var o=navigator.userAgent,wrapper=$('.wrapper')[0];
+	    var is_ios=(o.indexOf("iPhone")!=-1||o.indexOf("iPad")!=-1||o.indexOf("iPod")!=-1);
+	    if(is_ios){wrapper.addEventListener('touchstart',IosHanle);}
+	    else{soundWrap.addClass("rotateImg");initMusic();} 
+
+		window.onload=function(){
+			document.querySelector(".music").style.display="block";
+			document.querySelector(".music").classList.add("rotateImg");
+			sound.play();
+	        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                //设置宽高
+	                width : 96,
+	                height : 96
+	            });
+	        qrcode.makeCode(window.location.href);
+	    }
+	</script>
+</body>
+</html>

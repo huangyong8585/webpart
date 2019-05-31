@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>微信获取用户信息</title>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/mreset.css" />
+<style>
+.wrapper{width:100%;height:100%;margin:0 auto;overflow:hidden;position:relative;background-color:#e4e4e4;}
+.btnbox{padding-top:30px;}
+.btnbox a{display:block;width:200px;height:40px;margin:0 auto 20px;text-align:center;line-height:40px;border:1px solid #999;font-size:14px;border-radius:8px;}
+</style>
+</head>
+
+<body>
+	<article class="wrapper">
+		<div class="btnbox">
+			<a id="btn1" href="javascript:">微信登录</a>
+		</div>
+	</article>
+<script>
+/**
++----------------------------------------------------------
+* 获取URL参数
++----------------------------------------------------------
+*/
+function getURLPara(str){
+    var ary=[],obj={},wls=window.location.search,temp='',i=0;
+    if(wls!==""){
+      if(wls.indexOf("&")!=-1){ary=wls.substring(1).split("&");}
+      else{ary[0]=wls.substring(1)}
+      i=ary.length;
+      for(;i--;){
+		if(ary[i].indexOf('=')>-1){
+			temp=ary[i].split("=");
+			obj[temp[0]]=decodeURIComponent(temp[1].replace(/\+/g,"%20"));
+			}
+        }
+      }
+    if(str){return obj[str];}
+    else{return obj;}
+}
+
+//ajax
+function ajax(method,url,para,callback){
+	var xmlhttp=new XMLHttpRequest(),_url,_para;
+	xmlhttp.onreadystatechange=function(){
+		if(xmlhttp.readyState==4&&xmlhttp.status==200){
+			callback(xmlhttp.responseText.length>0?eval("(" +  xmlhttp.responseText + ")"):'');
+			}
+		};
+	if(method=="GET"){
+		_url=url+"?"+para;
+		_para=null;
+		}
+	else if(method=="POST"){
+		_url=url;
+		_para=para;
+		}
+	xmlhttp.open(method,_url,true);
+	xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+	xmlhttp.send(_para);
+	}
+
+(function (doc, win) {
+	var docEl = doc.getElementsByTagName("body")[0],
+		resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+		recalc = function () {
+			var clientWidth = (docEl.clientWidth||win.innerWidth);
+			if (!clientWidth) return;
+			docEl.style.fontSize = 16 * (clientWidth / 320) + 'px';
+		},
+		wxCode = function(){
+			var wxcode = getURLPara('code');
+			var wxstate = getURLPara('state');
+			if (!!wxcode && wxcode !== "undefined" && wxcode !== "" &&(typeof wxcode)!=="undefined" && wxcode.length > 0){
+				ajax("GET","../inc/GetUserInfo.php","code="+wxcode,function(data){
+					if(data.code!=1){
+						window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96a7770c738bf0f5&redirect_uri=http%3A%2F%2Fweixin.mir.sdo.com%2FSDGMir%2Fsign%2Findex.html&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';return false;
+					}					
+				});
+			
+			}else {
+				window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96a7770c738bf0f5&redirect_uri=http%3A%2F%2Fweixin.mir.sdo.com%2FSDGMir%2Fsign%2Findex.html&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';
+			}
+		};
+	if (!doc.addEventListener) return;
+	win.addEventListener(resizeEvt, recalc, false);
+	doc.addEventListener('DOMContentLoaded', recalc, false);
+	//doc.addEventListener('DOMContentLoaded', wxCode, false);
+	document.getElementById('btn1').addEventListener('click', wxCode, false);
+})(document, window);	
+</script>
+</body>
+</html>
