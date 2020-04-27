@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>animation-steps详解</title>
+    <style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    body {
+        background: #ccc;
+    }
+    .testbox {
+        padding: 20px 0 100px 0;
+    }
+    p {
+        width: 1000px;
+        line-height: 30px;
+        color: #3c3c3c;
+        margin: 0 auto;
+        text-indent: 2em;
+        padding-bottom: 10px;
+    }
+    p.red {
+        color: #f00;
+    }
+    .step {
+        width: 88.83333333333333px;
+        height: 54px;
+        margin: 10px auto;
+        background: url(data:image/png;base64,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) no-repeat;
+        animation: step 3s steps(6) both infinite;
+        -webkit-animation: step 3s steps(6) both infinite;
+    }
+    @keyframes step {
+        100% {
+            background-position: -533px 0;
+        }
+    }    
+    @-webkit-keyframes step {
+        100% {
+            background-position: -533px 0;
+        }
+    }
+    .step1 {
+        width: 88.83333333333333px;
+        height: 54px;
+        margin: 10px auto;
+        background: url(data:image/png;base64,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) no-repeat;
+        animation: step1 3s steps(1) both infinite;
+        -webkit-animation: step1 3s steps(1) both infinite;
+    }
+    @keyframes step1 {
+        0% {
+            background-position: 0;
+        }
+        16.7% {
+            background-position: -90px 0;
+        }
+        33.4% {
+            background-position: -180px 0;
+        }
+        50.1% {
+            background-position: -270px 0;
+        }
+        67.8% {
+            background-position: -360px 0;
+        }
+        84.5% {
+            background-position: -450px 0;
+        }
+        100% {
+            background-position: -533px 0;
+        }
+    }    
+    @-webkit-keyframes step1 {
+        0% {
+            background-position: 0;
+        }
+        16.7% {
+            background-position: -90px 0;
+        }
+        33.4% {
+            background-position: -180px 0;
+        }
+        50.1% {
+            background-position: -270px 0;
+        }
+        67.8% {
+            background-position: -360px 0;
+        }
+        84.5% {
+            background-position: -450px 0;
+        }
+        100% {
+            background-position: -533px 0;
+        }
+    }
+    .step_start {
+        width: 88.83333333333333px;
+        height: 54px;
+        margin: 10px auto;
+        background: url(data:image/png;base64,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) no-repeat;
+        background-position: -0 0;
+        animation: step_start 3s steps(6, start) both infinite;
+        -webkit-animation: step_start 3s steps(6, start) both infinite;
+    }
+    @keyframes step_start {
+        100% {
+            background-position: -533px 0;
+        }
+    }    
+    @-webkit-keyframes step_start {
+        100% {
+            background-position: -533px 0;
+        }
+    }
+    .step_end {
+        width: 88.83333333333333px;
+        height: 54px;
+        margin: 10px auto;
+        background: url(data:image/png;base64,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) no-repeat;
+        animation: step_end 3s steps(6, end) both infinite;
+        -webkit-animation: step_end 3s steps(6, end) both infinite;
+    }
+    @keyframes step_end {
+        100% {
+            background-position: -533px 0;
+        }
+    }   
+    @-webkit-keyframes step_end {
+        100% {
+            background-position: -533px 0;
+        }
+    }
+    .step-start {
+        width: 1000px;
+        height: 178px;
+        margin: 0 auto;
+        position: relative;
+    }
+    .step-start img {
+        display: block;
+        width: 192px;
+        height: 178px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: stepStart 10s step-start 0s infinite alternate both;
+        -webkit-animation: stepStart 10s step-start 0s infinite alternate both;
+    }
+    @keyframes stepStart {
+        0% {
+            left: 0;
+        }
+        100% {
+            left: 200px;
+        }
+    }
+    @-webkit-keyframes stepStart {
+        0% {
+            left: 0;
+        }
+        100% {
+            left: 200px;
+        }
+    }
+    .step-end {
+        width: 1000px;
+        height: 178px;
+        margin: 0 auto;
+        position: relative;
+    }
+    .step-end img {
+        display: block;
+        width: 192px;
+        height: 178px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: stepEnd 10s step-end 0s infinite alternate both;
+        -webkit-animation: stepEnd 10s step-end 0s infinite alternate both;
+    }
+    @keyframes stepEnd {
+        0% {
+            left: 0;
+        }
+        100% {
+            left: 200px;
+        }
+    }
+    @-webkit-keyframes stepEnd {
+        0% {
+            left: 0;
+        }
+        100% {
+            left: 200px;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <div class="testbox">
+        <p>在我们平时做宽高确定，需要背景图片切换的效果时，我如果用的是一张大的png图片。而且恰好是所有小图都是从左向右排列的，那么我们只需测量出某一个小图距左侧有多少像素(x)，然后我们banckground-position:-x 0;就可以显示出来当前我们想要的这个小图。</p>
+        <p>用steps(n,start/end)做逐帧动画时也是在不断地切换显示的背景图片。如果按照上边的说法，我只要量出距左侧有多少像素，来做操作，会出现一些很莫名其妙的问题。开始说明之前，我们先看看steps是什么样的操作。</p>
+        <p>在应用 CSS3 渐变/动画时，有个控制时间的属性timing-function 。它的取值中除了常用到的 贝塞尔曲线 以外，还有个让人比较困惑的 steps() 函数。steps(n,start/end) 第一个参数 number 为指定的间隔数，即把动画分为 n 步阶段性展示，第二个参数默认为 end，设置最后一步的状态，start 为结束时的状态，end 为开始时的状态。</p>
+        <p>steps 有两个参数</p>
+        <P>1、第一个肯定是分几步执行完</P>
+        <P>2、第二个有两个值</P>
+        <P>2.1start 第一帧是第一步动画结束</P>
+        <P>2.2end 第一帧是第一步动画开始</P>
+        <p>看完上边以为start对应的是初态，end对应的是末态，好吧！按着这个做，然后计算距左侧像素是多少，结果出来，就是不对。</p>
+        <p class="red">为什么呢？</p>
+        <p class="red">W3C的解释</p>
+        <p class="red">steps 函数指定了一个阶跃函数，第一个参数指定了时间函数中的间隔数量（必须是正整数）；第二个参数可选，接受 start 和 end 两个值，指定在每个间隔的起点或是终点发生阶跃变化，默认为 end。</p>
+        <p><img src="images/step.png" alt=""></p>
+        <p><img src="images/step-start.png" alt=""></p>
+        <div class="step_start"></div>
+        <p>当指定跃点为 start 时，动画在每个计时周期的起点发生阶跃（即图中 空心圆 → 实心圆 ）。 由于第一次阶跃发生在第一个计时周期的起点处（0s），所以我们看到的第一步动画（初态）就为 1/3 的状态，因此在视觉上动画的过程为 1/3 → 2/3 → 1 。</p>
+        <p>我们看我们小人的例子，当为start时，我们看到的是视觉动画的1/6的末状态。会跳帧不连续。我们会想了，我们直接把这个动画的第一帧写在background-position: -0 0;不就可以了么，但是这个想多了。因为动画开始执行的时候我们基本是看不到这个的变化的，而且重复开始之后就不再起作用了。（上边的人里有这个属性，我们是看不到第一帧的）</p>
+        <p><img src="images/step-end.png" alt=""></p>
+        <div class="step_end"></div>
+        <p>当指定跃点为 end，动画则在每个计时周期的终点发生阶跃（即图中 空心圆 → 实心圆 ）。 由于第一次阶跃发生在第一个计时周期结束时（1s），所以我们看到的初态为 0% 的状态；而在整个动画周期完成处（3s），虽然发生阶跃跳到了 100% 的状态，但同时动画结束，所以 100% 的状态不可视。因此在视觉上动画的过程为 0 → 1/3 → 2/3 </p>
+        <p>这个时候我们在去想计算的距左侧的像素问题时，为什么百分之百是-450px应该是最后一张小图，但是就是不对，因为100%的状态是不可视的。即使有我们也没有看到。所以我们就把距左侧写到最后一张小图的结束位置，相当于最后一张没有图。当最后一帧100%状态是也没图，也不需要看到，等再重复进行时，又从第一帧开始了，动画就连续起来了。</p>
+        <p>说完start跟end，那我们默认end的时候，只写一个参数n，就跟上边end的其实是一样的。</p>
+        <div class="step"></div>
+        <p>还有一种情况是，我们分将steps中的n设为1。即我阶跃一次。我控制keyframes里边的状态。</p>
+        <div class="step1"></div>
+        <p>测试的有6张图，所以一个动画从0到100分6个阶段。默认是end。所以距左侧要测量到下一个小图的开始位置。</p>
+        <p>steps()动画效果作为一个帧频来执行</p>
+        <p>step-start：动画一开始就跳到 100% 直到周期结束</p>
+        <p> @keyframes stepStart{ 0%{left:0;} 100%{ left:200px; } }</p>
+        <p> @-webkit-keyframes stepStart{ 0%{left:0;} 100%{ left:200px; } }</p>
+        <div class="step-start"><img src="images/section1_1.png" alt=""></div>
+        <p>step-end：保持 0% 的样式直到周期结束</p>
+        <p> @keyframes stepEnd{ 0%{left:0;} 100%{ left:200px; } }</p>
+        <p> @-webkit-keyframes stepEnd{ 0%{left:0;} 100%{ left:200px; } }</p>
+        <div class="step-end"><img src="images/section1_1.png" alt=""></div>
+
+        <p class="red">总结一下用法，直接默认写就行了。图片有多长(x)，不要计算距左侧的位置，直接最后background-position: -x 0;然后直接百分之百到这个位置。分几步就让n等于多少。参考上边的end时的用法或者默认状态下的用法</p>
+        <div class="step"></div>
+        <div class="step_end"></div>
+    </div>
+</body>
+
+</html>

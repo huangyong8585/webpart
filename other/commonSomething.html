@@ -53,9 +53,115 @@ body{background-color:#e4e4e4;height:auto;}
 				<h2>双核浏览器强制急速模式</h2>
 				<p>
 					&lt;meta name="renderer" content="webkit|ie-comp|ie-stand"&gt;　　<span style="color:#999">//浏览器自取值</span><br />
-					&lt;meta name="renderer" content="webkit"&gt;　　<span style="color:#999">//默认用极速核</span><br />
 					&lt;meta name="renderer" content="ie-comp"&gt;　　<span style="color:#999">//默认用ie兼容内核</span><br />
+					&lt;meta name="renderer" content="webkit"&gt;　　<span style="color:#999">//默认用极速核</span><br />
 					&lt;meta name="renderer" content="ie-stand"&gt;　　<span style="color:#999">//默认用ie标准内核</span><br />
+				</p>
+			</div>
+			<div class="box">
+				<h2>JS检测浏览器是否最大化</h2>
+				<p>
+					function isFullScreen () {<br />
+					　　if ( window.outerHeight === screen.availHeight ) {<br />
+					　　　　if ( window.outerWidth === screen.availWidth ) {<br />
+				　　　　　　　　return true;　<span style="color:#999">// 全屏</span><br />
+					　　　　}<br />
+					　　}<br />
+					　　return false;　<span style="color:#999">// 不是全屏</span><br />
+					}
+				</p>
+			</div>
+			<div class="box">
+				<h2>animation动画共如下这几个属性（默认值）</h2>
+				<p>
+					animation-name: none　　　　　　　　　　 <span style="color:#999">动画名称</span><br />
+					animation-duration: 0s　　　　　　　　　 <span style="color:#999">执行时间</span><br />
+					animation-timing-function: ease　　　　　<span style="color:#999">加减速贝塞尔曲线，与transition的缓动动画原理一样。</span><br />
+					animation-delay: 0s　　　　　　　　　　　<span style="color:#999">延迟时间</span><br />
+					animation-iteration-count: 1　　　　　　 <span style="color:#999">执行次数 n（定义动画播放次数的数值）| infinite（规定动画应该无限次播放）</span><br />
+					animation-direction: normal　　　　　　　<span style="color:#999">默认运动方向 normal | reverse（反转、颠倒的意思。表示反向运动） | alternate（交替，轮流的意思。这个值表示正反交替着运动） | alternate-reverse（表示默认反向运动，反正交替运动）</span><br />
+					animation-fill-mode: none　　　　　　　　<span style="color:#999">默认运动后恢复到初始状态 none | forwards（当动画完成后，保持最后一个属性值） | backwards（在 animation-delay 所指定的一段时间内，在动画显示之前，应用开始属性值） | both（向前和向后填充模式都被应用。）</span><br />
+					animation-play-state: running　　　　　　<span style="color:#999">默认处于运动状态 paused（规定动画已暂停）|running（规定动画正在播放）</span><br /><br /><br />
+					<span style="color:#999">多个片段的animation动画</span><br />
+					animation:　tiantiao1 0.5s ease-in  forwards,  <br />
+					　　　　　　tiantiao2 0.2s ease-out 0.5s  forwards,<br />
+					　　　　　　tiantiao3 0.2s ease-in 0.7s  forwards,<br />
+					　　　　　　tiantiao4 0.15s ease-out 0.9s  forwards,<br />
+					　　　　　　tiantiao5 0.15s ease-in 1.05s  forwards,<br />
+					　　　　　　rightMove 0.4s ease-out 1.2s  forwards;<br /><br /><br />
+					<span style="color:#999">animation中的steps()逐帧动画</span><br />
+					animation-timing-function: steps(6, end)　　　　　　　　　 <span style="color:#999">steps(n,start/end)做逐帧动画时也是在不断地切换显示的背景图片</span><br />
+					<span style="color:#999;display:block;padding-left:430px;">steps 有两个参数<br />1、第一个肯定是分几步执行完<br />2、第二个有两个值<br />2.start 第一帧是第一步动画结束<br />2.end 第一帧是第一步动画开始</span><br />
+				</p>
+			</div>
+			<div class="box">
+				<h2>jQuery 返回顶部的动画</h2>
+				<p>
+					$("html,body").animate({"scrollTop":0},500);
+				</p>
+			</div>
+			<div class="box">
+				<h2>css3动画停留在最后一帧</h2>
+				<p>
+					-webkit-animation-fill-mode: forwards; animation-fill-mode: forwards;
+				</p>
+			</div>
+			<div class="box">
+				<h2>css3 属性 js来赋值</h2>
+				<p>
+					transform　＝>　transform<br />
+					msTransform　＝>　-ms-transform　<span style="color:#999">/* IE 9 */</span><br />
+					OTransform　＝>　-o-transform　<span style="color:#999">/* Opera */</span><br />
+					MozTransform　＝>　-moz-transform　<span style="color:#999">/* Firefox */</span><br />
+					webkitTransform　＝>　-webkit-transform　<span style="color:#999">/* Safari 和 Chrome */</span>
+				</p>
+			</div>
+			<div class="box">
+				<h2>-webkit-animation动画有三个事件</h2>
+				<p>
+					开始事件: webkitAnimationStart<br />
+					结束事件:  webkitAnimationEnd<br />
+					重复运动事件: webkitAnimationIteration<br /><br />						
+
+					var o = document.getElementById("div1");<br />
+					<span style="color:#999">// 动画开始时事件</span><br />
+					o.addEventListener("webkitAnimationStart", function() {<br />
+					　　alert("动画开始");<br />
+					})<br />
+					<span style="color:#999">// 动画重复运动时事件</span><br />
+					o.addEventListener("webkitAnimationIteration", function() {<br />
+					　　alert("动画重复运动");<br />
+					})<br />
+					<span style="color:#999">// 动画结束时事件</span><br />
+					o.addEventListener("webkitAnimationEnd", function() {<br />
+					　　alert("动画结束");<br />
+					})<br />
+				</p>
+			</div>
+			<div class="box">
+				<h2>transition结束事件: webkitTransitionEnd</h2>
+				<p>
+					过渡属性transition，在动画结束时，也存在结束的事件: webkitTransitionEnd<br />
+					<span style="color:#999">// 如果多使用一个样式属性，在每个动画执行的过程中webkitTransitionEnd事件的触发次数将增加一次。也就是说webkitTransitionEnd事件将在元素的每个样式属性值发生改变之后触发一次，例如某个元素改变了width，height，opacity三个属性，webkitTransitionEnd将会触发三次</span><br /><br />
+				</p>
+			</div>
+			<div class="box">
+				<h2>CSS3 Flex 弹性盒模型与文本水平垂直居中</h2>
+				<p>
+					display: flex;<br />
+					align-items: center;<br />
+					justify-content: center;
+				</p>
+			</div>
+			<div class="box">
+				<h2>音频视频模拟onend事件</h2>
+				<p>
+					<span style="color:#999">//设置 currentTime 属性：</span><br />
+					<span style="color:#999">//audio|video.currentTime="seconds" </span><br /><br />
+					myVid=document.getElementById("video1");<span style="color:#999">//获取媒体元素</span><br />
+					myVid.pause(); 　　<span style="color:#999">//先暂停</span><br />
+					myVid.currentTime=0; 　　<span style="color:#999">//设置开始的时间位置为0</span><br />
+					myVid.play()
 				</p>
 			</div>
 			<div class="box">
@@ -342,6 +448,63 @@ body{background-color:#e4e4e4;height:auto;}
 				</p>
 			</div>
 			<div class="box">
+				<h2>模拟alert</h2>
+				<p>
+				(function(doc,win){<br />
+				　　var div=doc.createElement('div'),css=doc.createElement('style');<br />
+				　　css.innerHTML='.alertpopbox{display:none;position:fixed;width:100%;height:100%;left:0;top:0;background-color:rgba(0,0,0,0.6);z-index:100;}\<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				.alertpopbox .pop{display:none;position:absolute;width:68%;left:16%;top:50%;background-color:#fff;border-radius:.5em;-webkit-transform:translateY(-50%);transform:translateY(-50%);}\<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				.alertpopbox .pop p{font-size:0.3rem;line-height:1.5;padding:10%;word-break:break-all;border-bottom:1px solid #d4d4d4;}\<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				.alertpopbox .pop a{display:block;text-align:center;width:100%;font-size:0.32rem;box-sizing:border-box;height:1rem;line-height:1rem;color:#323232;}';
+				　　doc.getElementsByTagName("head")[0].appendChild(css);<br />
+				　　div.className="alertpopbox";<br />
+				　　div.innerHTML='&lt;div class="pop" id="alertpop"&gt;&lt;p&gt;&lt;/p&gt;&lt;a href="javascript:;" class="closepop"&gt;确定&lt;/a&gt;&lt;/div&gt;';<br />
+				　　doc.getElementsByTagName("body")[0].appendChild(div);<br />
+				　　win.alertpop=function (t){<br />
+				　　　　var popobj=document.getElementById("alertpop");<br />
+				　　　　popobj.parentNode.style.display="block";<br />
+				　　　　popobj.style.display="block";<br />
+				　　　　popobj.children[0].innerHTML=t;<br />
+				　　　　popobj.children[1].onclick=function(){<br />
+				　　　　　　popobj.parentNode.style.display="none";<br />
+				　　　　　　popobj.style.display="none";<br />
+				　　　　　　popobj.children[0].innerHTML='';<br />
+				　　　　　　}<br />
+				　　　　}<br />
+				})(document,window);<br />
+				</p>
+			</div>
+			<div class="box">
+				<h2>loading遮罩</h2>
+				<p>
+				(function(doc,win){<br />
+				　　var div=doc.createElement('div'),css=doc.createElement('style');<br />
+				　　css.innerHTML='.coverpop{display:none;position:fixed;width:100%;height:100%;overflow:hidden;left:0;top:0;z-index:200;opacity:0;-webkit-transition:opacity 0.33s ease-in-out;transition:opacity 0.33s ease-in-out;}\<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				.coverpop .pop{position:absolute;width:100%;height:100%;left:0;top:0;background:rgba(0,0,0,0.4);z-index:201;}\<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				.coverpop .pop .cover{width:64px;height:64px;position:absolute;left:50%;top:50%;margin:-32px 0 0 -32px;z-index:202;text-align:center;background:rgba(20,20,20,0.8);border-radius:10px;}\<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				.coverpop .pop .cover:before{content:" ";display:block;position:absolute;left:16px;top:16px;width:32px;height:32px;border:4px solid rgba(200,200,200,0.33);box-sizing:border-box;border-radius:32px;}\<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				.coverpop .pop .cover:after{content:" ";display:block;position:absolute;left:16px;top:16px;width:32px;height:32px;border-width:4px;border-style:solid;border-color:rgba(255,255,255,0.66) transparent transparent transparent;box-sizing:border-box;border-radius:32px;-webkit-animation:coverRotate 1s linear infinite;animation:coverRotate 1s linear infinite;}\<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				@-webkit-keyframes coverRotate{0%{-webkit-transform:rotate(0deg);} 100%{-webkit-transform:rotate(360deg);}}\<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				@keyframes coverRotate {0%{transform:rotate(0deg);} 100%{transform:rotate(360deg);}}';<br />
+				　　doc.getElementsByTagName("head")[0].appendChild(css);<br />
+				　　div.className="coverpop";<br />
+				　　div.id="loading";<br />
+				　　div.innerHTML='&lt;div class="pop"&gt;&lt;div class="cover"&gt;&lt;/div&gt;&lt;/div&gt;';<br />
+				　　doc.getElementsByTagName("body")[0].appendChild(div);<br />
+				　　win.showCoverPOP=function(t){<br />
+				　　　　var box=document.getElementById('loading');<br />
+				　　　　if(!box){showCoverPOP.CoverTime=setTimeout(function(){showCoverPOP(t);},1);}<br />
+				　　　　else{<br />
+				　　　　　　if(showCoverPOP.CoverTime){clearTimeout(showCoverPOP.CoverTime);}<br />
+				　　　　　　if(t){box.style.display="block";setTimeout(function(){box.style.opacity=1;},100);}<br />
+				　　　　　　else{box.style.opacity=0;setTimeout(function(){box.style.display="none";},330);}
+				　　　　　　//else{box.style.display="none";box.style.opacity=0;}
+				　　　　}<br />
+				　　}<br />
+				})(document,window);
+				</p>
+			</div>
+			<div class="box">
 				<h2>常用的手机页面viewport声明方式</h2>
 				<p>		
 						&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;<br />
@@ -444,6 +607,10 @@ body{background-color:#e4e4e4;height:auto;}
 						<span style="color:#999">//下方为这个PNG占位图片的base64编码 178B</span><br />
 						data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEIAAAA1AQMAAADPva/SAAAABlBMVEXd3d3x8fHdh2cDAAAAZ0lEQVQoz73OsQ2AMAxE0aAUKT0Co2Q0VmOUjEBJEfFBwnaEgtKBqydZPl/4cMSVV9NSTGxD7cNtaXm95NEiusTvc0unUwStm7BHghWaoWoIHPoaO8Y0uZJLbuUrRFVCVtWACv7T25wFv5rFJ7zZzQAAAABJRU5ErkJggg==<br /><br />
 						
+						<img src="data:image/gif;base64,R0lGODlhFAAUAIABAHR0dP///yH5BAEAAAEALAAAAAAUABQAAAIejI+py+0PG4hr0mTvyTpw/V0hND6lc0qdt6brCycFADs=" style="width:auto;" />　　
+						<span style="color:#999">//下方为这个gif箭头图片的base64编码 71B</span><br />
+						data:image/gif;base64,R0lGODlhFAAUAIABAHR0dP///yH5BAEAAAEALAAAAAAUABQAAAIejI+py+0PG4hr0mTvyTpw/V0hND6lc0qdt6brCycFADs=<br /><br />
+
 						<img src="data:image/gif;base64,R0lGODlhFAAUAIABAHR0dAAAACH5BAEAAAEALAAAAAAUABQAAAIdjI+py+0Po5x0gXdty4wj3yXgdozOZWLVyrbuGxUAOw==" style="width:auto;" />　　
 						<span style="color:#999">//下方为这个gif箭头图片的base64编码 70B</span><br />
 						data:image/gif;base64,R0lGODlhFAAUAIABAHR0dAAAACH5BAEAAAEALAAAAAAUABQAAAIdjI+py+0Po5x0gXdty4wj3yXgdozOZWLVyrbuGxUAOw==<br /><br />
