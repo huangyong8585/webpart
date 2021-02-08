@@ -39,13 +39,14 @@ a.uploadBut{display:none;line-height:32px;padding:0 12px;margin-left:10px;backgr
 #CustomMenu .defineBox dl dt{margin-bottom:10px;padding:5px 0 5px 10px;position:relative;}
 #CustomMenu .defineBox dl span.adddelete{display:inline-block;width:90px;margin-left:16px;height:30px;line-height:30px; vertical-align:middle;}
 #CustomMenu .defineBox dl span.adddelete i,#CustomMenu .defineBox dl span.adddelete b{float:left;width:30px;height:30px;margin-right:10px;cursor:pointer;}
-#CustomMenu .defineBox dl span.adddelete i{background:url(data:image/gif;base64,R0lGODlhDAAMAIAAACi3ef///yH5BAAHAP8ALAAAAAAMAAwAAAIXhBEZx6h91IIuMYmz3pzfR0lUNUHiUQAAOw==) 50% 50% no-repeat #28B779;}
+#CustomMenu .defineBox dl span.adddelete i{background:url(data:image/gif;base64,R0lGODlhDAAMAIAAACi3ef///yH5BAAHAP8ALAAAAAAMAAwAAAIXhBEZx6h91IIuMYmz3pzfR0lUNUHiUQAAOw==) 50% 50%/7px 7px no-repeat #28B779;}
+#CustomMenu .defineBox dl span.adddelete i.miniprogram{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAY1BMVEW9vr/Ew8T///++v8DBwMLx8fHAwcLv7/Dt7e3s6+vf397c3NzNzc+1trfExca3uLm4ubqxs7T5+fni4ePZ2drHx8i7u72rrK719fbS09SztLWfoaPp6emwsbLk5eXNzs+mp6i5IL6HAAAAqklEQVQY02WPSRKDMBADZcYreAebPcn/Xxk7OTJHVY26hWHQZuIMYHwyehhaINT4D0YlWqCFlYwI6JEVGkbJNQLVRZdWqQymkQUQjiVfuP04QXICUVqyvUStXMJ7QkxJLOdn211hAMh5VeZ3nHN77helmMPLss26H6scez5PvSTnQN630gox71vpLOKyYf0Nk+1BhMAatoslF0Iv62JdnXcWiJhs6o9xj/lfzlcI7rcdxRkAAAAASUVORK5CYII=);}
 #CustomMenu .defineBox dl span.adddelete b{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMBAMAAACkW0HUAAAAIVBMVEUAAADExMTExMTExMTExMTExMTExMTExMTExMTExMTExMQUrEz3AAAACnRSTlMA3MsPHNMewcC4xL12jwAAAE1JREFUCNdjCExgYGATZagSY2BIXM5gtNCBRUqZgVlLxHGRAQOQC+QwALkgDgOL1EIHIOW4SEsExFE2AnKBypiB3ChloOKlDDMMgIo7AVWtDoxToMKUAAAAAElFTkSuQmCC) 50% 50% no-repeat #ff2828;}
 #CustomMenu .defineBox dl dd{margin-bottom:10px;padding:5px 0 5px 42px;position:relative;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAPBAMAAAAFYbKSAAAAD1BMVEUAAADf39/d3d3a2trj4+M/Il7XAAAAAXRSTlMAQObYZgAAACFJREFUCNdjcGBAAQqoXAG8XAVSuEaCSEAITZaaXAMUHgBPGALhfwFb0gAAAABJRU5ErkJggg==) 10px 12px no-repeat;}
 #CustomMenu .defineBox .actionBtn{float:right;display:inline-block;background-color:#28B779;padding:0 20px;height:27px;line-height:27px;color:#FFFFFF;font-size:13px;font-weight:bold;}
 #CustomMenu .defineBox .add{background:#28B779 url(data:image/gif;base64,R0lGODlhDAAMAIAAACi3ef///yH5BAAHAP8ALAAAAAAMAAwAAAIXhBEZx6h91IIuMYmz3pzfR0lUNUHiUQAAOw==) no-repeat 15px 50%; padding-left:35px;}
 #CustomMenu .defineBox dl p.tips{position:absolute;left:0;top:0;height:40px;line-height:40px;padding:0 5px;color:#00F;font-weight:bold;font-size:16px;}
-
+.ml6{margin-left:6px;}
 .menujson{}
 
 </style>
@@ -90,9 +91,14 @@ function IsURL(str){
 }
 
 function selectchange(obj){
-	var lastInp=$(obj).next();
-	if(obj.value=="click"){lastInp.attr('name',"Key");}
-	else if(obj.value=="view"){lastInp.attr('name',"Url");}
+	var lastInp=$(obj).next(),objpn=obj.parentNode.nodeName.toLowerCase();
+	if(obj.value=="click"){lastInp.attr('name',"Key").attr("placeholder","关键词").attr("size",objpn=="dt"?40:30).siblings('[name=Appid]').hide().siblings('[name=PagePath]').hide();}
+	else if(obj.value=="view"){lastInp.attr('name',"Url").attr("placeholder","链接URL").attr("size",objpn=="dt"?40:30).siblings('[name=Appid]').hide().siblings('[name=PagePath]').hide();}
+	else if(obj.value=="miniprogram"){
+		lastInp.attr('name',"Url").attr("placeholder","链接URL").attr("size",8)
+		if(lastInp.parent().children().size()>4){lastInp.siblings('[name=Appid]').show().siblings('[name=PagePath]').show();}
+		else{lastInp.after('<input type="text" size="8" name="Appid" placeholder="Appid" class="inpMain ml6"><input type="text" size="8" name="PagePath" placeholder="PagePath" class="inpMain ml6">');}
+	}
 }
 
 var Is_Setted=false;
@@ -103,7 +109,7 @@ $(function(){
 	$("#addFirstMenu").click(function(){
 		var dl=$(this).parent().children("dl");
 		var inputSub=$("#look");
-		inputSub.before('<dl><dt OrderID="'+(dl.size()+1)+'"><input type="text" maxlength="4" size="20" name="MenuName" class="inpMain">&nbsp;&nbsp;<select onchange="selectchange(this)" name="Type"><option value="view">链接</option><option value="click">关键词</option></select>&nbsp;&nbsp;<input type="text" size="40" name="Url" class="inpMain"><span class="adddelete"><i></i><b></b></span></dt></dl>');
+		inputSub.before('<dl><dt OrderID="'+(dl.size()+1)+'"><input type="text" maxlength="4" size="20" name="MenuName" class="inpMain">&nbsp;&nbsp;<select onchange="selectchange(this)" name="Type"><option value="view">链接</option><option value="click">关键词</option><option value="miniprogram">小程序</option></select>&nbsp;&nbsp;<input type="text" size="40" name="Url" placeholder="链接URL" class="inpMain"><span class="adddelete"><i></i><b></b></span></dt></dl>');
 		if(dl.size()==2){$(this).hide();}
 		});
 		
@@ -113,9 +119,11 @@ $(function(){
 		//console.log(e.target.nodeName.toLowerCase(),that.parentNode.nodeName.toLowerCase());
 		if(e.target.nodeName.toLowerCase()=='i'){
 			dt.children("select").hide();
-			dt.children("input").eq(1).hide();
-			dt.children("input").eq(0).attr("size",75);
-			if(dl.children("dd").size()<5){dl.append('<dd OrderID="'+(dl.children("dd").size()+1)+'"><input type="text" maxlength="15" size="15" name="MenuName" class="inpMain">&nbsp;&nbsp;<select onchange="selectchange(this)" name="Type"><option value="view">链接</option><option value="click">关键词</option></select>&nbsp;&nbsp;<input type="text" size="30" name="Url" class="inpMain"><span class="adddelete"><b></b></span></dd>');}
+			/*dt.children("input").eq(1).hide();
+			dt.children("input").eq(2).hide();
+			dt.children("input").eq(3).hide();*/
+			dt.children("input").eq(0).attr("size",75).siblings('input').hide();
+			if(dl.children("dd").size()<5){dl.append('<dd OrderID="'+(dl.children("dd").size()+1)+'"><input type="text" maxlength="15" size="15" name="MenuName" class="inpMain">&nbsp;&nbsp;<select onchange="selectchange(this)" name="Type"><option value="view">链接</option><option value="click">关键词</option><option value="miniprogram">小程序</option></select>&nbsp;&nbsp;<input type="text" size="30" name="Url" placeholder="链接URL" class="inpMain"><span class="adddelete"><b></b></span></dd>');}
 			else{alert('最多只能添加五个二级菜单！');}
 			}
 		else if(e.target.nodeName.toLowerCase()=='b'){
@@ -189,8 +197,13 @@ $(function(){
 					button_obj={}
 					button_obj.type=this.children[0].children[1].value;
 					button_obj.name=this.children[0].children[0].value;
-					if(button_obj.type==='click'){button_obj.key=this.children[0].children[2].value;}
-					else if(button_obj.type==='view'){button_obj.url=this.children[0].children[2].value;}
+					if(button_obj.type==='click'){button_obj.key=encodeURIComponent(this.children[0].children[2].value);}
+					else if(button_obj.type==='view'){button_obj.url=encodeURIComponent(this.children[0].children[2].value);}
+					else if(button_obj.type==='miniprogram'){
+						button_obj.url=encodeURIComponent(this.children[0].children[2].value);
+						button_obj.appid=encodeURIComponent(this.children[0].children[3].value);
+						button_obj.pagepath=encodeURIComponent(this.children[0].children[4].value);
+					}
 				}
 				else{
 					button_obj={"name":'',"sub_button":[]};
@@ -199,8 +212,13 @@ $(function(){
 						sub_button_obj={};
 						sub_button_obj.type=this.children[1].value;
 						sub_button_obj.name=this.children[0].value;
-						if(sub_button_obj.type==='click'){sub_button_obj.key=this.children[2].value;}
-						else if(sub_button_obj.type==='view'){sub_button_obj.url=this.children[2].value;}
+						if(sub_button_obj.type==='click'){sub_button_obj.key=encodeURIComponent(this.children[2].value);}
+						else if(sub_button_obj.type==='view'){sub_button_obj.url=encodeURIComponent(this.children[2].value);}
+						else if(sub_button_obj.type==='miniprogram'){
+							sub_button_obj.url=encodeURIComponent(this.children[2].value);
+							sub_button_obj.appid=encodeURIComponent(this.children[3].value);
+							sub_button_obj.pagepath=encodeURIComponent(this.children[4].value);
+						}
 						button_obj.sub_button.push(sub_button_obj);
 					})
 
@@ -218,6 +236,9 @@ $(function(){
 		if(!ButtonsJSON){return false;}
 		if(confirm('确定要同步到微信菜单？')){
 			$('#menujson').text(ButtonsJSON);
+			$.post('http://www.qq.com/index.php',"rec=create&btn="+ButtonsJSON,function(data){SubmittIng=false;
+				if(data.code==0&&data.success){Is_Setted=true;alert('同步成功');location.reload();}
+			},'json');
 			/*if(Is_Setted){
 				//先删除再提交
 				$.post('../inc/WeixinMenu.php',"rec=delete",function(data){
@@ -247,8 +268,9 @@ function deleteMenuInfo(obj){
 		if(O.nodeName.toLowerCase()=="dl"&&$("#defineBox").children('dl').size()<3){$("#addFirstMenu").show();}
 		if(O.nodeName.toLowerCase()=="dd"&&OP.children.length==1){
 			OP.children[0].children[0].setAttribute("size",20);
-			$(OP.children[0].children[1]).show();
-			$(OP.children[0].children[2]).show();
+			if(OP.children[0].children[1].value==='miniprogram'){$(OP.children[0].children[1]).show().siblings('input').show();}
+			else{$(OP.children[0].children[1]).show();$(OP.children[0].children[2]).show().attr('size',40);}
+			/*$(OP.children[0].children[2]).show();*/
 			}
 		return false;
 }
@@ -262,8 +284,13 @@ function initmenudata(data){
 		dt.children[0].value=btnary[i].name;
 		if(!btnary[i].sub_button||btnary[i].sub_button.length==0){
 			dt.children[1].value=btnary[i].type;
-			dt.children[2].setAttribute('name',btnary[i].type==='click'?'Key':(btnary[i].type==='view'?'Url':''));
-			dt.children[2].value=btnary[i][(btnary[i].type==='click'?'key':(btnary[i].type==='view'?'url':''))];
+			dt.children[2].setAttribute('name',(function(n){if(n=='click'){return 'Key'}if(n=='view'){return 'Url'}if(n=='miniprogram'){return 'Url'}})(btnary[i].type)/*btnary[i].type==='click'?'Key':(btnary[i].type==='view'?'Url':'')*/);
+			dt.children[2].value=btnary[i][((function(n){if(n=='click'){return 'key'}if(n=='view'){return 'url'}if(n=='miniprogram'){return 'url'}})(btnary[i].type)/*btnary[i].type==='click'?'key':(btnary[i].type==='view'?'url':'')*/)];
+			if(btnary[i].type=='miniprogram'){
+				$(dt.children[2]).attr("size",8).after('<input type="text" size="8" name="Appid" placeholder="Appid" class="inpMain ml6"><input type="text" size="8" name="PagePath" placeholder="PagePath" class="inpMain ml6">');
+				dt.children[3].value=btnary[i].appid;
+				dt.children[4].value=btnary[i].pagepath;
+			}
 		}
 		else{
 			k=0;
@@ -273,8 +300,13 @@ function initmenudata(data){
 				dd=$(dt).parent().children('dd').last()[0];
 				dd.children[0].value=sub_btn[k].name;
 				dd.children[1].value=sub_btn[k].type;
-				dd.children[2].setAttribute('name',sub_btn[k].type==='click'?'Key':(sub_btn[k].type==='view'?'Url':''));
-				dd.children[2].value=sub_btn[k][(sub_btn[k].type==='click'?'key':(sub_btn[k].type==='view'?'url':''))];
+				dd.children[2].setAttribute('name',(function(n){if(n=='click'){return 'Key'}if(n=='view'){return 'Url'}if(n=='miniprogram'){return 'Url'}})(sub_btn[k].type)/*sub_btn[k].type==='click'?'Key':(sub_btn[k].type==='view'?'Url':'')*/);
+				dd.children[2].value=sub_btn[k][((function(n){if(n=='click'){return 'key'}if(n=='view'){return 'url'}if(n=='miniprogram'){return 'url'}})(sub_btn[k].type)/*sub_btn[k].type==='click'?'key':(sub_btn[k].type==='view'?'url':'')*/)];
+				if(sub_btn[k].type=='miniprogram'){
+					$(dd.children[2]).attr("size",8).after('<input type="text" size="8" name="Appid" placeholder="Appid" class="inpMain ml6"><input type="text" size="8" name="PagePath" placeholder="PagePath" class="inpMain ml6">');
+					dd.children[3].value=sub_btn[k].appid;
+					dd.children[4].value=sub_btn[k].pagepath;
+				}
 			}
 		}
 	}
@@ -366,7 +398,8 @@ $(window).load(function(){
         }]
     }]
 });*/
-	initmenudata({"button":[{"name":"阳光政务","sub_button":[{"type":"view","name":"税收法规","url":"http:\/\/www.jx-n-tax.gov.cn\/col\/col23381\/index.html","sub_button":[]},{"type":"view","name":"机关政讯","url":"http:\/\/www.jx-n-tax.gov.cn\/col\/col23314\/index.html","sub_button":[]}]},{"name":"办税查询","sub_button":[{"type":"view","name":"办税指南","url":"http:\/\/wx.syxfedj.com\/index.php?g=portal&m=list&a=index&id=14","sub_button":[]},{"type":"view","name":"办税地图","url":"http:\/\/wx.syxfedj.com\/index.php?g=portal&m=list&a=index&id=11","sub_button":[]},{"type":"view","name":"税额计算","url":"http:\/\/wx.syxfedj.com\/index.php?g=portal&m=list&a=index&id=41","sub_button":[]}]},{"name":"便民服务","sub_button":[{"type":"view","name":"实时取号","url":"http:\/\/www.runright.com.cn\/tax\/takenum.html","sub_button":[]},{"type":"view","name":"社保缴纳","url":"http:\/\/www.etax-jx.gov.cn\/etaxbf\/weixin\/faceAuth","sub_button":[]}]}]});
+	/*initmenudata({"button":[{"name":"阳光政务","sub_button":[{"type":"view","name":"税收法规","url":"http:\/\/www.jx-n-tax.gov.cn\/col\/col23381\/index.html","sub_button":[]},{"type":"view","name":"机关政讯","url":"http:\/\/www.jx-n-tax.gov.cn\/col\/col23314\/index.html","sub_button":[]}]},{"name":"办税查询","sub_button":[{"type":"view","name":"办税指南","url":"http:\/\/wx.syxfedj.com\/index.php?g=portal&m=list&a=index&id=14","sub_button":[]},{"type":"view","name":"办税地图","url":"http:\/\/wx.syxfedj.com\/index.php?g=portal&m=list&a=index&id=11","sub_button":[]},{"type":"view","name":"税额计算","url":"http:\/\/wx.syxfedj.com\/index.php?g=portal&m=list&a=index&id=41","sub_button":[]}]},{"name":"便民服务","sub_button":[{"type":"view","name":"实时取号","url":"http:\/\/www.runright.com.cn\/tax\/takenum.html","sub_button":[]},{"type":"view","name":"社保缴纳","url":"http:\/\/www.etax-jx.gov.cn\/etaxbf\/weixin\/faceAuth","sub_button":[]}]}]});*/
+	//initmenudata({"button":[/*{"name":"阳光政务","type":"miniprogram","url":"http://mp.weixin.qq.com","appid":"wx059cd327295ab444","pagepath":"pages/lunar/index","sub_button":[]},*/{"name":"办税查询","sub_button":[{"type":"view","name":"办税指南","url":"http:\/\/wx.syxfedj.com\/index.php?g=portal&m=list&a=index&id=14","sub_button":[]},{"type":"view","name":"办税地图","url":"http:\/\/wx.syxfedj.com\/index.php?g=portal&m=list&a=index&id=11","sub_button":[]},{"type":"view","name":"税额计算","url":"http:\/\/wx.syxfedj.com\/index.php?g=portal&m=list&a=index&id=41","sub_button":[]}]},{"name":"便民服务","sub_button":[{"type":"view","name":"实时取号","url":"http:\/\/www.runright.com.cn\/tax\/takenum.html","sub_button":[]},{"type":"view","name":"社保缴纳","url":"http:\/\/www.etax-jx.gov.cn\/etaxbf\/weixin\/faceAuth","sub_button":[]},{"type":"miniprogram","name":"社保缴纳","url":"http://mp.weixin.qq.com","appid":"wx059cd327295ab444","pagepath":"pages/lunar/index","sub_button":[]}]}]});
 	Is_Setted=true;
 })
 </script>

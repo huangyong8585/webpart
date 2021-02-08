@@ -198,13 +198,13 @@
         }
     
     //压缩图片
-    function compressPicture(picObj){
+    function compressPicture(picObj,wpx){
         var canvas=document.createElement("canvas"),
             ctx=canvas.getContext("2d"),
             bili=picObj.width/picObj.height;
-            if(bili>1){canvas.width=1000;canvas.height=1000/bili;}
-            else if(bili<1){canvas.height=1000;canvas.width=1000*bili;}
-            else{canvas.height=canvas.width=1000;}
+            if(bili>1){canvas.width=wpx;canvas.height=wpx/bili;}
+            else if(bili<1){canvas.height=wpx;canvas.width=wpx*bili;}
+            else{canvas.height=canvas.width=wpx;}
             ctx.drawImage(picObj,0,0, picObj.width,picObj.height,0,0,canvas.width,canvas.height);
             //window.open(canvas.toDataURL('image/jpeg'));
             picObj.src=canvas.toDataURL('image/jpeg');
@@ -226,7 +226,7 @@
                     img.onload=function (){
                         //imgH=img.height;
                         //imgW=img.width;
-                        if((img.width>1000||img.height>1000)&&resultFile.size>700*1024){compressPicture(img);}
+                        if((img.width>1000||img.height>1000)&&resultFile.size>700*1024){compressPicture(img,640);}
                         else{
                         kgb=img.width/img.height;
                         if(kgb>1){pic.style.cssText="height:200px;top:0px;width:"+200*kgb+"px;left:"+(0-(200*kgb-200)/2)+"px;";}

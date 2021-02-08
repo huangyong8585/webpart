@@ -1,0 +1,313 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>无标题文档</title>
+<style>
+@charset "utf-8";
+blockquote,body,caption,dd,div,dl,dt,em,fieldset,form,h1,h2,h3,h4,h5,h6,html,iframe,img,label,legend,li,object,ol,p,pre,span,strong,table,tbody,td,tfoot,th,thead,tr,ul,article,section,aside,figure{border:0 none;margin:0;outline:0 none;padding:0;-webkit-text-size-adjust:none;}
+body,html{font-family:'Microsoft YaHei',Helvetica,Tahoma,StSun,SimSun,sans-serif;/*font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;*/-webkit-text-size-adjust:none;height:100%;background:#f3efdb;}
+ol,ul,li{list-style:none}
+table{border-collapse:collapse;border-spacing:0}
+:focus{outline:0}
+button::-moz-focus-inner{padding:0;border:0}
+a:link,a:visited{text-decoration:none;color:#333;}
+a:hover{text-decoration:none;}
+a{-webkit-tap-highlight-color:rgba(255,0,0,0);}
+img{border:0;}
+.clearfix:after{display:block;clear:both;height:0;visibility:hidden;content:"."}
+.clearfix{display:block;*display:inline-block;zoom:1;}
+* html .clearfix{height:1%}
+.gold{color:#f08f00;}
+.hide{display:none}
+.fl{ float:left;}
+.fr{ float:right;}
+.tar{text-align:right;}
+.tac{text-align:center;}
+.w100{width:100%;}
+.imgw100{width:100%;display:block;}
+
+/*弹出层*/
+.popbox{display:none;position:absolute;width:100%;height:100%;overflow:hidden;left:0;top:0;z-index:30;background-color:rgba(0,0,0,0.9);}
+.popbox.animateLocal{background-color:rgba(0,0,0,0.9);
+-webkit-transform:translateY(-150%);transform:translateY(-150%);-webkit-transition:-webkit-transform .4s ease-in-out;transition:transform .4s ease-in-out;}
+.popbox.animateZoom{background-color:rgba(0,0,0,0.5);
+-webkit-transform:scale(0.001,0.001);transform:scale(0.001,0.001);-webkit-transform-origin:center center;transform-origin:center center;
+-webkit-transition:-webkit-transform .2s ease-in-out;transition:transform .2s ease-in-out;}
+.popbox .pop{position:absolute;width:100%;height:100%;left:0;top:0;z-index:31;overflow:hidden;}
+.popbox .pop img{width:100%;}
+.popbox .closepop{width:72px;height:72px;border-radius:72px;position:absolute;right:-15px;bottom:-15px;z-index:40;background:url(data:image/gif;base64,R0lGODlhFAAUAIAAAP///3R0dCH5BAEAAAAALAAAAAAUABQAAAIjhI+py+0PU3hzVesu0ozzdn0ZIFKRRJ5GeHqQWK5gZ6r2rRYAOw==) 45% 45% no-repeat rgba(255,255,255,0.75);background-size:30px 30px;}
+.popbox #eidtPicture:after{content:" ";display:block;width:200px;height:200px;border:1400px solid rgba(0,0,0,0.75);position:absolute;left:50%;top:50%;margin:-1500px 0 0 -1500px;z-index:33;}
+.popbox #eidtPicture #readArea{position:absolute;z-index:32;width:200px;height:200px;left:50%;top:50%;margin:-100px 0 0 -100px;}
+.popbox #eidtPicture #readArea .imgbox{position:absolute;z-index:32;}
+.popbox #eidtPicture #readArea img{display:block;width:100%;height:100%;/*position:absolute;z-index:32; transition:transform .2s linear;-webkit-transition:-webkit-transform .2s linear;*/}
+.popbox #eidtPicture #readArea i{display:block;width:20px;height:20px;position:absolute;left:0;top:0;z-index:32;margin-top:-10px;margin-left:-10px;}
+.popbox #eidtPicture #readArea i:after{content:" ";display:block;position:absolute;width:20px;height:2px;left:0;top:9px;background-color:#f00;}
+.popbox #eidtPicture #readArea i:before{content:" ";display:block;position:absolute;height:20px;width:2px;left:9px;top:0;background-color:#f00;}
+.popbox #eidtPicture #touchArea{position:absolute;z-index:35;width:198px;height:198px;left:50%;top:50%;margin:-100px 0 0 -100px;border:1px solid #00b6cc;}
+.popbox #eidtPicture #operaArea{position:absolute;z-index:34;width:202px;height:70px;left:50%;top:50%;margin:111px 0 0 -101px;}
+#operaArea .operaButs{height:30px;margin-bottom:10px;}
+#operaArea .operaButs a{float:left;width:64px;height:30px;background:#88de09;margin-right:5px;border-radius:2px;color:#fff;font-size:24px;font-family:Helvetica,STHeiTi,sans-serif;text-align:center;line-height:30px;}
+#operaArea .operaButs a.rotatebtn{position:relative;}
+#operaArea .operaButs a.rotatebtn:before{content:" ";display:block;width:0;height:0;border:4px solid transparent;border-left-color:#fff;position:absolute;left:38px;top:7px;transform:rotate(30deg);}
+#operaArea .operaButs a.rotatebtn:after{content:" ";display:block;width:18px;height:18px;border:1px solid #fff;border-right-color:transparent;border-radius:18px;position:absolute;left:50%;top:50%;margin:-10px 0 0 -10px;}
+#operaArea .operaButs a.zoomoutbtn{margin-right:0;}
+#operaArea .enterButs a{display:block;height:30px;font-size:16px;border-radius:4px;background:#88de09;color:#fff;text-align:center;line-height:30px;}
+</style>
+</head>
+
+<body>
+<input type="file" id="uploadPicture" style="position:relative;right:0;top:250px;" />
+<div class="popbox">
+    <div class="pop" id="eidtPicture">
+        <div id="readArea">
+        	<div class="imgbox"><img src="###" /><i></i></div>
+        </div>
+        <div id="touchArea"></div>
+        <div id="operaArea">
+            <p class="operaButs clearfix"><a href="javascript:;" class="zoominbtn">+</a><a href="javascript:;" class="rotatebtn"></a><a href="javascript:;" class="zoomoutbtn">-</a></p>
+            <p class="enterButs"><a href="javascript:readthePicture();">确&nbsp;定</a></p>
+        </div>
+    </div>
+    <div class="closepop" onclick="showEditPicPOP();"></div>
+    <canvas id="drawCanvas" height="200" width="200" style="position: absolute; z-index: 100; left: 0px; top: 0px;"></canvas>
+</div>
+
+<script>
+	function CropPicture() {
+		"use strict";
+		var CropPicture = {
+				image:null,		//图片对象
+				originObj:null,	//中心点对象
+				width:0,		//图片实际的宽
+				height:0,		//图片实际的高
+				cutedwidth:0, 	//压缩后的宽
+				cutedheight:0,	//压缩后的高
+				showwidth:0,	//显示图片的宽
+				showheight:0,	//显示图片的高
+				ratio:1,			//长宽比
+				zoomRatio:1,		//
+				left:0,				//
+				top:0,				//
+				scale:1,			//
+				rotate:0,			//旋转的角度
+				originx:0,			//
+				originy:0,			//缩放
+				cropwhpx:0,			//裁剪的宽度和高度
+				filesize:0,			//文件的大小
+				eidtImgBox:null,	//
+				touchArea:null,		//拖动的区域
+				operImage:null,		//
+				drawCanvas:null,	//
+				drawLeft:0,			//
+				drawTop:0,			//
+				touchLocal:{"x":0,"y":0},//
+				button:{},
+				touchMoveImage:function(){
+					var that = this,
+						operImage =that.operImage,originObj=that.originObj,local=that.touchLocal,touchBox=that.touchArea,
+						handleFun={
+							"touchmoveFn":function(e){
+								var _x = (e.touches[0].pageX-local.x),
+									_y = (e.touches[0].pageY-local.y);
+								//that.left = parseFloat(operImage.style.left)+_x;
+								//that.top = parseFloat(operImage.style.top)+_y;
+								//that.originx = that.originx-_x;
+								//that.originy = that.originy-_y;
+								if(that.rotate===0){
+									that.left = parseFloat(operImage.style.left)+_x;
+									that.top = parseFloat(operImage.style.top)+_y;
+									that.originx = that.originx-_x;
+									that.originy = that.originy-_y;
+								}else if(that.rotate===90){
+									that.left = parseFloat(operImage.style.left)+_y;
+									that.top = parseFloat(operImage.style.top)-_x;
+									that.originx = that.originx-_y;
+									that.originy = that.originy+_x;
+								}else if(that.rotate===180){
+									that.left = parseFloat(operImage.style.left)-_x;
+									that.top = parseFloat(operImage.style.top)-_y;
+									that.originx = that.originx+_x;
+									that.originy = that.originy+_y;
+								}else if(that.rotate===270){
+									that.left = parseFloat(operImage.style.left)-_y;
+									that.top = parseFloat(operImage.style.top)+_x;
+									that.originx = that.originx+_y;
+									that.originy = that.originy-_x;
+								}
+								local.x = e.touches[0].pageX;
+								local.y = e.touches[0].pageY;
+								operImage.style.left = that.left+"px";
+								operImage.style.top = that.top+"px";
+								operImage.style.transformOrigin = (that.originx)+"px "+(that.originy)+"px 0px";
+								originObj.style.left = that.originx+"px";
+								originObj.style.top = that.originy+"px";
+								that.readthePicture();
+								e.stopPropagation();
+								e.preventDefault();
+							},
+							"touchendFn":function(e){
+								//document.removeEventListener("touchstart",handleFun.touchstartFn,false);
+								touchBox.parentNode.parentNode.removeEventListener("touchmove",handleFun.touchmoveFn,false);
+								touchBox.parentNode.parentNode.removeEventListener("touchend",handleFun.touchendFn,false);
+							},
+							"touchstartFn":function(e){
+								local.x=e.touches[0].pageX;
+								local.y=e.touches[0].pageY;
+								touchBox.parentNode.parentNode.addEventListener("touchmove",handleFun.touchmoveFn,false);
+								touchBox.parentNode.parentNode.addEventListener("touchend",handleFun.touchendFn,false);
+								e.stopPropagation();
+								e.preventDefault();
+							}
+						};
+					touchBox.addEventListener("touchstart",handleFun.touchstartFn,false);
+				},
+				InitReadImage:function(img){
+					var pic=this.operImage,ratio=this.ratio,sw,sh,originObj=this.originObj;
+			        if(ratio>1){
+			        	this.showwidth = 200*ratio;this.showheight = 200;this.left = (0-(200*ratio-200)/2);this.top = 0;
+			        }else if(ratio<1){
+			        	this.showwidth = 200;this.showheight = 200/ratio;this.left = 0;this.top = (0-(200/ratio-200)/2);
+			        }else{
+			        	this.showwidth = 200;this.showheight = 200;this.left = 0;this.top = 0;
+			        }		
+			        console.log(img === this.image);
+			        //this.image = img;
+			        this.cutedwidth = img.width;
+			        this.cutedheight = img.height;
+			        this.originx = (this.showwidth/2);
+					this.originy = (this.showheight/2);
+			        pic.style.cssText = "width:"+this.showwidth+"px;left:"+this.left+"px;height:"+this.showheight+"px;top:"+this.top+"px";
+			        pic.style.transform = 'rotate('+this.rotate+'deg) scale('+this.scale+')';
+					pic.style.transformOrigin = (this.originx)+"px "+(this.originy)+"px 0px";
+			        pic.children[0].src = img.src;
+			        originObj.style.cssText = "left:"+this.originx+"px;top:"+this.originy+"px;"
+			        this.readthePicture();
+				},
+				transformImage:function(t){
+					var that = this,operImage = that.operImage,scale = that.scale,rotate = that.rotate;
+					if(t==="+"){
+						that.scale = (that.scale*10000+500)/10000;
+						if(that.scale>=3){that.scale=3;}
+						operImage.style.transform='rotate('+rotate+'deg) scale('+(that.scale)+')';
+					}
+					else if(t==="-"){
+						that.scale = (that.scale*10000-500)/10000;
+						if(that.scale<=0.1){that.scale=0.1;}
+						operImage.style.transform='rotate('+rotate+'deg) scale('+(that.scale)+')';
+					}
+					else if(t==="o"){
+						that.rotate=(that.rotate<270?that.rotate+90:0);
+						operImage.style.transform='rotate('+that.rotate+'deg) scale('+scale+')';
+					}
+					that.readthePicture();
+				},
+				showEditPicPOP:function(t){
+					if(t){this.eidtImgBox.style.display="block";this.touchMoveImage();}
+					else{this.eidtImgBox.style.display="none";}
+				},
+				compressPicture:function(img,whpx){
+					var that = this,
+						canvas=document.createElement("canvas"),
+			            ctx=canvas.getContext("2d"),
+			            ratio=this.ratio;
+		            if(ratio>1){canvas.width=whpx;canvas.height=whpx/ratio;}
+		            else if(ratio<1){canvas.height=whpx;canvas.width=whpx*ratio;}
+		            else{canvas.height=canvas.width=whpx;}
+		            ctx.drawImage(img,0,0, img.width,img.height,0,0,canvas.width,canvas.height);
+		            img.onload = function(){
+		            	console.log(this === that.image)
+		            	that.InitReadImage(this);
+		            }
+		            img.src = canvas.toDataURL('image/jpeg');
+				},
+				readthePicture:function(){
+					//console.log(sx,sy,sw,sh,left,top,rotate);
+					//console.log(this.showwidth,this.scale,this.cutedwidth);
+					var newImage = this.image,
+						rotate = this.rotate,
+						left = 0, top = 0,
+						canvas = this.drawCanvas,
+						ctx = canvas.getContext("2d");
+					if(this.rotate===0){left=0;top=0;}
+					if(this.rotate===90){left=200;top=0;}
+					if(this.rotate===180){left=200;top=200;}
+					if(this.rotate===270){left=0;top=200;}
+					this.zoomRatio = this.showwidth*this.scale/this.cutedwidth;
+					this.cropwhpx = (this.cutedwidth>=this.cutedheight?this.cutedheight:this.cutedwidth)/this.scale;
+					this.drawLeft = (this.originx*this.scale-100)/this.zoomRatio;
+					this.drawTop = (this.originy*this.scale-100)/this.zoomRatio;
+					//console.log(left,top);
+					ctx.clearRect(-500,-500,1200,1200);
+					ctx.translate(left,top);
+					ctx.rotate(rotate*(Math.PI/180));
+					ctx.drawImage(
+							newImage,
+							this.drawLeft,
+							this.drawTop,
+							this.cropwhpx,
+							this.cropwhpx,
+							0,
+							0,
+							canvas.width,
+							canvas.height
+						);
+						
+					//重置canvas的改变的角度值
+					ctx.rotate(-rotate*(Math.PI/180)%360);
+					ctx.translate(0-left,0-top);
+				},
+				ImageLoad:function(img){
+					this.width = img.width;
+					this.height = img.height;
+					this.ratio = img.width/img.height;
+					if((img.width>640||img.height>640)||this.filesize>2*1024*1024){
+                    	this.compressPicture(img,640);
+                    }else{
+                        this.InitReadImage(img);
+                    }
+				},
+				InitPicture:function(url,filesize){
+					var that = this;
+					that.touchArea = document.getElementById("touchArea");
+					that.operImage = document.getElementById("readArea").children[0];
+					that.eidtImgBox = document.getElementById("eidtPicture").parentNode;
+					that.drawCanvas = document.getElementById("drawCanvas");
+					that.originObj = document.getElementById("readArea").children[0].children[1];
+					that.button = document.getElementById("operaArea").getElementsByTagName('a');
+					that.filesize = filesize;
+					that.image = new Image();
+					that.image.onload = function(){
+						console.log(this === that.image);
+						that.ImageLoad(this);
+						that.showEditPicPOP(true);
+					}
+					that.image.src = url;
+					that.button[0].onclick=function(){that.transformImage("+");};
+					that.button[1].onclick=function(){that.transformImage("o");};
+					that.button[2].onclick=function(){that.transformImage("-");};
+				}
+			};
+		return CropPicture;
+	}
+
+	(function(){
+        var resultFile,urlData,CropPictureObject = new CropPicture();
+        document.getElementById("uploadPicture").onchange=function(ev){
+            resultFile=ev.target.files[0];
+            if (resultFile) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    urlData = this.result;
+                    CropPictureObject.InitPicture(urlData,resultFile.size);
+                };
+                reader.readAsDataURL(resultFile);
+            }
+            else{alert("未选择图片");}
+        }
+    })()
+
+</script>
+</body>
+</html>
