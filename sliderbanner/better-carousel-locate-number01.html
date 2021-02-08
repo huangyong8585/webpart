@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>左右滑动带数字 再优化后</title>
+<style>
+*{margin:0;padding:0;}
+
+.swiperbox{position:relative;}
+.swiper-container{width:594px;height:443px;overflow:hidden;position:relative;margin:70px auto 0;}
+.swiper-container .swiper-wrapper{width:5940px;height:385px;position:absolute;left:0;top:0;z-index:3;}
+.swiper-container .swiper-wrapper li{float:left;display:block;width:594px;height:385px;overflow:hidden;}
+.swiper-container .swiper-wrapper li img{display:block;width:100%;height:100%;}
+.swiper-pagination{position:absolute;z-index:10;height:18px;overflow:hidden;width:168px;border-radius:30px;padding:6px 5px;left:50%;margin-left:-89px;bottom:0;background:rgba(0,0,0,0.25);}
+.swiper-pagination span{display:inline-block;text-align:center;width:12px;height:12px;border:3px solid #fff;line-height:12px;background:#fff;margin:0 5px;border-radius:12px;cursor:pointer;overflow:hidden;text-indent:-100px;}
+.swiper-pagination span.active{ background:#ffba24;width:12px;}
+.swiperbox .jtprev,.swiperbox .jtnext{display:block;width:51px;height:66px;line-height:66px;background:#f60;position:absolute;top:160px;font-size:42px;font-family:simsun;text-align:center;}
+.swiperbox .jtprev{left:2px;}
+.swiperbox .jtnext{right:2px;}
+.swiperbox .jtprev:active{left:0;}
+.swiperbox .jtnext:active{right:0;}
+</style>
+<script type="text/javascript" src="../js/jquery-1.7.2.min.js?v=20130424"charset="utf-8"></script>
+</head>
+
+<body>
+    <div class="swiperbox" id="page1-Swiper">
+		<div class="swiper-container">
+			<ul class="swiper-wrapper">
+				<li><img src="https://static.web.sdo.com/jijiamobile/pic/dm/guide/hdimg1.png" /></li>
+				<li><img src="https://static.web.sdo.com/jijiamobile/pic/dm/guide/hdimg2.png" /></li>
+				<li><img src="https://static.web.sdo.com/jijiamobile/pic/dm/guide/hdimg3.png" /></li>
+				<li><img src="https://static.web.sdo.com/jijiamobile/pic/dm/guide/hdimg4.png" /></li>
+				<li><img src="https://static.web.sdo.com/jijiamobile/pic/dm/guide/hdimg5.png" /></li>
+				<li><img src="https://static.web.sdo.com/jijiamobile/pic/dm/guide/hdimg6.png" /></li>
+			</ul>
+		</div>
+		<div class="swiper-pagination"></div>
+		<a href="javascript:;" class="jtprev" id="page1-jtprev">&lt;</a>
+		<a href="javascript:;" class="jtnext" id="page1-jtnext">&gt;</a>
+	</div>
+<script>
+function Swiperbanner(SwiperObj,activeClass,play_time,arrowbtns,pagination){
+	var n = 0,temp_time = null;
+	var Swiper = SwiperObj,
+        Swiper_child_first = Swiper.children('li:first'),
+	    Swiper_child_last = Swiper.children('li:last'),
+        Swiper_child_length = Swiper.children("li").size(),
+        Swiper_container_width = Swiper.parent().width(),
+        Swiper_wrapper_width = Swiper.width(Swiper_container_width*Swiper_child_length).width(),
+        //SwiperPagination = Swiper.parent().parent().children(".swiper-pagination");
+        SwiperPagination = pagination;
+    
+	if(Swiper_child_length<=1||Swiper_child_length>10){return false;}
+	
+	if(play_time){
+        Swiper.hover(
+            function(){clearTimeout(temp_time);},
+            function(){temp_time=setTimeout(function(){handle.play_img(n+1)},play_time);}
+            );
+    }
+    if(arrowbtns){
+    	arrowbtns.prev.click(function(){handle.prev_handle()});
+    	arrowbtns.next.click(function(){handle.next_handle()});
+    }
+    var handle={
+        play_img:function(num){
+            if(temp_time){clearTimeout(temp_time);}
+            this.update_location(num);
+            if(num<Swiper_child_length&&num>-1){Swiper.animate({"left":-(Swiper_container_width*num)+"px"},500,/*function(){num++;n=num;}*/);}
+            if(num==Swiper_child_length){
+                    this.update_location(0);
+                    Swiper_child_first.css({"position":"relative","left":Swiper_container_width*num+"px"});
+                    Swiper.animate({"left":"-="+Swiper_container_width+"px"},500,function(){
+                        Swiper_child_first.removeAttr("style");
+                        Swiper.css("left","0px");
+                        num=0;n=num;
+                        });
+                }
+            if(num<0){
+                this.update_location(Swiper_child_length-1);
+                Swiper_child_last.css({"position":"relative","left":0-Swiper_wrapper_width+"px"});
+                Swiper.animate({"left":Swiper_container_width+"px"},500,function(){
+                    Swiper_child_last.removeAttr("style");
+                    Swiper.css("left",0-(Swiper_wrapper_width-Swiper_container_width)+"px");
+                    num=Swiper_child_length-1;n=num;
+                    });
+            }
+            n=num;
+           if(play_time){temp_time=setTimeout(function(){handle.play_img(num+1)},play_time);}
+		},
+        addnumber:function(count){
+        	if(!pagination){return false;}
+            var _html='',i=0;
+            for(;i<count;i++){_html+='<span>'+(i+1)+'</span>';}
+            SwiperPagination.html(_html).children('span').click(function(){
+                n=$(this).index();
+                handle.play_img(n);
+                clearTimeout(temp_time);
+                });
+        },
+        update_location:function(i){
+        	if(!pagination){return false;}
+            SwiperPagination.children('span').eq(i).addClass(activeClass).siblings().removeClass(activeClass);
+        },
+        prev_handle:function(){this.play_img(n-1);},
+        next_handle:function(){this.play_img(n+1);}
+    };
+	
+    if(pagination){handle.addnumber(Swiper_child_length);}
+    handle.play_img(n);
+}
+Swiperbanner($("#page1-Swiper ul.swiper-wrapper"),"active",10000,{"prev":$("#page1-jtprev"),"next":$("#page1-jtnext")},$('#page1-Swiper>.swiper-pagination'));
+</script>
+</body>
+</html>
